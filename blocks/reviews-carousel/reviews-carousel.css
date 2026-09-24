@@ -1,51 +1,63 @@
+/* Customer reviews — matching original testimonials section */
 .reviews-carousel {
   padding: 64px 24px;
-  background: #F5F7F5;
+  background: #F8F8F8;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .reviews-carousel h2 {
-  font-size: 36px;
-  font-weight: 800;
-  color: #1A1A1A;
-  margin: 0 0 8px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #131631;
+  margin: 0 0 32px;
+  text-align: center;
+}
+
+.reviews-carousel > div > div > p {
+  color: #5B5C69;
+  margin: 0 0 32px;
+  text-align: center;
 }
 
 .review-item {
   background: #fff;
-  border-radius: 12px;
+  border-radius: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
   padding: 28px;
   margin-bottom: 20px;
-  border: 1px solid #E0E0E0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .review-item h3 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
-  color: #007A3D;
+  color: #D8479A;
   margin: 0 0 4px;
 }
 
 .review-item p:nth-child(2) {
   font-weight: 600;
-  color: #333;
+  color: #131631;
   font-size: 16px;
   margin: 0 0 12px;
 }
 
 .review-item p:nth-child(3) {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6;
-  color: #555;
+  color: #5B5C69;
   margin: 0;
   font-style: italic;
+  flex: 1;
 }
 
 @media (width >= 768px) {
   .reviews-carousel > div:nth-child(n+2) {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
   }
   .review-item { margin-bottom: 0; }

@@ -6,21 +6,23 @@
 
 .faq-accordion details {
   border: 1px solid #E0E0E0;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 12px;
   overflow: hidden;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fff;
 }
 
 .faq-accordion details:hover {
-  border-color: #00A851;
+  border-color: #7564C1;
+  box-shadow: 0 2px 12px rgba(117,100,193,0.1);
 }
 
 .faq-accordion summary {
   padding: 18px 20px;
   font-size: 18px;
   font-weight: 600;
-  color: #1A1A1A;
+  color: #131631;
   cursor: pointer;
   list-style: none;
   display: flex;
@@ -36,7 +38,7 @@
 .faq-accordion summary::after {
   content: '+';
   font-size: 22px;
-  color: #00A851;
+  color: #7564C1;
   font-weight: 300;
 }
 
@@ -48,6 +50,6 @@
   padding: 0 20px 18px;
   font-size: 16px;
   line-height: 1.6;
-  color: #555;
+  color: #5B5C69;
   margin: 0;
 }

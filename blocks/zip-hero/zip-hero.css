@@ -1,83 +1,127 @@
 .zip-hero {
-  background: linear-gradient(135deg, #00A851 0%, #007A3D 100%);
-  color: #fff;
-  padding: 80px 24px;
-  text-align: center;
+  background: linear-gradient(135deg, #1a1340 0%, #2d1b69 50%, #3d2b7d 100%);
+  position: relative;
+  overflow: hidden;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.zip-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('https://everythingenergy.com/wp-content/uploads/2022/03/hp-hero-main-img2.jpg') center/cover;
+  opacity: 0.7;
+  z-index: 0;
+}
+
+.zip-hero > div { position: relative; z-index: 1; width: 100%; }
+.zip-hero > div > div { max-width: 580px; margin: 0 auto; text-align: center; padding: 80px 24px; }
 
 .zip-hero h1 {
+  color: #fff;
   font-size: 48px;
-  font-weight: 800;
-  margin: 0 0 12px;
-  line-height: 1.1;
-}
-
-.zip-hero p {
-  font-size: 20px;
-  margin: 0 0 24px;
-  opacity: 0.95;
-}
-
-.zip-input-wrapper {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
-  max-width: 460px;
-  margin: 0 auto;
-}
-
-.zip-input-wrapper input {
-  flex: 1;
-  padding: 14px 20px;
-  font-size: 18px;
-  border: 2px solid #fff;
-  border-radius: 8px;
-  background: #fff;
-  color: #1A1A1A;
-  outline: none;
-}
-
-.zip-input-wrapper input::placeholder {
-  color: #999;
-}
-
-.zip-input-wrapper .zip-submit {
-  padding: 14px 28px;
-  font-size: 18px;
   font-weight: 700;
-  background: #FFD200;
-  color: #1A1A1A;
+  line-height: 1.1;
+  margin: 0 0 20px;
+}
+
+.zip-hero h4,
+.zip-hero > div > div > p:first-of-type {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 0 0 32px;
+  opacity: 0.9;
+}
+
+/* ZIP search — pill shaped matching original */
+.zip-hero .zip-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #F2F2F2;
+  border-radius: 40px;
+  padding: 4px 4px 4px 24px;
+  max-width: 460px;
+  margin: 0 auto 24px;
+}
+
+.zip-hero .zip-input-wrapper input {
+  flex: 1;
+  background: transparent;
   border: none;
-  border-radius: 8px;
+  font-size: 18px;
+  outline: none;
+  padding: 12px 8px;
+  color: #131631;
+}
+
+.zip-hero .zip-input-wrapper input::placeholder { color: #999; }
+
+.zip-hero .zip-input-wrapper .zip-submit {
+  background: #7564C1;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 16px 28px;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
-  text-decoration: none;
   white-space: nowrap;
+  margin: 0;
 }
 
-.zip-input-wrapper .zip-submit:hover {
-  background: #FFC700;
+.zip-hero .zip-input-wrapper .zip-submit:hover { background: #D8479A; }
+
+/* Moving address toggle */
+.zip-hero .zip-moving { margin-top: 24px; font-size: 16px; color: #fff; }
+.zip-hero .zip-moving p:first-child { margin-bottom: 12px; color: rgba(255,255,255,0.9); }
+
+.zip-hero .zip-moving p:nth-child(2) {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
 }
 
-.zip-moving {
-  margin-top: 20px;
+.zip-hero .zip-moving a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 12px;
+  padding: 10px 24px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
   font-size: 16px;
 }
 
-.zip-moving a {
+.zip-hero .zip-moving a:hover {
+  background: rgba(255,255,255,0.25);
+  border-color: rgba(255,255,255,0.5);
   color: #fff;
-  text-decoration: underline;
 }
 
-.zip-error {
+.zip-hero .zip-error {
   margin-top: 12px;
-  color: #FFD200;
+  color: #D8479A;
   font-weight: 600;
+  font-size: 16px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 8px 16px;
+  display: inline-block;
 }
 
 @media (width <= 768px) {
-  .zip-hero { padding: 48px 16px; }
+  .zip-hero { min-height: 500px; }
   .zip-hero h1 { font-size: 32px; }
-  .zip-input-wrapper { flex-direction: column; }
-  .zip-input-wrapper input { width: 100%; }
+  .zip-hero > div > div { padding: 60px 16px; }
+  .zip-hero .zip-input-wrapper { flex-direction: column; border-radius: 24px; padding: 12px; gap: 12px; }
+  .zip-hero .zip-input-wrapper input { width: 100%; }
+  .zip-hero .zip-input-wrapper .zip-submit { width: 100%; border-radius: 24px; }
 }
