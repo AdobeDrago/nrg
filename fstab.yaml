@@ -1,2 +1,5 @@
 mountpoints:
-  /: https://content.da.live/adobedrago/nrg
+  /:
+    type: github
+    url: https://github.com/AdobeDrago/nrg
+    branch: main
