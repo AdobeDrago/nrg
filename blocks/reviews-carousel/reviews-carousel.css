@@ -1,64 +1,88 @@
 /* Customer reviews — matching original testimonials section */
 .reviews-carousel {
-  padding: 64px 24px;
+  padding: 64px 32px;
   background: #F8F8F8;
   max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
 }
 
-.reviews-carousel h2 {
+.reviews-carousel h2,
+.reviews-carousel h3 {
   font-size: 32px;
   font-weight: 700;
   color: #131631;
-  margin: 0 0 32px;
+  margin: 0 0 16px;
   text-align: center;
 }
 
-.reviews-carousel > div > div > p {
+/* First row = heading, span all columns */
+.reviews-carousel > div:first-child {
+  grid-column: 1 / -1;
+}
+
+.reviews-carousel > div:first-child > div {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 48px;
+}
+
+.reviews-carousel > div:first-child > div > p {
   color: #5B5C69;
-  margin: 0 0 32px;
-  text-align: center;
+  font-size: 18px;
+  margin: 0;
 }
 
-.review-item {
+/* Each review card */
+.reviews-carousel > div:not(:first-child) > div {
   background: #fff;
-  border-radius: 24px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  padding: 28px;
-  margin-bottom: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.review-item h3 {
+.reviews-carousel > div:not(:first-child) > div h3 {
   font-size: 18px;
   font-weight: 700;
   color: #D8479A;
-  margin: 0 0 4px;
+  margin: 0 0 8px;
 }
 
-.review-item p:nth-child(2) {
-  font-weight: 600;
-  color: #131631;
-  font-size: 16px;
+.reviews-carousel > div:not(:first-child) > div p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #5B5C69;
   margin: 0 0 12px;
 }
 
-.review-item p:nth-child(3) {
+.reviews-carousel > div:not(:first-child) > div p:nth-child(2) {
+  font-weight: 600;
+  color: #131631;
   font-size: 16px;
-  line-height: 1.6;
-  color: #5B5C69;
-  margin: 0;
-  font-style: italic;
-  flex: 1;
 }
 
-@media (width >= 768px) {
-  .reviews-carousel > div:nth-child(n+2) {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+.reviews-carousel > div:not(:first-child) > div p:last-child {
+  font-style: italic;
+  margin: 0;
+}
+
+/* Tablet — 2 columns */
+@media (width <= 900px) {
+  .reviews-carousel {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile — 1 column */
+@media (width <= 600px) {
+  .reviews-carousel {
+    padding: 40px 16px;
+    grid-template-columns: 1fr;
     gap: 20px;
   }
-  .review-item { margin-bottom: 0; }
 }

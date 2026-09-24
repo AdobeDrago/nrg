@@ -31,7 +31,7 @@
 .plan-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 32px;
 }
 
 /* First row = heading, span all columns */
@@ -44,7 +44,7 @@
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(117, 100, 193, 0.08);
-  padding: 32px 24px;
+  padding: 36px 32px;
   text-align: center;
   transition: box-shadow 0.2s, transform 0.2s;
   display: flex;
@@ -108,7 +108,7 @@
 .plan-button {
   display: inline-block;
   background: #7564C1;
-  color: #fff;
+  color: #fff !important;
   padding: 12px 28px;
   border-radius: 30px;
   font-weight: 600;
@@ -119,6 +119,7 @@
 
 .plan-button:hover {
   background: #D8479A;
+  color: #fff !important;
   transform: scale(1.03);
 }
 
