@@ -1,0 +1,64 @@
+.provider-cards {
+  padding: 64px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.provider-cards h2 {
+  font-size: 36px;
+  font-weight: 800;
+  color: #1A1A1A;
+  margin: 0 0 8px;
+}
+
+.provider-cards > div > div > p {
+  color: #666;
+  margin: 0 0 32px;
+}
+
+.provider-card {
+  background: #fff;
+  border: 2px solid #E8F5E9;
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 20px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.provider-card:hover {
+  border-color: #00A851;
+  box-shadow: 0 4px 16px rgba(0, 168, 81, 0.12);
+}
+
+.provider-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #00A851;
+  margin: 0 0 10px;
+}
+
+.provider-card p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #555;
+  margin: 0 0 16px;
+}
+
+.provider-card a {
+  color: #00A851;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.provider-card a:hover {
+  text-decoration: underline;
+}
+
+@media (width >= 768px) {
+  .provider-cards > div:nth-child(n+2) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .provider-card { margin-bottom: 0; }
+}

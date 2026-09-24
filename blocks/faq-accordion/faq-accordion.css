@@ -1,0 +1,53 @@
+.faq-accordion {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.faq-accordion details {
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.faq-accordion details:hover {
+  border-color: #00A851;
+}
+
+.faq-accordion summary {
+  padding: 18px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1A1A1A;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+}
+
+.faq-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-accordion summary::after {
+  content: '+';
+  font-size: 22px;
+  color: #00A851;
+  font-weight: 300;
+}
+
+.faq-accordion details[open] summary::after {
+  content: '−';
+}
+
+.faq-accordion details p {
+  padding: 0 20px 18px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+  margin: 0;
+}

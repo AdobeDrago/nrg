@@ -1,0 +1,83 @@
+.zip-hero {
+  background: linear-gradient(135deg, #00A851 0%, #007A3D 100%);
+  color: #fff;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.zip-hero h1 {
+  font-size: 48px;
+  font-weight: 800;
+  margin: 0 0 12px;
+  line-height: 1.1;
+}
+
+.zip-hero p {
+  font-size: 20px;
+  margin: 0 0 24px;
+  opacity: 0.95;
+}
+
+.zip-input-wrapper {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.zip-input-wrapper input {
+  flex: 1;
+  padding: 14px 20px;
+  font-size: 18px;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  background: #fff;
+  color: #1A1A1A;
+  outline: none;
+}
+
+.zip-input-wrapper input::placeholder {
+  color: #999;
+}
+
+.zip-input-wrapper .zip-submit {
+  padding: 14px 28px;
+  font-size: 18px;
+  font-weight: 700;
+  background: #FFD200;
+  color: #1A1A1A;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.zip-input-wrapper .zip-submit:hover {
+  background: #FFC700;
+}
+
+.zip-moving {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.zip-moving a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.zip-error {
+  margin-top: 12px;
+  color: #FFD200;
+  font-weight: 600;
+}
+
+@media (width <= 768px) {
+  .zip-hero { padding: 48px 16px; }
+  .zip-hero h1 { font-size: 32px; }
+  .zip-input-wrapper { flex-direction: column; }
+  .zip-input-wrapper input { width: 100%; }
+}
