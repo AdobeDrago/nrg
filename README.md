@@ -43,3 +43,4 @@ Install the [AEM Sidekick extension](https://www.aem.live/tools/sidekick/) and a
 - **URL**: https://github.com/AdobeDrago/everything-energy
 
 The FORGE Co-Pilot plugin is pre-configured in `tools/sidekick/config.json`.
+
