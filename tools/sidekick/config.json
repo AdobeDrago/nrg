@@ -1,0 +1,19 @@
+{
+  "project": "Everything Energy",
+  "editUrlLabel": "AEM Editor",
+  "editUrlPattern": "{{contentSourceUrl}}{{pathname}}?cmd=open",
+  "plugins": [
+    {
+      "id": "forge-copilot",
+      "title": "✨ Co-Pilot",
+      "url": "http://localhost:8082/sidekick/copilot-plugin.html",
+      "isPalette": true,
+      "paletteRect": "top: 60px, right: 20px, width: 420px, height: 600px",
+      "environments": [
+        "preview",
+        "live",
+        "dev"
+      ]
+    }
+  ]
+}

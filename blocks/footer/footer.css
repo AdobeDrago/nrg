@@ -1,0 +1,14 @@
+/* footer */
+footer {
+  background-color: var(--light-color);
+  font-size: var(--body-font-size-s);
+}
+footer .footer {
+  max-width: 1200px;
+  margin: auto;
+  padding: 32px 24px;
+  font-family: var(--body-font-family);
+}
+footer .footer p { margin: 0; }
+footer .footer ul { list-style: none; padding-left: 0; display: flex; flex-wrap: wrap; gap: 16px; }
+footer .footer a:any-link { color: currentcolor; }
