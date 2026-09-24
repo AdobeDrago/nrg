@@ -104,11 +104,15 @@
   margin: 0;
 }
 
-/* Pool tips grid — 2 columns */
-.pool-savings > div:not(:first-child) {
+/* Pool tips grid — block itself becomes a 2-column grid */
+.pool-savings {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
+}
+
+.pool-savings > div:first-child {
+  grid-column: 1 / -1;
 }
 
 .pool-savings > div:not(:first-child) > div {
@@ -169,7 +173,7 @@
   .personalization {
     padding: 48px 16px;
   }
-  .pool-savings > div:not(:first-child) {
+  .pool-savings {
     grid-template-columns: 1fr;
   }
 }

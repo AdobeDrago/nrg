@@ -27,12 +27,16 @@
   margin: 0;
 }
 
-/* Plan grid — 3 columns */
-.plan-cards > div:not(:first-child) {
+/* The block itself becomes a grid */
+.plan-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  margin-bottom: 24px;
+}
+
+/* First row = heading, span all columns */
+.plan-cards > div:first-child {
+  grid-column: 1 / -1;
 }
 
 /* Each plan card */
@@ -45,6 +49,7 @@
   transition: box-shadow 0.2s, transform 0.2s;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .plan-cards > div:not(:first-child) > div:hover {
@@ -139,7 +144,7 @@
 
 /* Tablet — 2 columns */
 @media (width <= 900px) {
-  .plan-cards > div:not(:first-child) {
+  .plan-cards {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -148,8 +153,6 @@
 @media (width <= 600px) {
   .plan-cards {
     padding: 40px 16px;
-  }
-  .plan-cards > div:not(:first-child) {
     grid-template-columns: 1fr;
   }
 }

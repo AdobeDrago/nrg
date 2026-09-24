@@ -4,6 +4,9 @@
   padding: 64px 24px;
   max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
 
 .provider-cards h2,
@@ -15,7 +18,11 @@
   text-align: center;
 }
 
-/* First row = heading + subtitle, full width */
+/* First row = heading, span all columns */
+.provider-cards > div:first-child {
+  grid-column: 1 / -1;
+}
+
 .provider-cards > div:first-child > div {
   text-align: center;
   max-width: 600px;
@@ -26,14 +33,6 @@
   color: #5B5C69;
   font-size: 18px;
   margin: 0;
-}
-
-/* Provider cards — 3 columns on desktop, 2 on tablet, 1 on mobile */
-.provider-cards > div:not(:first-child) {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 24px;
 }
 
 /* Each provider card */
@@ -48,6 +47,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
 }
 
 .provider-cards > div:not(:first-child) > div:hover {
@@ -61,13 +61,14 @@
   font-weight: 700;
   color: #7564C1;
   margin: 0 0 12px;
+  text-align: center;
 }
 
 .provider-cards > div:not(:first-child) > div p {
   font-size: 15px;
   line-height: 1.5;
   color: #5B5C69;
-  margin: 0 0 16px;
+  margin: 0 0 12px;
 }
 
 .provider-cards > div:not(:first-child) > div p:last-child {
@@ -88,7 +89,7 @@
 
 /* Tablet — 2 columns */
 @media (width <= 900px) {
-  .provider-cards > div:not(:first-child) {
+  .provider-cards {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -97,8 +98,6 @@
 @media (width <= 600px) {
   .provider-cards {
     padding: 40px 16px;
-  }
-  .provider-cards > div:not(:first-child) {
     grid-template-columns: 1fr;
     gap: 16px;
   }
