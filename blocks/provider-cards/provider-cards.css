@@ -1,8 +1,8 @@
-/* Featured providers — logo grid matching original everythingenergy.com */
+/* Featured providers — multi-column grid matching everythingenergy.com */
 .provider-cards {
   background: #fff;
   padding: 64px 24px;
-  max-width: 1060px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -11,75 +11,95 @@
   font-size: 32px;
   font-weight: 700;
   color: #131631;
-  margin: 0 0 32px;
+  margin: 0 0 16px;
   text-align: center;
 }
 
-.provider-cards > div > div > p {
+/* First row = heading + subtitle, full width */
+.provider-cards > div:first-child > div {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.provider-cards > div:first-child > div > p {
   color: #5B5C69;
-  margin: 0 0 32px;
-  text-align: center;
+  font-size: 18px;
+  margin: 0;
 }
 
-/* Provider logo grid — matching original .logo-list--wrapper */
-.provider-cards .provider-card {
+/* Provider cards — 3 columns on desktop, 2 on tablet, 1 on mobile */
+.provider-cards > div:not(:first-child) {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* Each provider card */
+.provider-cards > div:not(:first-child) > div {
   background: #fff;
-  border-radius: 24px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  padding: 20px;
-  margin-bottom: 20px;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 28px 24px;
   text-align: center;
   transition: box-shadow 0.2s, transform 0.2s;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 140px;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.provider-cards .provider-card:hover {
-  box-shadow: 0 8px 30px rgba(117,100,193,0.15);
-  transform: translateY(-2px);
+.provider-cards > div:not(:first-child) > div:hover {
+  box-shadow: 0 8px 30px rgba(117, 100, 193, 0.15);
+  transform: translateY(-3px);
+  border-color: rgba(117, 100, 193, 0.3);
 }
 
-.provider-cards .provider-card h3 {
-  font-size: 18px;
+.provider-cards > div:not(:first-child) > div h3 {
+  font-size: 20px;
   font-weight: 700;
   color: #7564C1;
-  margin: 0 0 8px;
-}
-
-.provider-cards .provider-card p {
-  font-size: 16px;
-  line-height: 1.5;
-  color: #5B5C69;
   margin: 0 0 12px;
 }
 
-.provider-cards .provider-card a {
+.provider-cards > div:not(:first-child) > div p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #5B5C69;
+  margin: 0 0 16px;
+}
+
+.provider-cards > div:not(:first-child) > div p:last-child {
+  margin-bottom: 0;
+}
+
+.provider-cards > div:not(:first-child) > div a {
   color: #7564C1;
   font-weight: 600;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 15px;
 }
 
-.provider-cards .provider-card a:hover {
+.provider-cards > div:not(:first-child) > div a:hover {
   color: #D8479A;
   text-decoration: underline;
 }
 
-/* Grid layout */
-.provider-cards > div:nth-child(n+2) {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+/* Tablet — 2 columns */
+@media (width <= 900px) {
+  .provider-cards > div:not(:first-child) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.provider-cards .provider-card { margin-bottom: 0; }
-
-@media (width <= 768px) {
-  .provider-cards { padding: 40px 16px; }
-  .provider-cards > div:nth-child(n+2) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+/* Mobile — 1 column */
+@media (width <= 600px) {
+  .provider-cards {
+    padding: 40px 16px;
+  }
+  .provider-cards > div:not(:first-child) {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
