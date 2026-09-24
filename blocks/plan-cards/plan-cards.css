@@ -31,7 +31,8 @@
 .plan-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  column-gap: 32px;
+  row-gap: 48px;
 }
 
 /* First row = heading, span all columns */

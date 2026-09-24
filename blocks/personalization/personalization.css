@@ -108,7 +108,8 @@
 .pool-savings {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
+  column-gap: 32px;
+  row-gap: 48px;
 }
 
 .pool-savings > div:first-child {
