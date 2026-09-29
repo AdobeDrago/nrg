@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Everything Energy — NRG EDS Site · Sales & Dev Documentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nrg-purple: #7564C1;
+    --nrg-purple-hover: #6353a8;
+    --nrg-purple-text: #5d4ba0;
+    --nrg-pink: #D8479A;
+    --nrg-navy: #131631;
+    --nrg-text: #131631;
+    --nrg-grey-text: #5B5C69;
+    --nrg-pale: #f4f2fa;
+    --accent: var(--nrg-purple);
+    --gray-50: #ffffff; --gray-75: #fafafa; --gray-100: #f5f5f5; --gray-200: #eaeaea;
+    --gray-300: #e1e1e1; --gray-400: #cacaca; --gray-500: #b3b3b3; --gray-600: #6b6b6b;
+    --gray-700: #6e6e6e; --gray-800: #4b4b4b; --gray-900: #2c2c2c;
+    --font: 'Source Sans 3', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono: 'Source Code Pro', 'Fira Mono', 'Courier New', monospace;
+    --sidebar-width: 248px; --content-max: 860px; --header-h: 56px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); font-size: 14px; line-height: 1.6; color: var(--gray-900); background: var(--gray-50); display: flex; flex-direction: column; min-height: 100vh; }
+  .topnav { position: fixed; top: 0; left: 0; right: 0; height: var(--header-h); background: #fff; display: flex; align-items: center; padding: 0 24px; gap: 16px; z-index: 100; box-shadow: 0 1px 0 var(--gray-200); }
+  .topnav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; color: var(--nrg-navy); font-size: 15px; letter-spacing: -0.01em; }
+  .topnav-logo .mark { width: 30px; height: 30px; border-radius: 50%; background: var(--nrg-purple); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px; letter-spacing: -0.02em; flex-shrink: 0; }
+  .topnav-divider { width: 1px; height: 20px; background: var(--gray-300); }
+  .topnav-title { color: var(--gray-800); font-size: 14px; font-weight: 400; white-space: nowrap; }
+  .topnav-badge { margin-left: auto; background: var(--nrg-pale); color: var(--nrg-purple-text); font-size: 11px; padding: 3px 10px; border-radius: 12px; letter-spacing: 0.04em; font-weight: 700; text-transform: uppercase; }
+  .layout { display: flex; margin-top: var(--header-h); min-height: calc(100vh - var(--header-h)); }
+  .sidebar { width: var(--sidebar-width); flex-shrink: 0; position: sticky; top: var(--header-h); height: calc(100vh - var(--header-h)); overflow-y: auto; border-right: 1px solid var(--gray-200); background: var(--gray-75); padding: 24px 0 40px; }
+  .sidebar-section { margin-bottom: 8px; }
+  .sidebar-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-600); padding: 8px 20px 4px; display: flex; align-items: center; gap: 6px; }
+  .sidebar-link { display: flex; align-items: center; gap: 8px; padding: 7px 20px; font-size: 13px; color: var(--gray-800); text-decoration: none; border-left: 2px solid transparent; transition: background 0.1s, color 0.1s, border-color 0.1s; }
+  .sidebar-link:hover { background: var(--gray-200); color: var(--gray-900); }
+  .sidebar-link.active { background: var(--nrg-pale); color: var(--nrg-purple-text); border-left-color: var(--nrg-purple); font-weight: 700; }
+  .sidebar-link .icon { width: 16px; height: 16px; opacity: 0.6; flex-shrink: 0; }
+  .sidebar-link.active .icon { opacity: 1; }
+  .main { flex: 1; min-width: 0; padding: 48px 56px 80px; }
+  .main-inner { max-width: var(--content-max); }
+  .page-hero { padding-bottom: 32px; border-bottom: 1px solid var(--gray-200); margin-bottom: 48px; }
+  .page-hero-eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--nrg-purple-text); margin-bottom: 8px; }
+  .page-hero h1 { font-size: 32px; font-weight: 700; color: var(--nrg-navy); line-height: 1.2; margin-bottom: 12px; }
+  .page-hero-sub { font-size: 16px; color: var(--gray-700); max-width: 640px; line-height: 1.5; }
+  .doc-section { margin-bottom: 56px; scroll-margin-top: calc(var(--header-h) + 24px); }
+  .doc-section h2 { font-size: 20px; font-weight: 700; color: var(--nrg-navy); margin-bottom: 4px; display: flex; align-items: center; gap: 10px; width: 100%; }
+  .section-rule { height: 1px; background: var(--gray-200); margin: 12px 0 24px; }
+  .doc-section h3 { font-size: 14px; font-weight: 700; color: var(--gray-900); margin: 24px 0 8px; }
+  .doc-section p { font-size: 14px; color: var(--gray-800); margin-bottom: 12px; line-height: 1.65; }
+  .section-icon { width: 28px; height: 28px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .icon-purple { background: #f3edfb; color: var(--nrg-purple); }
+  .icon-navy { background: #e6eef7; color: var(--nrg-navy); }
+  .icon-green { background: #eaf6f1; color: #268e6c; }
+  .icon-pink { background: #fce4f0; color: #c9398a; }
+  .icon-orange { background: #fff4e5; color: #da7b11; }
+  .icon-seafoam { background: #e6f4f4; color: #16878c; }
+  .url-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .url-card { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 8px; padding: 14px 16px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 4px; transition: border-color 0.15s, box-shadow 0.15s; }
+  .url-card:hover { border-color: var(--nrg-purple); box-shadow: 0 0 0 1px var(--nrg-purple); }
+  .url-card-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray-600); display: flex; align-items: center; gap: 6px; }
+  .url-card-label .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .dot-purple { background: var(--nrg-purple); } .dot-navy { background: var(--nrg-navy); } .dot-green { background: #268e6c; } .dot-pink { background: var(--nrg-pink); }
+  .url-card-title { font-size: 13px; font-weight: 700; color: var(--gray-900); }
+  .url-card-url { font-size: 12px; font-family: var(--mono); color: var(--nrg-purple-text); word-break: break-all; }
+  .url-card-desc { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
+  .code-block { background: var(--gray-900); color: #d4d4d4; border-radius: 6px; padding: 14px 16px; font-family: var(--mono); font-size: 12.5px; line-height: 1.6; overflow-x: auto; margin: 8px 0 4px; white-space: pre; }
+  .code-block .cmt { color: #6a9955; } .code-block .str { color: #ce9178; } .code-block .kw { color: #569cd6; } .code-block .var { color: #9cdcfe; }
+  .code-inline { font-family: var(--mono); font-size: 12px; background: var(--gray-100); border: 1px solid var(--gray-300); color: var(--gray-900); padding: 1px 5px; border-radius: 4px; }
+  .notice { border-radius: 6px; padding: 12px 16px; margin: 16px 0; font-size: 13px; display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+  .notice-icon { flex-shrink: 0; margin-top: 1px; }
+  .notice.info { background: #f3edfb; color: #4a2d7a; border-left: 3px solid var(--nrg-purple); }
+  .notice.tip { background: #eaf6f1; color: #1a6b50; border-left: 3px solid #268e6c; }
+  .notice.warning { background: #fff4e5; color: #8a4b08; border-left: 3px solid #da7b11; }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+  .skill-card { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 8px; padding: 14px 16px; }
+  .skill-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .skill-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 10px; }
+  .tag-js { background: #fff8d6; color: #8a5e00; } .tag-css { background: #f3edfb; color: #5d4ba0; } .tag-cfg { background: #eaf6f1; color: #1a6b50; } .tag-core { background: var(--gray-100); color: var(--gray-700); } .tag-poli { background: var(--nrg-pale); color: var(--nrg-purple-text); }
+  .skill-card-name { font-size: 13px; font-weight: 700; color: var(--gray-900); font-family: var(--mono); }
+  .skill-card-desc { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+  .arch-diagram { border: 1px solid var(--gray-200); border-radius: 8px; padding: 24px; background: var(--gray-75); margin: 16px 0; }
+  .arch-row { display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: 8px; }
+  .arch-node { padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 700; text-align: center; min-width: 110px; }
+  .arch-arrow { font-size: 18px; color: var(--gray-400); }
+  .spec-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+  .spec-table th { text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--gray-600); padding: 8px 12px; border-bottom: 2px solid var(--gray-200); background: var(--gray-75); }
+  .spec-table td { padding: 9px 12px; border-bottom: 1px solid var(--gray-200); color: var(--gray-800); vertical-align: top; }
+  .spec-table tr:last-child td { border-bottom: none; }
+  .spec-table td:first-child { font-weight: 700; color: var(--gray-900); }
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 16px 0; }
+  .stat-card { border: 1px solid var(--gray-200); border-radius: 8px; padding: 16px; background: var(--gray-75); }
+  .stat-num { font-size: 26px; font-weight: 700; color: var(--nrg-purple); line-height: 1.1; }
+  .stat-label { font-size: 12px; color: var(--gray-600); margin-top: 4px; }
+  .doc-footer { border-top: 1px solid var(--gray-200); margin-top: 40px; padding-top: 20px; font-size: 12px; color: var(--gray-500); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .nav-status { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 1px 6px; border-radius: 8px; text-transform: uppercase; }
+  .ns-done { background: #eaf6f1; color: #1a6b50; }
+  .status-badge { margin-left: auto; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 3px 10px; border-radius: 12px; text-transform: uppercase; }
+  .sb-done { background: #eaf6f1; color: #1a6b50; }
+  .sb-progress { background: #fff4e5; color: #8a4b08; }
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 4px 0; }
+  .check-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--gray-200); border-radius: 8px; background: var(--gray-50); }
+  .check-mark { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .check-mark svg { width: 12px; height: 12px; }
+  .cm-done { background: #eaf6f1; color: #268e6c; } .cm-partial { background: #fff4e5; color: #da7b11; }
+  .check-body { flex: 1; }
+  .check-title { font-weight: 700; font-size: 13px; color: var(--gray-900); }
+  .check-note { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+  .req-list { margin: 8px 0 0 18px; font-size: 13px; color: var(--gray-700); }
+  .req-list li { margin-bottom: 4px; }
+  @media (max-width: 768px) { .sidebar { display: none; } .main { padding: 24px 20px 60px; } .page-hero h1 { font-size: 24px; } .url-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <a class="topnav-logo" href="#overview">
+    <span class="mark">EE</span>
+    Everything Energy
+  </a>
+  <div class="topnav-divider"></div>
+  <span class="topnav-title">NRG · Everything Energy — EDS Site · Sales &amp; Dev Documentation</span>
+  <span class="topnav-badge">EDS Site</span>
+</nav>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" aria-label="Page navigation">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Overview</div>
+      <a class="sidebar-link active" href="#overview">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h5v5H2zm7 0h5v5H9zM2 9h5v5H2zm7 0h5v5H9z"/></svg>
+        Project overview
+      </a>
+      <a class="sidebar-link" href="#use-case">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.75A.75.75 0 012.75 2h7.5a.75.75 0 01.53.22l3 3a.75.75 0 01.22.53v7.5a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75V2.75zM5 6.5a.5.5 0 000 1h6a.5.5 0 000-1H5zm0 2.5a.5.5 0 000 1h6a.5.5 0 000-1H5zm0 2.5a.5.5 0 000 1h4a.5.5 0 000-1H5z"/></svg>
+        Use case &amp; requirements
+      </a>
+      <a class="sidebar-link" href="#references">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"/></svg>
+        Key references
+      </a>
+      <a class="sidebar-link" href="#deliverables">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M4.5 2A2.5 2.5 0 002 4.5v7A2.5 2.5 0 004.5 14h7a2.5 2.5 0 002.5-2.5v-7A2.5 2.5 0 0011.5 2h-7zM5 5.5A.5.5 0 015.5 5h5a.5.5 0 010 1h-5A.5.5 0 015 5.5zm0 2.5a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5A.5.5 0 015 8zm.5 2a.5.5 0 000 1h3a.5.5 0 000-1h-3z"/></svg>
+        Deliverables
+      </a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Site <span class="nav-status ns-done">Complete</span></div>
+      <a class="sidebar-link" href="#chrome">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0114.25 14H1.75A1.75 1.75 0 010 12.25v-8.5zm1.75-.25a.25.25 0 00-.25.25v.5h13v-.5a.25.25 0 00-.25-.25H1.75zM1.5 5.5v6.75c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V5.5h-13z"/></svg>
+        Header &amp; footer
+      </a>
+      <a class="sidebar-link" href="#brand">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2.5A.5.5 0 013.5 2h9a.5.5 0 01.5.5V4a.5.5 0 01-1 0v-1H8.5v10H10a.5.5 0 010 1H6a.5.5 0 010-1h1.5V3H4v1a.5.5 0 01-1 0V2.5z"/></svg>
+        Brand identity
+      </a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Pages <span class="nav-status ns-done">Complete</span></div>
+      <a class="sidebar-link" href="#homepage">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0114.25 15H1.75A1.75 1.75 0 010 13.25V2.75C0 1.784.784 1 1.75 1zM1.5 4v9.25c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V4h-13z"/></svg>
+        Homepage
+      </a>
+      <a class="sidebar-link" href="#plans">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 3.75A1.75 1.75 0 013.75 2h3.5c.464 0 .909.184 1.237.513l5.5 5.5a1.75 1.75 0 010 2.474l-3.5 3.5a1.75 1.75 0 01-2.474 0l-5.5-5.5A1.75 1.75 0 012 7.25v-3.5zM5 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+        Plans &amp; providers
+      </a>
+      <a class="sidebar-link" href="#about-faqs">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a.75.75 0 01.75.75v6.19l1.72-1.72a.75.75 0 111.06 1.06l-3 3a.75.75 0 01-1.06 0l-3-3a.75.75 0 011.06-1.06l1.72 1.72V1.75A.75.75 0 018 1z"/></svg>
+        About &amp; FAQs
+      </a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Architecture</div>
+      <a class="sidebar-link" href="#architecture">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M1 3.5A1.5 1.5 0 012.5 2h2A1.5 1.5 0 016 3.5v2A1.5 1.5 0 014.5 7h-2A1.5 1.5 0 011 5.5v-2zm5.5 0A1.5 1.5 0 018 2h2a1.5 1.5 0 011.5 1.5v2A1.5 1.5 0 0110 7H8A1.5 1.5 0 016.5 5.5v-2zm-5.5 5A1.5 1.5 0 012.5 7h2A1.5 1.5 0 016 8.5v2A1.5 1.5 0 014.5 12h-2A1.5 1.5 0 011 10.5v-2zm5.5 0A1.5 1.5 0 018 7h2a1.5 1.5 0 011.5 1.5v2A1.5 1.5 0 0110 12H8a1.5 1.5 0 01-1.5-1.5v-2z"/></svg>
+        EDS architecture
+      </a>
+
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Handoff</div>
+      <a class="sidebar-link" href="#limitations">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM8 5a.75.75 0 00-.75.75v2.5a.75.75 0 001.5 0v-2.5A.75.75 0 008 5zm0 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+        Known limitations
+      </a>
+      <a class="sidebar-link" href="#next-steps">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M2 4.5A2.5 2.5 0 014.5 2h7A2.5 2.5 0 0114 4.5v5a2.5 2.5 0 01-2.5 2.5H6.7l-3 2.4A.5.5 0 013 14v-2H4.5A2.5 2.5 0 012 9.5v-5z"/></svg>
+        Next steps
+      </a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Reference</div>
+      <a class="sidebar-link" href="#blocks">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M1 3.5A1.5 1.5 0 012.5 2h2A1.5 1.5 0 016 3.5v2A1.5 1.5 0 014.5 7h-2A1.5 1.5 0 011 5.5v-2zm5.5 0A1.5 1.5 0 018 2h2a1.5 1.5 0 011.5 1.5v2A1.5 1.5 0 0110 7H8A1.5 1.5 0 016.5 5.5v-2zm-5.5 5A1.5 1.5 0 012.5 7h2A1.5 1.5 0 016 8.5v2A1.5 1.5 0 014.5 12h-2A1.5 1.5 0 011 10.5v-2zm5.5 0A1.5 1.5 0 018 7h2a1.5 1.5 0 011.5 1.5v2A1.5 1.5 0 0110 12H8a1.5 1.5 0 01-1.5-1.5v-2z"/></svg>
+        Block library
+      </a>
+      <a class="sidebar-link" href="#dev-notes">
+        <svg class="icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
+        Developer notes
+      </a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+    <div class="main-inner">
+
+      <!-- PAGE HERO -->
+      <div class="page-hero" id="overview">
+        <div class="page-hero-eyebrow">NRG · Everything Energy — EDS Site</div>
+        <h1>Everything Energy on Edge Delivery Services</h1>
+        <p class="page-hero-sub">Rebuilding <strong>everythingenergy.com</strong> — NRG's electricity plan comparison site for Texas and Pennsylvania — on <strong>Adobe Edge Delivery Services</strong>. Built and hand-polished in 16 commits to match everythingenergy.com's purple/pink brand identity. This is the <strong>sales &amp; developer documentation</strong> covering what was built, the architecture, the custom blocks, and what's next.</p>
+      </div>
+
+      <!-- PROJECT OVERVIEW -->
+      <section class="doc-section">
+        <h2>
+          <span class="section-icon icon-navy">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1 3.5A1.5 1.5 0 012.5 2h2A1.5 1.5 0 016 3.5v2A1.5 1.5 0 014.5 7h-2A1.5 1.5 0 011 5.5v-2zm5.5 0A1.5 1.5 0 018 2h2a1.5 1.5 0 011.5 1.5v2A1.5 1.5 0 0110 7H8A1.5 1.5 0 016.5 5.5v-2zm-5.5 5A1.5 1.5 0 012.5 7h2A1.5 1.5 0 016 8.5v2A1.5 1.5 0 014.5 12h-2A1.5 1.5 0 011 10.5v-2zm5.5 0A1.5 1.5 0 018 7h2a1.5 1.5 0 011.5 1.5v2A1.5 1.5 0 0110 12H8a1.5 1.5 0 01-1.5-1.5v-2z"/></svg>
+          </span>
+          Project overview
+        </h2>
+        <div class="section-rule"></div>
+        <p>This effort recreates <strong>Everything Energy</strong> — NRG's electricity plan comparison site for Texas and Pennsylvania residents — on <strong>Adobe Edge Delivery Services (EDS)</strong>, authored through <strong>Document Authoring (DA)</strong>. The site lets customers enter their ZIP code, compare plans across five NRG subsidiary providers, and choose a plan — all delivered as EDS blocks on an edge CDN.</p>
+
+        <div class="stat-row">
+          <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">providers (Reliant, Green Mountain, Direct, Cirro, Discount)</div></div>
+          <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">custom blocks built</div></div>
+          <div class="stat-card"><div class="stat-num">16</div><div class="stat-label">commits — auto-generated + hand-polish</div></div>
+          <div class="stat-card"><div class="stat-num">1 day</div><div class="stat-label">brand brief → live site</div></div>
+        </div>
+
+        <h3>Goals</h3>
+        <ul class="req-list">
+          <li>Recreate the Everything Energy experience on <strong>Edge Delivery Services</strong>, authored in DA.</li>
+          <li>Match everythingenergy.com's <strong>brand identity</strong> — purple/pink colors, Source Sans Pro typeface, pill-shaped ZIP search.</li>
+          <li>Build a <strong>ZIP-code-driven plan discovery</strong> flow with provider landing pages.</li>
+          <li>Deliver <strong>sub-second page loads</strong> via edge CDN, replacing the WordPress origin.</li>
+          <li>Enable <strong>content authoring without developer involvement</strong> — marketing edits in DA.live.</li>
+        </ul>
+
+        <h3>Approach</h3>
+        <ul class="req-list">
+          <li>EDS <strong>block-based development</strong> — every UI module is an authorable block with CSS + JS.</li>
+          <li>Site auto-generated from a brand brief, then hand-polished to match the live site.</li>
+          <li>Content authored in <strong>DA.live</strong> — Google Docs-like editor, no CMS database.</li>
+          <li>Deployment via <strong>git push → AEM Code Sync</strong> — push to <code class="code-inline">main</code> auto-deploys to CDN.</li>
+        </ul>
+
+        <h3>Workstreams</h3>
+        <table class="spec-table">
+          <thead><tr><th>Workstream</th><th>What it delivers</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><a href="#chrome" style="color:var(--nrg-purple-text);">Site chrome</a></td><td>Header nav + footer with NRG brand styling</td><td><span class="nav-status ns-done">Complete</span></td></tr>
+            <tr><td><a href="#brand" style="color:var(--nrg-purple-text);">Brand identity</a></td><td>Purple/pink palette, Source Sans Pro, dark hero, pill search</td><td><span class="nav-status ns-done">Complete</span></td></tr>
+            <tr><td><a href="#homepage" style="color:var(--nrg-purple-text);">Homepage</a></td><td>ZIP hero, provider cards, reviews, CTA</td><td><span class="nav-status ns-done">Complete</span></td></tr>
+            <tr><td><a href="#plans" style="color:var(--nrg-purple-text);">Plans &amp; providers</a></td><td>All-plans page + 5 provider pages with plan-cards</td><td><span class="nav-status ns-done">Complete</span></td></tr>
+            <tr><td><a href="#about-faqs" style="color:var(--nrg-purple-text);">About &amp; FAQs</a></td><td>About page with TX/PA columns + FAQ accordion</td><td><span class="nav-status ns-done">Complete</span></td></tr>
+          </tbody>
+        </table>
+
+        <div class="notice info">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          <span><strong>Adobe First.</strong> The complete site was auto-generated from a brand brief (commit <code class="code-inline">dba9e0a</code> — "Generated site from brand brief"), then 16 commits of hand-polishing matched everythingenergy.com's live UI — purple/pink brand colors, Source Sans Pro typeface, dark hero with background image, pill-shaped ZIP search, logo-grid provider cards, testimonial-style reviews, and FAQ accordion.</span>
+        </div>
+
+        <table class="spec-table" style="margin-top:16px;">
+          <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Effort</td><td>everythingenergy.com → Edge Delivery Services migration</td></tr>
+            <tr><td>GitHub repo</td><td><code class="code-inline">AdobeDrago/nrg</code> · branch <code class="code-inline">main</code></td></tr>
+            <tr><td>Authoring</td><td>Document Authoring — <code class="code-inline">adobedrago/nrg</code></td></tr>
+            <tr><td>Dev model</td><td>EDS block-based development</td></tr>
+            <tr><td>Brand typeface</td><td>Source Sans Pro (via EDS styles)</td></tr>
+            <tr><td>Brand colors</td><td><code class="code-inline">#7564C1</code> (purple) · <code class="code-inline">#D8479A</code> (pink) · <code class="code-inline">#131631</code> (navy)</td></tr>
+            <tr><td>Content source</td><td>DA.live (Document Authoring)</td></tr>
+            <tr><td>Reference site</td><td>everythingenergy.com</td></tr>
+            <tr><td>Initial generation</td><td>commit <code class="code-inline">dba9e0a</code> — "Generated site from brand brief"</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- USE CASE & REQUIREMENTS -->
+      <section class="doc-section" id="use-case">
+        <h2>
+          <span class="section-icon icon-navy">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.75A.75.75 0 012.75 2h7.5a.75.75 0 01.53.22l3 3a.75.75 0 01.22.53v7.5a.75.75 0 01-.75.75h-10.5a.75.75 0 01-.75-.75V2.75zM5 6.5a.5.5 0 000 1h6a.5.5 0 000-1H5zm0 2.5a.5.5 0 000 1h6a.5.5 0 000-1H5zm0 2.5a.5.5 0 000 1h4a.5.5 0 000-1H5z"/></svg>
+          </span>
+          Use case &amp; requirements
+        </h2>
+        <div class="section-rule"></div>
+        <p><strong>Use case.</strong> NRG operates five retail electricity brands across Texas and Pennsylvania. Their existing WordPress site at everythingenergy.com was slow, hard to update, and couldn't scale content across providers. The site needed to let customers <strong>enter their ZIP code, compare plans across all five NRG providers, and choose a plan</strong> — with sub-second page loads and content editing that doesn't require a developer.</p>
+
+        <h3>Requirements gathered</h3>
+        <table class="spec-table">
+          <thead><tr><th>Area</th><th>What was needed</th></tr></thead>
+          <tbody>
+            <tr><td>Core UX</td><td>ZIP code search → plan comparison → provider pages → plan selection</td></tr>
+            <tr><td>Providers</td><td>5 NRG subsidiary brands: Reliant Energy, Green Mountain Energy, Direct Energy, Cirro Energy, Discount Power</td></tr>
+            <tr><td>Plan data</td><td>Rate (cents/kWh), term length, features (free nights, renewable, flat rate), provider name, CTA</td></tr>
+            <tr><td>Brand match</td><td>Purple <code class="code-inline">#7564C1</code> + pink <code class="code-inline">#D8479A</code>, Source Sans Pro, dark hero, pill search, rounded cards</td></tr>
+            <tr><td>Markets</td><td>Texas (deregulated) + Pennsylvania (deregulated)</td></tr>
+            <tr><td>Page load</td><td>Sub-second via edge CDN (WordPress was 2–4 seconds)</td></tr>
+            <tr><td>Content editing</td><td>Marketing team edits in DA.live without developer involvement</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Before &amp; after</h3>
+        <table class="spec-table">
+          <thead><tr><th>Feature</th><th>WordPress (before)</th><th>EDS (after)</th></tr></thead>
+          <tbody>
+            <tr><td>Page load</td><td>2–4 seconds</td><td>Sub-second (edge CDN)</td></tr>
+            <tr><td>Content editing</td><td>Developer required</td><td>Document Authoring (Google Docs-like)</td></tr>
+            <tr><td>Hosting</td><td>Self-managed server</td><td>Adobe-managed edge CDN (99.99% SLA)</td></tr>
+            <tr><td>SEO</td><td>Plugins needed</td><td>Built-in structured metadata, fast LCP</td></tr>
+            <tr><td>Deploy</td><td>Manual</td><td>Git push → CDN auto-deploy via Code Sync</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- KEY REFERENCES -->
+      <section class="doc-section" id="references">
+        <h2>
+          <span class="section-icon icon-purple">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"/></svg>
+          </span>
+          Key references
+        </h2>
+        <div class="section-rule"></div>
+        <p>The three places the site lives — the rendered preview, the authoring surface, and the code.</p>
+        <div class="url-grid">
+          <a class="url-card" href="https://main--nrg--adobedrago.aem.page/" target="_blank" rel="noopener">
+            <span class="url-card-label"><span class="dot dot-purple"></span>EDS Preview</span>
+            <span class="url-card-title">Everything Energy (rendered)</span>
+            <span class="url-card-url">main--nrg--adobedrago.aem.page</span>
+            <span class="url-card-desc">The main branch rendered against DA content — live and functional.</span>
+          </a>
+          <a class="url-card" href="https://da.live/#/adobedrago/nrg" target="_blank" rel="noopener">
+            <span class="url-card-label"><span class="dot dot-navy"></span>Document Authoring</span>
+            <span class="url-card-title">adobedrago / nrg</span>
+            <span class="url-card-url">da.live/#/adobedrago/nrg</span>
+            <span class="url-card-desc">Where authors edit pages, blocks, and content.</span>
+          </a>
+          <a class="url-card" href="https://github.com/AdobeDrago/nrg" target="_blank" rel="noopener">
+            <span class="url-card-label"><span class="dot dot-pink"></span>GitHub</span>
+            <span class="url-card-title">AdobeDrago/nrg</span>
+            <span class="url-card-url">github.com/AdobeDrago/nrg</span>
+            <span class="url-card-desc">Blocks, styles, scripts — 16 commits on main.</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- DELIVERABLES -->
+      <section class="doc-section" id="deliverables">
+        <h2>
+          <span class="section-icon icon-green">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg>
+          </span>
+          Deliverables
+        </h2>
+        <div class="section-rule"></div>
+        <p>What shipped, at a glance.</p>
+        <ul class="checklist">
+          <li class="check-item">
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body"><div class="check-title">Auto-generated site from brand brief</div><div class="check-note">The complete EDS site — CSS, blocks, pages, config — was auto-generated from a brand brief in a single day, then hand-polished to match the live site.</div></div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body"><div class="check-title">Brand identity matched to everythingenergy.com</div><div class="check-note">Purple <code class="code-inline">#7564C1</code>, pink <code class="code-inline">#D8479A</code>, Source Sans Pro, dark gradient hero, pill-shaped ZIP search, rounded provider cards, 20px card radius, 30px button radius.</div></div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body"><div class="check-title">6 custom blocks built</div><div class="check-note">zip-hero (ZIP code search), provider-cards (provider grid), plan-cards (pricing cards), reviews-carousel (testimonials), faq-accordion (expandable Q&amp;A), personalization (recommendations).</div></div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body"><div class="check-title">Homepage with ZIP search + provider grid + reviews</div><div class="check-note">Dark gradient hero with pill-shaped ZIP input, moving-address toggle, 5-provider card grid, 5-customer review carousel, and a CTA section.</div></div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body"><div class="check-title">All-plans page + 5 provider pages</div><div class="check-note">8 plans on the all-plans page (all providers), 3 plans per provider page (15 total). Plan-cards block auto-extracts rate, term, features, and CTA from authored HTML.</div></div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body"><div class="check-title">About page + FAQ accordion</div><div class="check-note">About page with NRG affiliation, TX/PA columns, PUCT registration. FAQ page with category cards + 6-question expandable accordion using native <code class="code-inline">&lt;details&gt;</code> elements.</div></div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body"><div class="check-title">Fully responsive — desktop, tablet, mobile</div><div class="check-note">Plan grid: 3 columns desktop, 2 tablet, 1 mobile. Navigation collapses to hamburger. ZIP input stacks vertically on mobile. All breakpoints tested and styled.</div></div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-done"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06l2.72 2.72 6.72-6.72a.75.75 0 011.06 0z"/></svg></span>
+            <div class="check-body"><div class="check-title">XWalk component definitions + Sidekick config</div><div class="check-note">component-definition.json, component-models.json, component-filters.json for XWalk compatibility. AEM Sidekick config included.</div></div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- SITE CHROME -->
+      <section class="doc-section" id="chrome">
+        <h2>
+          <span class="section-icon icon-navy">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0114.25 14H1.75A1.75 1.75 0 010 12.25v-8.5zm1.75-.25a.25.25 0 00-.25.25v.5h13v-.5a.25.25 0 00-.25-.25H1.75zM1.5 5.5v6.75c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V5.5h-13z"/></svg>
+          </span>
+          Site chrome — header &amp; footer
+          <span class="status-badge sb-done">Complete</span>
+        </h2>
+        <div class="section-rule"></div>
+        <p>The header and footer provide shared chrome across every page. Both are standard EDS blocks — the header loads a nav fragment from DA, the footer loads a footer fragment.</p>
+        <ul class="req-list">
+          <li><strong>Header</strong> — fixed-position navigation with hamburger menu on mobile (≤900px). Desktop shows full nav inline. Built as an EDS <code class="code-inline">header</code> block that loads a <code class="code-inline">nav.html</code> fragment from DA. Includes brand logo, nav links, and responsive collapse behavior with <code class="code-inline">aria-expanded</code> toggling and Escape-to-close.</li>
+          <li><strong>Footer</strong> — "Everything Energy © 2026 · Part of the NRG family of companies" with nav links (Home, About, FAQs), phone number, and PUCT registration number (BR210182). Loads from <code class="code-inline">footer.html</code> fragment.</li>
+        </ul>
+        <div class="notice tip">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm11.78-1.72a.75.75 0 00-1.06-1.06L7 8.94 5.28 7.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.06 0l4.25-4.25z"/></svg>
+          <span>Both header and footer are <strong>fragment-based</strong> — edit <code class="code-inline">nav.html</code> or <code class="code-inline">footer.html</code> in DA and every page picks up the change. No per-page header/footer duplication.</span>
+        </div>
+      </section>
+
+      <!-- BRAND IDENTITY -->
+      <section class="doc-section" id="brand">
+        <h2>
+          <span class="section-icon icon-purple">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2.5A.5.5 0 013.5 2h9a.5.5 0 01.5.5V4a.5.5 0 01-1 0v-1H8.5v10H10a.5.5 0 010 1H6a.5.5 0 010-1h1.5V3H4v1a.5.5 0 01-1 0V2.5z"/></svg>
+          </span>
+          Brand identity — NRG purple &amp; pink
+          <span class="status-badge sb-done">Complete</span>
+        </h2>
+        <div class="section-rule"></div>
+        <p>The site matches everythingenergy.com's visual identity exactly. Every color, radius, and gradient was hand-polished to match the live site pixel-for-pixel.</p>
+
+        <table class="spec-table">
+          <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td>Primary purple</td><td><code class="code-inline">#7564C1</code></td><td>Buttons, links, plan rates, accent borders, hover states</td></tr>
+            <tr><td>Accent pink</td><td><code class="code-inline">#D8479A</code></td><td>Hover/active states, feature tags, error messages, CTA hover</td></tr>
+            <tr><td>Text dark</td><td><code class="code-inline">#131631</code></td><td>Headings, plan names, primary text</td></tr>
+            <tr><td>Text muted</td><td><code class="code-inline">#5B5C69</code></td><td>Body text, descriptions, secondary labels</td></tr>
+            <tr><td>Background light</td><td><code class="code-inline">#f8f7fc</code></td><td>Plan cards section background</td></tr>
+            <tr><td>Hero gradient</td><td><code class="code-inline">linear-gradient(135deg, #1a1340, #2d1b69, #3d2b7d)</code></td><td>Homepage hero background</td></tr>
+            <tr><td>Card radius</td><td><code class="code-inline">20px</code></td><td>Provider cards, plan cards</td></tr>
+            <tr><td>Button radius</td><td><code class="code-inline">30px</code></td><td>Plan CTA buttons</td></tr>
+            <tr><td>Pill radius</td><td><code class="code-inline">40px</code></td><td>ZIP search input wrapper</td></tr>
+            <tr><td>Typeface</td><td>Source Sans Pro</td><td>All text — loaded via EDS global styles</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Responsive breakpoints</h3>
+        <table class="spec-table">
+          <thead><tr><th>Breakpoint</th><th>Plan grid</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>≥900px</td><td>3 columns</td><td>Desktop — full nav, hero at full size</td></tr>
+            <tr><td>600–900px</td><td>2 columns</td><td>Tablet — hamburger nav, hero shrinks</td></tr>
+            <tr><td>≤600px</td><td>1 column</td><td>Mobile — stacked cards, vertical ZIP input</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- HOMEPAGE -->
+      <section class="doc-section" id="homepage">
+        <h2>
+          <span class="section-icon icon-navy">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0114.25 15H1.75A1.75 1.75 0 010 13.25V2.75C0 1.784.784 1 1.75 1zM1.5 4v9.25c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V4h-13z"/></svg>
+          </span>
+          Homepage
+          <span class="status-badge sb-done">Complete</span>
+        </h2>
+        <div class="section-rule"></div>
+        <p>The homepage is composed of four sections: a dark gradient hero with ZIP search, a provider card grid, a customer reviews carousel, and a CTA. Each section is a separate EDS block.</p>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-card-header"><span class="skill-tag tag-js">block</span><span class="skill-card-name">zip-hero</span></div>
+            <div class="skill-card-desc">Dark gradient hero with pill-shaped ZIP code input + "View plans" submit button. Validates 5-digit ZIP (<code class="code-inline">/^\d{5}$/</code>), redirects to <code class="code-inline">/plans?zip={zip}</code>. Moving-address toggle adapts placeholder text.</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-header"><span class="skill-tag tag-js">block</span><span class="skill-card-name">provider-cards</span></div>
+            <div class="skill-card-desc">6-column CSS grid (heading spans all). 5 provider cards with brand name, description, and "View plans" link to each provider's page. CSS-only block — no JS decoration beyond class addition.</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-header"><span class="skill-tag tag-js">block</span><span class="skill-card-name">reviews-carousel</span></div>
+            <div class="skill-card-desc">5 customer testimonials with highlight labels (Saved over 30%, Renewable sources, etc.), customer name, and review text. Styled as a testimonial grid matching everythingenergy.com.</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-header"><span class="skill-tag tag-js">block</span><span class="skill-card-name">zip-cta</span></div>
+            <div class="skill-card-desc">Closing CTA — "Ready to find your plan?" with a "Get started" button linking back to the ZIP search.</div>
+          </div>
+        </div>
+
+        <h3>ZIP search behavior</h3>
+        <div class="code-block"><span class="cmt">// zip-hero.js — submit handler</span>
+submit.addEventListener(<span class="str">'click'</span>, (e) => {
+  e.preventDefault();
+  <span class="kw">const</span> zip = input.value.trim();
+  <span class="kw">if</span> (<span class="str">/^\d{5}$/</span>.test(zip)) {
+    errorEl.style.display = <span class="str">'none'</span>;
+    window.location.href = <span class="str">`/plans?zip=${zip}`</span>;
+  } <span class="kw">else</span> {
+    errorEl.style.display = <span class="str">'block'</span>;  <span class="cmt">// "Invalid ZIP code. Please try again."</span>
+  }
+});</div>
+
+        <div class="notice info">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          <span><strong>Moving-address toggle.</strong> "Moving to a new address? Yes / No" — clicking "Yes" changes the ZIP input placeholder to "Enter your new ZIP code"; "No" resets it. Both are styled as bordered pill buttons with hover states.</span>
+        </div>
+      </section>
+
+      <!-- PLANS & PROVIDERS -->
+      <section class="doc-section" id="plans">
+        <h2>
+          <span class="section-icon icon-seafoam">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2 3.75A1.75 1.75 0 013.75 2h3.5c.464 0 .909.184 1.237.513l5.5 5.5a1.75 1.75 0 010 2.474l-3.5 3.5a1.75 1.75 0 01-2.474 0l-5.5-5.5A1.75 1.75 0 012 7.25v-3.5zM5 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          </span>
+          Plans &amp; providers
+          <span class="status-badge sb-done">Complete</span>
+        </h2>
+        <div class="section-rule"></div>
+        <p>The plan discovery flow spans the all-plans page (<code class="code-inline">/plans</code>) and 5 individual provider pages. All use the <code class="code-inline">plan-cards</code> block, which auto-extracts plan data from authored HTML paragraphs.</p>
+
+        <h3>Plan-cards block</h3>
+        <p>For each plan row, the block JS reads the <code class="code-inline">&lt;h3&gt;</code> (plan name) and <code class="code-inline">&lt;p&gt;</code> elements, then classifies each paragraph by regex pattern matching:</p>
+        <table class="spec-table">
+          <thead><tr><th>Pattern</th><th>CSS class</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td><code class="code-inline">$</code>, cents, ¢, kWh, rate, price</td><td><code class="code-inline">.plan-rate</code></td><td>"9.9 cents/kWh" → 36px purple</td></tr>
+            <tr><td>month, year, term, fixed, variable</td><td><code class="code-inline">.plan-term</code></td><td>"12-month fixed term" → 14px uppercase</td></tr>
+            <tr><td>pool, renewable, green, free, night, weekend</td><td><code class="code-inline">.plan-tag</code></td><td>"Free electricity from 8pm to 6am" → pink pill</td></tr>
+            <tr><td>Remaining text</td><td><code class="code-inline">.plan-desc</code></td><td>"Perfect for night owls and EV owners"</td></tr>
+            <tr><td>First <code class="code-inline">&lt;a&gt;</code> link</td><td><code class="code-inline">.plan-button</code></td><td>"Choose this plan" → purple CTA</td></tr>
+          </tbody>
+        </table>
+
+        <div class="notice info">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          <span><strong>"Best Value" badge.</strong> The first plan card in each grid automatically gets a <code class="code-inline">border: 2px solid #7564C1</code> and a "Best Value" badge positioned at <code class="code-inline">top: -12px</code> via <code class="code-inline">::before</code> pseudo-element.</span>
+        </div>
+
+        <h3>Pages</h3>
+        <table class="spec-table">
+          <thead><tr><th>Page</th><th>Route</th><th>Plans</th><th>Provider</th></tr></thead>
+          <tbody>
+            <tr><td>All plans</td><td><code class="code-inline">/plans</code></td><td>8</td><td>All providers (mixed)</td></tr>
+            <tr><td>Reliant</td><td><code class="code-inline">/providers/reliant</code></td><td>3</td><td>Truly Free Nights 12, Truly Free Weekends 24, Secure Plus 12</td></tr>
+            <tr><td>Green Mountain</td><td><code class="code-inline">/providers/green-mountain</code></td><td>3</td><td>Pollution Free Reliable 12, Solar Safe 24, Green Choice 36</td></tr>
+            <tr><td>Direct Energy</td><td><code class="code-inline">/providers/direct-energy</code></td><td>3</td><td>Live Brighter 12, Live Brighter 24, Energy to Go 6</td></tr>
+            <tr><td>Cirro Energy</td><td><code class="code-inline">/providers/cirro</code></td><td>3</td><td>Smart Simple 12, Smart Simple 24, Smart Choice 36</td></tr>
+            <tr><td>Discount Power</td><td><code class="code-inline">/providers/discount-power</code></td><td>3</td><td>Discount Saver 12, Discount Saver 24, Fixed Bill 36</td></tr>
+          </tbody>
+        </table>
+        <p>Rate range: <strong>9.7 ¢/kWh</strong> (Discount Saver 12, cheapest) to <strong>12.8 ¢/kWh</strong> (Solar Safe 24, most expensive). Term range: 6 to 36 months.</p>
+      </section>
+
+      <!-- ABOUT & FAQs -->
+      <section class="doc-section" id="about-faqs">
+        <h2>
+          <span class="section-icon icon-green">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a.75.75 0 01.75.75v6.19l1.72-1.72a.75.75 0 111.06 1.06l-3 3a.75.75 0 01-1.06 0l-3-3a.75.75 0 011.06-1.06l1.72 1.72V1.75A.75.75 0 018 1z"/></svg>
+          </span>
+          About &amp; FAQs
+          <span class="status-badge sb-done">Complete</span>
+        </h2>
+        <div class="section-rule"></div>
+        <p>Two supporting pages round out the site: an About page explaining Everything Energy's NRG affiliation and market coverage, and an FAQ page with category cards and an expandable accordion.</p>
+
+        <h3>About page</h3>
+        <ul class="req-list">
+          <li><strong>NRG affiliation</strong> — "Part of the NRG family of companies" with link to FAQs</li>
+          <li><strong>Provider partners</strong> — NRG, Reliant, Green Mountain, Direct Energy, Cirro, Discount Power</li>
+          <li><strong>TX/PA columns</strong> — two-column block with "Shop Texas plans" and "Shop PA plans" CTAs</li>
+          <li><strong>PUCT registration</strong> — BR210182, with PUCT contact info for unresolved issues</li>
+        </ul>
+
+        <h3>FAQ page</h3>
+        <p>The <code class="code-inline">faq-accordion</code> block converts authored <code class="code-inline">&lt;h3&gt;</code> + <code class="code-inline">&lt;p&gt;</code> pairs into native <code class="code-inline">&lt;details&gt;</code>/<code class="code-inline">&lt;summary&gt;</code> elements. Each FAQ item has:</p>
+        <ul class="req-list">
+          <li>Styled <code class="code-inline">&lt;summary&gt;</code> with <code class="code-inline">+</code> / <code class="code-inline">−</code> toggle via <code class="code-inline">::after</code> pseudo-element</li>
+          <li>Purple hover state (<code class="code-inline">border-color: #7564C1</code>) with subtle box-shadow</li>
+          <li>12px border-radius, 1px border, smooth <code class="code-inline">border-color</code> transition</li>
+          <li>5 category cards above the accordion linking to topic-specific pages (About Plans, About EE, Industry Infrastructure, Power Outages, Switching Providers)</li>
+        </ul>
+        <p>Six common questions are authored: fixed-rate plans, variable-rate plans, deposits, moving, cost to use Everything Energy, and provider affiliations.</p>
+      </section>
+
+      <!-- ARCHITECTURE -->
+      <section class="doc-section" id="architecture">
+        <h2>
+          <span class="section-icon icon-purple">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1 3.5A1.5 1.5 0 012.5 2h2A1.5 1.5 0 016 3.5v2A1.5 1.5 0 014.5 7h-2A1.5 1.5 0 011 5.5v-2zm5.5 0A1.5 1.5 0 018 2h2a1.5 1.5 0 011.5 1.5v2A1.5 1.5 0 0110 7H8A1.5 1.5 0 016.5 5.5v-2zm-5.5 5A1.5 1.5 0 012.5 7h2A1.5 1.5 0 016 8.5v2A1.5 1.5 0 014.5 12h-2A1.5 1.5 0 011 10.5v-2zm5.5 0A1.5 1.5 0 018 7h2a1.5 1.5 0 011.5 1.5v2A1.5 1.5 0 0110 12H8a1.5 1.5 0 01-1.5-1.5v-2z"/></svg>
+          </span>
+          EDS architecture
+        </h2>
+        <div class="section-rule"></div>
+        <p>Adobe Experience Manager <strong>Edge Delivery Services</strong> is a headless CMS + edge-rendered architecture. Content is authored in DA.live, code lives in GitHub, and Adobe's edge CDN fetches, decorates, and serves pages globally.</p>
+
+        <div class="arch-diagram">
+          <div class="arch-row">
+            <div class="arch-node" style="background:#f3edfb;color:#7240ab;">DA.live (authoring)</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node" style="background:#e6eef7;color:var(--nrg-navy);">GitHub repo</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node" style="background:#e9f1fc;color:#5d4ba0;">AEM Code Sync</div>
+            <span class="arch-arrow">→</span>
+            <div class="arch-node" style="background:#eaf6f1;color:#1a6b50;">Edge CDN → Browser</div>
+          </div>
+        </div>
+
+        <h3>Content flow</h3>
+        <ul class="req-list">
+          <li><strong>Authoring</strong> — content editors use DA.live (Google Docs-like) to create and edit HTML pages</li>
+          <li><strong>Code</strong> — CSS, JS, and block definitions live in the GitHub repo (<code class="code-inline">AdobeDrago/nrg</code>)</li>
+          <li><strong>Rendering</strong> — the edge CDN fetches HTML from GitHub, decorates it with block JS/CSS, serves to browser</li>
+          <li><strong>Deployment</strong> — <code class="code-inline">git push main</code> triggers AEM Code Sync (App ID 17488), which deploys CSS/JS/blocks to CDN automatically</li>
+        </ul>
+
+        <h3>Page load sequence</h3>
+        <table class="spec-table">
+          <thead><tr><th>Phase</th><th>What happens</th></tr></thead>
+          <tbody>
+            <tr><td><code class="code-inline">loadEager()</code></td><td>Set lang, decorate template/theme, decorate main, load first section + first image (LCP optimization)</td></tr>
+            <tr><td><code class="code-inline">loadLazy()</code></td><td>Load header, remaining sections, footer, lazy styles + fonts</td></tr>
+            <tr><td><code class="code-inline">loadDelayed()</code></td><td>After 3s delay — import <code class="code-inline">delayed.js</code> (placeholder for analytics, third-party scripts)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Repository structure</h3>
+        <div class="code-block"><span class="cmt"># Key directories</span>
+nrg/
+├── index.html              <span class="cmt"># Homepage — zip-hero + provider-cards + reviews + CTA</span>
+├── plans.html              <span class="cmt"># All-plans page — 8 plan-cards</span>
+├── about.html              <span class="cmt"># About — columns block (TX/PA)</span>
+├── faqs.html               <span class="cmt"># FAQs — category cards + faq-accordion</span>
+├── providers/              <span class="cmt"># 5 provider pages, 3 plans each</span>
+├── personalized/           <span class="cmt"># Personalized plan page (placeholder)</span>
+├── blocks/                 <span class="cmt"># Custom EDS blocks (CSS + JS per block)</span>
+│   ├── zip-hero/           <span class="cmt"># ZIP code search hero</span>
+│   ├── provider-cards/     <span class="cmt"># Provider card grid</span>
+│   ├── plan-cards/         <span class="cmt"># Plan pricing cards</span>
+│   ├── faq-accordion/      <span class="cmt"># Expandable FAQ</span>
+│   ├── personalization/    <span class="cmt"># Personalized recommendations</span>
+│   ├── header/             <span class="cmt"># Navigation header</span>
+│   └── footer/             <span class="cmt"># Footer</span>
+├── scripts/
+│   ├── aem.js              <span class="cmt"># EDS core runtime (v16.21.21)</span>
+│   ├── scripts.js          <span class="cmt"># Page decoration + boot sequence</span>
+│   └── delayed.js          <span class="cmt"># Deferred loads (placeholder)</span>
+├── styles/                 <span class="cmt"># Global styles (styles.css, fonts, lazy)</span>
+├── tools/sidekick/         <span class="cmt"># AEM Sidekick config</span>
+</div>
+
+        <h3>Deployment</h3>
+        <div class="code-block"><span class="cmt"># Push to deploy — AEM Code Sync auto-deploys</span>
+git add . &amp;&amp; git commit -m <span class="str">"description"</span> &amp;&amp; git push origin main</div>
+      </section>
+
+      <!-- KNOWN LIMITATIONS -->
+      <section class="doc-section" id="limitations">
+        <h2>
+          <span class="section-icon icon-orange">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM8 5a.75.75 0 00-.75.75v2.5a.75.75 0 001.5 0v-2.5A.75.75 0 008 5zm0 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          </span>
+          Known limitations
+          <span class="status-badge sb-progress">Review</span>
+        </h2>
+        <div class="section-rule"></div>
+        <p>Accepted for this delivery — each is a candidate for follow-up.</p>
+        <ul class="checklist">
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 5a.75.75 0 00-.75.75v2.5a.75.75 0 001.5 0v-2.5A.75.75 0 008 5zm0 6a1 1 0 100-2 1 1 0 000 2z"/></svg></span>
+            <div class="check-body"><div class="check-title">Plan data is static</div><div class="check-note">Plan rates, terms, and features are hardcoded in the HTML pages. No API integration with NRG's plan catalog — content authors must update HTML when plans or rates change.</div></div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 5a.75.75 0 00-.75.75v2.5a.75.75 0 001.5 0v-2.5A.75.75 0 008 5zm0 6a1 1 0 100-2 1 1 0 000 2z"/></svg></span>
+            <div class="check-body"><div class="check-title">ZIP search is client-side only</div><div class="check-note"><code class="code-inline">/plans?zip={zip}</code> doesn't filter server-side — all 8 plans are shown regardless of which ZIP is entered. A real plan API would filter by service area.</div></div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 5a.75.75 0 00-.75.75v2.5a.75.75 0 001.5 0v-2.5A.75.75 0 008 5zm0 6a1 1 0 100-2 1 1 0 000 2z"/></svg></span>
+            <div class="check-body"><div class="check-title">Personalization page is a placeholder</div><div class="check-note"><code class="code-inline">personalized/92677.html</code> exists with the personalization block styled (gradient background, frosted-glass badges), but no recommendation engine is wired up to generate personalized plan suggestions.</div></div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 5a.75.75 0 00-.75.75v2.5a.75.75 0 001.5 0v-2.5A.75.75 0 008 5zm0 6a1 1 0 100-2 1 1 0 000 2z"/></svg></span>
+            <div class="check-body"><div class="check-title">No enrollment flow</div><div class="check-note">"Choose this plan" links to a placeholder (<code class="code-inline">/personalized/92677</code>). Not connected to any provider enrollment API — the final conversion step (enroll in a plan) is not functional.</div></div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 5a.75.75 0 00-.75.75v2.5a.75.75 0 001.5 0v-2.5A.75.75 0 008 5zm0 6a1 1 0 100-2 1 1 0 000 2z"/></svg></span>
+            <div class="check-body"><div class="check-title">No analytics integration</div><div class="check-note"><code class="code-inline">delayed.js</code> is a placeholder. EDS core RUM (Real User Monitoring) is active via <code class="code-inline">sampleRUM()</code> beacons to <code class="code-inline">ot.aem.live</code>, but no Adobe Analytics or GA4 is wired up for conversion tracking.</div></div>
+          </li>
+          <li class="check-item">
+            <span class="check-mark cm-partial"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 5a.75.75 0 00-.75.75v2.5a.75.75 0 001.5 0v-2.5A.75.75 0 008 5zm0 6a1 1 0 100-2 1 1 0 000 2z"/></svg></span>
+            <div class="check-body"><div class="check-title">Two states only</div><div class="check-note">Currently serves Texas and Pennsylvania. NRG operates in additional deregulated markets that could be added with new provider pages and ZIP coverage.</div></div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- NEXT STEPS -->
+      <section class="doc-section" id="next-steps">
+        <h2>
+          <span class="section-icon icon-green">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2 4.5A2.5 2.5 0 014.5 2h7A2.5 2.5 0 0114 4.5v5a2.5 2.5 0 01-2.5 2.5H6.7l-3 2.4A.5.5 0 013 14v-2H4.5A2.5 2.5 0 012 9.5v-5z"/></svg>
+          </span>
+          Next steps
+        </h2>
+        <div class="section-rule"></div>
+        <p>The site is live and functional as a marketing and plan-comparison surface. These are the expansion areas that would take it from MVP to production-grade:</p>
+        <table class="spec-table">
+          <thead><tr><th>Area</th><th>What's needed</th><th>Effort</th></tr></thead>
+          <tbody>
+            <tr><td>Plan API integration</td><td>Connect to NRG's plan catalog API for live pricing by ZIP code — replace static HTML plan data with dynamic fetching</td><td>Medium</td></tr>
+            <tr><td>Enrollment flow</td><td>Wire "Choose this plan" to the provider enrollment API — the final conversion step</td><td>Medium</td></tr>
+            <tr><td>Personalization engine</td><td>Build the recommendation logic behind the personalization block — usage-based, lifestyle-matched plan suggestions</td><td>Large</td></tr>
+            <tr><td>Analytics</td><td>Add Adobe Analytics or GA4 for conversion tracking on the ZIP search → plan selection funnel</td><td>Small</td></tr>
+            <tr><td>Additional states</td><td>Add provider pages and ZIP coverage for NRG's other deregulated markets</td><td>Medium</td></tr>
+            <tr><td>Server-side ZIP filtering</td><td>Make <code class="code-inline">/plans?zip={zip}</code> actually filter plans by service area — requires the plan API</td><td>Medium</td></tr>
+            <tr><td>A/B testing</td><td>Set up EDS experimentation on the hero CTA, plan card layout, and provider card ordering</td><td>Small</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- BLOCK LIBRARY -->
+      <section class="doc-section" id="blocks">
+        <h2>
+          <span class="section-icon icon-navy">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1 3.5A1.5 1.5 0 012.5 2h2A1.5 1.5 0 016 3.5v2A1.5 1.5 0 014.5 7h-2A1.5 1.5 0 011 5.5v-2zm5.5 0A1.5 1.5 0 018 2h2a1.5 1.5 0 011.5 1.5v2A1.5 1.5 0 0110 7H8A1.5 1.5 0 016.5 5.5v-2zm-5.5 5A1.5 1.5 0 012.5 7h2A1.5 1.5 0 016 8.5v2A1.5 1.5 0 014.5 12h-2A1.5 1.5 0 011 10.5v-2zm5.5 0A1.5 1.5 0 018 7h2a1.5 1.5 0 011.5 1.5v2A1.5 1.5 0 0110 12H8a1.5 1.5 0 01-1.5-1.5v-2z"/></svg>
+          </span>
+          Block library
+        </h2>
+        <div class="section-rule"></div>
+        <h3>Custom blocks built for NRG</h3>
+        <p>Net-new blocks authored for Everything Energy — not part of the EDS boilerplate.</p>
+        <div class="skills-grid">
+          <div class="skill-card"><div class="skill-card-header"><span class="skill-tag tag-js">custom</span><span class="skill-card-name">zip-hero</span></div><div class="skill-card-desc">Dark gradient hero with pill-shaped ZIP code input, submit button, validation, and moving-address toggle. Redirects to <code class="code-inline">/plans?zip={zip}</code> on valid submit.</div></div>
+          <div class="skill-card"><div class="skill-card-header"><span class="skill-tag tag-js">custom</span><span class="skill-card-name">provider-cards</span></div><div class="skill-card-desc">CSS-only provider card grid — 5 NRG brand cards with descriptions and "View plans" links. CSS grid, no JS decoration beyond class addition.</div></div>
+          <div class="skill-card"><div class="skill-card-header"><span class="skill-tag tag-js">custom</span><span class="skill-card-name">plan-cards</span></div><div class="skill-card-desc">Pricing card grid — auto-extracts rate, term, features, and CTA from authored HTML by regex pattern matching. "Best Value" badge on first card. Responsive 3/2/1 columns.</div></div>
+          <div class="skill-card"><div class="skill-card-header"><span class="skill-tag tag-js">custom</span><span class="skill-card-name">faq-accordion</span></div><div class="skill-card-desc">Expandable Q&amp;A using native <code class="code-inline">&lt;details&gt;</code>/<code class="code-inline">&lt;summary&gt;</code>. JS converts h3+p pairs into details/summary. CSS handles +/− toggle and hover states.</div></div>
+          <div class="skill-card"><div class="skill-card-header"><span class="skill-tag tag-js">custom</span><span class="skill-card-name">personalization</span></div><div class="skill-card-desc">Gradient recommendation panel — splits comma-separated text into frosted-glass badges. Styled but recommendation engine not wired up.</div></div>
+          <div class="skill-card"><div class="skill-card-header"><span class="skill-tag tag-js">custom</span><span class="skill-card-name">reviews-carousel</span></div><div class="skill-card-desc">Customer testimonial grid with highlight labels, names, and review text. Styled to match everythingenergy.com's testimonial layout.</div></div>
+        </div>
+        <h3>Standard EDS blocks in the project</h3>
+        <p>Blocks from the AEM boilerplate, updated and restyled for NRG.</p>
+        <div class="skills-grid">
+          <div class="skill-card"><div class="skill-card-header"><span class="skill-tag tag-poli">polished</span><span class="skill-card-name">header</span></div><div class="skill-card-desc">Fixed nav with hamburger mobile fallback. Fragment-based — loads nav.html from DA.</div></div>
+          <div class="skill-card"><div class="skill-card-header"><span class="skill-tag tag-poli">polished</span><span class="skill-card-name">footer</span></div><div class="skill-card-desc">NRG footer — copyright, nav links, phone, PUCT registration. Fragment-based.</div></div>
+          <div class="skill-card"><div class="skill-card-header"><span class="skill-tag tag-poli">polished</span><span class="skill-card-name">hero</span></div><div class="skill-card-desc">Full-bleed background + content band. Full-bleed background with overlaid content band.</div></div>
+          <div class="skill-card"><div class="skill-card-header"><span class="skill-tag tag-core">core</span><span class="skill-card-name">cards</span></div></div>
+          <div class="skill-card"><div class="skill-card-header"><span class="skill-tag tag-core">core</span><span class="skill-card-name">columns</span></div><div class="skill-card-desc">Used on About page for TX/PA layout.</div></div>
+          <div class="skill-card"><div class="skill-card-header"><span class="skill-tag tag-core">core</span><span class="skill-card-name">fragment</span></div><div class="skill-card-desc">Loads header and footer fragments from DA.</div></div>
+        </div>
+      </section>
+
+      <!-- DEVELOPER NOTES -->
+      <section class="doc-section" id="dev-notes">
+        <h2>
+          <span class="section-icon icon-orange">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
+          </span>
+          Developer notes
+        </h2>
+        <div class="section-rule"></div>
+
+        <h3>Local development</h3>
+        <div class="code-block"><span class="cmt"># Prerequisites: Node.js 18+</span>
+npm install -g @adobe/aem-cli
+
+<span class="cmt"># Clone and run locally</span>
+git clone https://github.com/AdobeDrago/nrg.git
+cd nrg
+aem up  <span class="cmt"># opens at http://localhost:3000</span>
+
+<span class="cmt"># Local server proxies content from DA.live and runs block CSS/JS locally.
+# Edits to CSS/JS hot-reload. Content edits happen in DA.live.</span></div>
+
+        <h3>Content authoring</h3>
+        <p>Content is authored in <strong>DA.live</strong> — not in the GitHub repo. The repo contains code (CSS, JS, block definitions); DA contains page content. Block syntax: add a div with the block name as a CSS class (e.g. <code class="code-inline">zip-hero</code>, <code class="code-inline">plan-cards</code>). The EDS decoration engine picks it up automatically.</p>
+
+        <h3>fstab.yaml</h3>
+        <div class="code-block"><span class="cmt"># fstab.yaml — tells EDS where to find the code repository</span>
+mountpoints:
+  /:
+    type: github
+    url: https://github.com/AdobeDrago/nrg
+    branch: main</div>
+
+        <h3>Plan-cards regex classification</h3>
+        <p>The <code class="code-inline">plan-cards</code> block uses regex to classify each paragraph. If a paragraph matches multiple patterns, the first match wins (rate → term → tag → description). This means the order of authored paragraphs matters — put rate first, then term, then features, then description.</p>
+
+        <h3>EDS escapes raw HTML in &lt;p&gt; tags</h3>
+        <div class="notice warning">
+          <svg class="notice-icon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM8 5a.75.75 0 00-.75.75v2.5a.75.75 0 001.5 0v-2.5A.75.75 0 008 5zm0 6a1 1 0 100-2 1 1 0 000 2z"/></svg>
+          <span><strong>Gotcha.</strong> EDS escapes raw HTML inside <code class="code-inline">&lt;p&gt;</code> tags — interactive elements (inputs, buttons, toggles) must be built in block JS, not authored as HTML in DA. The zip-hero block builds its input, submit button, and Yes/No toggle entirely in JavaScript from text-only authored rows.</span>
+        </div>
+
+        <h3>Code Sync app</h3>
+        <p>AEM Code Sync (<code class="code-inline">aem-code-sync</code>, App ID 17488) deploys CSS/JS/blocks to the CDN. This is <strong>not</strong> <code class="code-inline">aem-code-connector</code> (the AI agent integration, which doesn't deploy). Make sure the correct app is configured in the Adobe Developer Console.</p>
+
+        <div class="doc-footer">
+          <span>Everything Energy · NRG · EDS Site</span>
+          <span>·</span>
+          <span><a href="https://github.com/AdobeDrago/nrg" style="color:var(--nrg-purple-text);text-decoration:none;">AdobeDrago/nrg</a></span>
+          <span>·</span>
+          <span>Built on Adobe Edge Delivery Services</span>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  const links = [...document.querySelectorAll('.sidebar-link')];
+  const byId = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const link = byId.get(entry.target.id);
+        if (!link) return;
+        links.forEach((a) => a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  document.querySelectorAll('.doc-section, .page-hero').forEach((s) => { if (s.id) observer.observe(s); });
+</script>
+
+</body>
+</html>
