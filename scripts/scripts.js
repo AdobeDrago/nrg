@@ -40,7 +40,7 @@ function decorateButtons(main) {
   });
 }
 
-function decorateMain(main) {
+export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
