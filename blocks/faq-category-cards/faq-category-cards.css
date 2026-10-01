@@ -1,0 +1,60 @@
+/* FAQ category cards — gradient tiles */
+.faq-category-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  max-width: 1004px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+.faq-category-cards .faq-category-card {
+  flex: 0 0 calc(50% - 8px);
+  border-radius: 12px;
+  background: linear-gradient(90deg, #79b3dc, #67a85f);
+  overflow: hidden;
+}
+
+.faq-category-cards .faq-category-card-3 { background: linear-gradient(90deg, #f6cf6b, #79b3dc); }
+.faq-category-cards .faq-category-card-4 { background: linear-gradient(90deg, #e46aa9, #f6d576); }
+.faq-category-cards .faq-category-card-5 { background: linear-gradient(90deg, #5c5a8c, #79b3dc); }
+
+.faq-category-cards .faq-category-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 150px;
+  padding: 24px 16px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+}
+
+.faq-category-cards .faq-category-tile svg {
+  width: 44px;
+  height: 44px;
+  fill: rgb(255 255 255 / 85%);
+}
+
+.faq-category-cards .faq-category-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.faq-category-cards a.faq-category-tile:hover { background: rgb(0 0 0 / 8%); }
+
+@media (width >= 900px) {
+  .faq-category-cards { gap: 26px; padding: 40px 32px 64px; }
+
+  .faq-category-cards .faq-category-card { flex: 0 0 300px; }
+
+  .faq-category-cards .faq-category-tile { min-height: 185px; padding: 32px 40px; }
+
+  .faq-category-cards .faq-category-title { font-size: 18px; }
+}

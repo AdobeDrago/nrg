@@ -1,69 +1,54 @@
+const RATE = /^\$|\d\s*(cents|¢)|\/\s*kwh/i;
+const TERM = /\b\d+[\s-]*(month|mo|year|yr)s?\b|\bterm\b/i;
+
+function el(className, text) {
+  const div = document.createElement('div');
+  div.className = className;
+  div.textContent = text;
+  return div;
+}
+
 export default function decorate(block) {
-  block.classList.add('plan-cards-block');
+  const [intro, ...rows] = block.querySelectorAll(':scope > div');
+  intro?.classList.add('plan-cards-intro');
 
-  // Find all plan rows (every row after the first which is the heading)
-  const rows = block.querySelectorAll(':scope > div:not(:first-child)');
-  rows.forEach((row) => {
-    const cell = row.querySelector('div');
-    if (cell) {
-      // Find the plan name (h3) and details
-      const h3 = cell.querySelector('h3');
-      const details = cell.querySelectorAll('p');
+  rows.forEach((row, i) => {
+    const cell = row.querySelector(':scope > div');
+    if (!cell) return;
+    row.classList.add('plan-cards-row');
+    if (i === 0) row.classList.add('featured');
 
-      // Build a structured card
-      const card = document.createElement('div');
-      card.className = 'plan-card';
+    const card = document.createElement('div');
+    card.className = 'plan-card';
+    const heading = cell.querySelector('h2, h3, h4');
+    if (heading) card.append(el('plan-name', heading.textContent.trim()));
 
-      if (h3) {
-        const name = document.createElement('div');
-        name.className = 'plan-name';
-        name.textContent = h3.textContent;
-        card.appendChild(name);
-      }
+    const link = cell.querySelector('a');
+    const extras = [];
+    cell.querySelectorAll('p').forEach((p) => {
+      const text = p.textContent.trim();
+      if (!text || p.querySelector('a')) return;
+      if (!card.querySelector('.plan-rate') && RATE.test(text)) card.append(el('plan-rate', text));
+      else if (!card.querySelector('.plan-term') && TERM.test(text)) card.append(el('plan-term', text));
+      else extras.push(text);
+    });
 
-      // Extract rate, term, details from paragraphs
-      details.forEach((p) => {
-        const text = p.textContent.trim();
-        if (!text) return;
+    // first remaining line is the provider, the rest describe the plan
+    const [provider, ...desc] = extras;
+    if (provider) card.append(el('plan-provider', provider));
+    desc.forEach((text) => card.append(el('plan-desc', text)));
 
-        if (text.match(/^\$|cents|¢|kWh|rate|price/i)) {
-          const rate = document.createElement('div');
-          rate.className = 'plan-rate';
-          rate.textContent = text;
-          card.appendChild(rate);
-        } else if (text.match(/month|year|term|fixed|variable/i)) {
-          const term = document.createElement('div');
-          term.className = 'plan-term';
-          term.textContent = text;
-          card.appendChild(term);
-        } else if (text.match(/pool|renewable|green|free|night|weekend/i)) {
-          const tag = document.createElement('div');
-          tag.className = 'plan-tag';
-          tag.textContent = text;
-          card.appendChild(tag);
-        } else {
-          const desc = document.createElement('div');
-          desc.className = 'plan-desc';
-          desc.textContent = text;
-          card.appendChild(desc);
-        }
-      });
-
-      // Find any links and make them CTA buttons
-      const links = cell.querySelectorAll('a');
-      if (links.length > 0) {
-        const cta = document.createElement('div');
-        cta.className = 'plan-cta';
-        const link = document.createElement('a');
-        link.href = links[0].href;
-        link.textContent = 'Choose this plan';
-        link.className = 'plan-button';
-        cta.appendChild(link);
-        card.appendChild(cta);
-      }
-
-      cell.innerHTML = '';
-      cell.appendChild(card);
+    if (link) {
+      const cta = document.createElement('div');
+      cta.className = 'plan-cta';
+      const a = document.createElement('a');
+      a.href = link.href;
+      a.className = 'plan-button';
+      a.textContent = link.textContent.trim() || 'Choose this plan';
+      cta.append(a);
+      card.append(cta);
     }
+
+    cell.replaceChildren(card);
   });
 }

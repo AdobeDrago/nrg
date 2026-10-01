@@ -13,7 +13,7 @@ footer .footer > div {
 }
 
 footer .footer .section { padding: 0; }
-footer .footer .section + .section { margin-top: 24px; }
+footer .footer .section + .section { margin-top: 40px; }
 footer .footer p { margin: 0 0 8px; font-size: inherit; line-height: 1.5; }
 footer .footer ul { list-style: none; margin: 0; padding-left: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; }
 footer .footer a:any-link { color: currentcolor; }
@@ -29,10 +29,10 @@ footer .footer h4 {
 }
 
 /* brand */
-footer .footer .footer-brand a { display: inline-flex; flex-direction: column; gap: 6px; }
+footer .footer .footer-brand a { display: inline-flex; flex-direction: column; gap: 16px; }
 footer .footer .footer-brand img { display: block; height: auto; }
-footer .footer .footer-brand img:first-child { width: 32px; }
-footer .footer .footer-brand img:last-child { width: 180px; }
+footer .footer .footer-brand img:first-child { width: 40px; }
+footer .footer .footer-brand img:last-child { width: 220px; }
 
 /* columns */
 footer .footer .footer-columns {

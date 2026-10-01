@@ -1,5 +1,6 @@
 .faq-accordion {
-  max-width: 800px;
+  max-width: 808px;
+  box-sizing: border-box;
   margin: 0 auto;
   padding: 24px;
 }
