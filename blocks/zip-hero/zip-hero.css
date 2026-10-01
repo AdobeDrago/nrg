@@ -40,100 +40,6 @@
   line-height: 1.3;
 }
 
-/* ZIP card */
-.zip-hero .zip-card {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 400px;
-  padding: 32px 20px;
-  border-radius: 24px;
-  background: #fff;
-  box-shadow: 0 8px 32px rgb(19 22 49 / 12%);
-}
-
-.zip-hero .zip-card input {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 8px 0 10px;
-  border: 0;
-  border-bottom: 2px solid var(--ee-purple);
-  border-radius: 0;
-  background: transparent;
-  color: var(--ee-text-title);
-  font-size: 18px;
-  font-weight: 600;
-  outline: none;
-}
-
-.zip-hero .zip-card input::placeholder { color: var(--ee-text-title); opacity: 1; }
-.zip-hero .zip-card input:focus::placeholder { color: #999; }
-.zip-hero .zip-card input:focus { border-bottom-color: var(--ee-pink); }
-
-.zip-hero .zip-error {
-  margin: 8px 0 0;
-  color: var(--ee-pink);
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.zip-hero .zip-moving {
-  margin: 20px 0 0;
-  padding: 0;
-  border: 0;
-}
-
-.zip-hero .zip-moving legend {
-  padding: 0;
-  color: var(--ee-text-dark);
-  font-size: 15px;
-}
-
-.zip-hero .zip-moving-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.zip-hero .zip-moving-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  margin: 0;
-  padding: 14px 8px 10px;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  background: #f2f2f2;
-  color: var(--ee-text-title);
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.zip-hero .zip-moving-option svg { width: 24px; height: 24px; fill: #5b5c69; }
-
-.zip-hero .zip-moving-option:hover,
-.zip-hero .zip-moving-option:focus { background: #ebe8f7; color: var(--ee-text-title); }
-
-.zip-hero .zip-moving-option[aria-pressed="true"] {
-  border-color: var(--ee-purple);
-  background: #ebe8f7;
-}
-
-.zip-hero .zip-moving-option[aria-pressed="true"] svg { fill: var(--ee-purple); }
-
-.zip-hero .zip-submit {
-  display: block;
-  min-width: 140px;
-  margin: 24px auto 0;
-  padding: 10px 28px;
-  background: var(--ee-pink);
-  font-size: 16px;
-}
-
-.zip-hero .zip-submit:hover,
-.zip-hero .zip-submit:focus { background: var(--ee-purple); }
-
 @media (width >= 900px) {
   .zip-hero {
     flex-direction: row;
@@ -156,7 +62,6 @@
 
   .zip-hero .zip-hero-copy { order: 0; max-width: 300px; }
   .zip-hero h1 { font-size: 36px; }
-  .zip-hero .zip-card { width: 376px; padding: 40px 32px 36px; }
 }
 
 /* make room for the transparent header that overlaps the hero on small screens */

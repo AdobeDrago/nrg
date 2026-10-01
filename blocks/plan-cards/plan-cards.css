@@ -52,8 +52,8 @@ main .plan-cards-wrapper { background: var(--ee-cards-bg, #f8f7fc); }
 
 .plan-cards .plan-cards-row.featured > div { border-color: var(--ee-purple, #7564c1); }
 
-.plan-cards .plan-cards-row.featured > div::before {
-  content: 'Best Value';
+.plan-cards .plan-cards-row.featured > div[data-badge]::before {
+  content: attr(data-badge);
   position: absolute;
   top: -13px;
   left: 50%;
@@ -74,6 +74,7 @@ main .plan-cards-wrapper { background: var(--ee-cards-bg, #f8f7fc); }
 }
 
 .plan-cards .plan-name {
+  margin: 0;
   color: var(--ee-text-title, #131631);
   font-size: 22px;
   font-weight: 700;
@@ -106,6 +107,12 @@ main .plan-cards-wrapper { background: var(--ee-cards-bg, #f8f7fc); }
   line-height: 1.5;
 }
 
+.plan-cards .plan-facts {
+  color: var(--ee-text-title, #131631);
+  font-size: 14px;
+  font-weight: 600;
+}
+
 .plan-cards .plan-cta {
   margin-top: auto;
   padding-top: 16px;
@@ -124,6 +131,23 @@ main .plan-cards-wrapper { background: var(--ee-cards-bg, #f8f7fc); }
 }
 
 .plan-cards a.plan-button:hover { background: var(--ee-pink, #d8479a); }
+
+.plan-cards a.plan-efl:any-link {
+  display: block;
+  margin-top: 12px;
+  color: var(--ee-purple, #7564c1);
+  font-size: 14px;
+}
+
+/* no plans for the requested ZIP */
+.plan-cards .plan-cards-empty { max-width: 760px; padding: 48px 0; text-align: left; }
+
+.plan-cards .plan-cards-empty h2 {
+  font-size: var(--heading-font-size-xl);
+  line-height: 1.2;
+}
+
+.plan-cards .plan-cards-empty a:any-link { color: var(--ee-purple, #7564c1); font-weight: 600; }
 
 @media (width >= 600px) {
   .plan-cards { grid-template-columns: repeat(2, 1fr); padding: 64px 32px; }

@@ -1,0 +1,120 @@
+/* ZIP lookup card shared by zip-hero and zip-cta */
+.zip-card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
+  padding: 32px 20px;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 8px 32px rgb(19 22 49 / 12%);
+  text-align: left;
+}
+
+.zip-card .zip-field { position: relative; padding-top: 14px; }
+
+.zip-card .zip-field input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px 0 10px;
+  border: 0;
+  border-bottom: 2px solid var(--ee-purple);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ee-text-title);
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  outline: none;
+}
+
+.zip-card .zip-field input:focus { border-bottom-color: var(--ee-pink); }
+.zip-card .zip-field input[aria-invalid="true"] { border-bottom-color: var(--ee-pink); }
+
+/* floating label: sits in the input until focused or filled */
+.zip-card .zip-field label {
+  position: absolute;
+  top: 22px;
+  left: 0;
+  color: var(--ee-text-title);
+  font-size: 18px;
+  font-weight: 600;
+  pointer-events: none;
+  transform-origin: left top;
+  transition: transform .15s, color .15s;
+}
+
+.zip-card .zip-field input:focus + label,
+.zip-card .zip-field input:not(:placeholder-shown) + label {
+  color: var(--ee-purple);
+  transform: translateY(-22px) scale(.72);
+}
+
+.zip-card .zip-error {
+  margin: 8px 0 0;
+  color: var(--ee-pink);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.zip-card .zip-moving {
+  margin: 20px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.zip-card .zip-moving legend {
+  padding: 0;
+  color: var(--ee-text-dark);
+  font-size: 15px;
+}
+
+.zip-card .zip-moving-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.zip-card .zip-moving-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 14px 8px 10px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: #f2f2f2;
+  color: var(--ee-text-title);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.zip-card .zip-moving-option svg { width: 24px; height: 24px; fill: #5b5c69; }
+
+.zip-card .zip-moving-option:hover,
+.zip-card .zip-moving-option:focus { background: #ebe8f7; color: var(--ee-text-title); }
+
+.zip-card .zip-moving-option[aria-pressed="true"] {
+  border-color: var(--ee-purple);
+  background: #ebe8f7;
+}
+
+.zip-card .zip-moving-option[aria-pressed="true"] svg { fill: var(--ee-purple); }
+
+.zip-card .zip-submit {
+  display: block;
+  min-width: 140px;
+  margin: 24px auto 0;
+  padding: 10px 28px;
+  background: var(--ee-pink);
+  color: #fff;
+  font-size: 16px;
+}
+
+.zip-card .zip-submit:hover,
+.zip-card .zip-submit:focus { background: var(--ee-purple); }
+
+@media (width >= 900px) {
+  .zip-card { width: 376px; padding: 40px 32px 36px; }
+}
