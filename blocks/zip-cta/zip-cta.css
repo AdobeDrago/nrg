@@ -1,0 +1,83 @@
+/* ZIP call to action — gradient band with a pill ZIP search */
+.zip-cta {
+  position: relative;
+  padding: 0 20px 64px;
+  text-align: center;
+}
+
+.zip-cta::before {
+  content: '';
+  display: block;
+  height: 72px;
+  margin: 0 -20px 40px;
+  background: linear-gradient(90deg, #d8479a 0%, #b45fb0 30%, #7f86cc 70%, #6a9bd2 100%);
+  clip-path: ellipse(120% 100% at 60% 0%);
+}
+
+.zip-cta > div > div { max-width: 560px; margin: 0 auto; }
+
+.zip-cta h2 {
+  margin: 0 0 8px;
+  color: var(--ee-text-title);
+  font-size: var(--heading-font-size-l);
+}
+
+.zip-cta p {
+  margin: 0 0 24px;
+  font-size: var(--body-font-size-s);
+}
+
+.zip-cta-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--ee-purple);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.zip-cta-field {
+  display: flex;
+  align-items: center;
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 4px 4px 4px 20px;
+  border-radius: 40px;
+  background: var(--ee-light-gray);
+}
+
+.zip-cta-field input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  color: var(--ee-text-title);
+  font-size: 16px;
+  outline: none;
+}
+
+.zip-cta-field button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.zip-cta-field button svg { width: 20px; height: 20px; fill: #fff; }
+
+.zip-cta-field:focus-within { box-shadow: 0 0 0 2px var(--ee-purple); }
+
+.zip-cta .zip-cta-error {
+  margin: 8px 0 0;
+  color: var(--ee-pink);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media (width >= 900px) {
+  .zip-cta::before { height: 120px; margin-bottom: 48px; }
+}

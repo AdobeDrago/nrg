@@ -1,93 +1,86 @@
+const ICONS = {
+  yes: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h11v10H3zM14 9h4l3 3v3h-7zM6.5 18.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm11 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>',
+  no: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9h-6v-6H9v6H3z"/></svg>',
+};
+
+function buildMovingToggle(label, input) {
+  const wrapper = document.createElement('fieldset');
+  wrapper.className = 'zip-moving';
+  const legend = document.createElement('legend');
+  legend.textContent = label;
+  wrapper.append(legend);
+  const options = document.createElement('div');
+  options.className = 'zip-moving-options';
+  ['yes', 'no'].forEach((value) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `zip-moving-option moving-${value}`;
+    btn.setAttribute('aria-pressed', 'false');
+    btn.innerHTML = `${ICONS[value]}<span>${value === 'yes' ? 'Yes' : 'No'}</span>`;
+    btn.addEventListener('click', () => {
+      options.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+      input.placeholder = value === 'yes' ? 'Enter your new ZIP code' : 'Enter your ZIP code';
+    });
+    options.append(btn);
+  });
+  wrapper.append(options);
+  return wrapper;
+}
+
 export default function decorate(block) {
-  block.classList.add('zip-hero-block');
+  const [copyRow, zipRow, movingRow] = block.querySelectorAll(':scope > div');
+  copyRow?.classList.add('zip-hero-copy');
 
-  // The block has 3 rows: heading, zip input, moving toggle
-  // Row 1: h1 + subtitle
-  // Row 2: "Enter your ZIP code" text → build input + submit
-  // Row 3: "Moving to a new address? Yes No" → build toggle
+  const form = document.createElement('form');
+  form.className = 'zip-card';
+  form.noValidate = true;
 
-  // Find the rows
-  const rows = block.querySelectorAll(':scope > div');
+  const zipLabel = zipRow?.textContent.trim() || 'Enter your ZIP code';
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.inputMode = 'numeric';
+  input.autocomplete = 'postal-code';
+  input.maxLength = 5;
+  input.pattern = '[0-9]{5}';
+  input.placeholder = zipLabel;
+  input.id = 'zip-code-input';
+  input.setAttribute('aria-label', '5-digit ZIP code');
+  form.append(input);
 
-  // Build the ZIP input row from row 2
-  if (rows.length >= 2) {
-    const zipRow = rows[1];
-    const zipCell = zipRow.querySelector('div');
-    if (zipCell) {
-      zipCell.innerHTML = '';
-      const wrapper = document.createElement('div');
-      wrapper.className = 'zip-input-wrapper';
-      const input = document.createElement('input');
-      input.type = 'tel';
-      input.placeholder = 'Enter your ZIP code';
-      input.maxLength = '5';
-      input.id = 'zip-code-input';
-      input.setAttribute('aria-label', '5-digit ZIP code');
-      const submit = document.createElement('button');
-      submit.type = 'button';
-      submit.className = 'zip-submit';
-      submit.textContent = 'View plans';
-      wrapper.appendChild(input);
-      wrapper.appendChild(submit);
-      zipCell.appendChild(wrapper);
+  const error = document.createElement('p');
+  error.className = 'zip-error';
+  error.hidden = true;
+  error.setAttribute('role', 'alert');
+  error.textContent = 'Invalid ZIP code. Please try again.';
+  form.append(error);
 
-      // Error message
-      const errorEl = document.createElement('p');
-      errorEl.className = 'zip-error';
-      errorEl.style.display = 'none';
-      errorEl.textContent = 'Invalid ZIP code. Please try again.';
-      zipCell.appendChild(errorEl);
-
-      submit.addEventListener('click', (e) => {
-        e.preventDefault();
-        const zip = input.value.trim();
-        if (/^\d{5}$/.test(zip)) {
-          errorEl.style.display = 'none';
-          window.location.href = `/plans?zip=${zip}`;
-        } else {
-          errorEl.style.display = 'block';
-        }
-      });
-    }
+  if (movingRow) {
+    const movingLabel = movingRow.textContent.replace(/\s*Yes\s*No\s*$/i, '').trim();
+    form.append(buildMovingToggle(movingLabel || 'Moving to a new address?', input));
   }
 
-  // Build the moving toggle from row 3
-  if (rows.length >= 3) {
-    const movingRow = rows[2];
-    const movingCell = movingRow.querySelector('div');
-    if (movingCell) {
-      const text = movingCell.textContent;
-      movingCell.innerHTML = '';
-      const wrapper = document.createElement('div');
-      wrapper.className = 'zip-moving';
-      const label = document.createElement('p');
-      label.textContent = 'Moving to a new address?';
-      const toggle = document.createElement('p');
-      const yes = document.createElement('a');
-      yes.href = '#';
-      yes.textContent = 'Yes';
-      yes.className = 'moving-yes';
-      const no = document.createElement('a');
-      no.href = '#';
-      no.textContent = 'No';
-      no.className = 'moving-no';
-      toggle.appendChild(yes);
-      toggle.appendChild(document.createTextNode('  '));
-      toggle.appendChild(no);
-      wrapper.appendChild(label);
-      wrapper.appendChild(toggle);
-      movingCell.appendChild(wrapper);
+  const submit = document.createElement('button');
+  submit.type = 'submit';
+  submit.className = 'zip-submit';
+  submit.textContent = 'View plans';
+  form.append(submit);
 
-      yes.addEventListener('click', (e) => {
-        e.preventDefault();
-        const inp = block.querySelector('#zip-code-input');
-        if (inp) inp.placeholder = 'Enter your new ZIP code';
-      });
-      no.addEventListener('click', (e) => {
-        e.preventDefault();
-        const inp = block.querySelector('#zip-code-input');
-        if (inp) inp.placeholder = 'Enter your ZIP code';
-      });
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const zip = input.value.trim();
+    if (/^\d{5}$/.test(zip)) {
+      error.hidden = true;
+      window.location.href = `/plans?zip=${zip}`;
+    } else {
+      error.hidden = false;
+      input.focus();
     }
-  }
+  });
+
+  const cardRow = document.createElement('div');
+  cardRow.className = 'zip-hero-form';
+  cardRow.append(form);
+  zipRow?.remove();
+  movingRow?.remove();
+  block.prepend(cardRow);
 }
