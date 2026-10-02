@@ -23,6 +23,26 @@ async function loadFonts() {
 
 function buildAutoBlocks() {}
 
+/**
+ * DA drops relative <img> sources on preview, so images kept in the code repo
+ * (e.g. /icons/providers/*.png) are authored as a standalone link to the file.
+ * Turns such links into images; the link text (if not the path) becomes the alt.
+ */
+function decorateImageLinks(main) {
+  main.querySelectorAll('a[href*="/icons/"]').forEach((a) => {
+    const url = new URL(a.href, window.location);
+    if (!url.pathname.startsWith('/icons/') || !/\.(png|jpe?g|gif|webp|svg)$/i.test(url.pathname)) return;
+    const parent = a.parentElement;
+    if (parent.textContent.trim() !== a.textContent.trim()) return;
+    const text = a.textContent.trim();
+    const img = document.createElement('img');
+    img.src = `${window.hlx.codeBasePath}${url.pathname}`;
+    img.alt = text.includes('/icons/') ? '' : text;
+    img.loading = 'lazy';
+    a.replaceWith(img);
+  });
+}
+
 function decorateButtons(main) {
   main.querySelectorAll('p a[href]').forEach((a) => {
     a.title = a.title || a.textContent;
@@ -43,6 +63,7 @@ function decorateButtons(main) {
 
 export function decorateMain(main) {
   decorateIcons(main);
+  decorateImageLinks(main);
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);

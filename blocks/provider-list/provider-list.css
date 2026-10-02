@@ -1,0 +1,144 @@
+/* Provider list — the providers landing card grid on everythingenergy.com */
+main .section.provider-list-container {
+  padding: 40px 8px;
+  background: var(--ee-cards-bg);
+}
+
+.provider-list > ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.provider-list > ul > li {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 16px 12px;
+  padding: 12px;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
+}
+
+.provider-list .provider-list-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 170px;
+  border-radius: 14px;
+  background: var(--ee-light-gray);
+}
+
+.provider-list .provider-list-logo img {
+  display: block;
+  max-width: 130px;
+  max-height: 70px;
+  width: auto;
+  height: auto;
+}
+
+.provider-list .provider-list-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.provider-list .provider-list-body > p:first-child {
+  margin: 0;
+  padding: 16px 10px;
+  color: var(--ee-text-dark);
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.provider-list .provider-list-body ul {
+  display: block;
+  margin: 12px 0 36px;
+  padding: 0 10px;
+}
+
+.provider-list .provider-list-body ul li {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin: 8px 0 0;
+  color: var(--ee-text-dark);
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.provider-list .provider-list-body ul li::before {
+  content: "";
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: 4px;
+  border-radius: 50%;
+  background: var(--ee-purple) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M9.5 16.2 5.3 12l-1.4 1.4 5.6 5.6 11-11-1.4-1.4z'/%3E%3C/svg%3E") center / 10px no-repeat;
+}
+
+.provider-list .provider-list-cta-wrapper { margin: auto 0 26px; text-align: center; }
+
+.provider-list a.provider-list-cta {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 130px;
+  height: 40px;
+  border: 2px solid #d84699;
+  border-radius: 50px;
+  color: #d84699;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 36px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.provider-list a.provider-list-cta:hover,
+.provider-list a.provider-list-cta:focus-visible { background: #d84699; color: #fff; }
+
+.provider-list .provider-list-widget {
+  padding: 44px 18px 60px;
+  color: #4f4f4f;
+  line-height: 1.4;
+}
+
+.provider-list .provider-list-widget h2,
+.provider-list .provider-list-widget h3,
+.provider-list .provider-list-widget h4 {
+  margin: 0 0 0 12px;
+  color: #4f4f4f;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.provider-list .provider-list-widget > p {
+  max-width: 200px;
+  margin: 0 0 0 12px;
+  padding: 24px 0;
+  font-size: 18px;
+}
+
+.provider-list .provider-list-widget .zip-search { margin: auto -4px 0; }
+.provider-list .provider-list-widget .zip-search label { margin-bottom: 16px; }
+
+@media (width >= 900px) {
+  main .section.provider-list-container { padding: 82px 0; }
+
+  .provider-list > ul > li {
+    flex: 0 0 auto;
+    width: calc(33.33% - 40px);
+    max-width: 308px;
+    min-height: 400px;
+    margin: 20px;
+  }
+
+  .provider-list .provider-list-body > p:first-child { height: 200px; box-sizing: border-box; }
+}

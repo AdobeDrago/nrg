@@ -85,3 +85,60 @@ export default async function buildZipForm({
 
   return form;
 }
+
+/**
+ * Builds the compact "Enter your location" pill search (ZIP input + round search button)
+ * used by the providers pages. Submitting a valid ZIP navigates to {locale}/plans?zip=XXXXX.
+ * @param {object} [options]
+ * @param {string} [options.label] label above the pill
+ * @param {string} [options.placeholder] input placeholder
+ * @returns {Promise<HTMLFormElement>}
+ */
+export async function buildZipSearch({
+  label = 'Enter your location',
+  placeholder = 'Zip Code',
+} = {}) {
+  await loadCSS(`${window.hlx.codeBasePath}/styles/zip-form.css`);
+  formCount += 1;
+  const id = `zip-search-${formCount}`;
+
+  const form = document.createElement('form');
+  form.className = 'zip-search';
+  form.noValidate = true;
+  form.action = `${localePrefix()}/plans`;
+  form.innerHTML = `<label for="${id}"></label>
+    <div class="zip-search-field">
+      <input id="${id}" name="zip" type="text" inputmode="numeric" autocomplete="postal-code"
+        maxlength="5" pattern="[0-9]{5}" aria-describedby="${id}-error">
+      <button type="submit" aria-label="Search plans"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3a7 7 0 0 1 5.6 11.2l5.1 5.1-1.4 1.4-5.1-5.1A7 7 0 1 1 10 3zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg></button>
+    </div>
+    <p class="zip-error" id="${id}-error" role="alert" hidden>Invalid zip code. Try again.</p>`;
+
+  const input = form.querySelector('input');
+  const error = form.querySelector('.zip-error');
+  form.querySelector('label').textContent = label;
+  input.placeholder = placeholder;
+
+  input.addEventListener('input', () => {
+    const digits = input.value.replace(/\D/g, '').slice(0, 5);
+    if (digits !== input.value) input.value = digits;
+    if (digits.length === 5) {
+      error.hidden = true;
+      input.removeAttribute('aria-invalid');
+    }
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const zip = input.value.trim();
+    if (!/^\d{5}$/.test(zip)) {
+      error.hidden = false;
+      input.setAttribute('aria-invalid', 'true');
+      input.focus();
+      return;
+    }
+    window.location.href = `${localePrefix()}/plans?${new URLSearchParams({ zip })}`;
+  });
+
+  return form;
+}

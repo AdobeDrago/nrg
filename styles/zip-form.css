@@ -118,3 +118,66 @@
 @media (width >= 900px) {
   .zip-card { width: 376px; padding: 40px 32px 36px; }
 }
+
+/* compact "Enter your location" pill search (providers pages) */
+.zip-search { text-align: left; }
+
+.zip-search label {
+  display: block;
+  margin: 0 0 12px 20px;
+  color: var(--ee-purple);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.zip-search .zip-search-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 3px 2px 24px;
+  border: 1px solid var(--ee-light-gray);
+  border-radius: 40px;
+  background: var(--ee-light-gray);
+}
+
+.zip-search .zip-search-field:focus-within { border-color: var(--ee-purple); }
+.zip-search input[aria-invalid="true"] { color: var(--ee-pink); }
+
+.zip-search input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 0;
+  border: 0;
+  background: transparent;
+  color: var(--ee-text-title);
+  font: inherit;
+  font-size: 18px;
+  outline: none;
+}
+
+.zip-search input::placeholder { color: #828282; }
+
+.zip-search button {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ee-purple);
+  cursor: pointer;
+}
+
+.zip-search button:hover,
+.zip-search button:focus-visible { background: var(--ee-pink); }
+.zip-search button svg { width: 20px; height: 20px; fill: #fff; }
+
+.zip-search .zip-error {
+  margin: 8px 0 0 20px;
+  color: var(--ee-pink);
+  font-size: 14px;
+}
