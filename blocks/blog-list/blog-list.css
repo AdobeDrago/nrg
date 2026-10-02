@@ -20,14 +20,15 @@ main .section.blog-list-container .default-content-wrapper h1::after {
   background: var(--ee-pink);
 }
 
-main > .section > .blog-list-wrapper {
+main .blog-list {
+  box-sizing: border-box;
   max-width: 968px;
   margin: 0 auto;
   padding: 0 16px 40px;
 }
 
 .blog-list .blog-list-label {
-  margin: 40px 0 24px;
+  margin: 40px 0 24px 20px;
   font-size: 13px;
   font-weight: 700;
   line-height: 1.4;
@@ -155,7 +156,7 @@ main > .section > .blog-list-wrapper {
     margin-top: 24px;
   }
 
-  main > .section > .blog-list-wrapper {
+  main .blog-list {
     padding: 0 0 32px;
   }
 
