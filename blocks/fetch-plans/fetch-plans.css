@@ -1,0 +1,18 @@
+/* Fetch plans card — matches everythingenergy.com .blog-cta sidebar card */
+.fetch-plans {
+  max-width: 318px;
+  margin: 0 auto;
+  padding: 32px 24px 36px;
+  border-radius: 32px;
+  background: #fff;
+  box-shadow: 0 10px 40px rgb(19 22 49 / 18%);
+}
+
+.fetch-plans .zip-search label {
+  margin: 0 12px 16px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.fetch-plans .zip-search label strong { font-weight: 700; }

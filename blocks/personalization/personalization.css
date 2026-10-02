@@ -3,13 +3,11 @@
   background: linear-gradient(135deg, #7564C1 0%, #D8479A 100%);
   padding: 80px 24px;
   color: #fff;
-  max-width: 1200px;
-  margin: 0 auto;
-  border-radius: 0;
 }
 
-.personalization-block {
-  width: 100%;
+.personalization > div {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .personalization-header {
@@ -74,79 +72,6 @@
   margin: 0;
 }
 
-/* Pool savings section */
-.pool-savings {
-  background: #fff;
-  padding: 64px 32px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.pool-savings h2,
-.pool-savings h3 {
-  font-size: 28px;
-  font-weight: 700;
-  color: #131631;
-  margin: 0 0 16px;
-  text-align: center;
-}
-
-.pool-savings > div:first-child > div {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 40px;
-}
-
-.pool-savings > div:first-child > div > p {
-  color: #5B5C69;
-  font-size: 17px;
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* Pool tips grid — block itself becomes a 2-column grid */
-.pool-savings {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 32px;
-  row-gap: 48px;
-}
-
-.pool-savings > div:first-child {
-  grid-column: 1 / -1;
-}
-
-.pool-savings > div:not(:first-child) > div {
-  background: #f8f7fc;
-  border: 1px solid #eee;
-  border-radius: 16px;
-  padding: 32px 28px;
-}
-
-.pool-savings > div:not(:first-child) > div h3 {
-  font-size: 18px;
-  text-align: left;
-  color: #7564C1;
-}
-
-.pool-savings > div:not(:first-child) > div p {
-  font-size: 15px;
-  color: #5B5C69;
-  line-height: 1.6;
-  margin: 8px 0 0;
-}
-
-.pool-savings .savings-highlight {
-  display: inline-block;
-  background: rgba(117, 100, 193, 0.1);
-  color: #7564C1;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 700;
-  margin-top: 12px;
-}
-
 /* CTA */
 .pzn-cta {
   text-align: center;
@@ -171,10 +96,7 @@
 }
 
 @media (width <= 768px) {
-  .personalization {
-    padding: 48px 16px;
-  }
-  .pool-savings {
-    grid-template-columns: 1fr;
-  }
+  .personalization { padding: 48px 20px; }
+  .personalization-header h2,
+  .personalization-header h3 { font-size: 30px; overflow-wrap: anywhere; }
 }

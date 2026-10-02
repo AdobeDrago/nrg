@@ -19,7 +19,7 @@ export default function decorate(block) {
 
       const text = badgeCell.textContent;
       // Split on commas or "and"
-      const parts = text.split(/,| and /).map(s => s.trim()).filter(s => s);
+      const parts = text.split(/,| and /).map((s) => s.trim()).filter((s) => s);
 
       parts.forEach((part) => {
         const badge = document.createElement('span');

@@ -14,6 +14,18 @@ indices:
       description:
         select: head > meta[name="description"]
         value: attribute(el, "content")
+      date:
+        select: head > meta[name="date"]
+        value: attribute(el, "content")
+      author:
+        select: head > meta[name="author"]
+        value: attribute(el, "content")
+      category:
+        select: head > meta[name="category"]
+        value: attribute(el, "content")
+      template:
+        select: head > meta[name="template"]
+        value: attribute(el, "content")
       lastModified:
         select: none
         value: dateValue(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")

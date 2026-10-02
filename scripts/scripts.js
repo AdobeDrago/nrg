@@ -1,7 +1,9 @@
 import {
   loadHeader, loadFooter, decorateIcons, decorateSections, decorateBlocks,
   decorateTemplateAndTheme, waitForFirstImage, loadSection, loadSections, loadCSS,
+  getMetadata, toClassName,
 } from './aem.js';
+import { getLocale } from './locale.js';
 
 function moveAttributes(from, to, attributes) {
   if (!attributes) attributes = [...from.attributes].map(({ nodeName }) => nodeName);
@@ -21,6 +23,26 @@ async function loadFonts() {
 }
 
 function buildAutoBlocks() {}
+
+/**
+ * DA drops relative <img> sources on preview, so images kept in the code repo
+ * (e.g. /icons/providers/*.png) are authored as a standalone link to the file.
+ * Turns such links into images; the link text (if not the path) becomes the alt.
+ */
+function decorateImageLinks(main) {
+  main.querySelectorAll('a[href*="/icons/"]').forEach((a) => {
+    const url = new URL(a.href, window.location);
+    if (!url.pathname.startsWith('/icons/') || !/\.(png|jpe?g|gif|webp|svg)$/i.test(url.pathname)) return;
+    const parent = a.parentElement;
+    if (parent.textContent.trim() !== a.textContent.trim()) return;
+    const text = a.textContent.trim();
+    const img = document.createElement('img');
+    img.src = `${window.hlx.codeBasePath}${url.pathname}`;
+    img.alt = text.includes('/icons/') ? '' : text;
+    img.loading = 'lazy';
+    a.replaceWith(img);
+  });
+}
 
 function decorateButtons(main) {
   main.querySelectorAll('p a[href]').forEach((a) => {
@@ -42,18 +64,40 @@ function decorateButtons(main) {
 
 export function decorateMain(main) {
   decorateIcons(main);
+  decorateImageLinks(main);
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
 }
 
+const TEMPLATES = ['blog-post', 'area-service', 'faq-category', 'faq-question'];
+
+/**
+ * Loads /templates/{name}/{name}.css|js when the page has a known `template` metadata
+ * and lets the template decorate the (already decorated) main element.
+ * @param {Element} main
+ */
+async function loadTemplate(main) {
+  const name = toClassName(getMetadata('template'));
+  if (!TEMPLATES.includes(name)) return;
+  try {
+    const base = `${window.hlx.codeBasePath}/templates/${name}/${name}`;
+    const [mod] = await Promise.all([import(`${base}.js`), loadCSS(`${base}.css`)]);
+    if (mod.default) await mod.default(main);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(`failed to load template ${name}`, e);
+  }
+}
+
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  document.documentElement.lang = getLocale() || 'en';
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    await loadTemplate(main);
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
