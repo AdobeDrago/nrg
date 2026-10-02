@@ -92,11 +92,14 @@ export default async function buildZipForm({
  * @param {object} [options]
  * @param {string} [options.label] label above the pill
  * @param {string} [options.placeholder] input placeholder
+ * @param {string} [options.submitLabel] when set, renders a full-width text button
+ *   (e.g. "Fetch plans") below the input instead of the round icon button
  * @returns {Promise<HTMLFormElement>}
  */
 export async function buildZipSearch({
   label = 'Enter your location',
   placeholder = 'Zip Code',
+  submitLabel = '',
 } = {}) {
   await loadCSS(`${window.hlx.codeBasePath}/styles/zip-form.css`);
   formCount += 1;
@@ -118,6 +121,13 @@ export async function buildZipSearch({
   const error = form.querySelector('.zip-error');
   form.querySelector('label').textContent = label;
   input.placeholder = placeholder;
+  if (submitLabel) {
+    form.classList.add('zip-search-stacked');
+    const button = form.querySelector('button');
+    button.removeAttribute('aria-label');
+    button.prepend(document.createTextNode(submitLabel));
+    form.append(button);
+  }
 
   input.addEventListener('input', () => {
     const digits = input.value.replace(/\D/g, '').slice(0, 5);

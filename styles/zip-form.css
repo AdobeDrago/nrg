@@ -181,3 +181,23 @@
   color: var(--ee-pink);
   font-size: 14px;
 }
+
+/* stacked variant: full-width "Fetch plans" button below the input (area sidebar) */
+.zip-search.zip-search-stacked .zip-search-field { padding: 13px 24px; }
+.zip-search.zip-search-stacked input { padding: 0; }
+
+.zip-search.zip-search-stacked button {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+  height: 53px;
+  margin-top: 24px;
+  border-radius: 40px;
+  color: #fff;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.zip-search.zip-search-stacked button svg { width: 24px; height: 24px; }

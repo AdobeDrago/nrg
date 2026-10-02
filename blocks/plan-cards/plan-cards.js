@@ -4,6 +4,26 @@ const RATE = /^\$|\d\s*(cents|¢)|\/\s*kwh/i;
 const TERM = /\b\d+[\s-]*(month|mo|year|yr)s?\b|\bterm\b/i;
 const DATA_PATH = '/data/plans.json?sheet=zips&sheet=plans';
 
+// brand details from everythingenergy.com's embedded plansData
+const BRANDS = {
+  RE: {
+    name: 'Reliant', slug: 'reliant', hours: 'Available 24 hours everyday', match: /reliant/i,
+  },
+  CE: {
+    name: 'Cirro Energy', slug: 'cirro', hours: 'Daily 7 a.m. - 10 p.m. CST', match: /cirro/i,
+  },
+  PW: {
+    name: 'Discount Power', slug: 'discount-power', hours: 'Weekdays, 8 a.m. - 5 p.m. CST', match: /discount/i,
+  },
+  GM: {
+    name: 'Green Mountain Energy', slug: 'green-mountain', hours: 'Weekdays 7 a.m. – 10 p.m. CT', match: /green mountain/i,
+  },
+  DE: {
+    name: 'Direct Energy', slug: 'direct-energy', hours: 'Monday – Saturday, 7:30 a.m. – 8:00 p.m. CT', match: /direct/i,
+  },
+};
+const BRAND_PHONE = '877-241-9360';
+
 function el(className, text, tag = 'div') {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -86,8 +106,26 @@ function decorateAuthored(block) {
   });
 }
 
-function matchesZip(value, zip) {
-  return String(value || '').split(',').map((z) => z.trim()).some((z) => z === '*' || z === zip);
+function tokens(value) {
+  return String(value || '').split(',').map((v) => v.trim().toLowerCase()).filter(Boolean);
+}
+
+/**
+ * A plan's zip column lists `*`, ZIPs, or region keys (the ZIP row's state or utility),
+ * so one row can cover every TX ZIP or one TDSP territory.
+ */
+function matchesZip(value, zip, zipInfo) {
+  const keys = [zip, zipInfo?.state, zipInfo?.utility].filter(Boolean).map((k) => k.toLowerCase());
+  return tokens(value).some((v) => v === '*' || keys.includes(v));
+}
+
+function brandOf(plan) {
+  return BRANDS[String(plan.brand || '').trim().toUpperCase()]
+    || Object.values(BRANDS).find((b) => b.match.test(plan.provider || ''));
+}
+
+function focusTags(plan) {
+  return String(plan.searchFocus || '').split(',').map((t) => t.trim()).filter(Boolean);
 }
 
 function termLabel(plan) {
@@ -100,6 +138,17 @@ function termLabel(plan) {
 function buildDataCard(plan) {
   const card = document.createElement('div');
   card.className = 'plan-card';
+  const brand = brandOf(plan);
+  if (brand) {
+    const logo = document.createElement('img');
+    logo.className = 'plan-logo';
+    logo.src = `${window.hlx.codeBasePath}/icons/providers/${brand.slug}-logo.png`;
+    logo.alt = brand.name;
+    logo.width = 130;
+    logo.height = 64;
+    logo.loading = 'lazy';
+    card.append(logo);
+  }
   card.append(el('plan-name', plan.planName, 'h3'));
   if (plan.priceKwh) card.append(el('plan-rate', `${plan.priceKwh} cents/kWh`));
   card.append(el('plan-term', termLabel(plan)));
@@ -110,6 +159,13 @@ function buildDataCard(plan) {
   if (plan.monthlyEst1000) facts.push(`Est. $${plan.monthlyEst1000}/mo at 1,000 kWh`);
   if (parseInt(plan.renewablePct, 10) > 0) facts.push(`${plan.renewablePct}% renewable`);
   if (facts.length) card.append(el('plan-facts', facts.join(' · ')));
+  const tags = focusTags(plan);
+  if (tags.length) {
+    const ul = document.createElement('ul');
+    ul.className = 'plan-tags';
+    tags.forEach((tag) => ul.append(el('', tag, 'li')));
+    card.append(ul);
+  }
 
   const cta = el('plan-cta', '');
   const enroll = safeHref(plan.enrollUrl);
@@ -122,7 +178,47 @@ function buildDataCard(plan) {
     cta.append(link);
   }
   if (cta.children.length) card.append(cta);
+  if (brand) {
+    const contact = el('plan-contact', '');
+    const tel = document.createElement('a');
+    tel.href = `tel:1-${BRAND_PHONE}`;
+    tel.textContent = BRAND_PHONE;
+    contact.append(tel, el('', brand.hours, 'span'));
+    card.append(contact);
+  }
   return card;
+}
+
+/** searchFocus chips: single-select filter over the rendered cards. */
+function buildFilters(rows, plans) {
+  const all = [...new Set(plans.flatMap(focusTags))].sort();
+  if (all.length < 2) return null;
+  const bar = document.createElement('div');
+  bar.className = 'plan-cards-filters';
+  bar.setAttribute('role', 'group');
+  bar.setAttribute('aria-label', 'Filter plans');
+  const status = el('plan-cards-count', '');
+  status.setAttribute('aria-live', 'polite');
+  const apply = (tag) => {
+    let shown = 0;
+    rows.forEach((row, i) => {
+      const hit = !tag || focusTags(plans[i]).includes(tag);
+      row.hidden = !hit;
+      if (hit) shown += 1;
+    });
+    status.textContent = `${shown} plan${shown === 1 ? '' : 's'}`;
+    bar.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String((b.dataset.tag || '') === (tag || ''))));
+  };
+  ['', ...all].forEach((tag) => {
+    const btn = el('', tag || 'All plans', 'button');
+    btn.type = 'button';
+    if (tag) btn.dataset.tag = tag;
+    btn.addEventListener('click', () => apply(btn.getAttribute('aria-pressed') === 'true' ? '' : tag));
+    bar.append(btn);
+  });
+  bar.append(status);
+  apply('');
+  return bar;
 }
 
 function renderEmpty(block, zip) {
@@ -148,7 +244,8 @@ function renderPlans(block, zip, zipInfo, plans) {
   const lead = [...(intro?.querySelectorAll('p') || [])].find((p) => p.textContent.trim() && p !== heading);
   if (lead) introCell.append(el('', lead.textContent.trim(), 'p'));
   const rows = plans.map((plan) => wrapRow(buildDataCard(plan), plan.badge));
-  block.replaceChildren(introCell, ...rows);
+  const filters = buildFilters(rows, plans);
+  block.replaceChildren(introCell, ...(filters ? [filters] : []), ...rows);
 }
 
 async function loadData() {
@@ -174,9 +271,9 @@ export default async function decorate(block) {
     return;
   }
 
-  const zipInfo = data.zips.find((row) => matchesZip(row.zip, zip));
+  const zipInfo = data.zips.find((row) => tokens(row.zip).includes(zip));
   const plans = data.plans
-    .filter((plan) => plan.planName && matchesZip(plan.zip, zip))
+    .filter((plan) => plan.planName && matchesZip(plan.zip, zip, zipInfo))
     .sort((a, b) => (parseFloat(a.sort) || 0) - (parseFloat(b.sort) || 0));
 
   if (!plans.length) renderEmpty(block, zip);

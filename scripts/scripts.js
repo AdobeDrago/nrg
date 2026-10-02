@@ -71,7 +71,7 @@ export function decorateMain(main) {
   decorateButtons(main);
 }
 
-const TEMPLATES = ['blog-post'];
+const TEMPLATES = ['blog-post', 'area-service'];
 
 /**
  * Loads /templates/{name}/{name}.css|js when the page has a known `template` metadata

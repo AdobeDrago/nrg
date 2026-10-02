@@ -135,3 +135,60 @@
   .provider-hero.landing .provider-hero-intro { margin: 58px 0 80px; }
   .provider-hero .provider-hero-intro p { font-size: 18px; }
 }
+
+/* areas variant — matches everythingenergy.com hero-inner-3 (Texas map) */
+.provider-hero.landing.areas {
+  position: relative;
+  padding: 64px 0 0;
+  overflow: hidden;
+}
+
+.provider-hero.areas .provider-hero-title { margin: 40px 40px 0; }
+.provider-hero.areas .provider-hero-title h1 { font-size: 48px; }
+.provider-hero.landing.areas .provider-hero-title::after { bottom: -16px; background: var(--ee-pink); }
+.provider-hero.landing.areas .provider-hero-image { max-width: none; margin: 40px 0 0; }
+
+.provider-hero.landing.areas .provider-hero-intro {
+  max-width: none;
+  margin: 32px 40px 64px;
+}
+
+.provider-hero.landing.areas .provider-hero-intro p {
+  color: var(--ee-text-dark);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.provider-hero.areas .zip-search { margin: 64px -20px 0; }
+
+@media (width >= 900px) {
+  .provider-hero.landing.areas {
+    display: block;
+    min-height: 654px;
+    padding: 160px 160px 120px;
+    box-sizing: border-box;
+  }
+
+  .provider-hero.landing.areas .provider-hero-image {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: min(1189px, 83vw);
+    margin: 0;
+  }
+
+  .provider-hero.areas .provider-hero-title,
+  .provider-hero.landing.areas .provider-hero-intro {
+    position: relative;
+    z-index: 1;
+    max-width: 470px;
+    margin: 0;
+  }
+
+  .provider-hero.areas .provider-hero-title { max-width: 520px; }
+  .provider-hero.areas .provider-hero-title h1 { font-size: 72px; }
+  .provider-hero.landing.areas .provider-hero-title::after { bottom: -20px; }
+  .provider-hero.landing.areas .provider-hero-intro { margin-top: 43px; }
+  .provider-hero.areas .zip-search { max-width: 325px; margin: 28px 0 0 -12px; }
+}
