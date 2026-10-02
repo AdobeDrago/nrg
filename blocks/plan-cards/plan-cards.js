@@ -1,6 +1,8 @@
+import { localePrefix } from '../../scripts/locale.js';
+
 const RATE = /^\$|\d\s*(cents|¢)|\/\s*kwh/i;
 const TERM = /\b\d+[\s-]*(month|mo|year|yr)s?\b|\bterm\b/i;
-const DATA_URL = '/data/plans.json?sheet=zips&sheet=plans';
+const DATA_PATH = '/data/plans.json?sheet=zips&sheet=plans';
 
 function el(className, text, tag = 'div') {
   const node = document.createElement(tag);
@@ -129,7 +131,7 @@ function renderEmpty(block, zip) {
   intro.append(el('', 'Sorry we currently do not offer residential electricity products in your area.', 'h2'));
   const p = el('', `We couldn't find plans for ZIP ${zip}. `, 'p');
   const retry = document.createElement('a');
-  retry.href = '/';
+  retry.href = `${localePrefix()}/`;
   retry.textContent = 'Try another ZIP code';
   p.append(retry);
   intro.append(p);
@@ -150,7 +152,7 @@ function renderPlans(block, zip, zipInfo, plans) {
 }
 
 async function loadData() {
-  const resp = await fetch(DATA_URL);
+  const resp = await fetch(`${localePrefix()}${DATA_PATH}`);
   if (!resp.ok) throw new Error(`plans data ${resp.status}`);
   const json = await resp.json();
   return { zips: json.zips?.data || [], plans: json.plans?.data || [] };

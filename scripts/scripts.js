@@ -2,6 +2,7 @@ import {
   loadHeader, loadFooter, decorateIcons, decorateSections, decorateBlocks,
   decorateTemplateAndTheme, waitForFirstImage, loadSection, loadSections, loadCSS,
 } from './aem.js';
+import { getLocale } from './locale.js';
 
 function moveAttributes(from, to, attributes) {
   if (!attributes) attributes = [...from.attributes].map(({ nodeName }) => nodeName);
@@ -49,7 +50,7 @@ export function decorateMain(main) {
 }
 
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  document.documentElement.lang = getLocale() || 'en';
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {

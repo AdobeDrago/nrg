@@ -54,51 +54,19 @@ header .header-phone:any-link {
 header .header-phone svg { width: 24px; height: 24px; }
 header .header-phone span { display: none; }
 
-/* español */
-header .header-lang { display: none; position: relative; }
-
-header .header-lang-toggle {
-  margin: 0;
+/* language switch */
+header .header-lang:any-link {
+  display: none;
+  align-items: center;
   padding: 0 20px;
   height: 40px;
-  border: 0;
   border-radius: 100px;
   background: #f2f2f2;
   color: var(--ee-text-title, #131631);
   font: 700 16px/1 var(--body-font-family);
-  cursor: pointer;
+  text-decoration: none;
 }
-header .header-lang-toggle:hover,
-header .header-lang-toggle[aria-expanded="true"] { background: #e4e4e4; }
-
-header .header-popover {
-  position: absolute;
-  top: calc(100% + 34px);
-  left: 50%;
-  width: 338px;
-  box-sizing: border-box;
-  padding: 20px;
-  transform: translateX(-50%);
-  border-radius: 6px;
-  background: #fff;
-  box-shadow: 0 6px 24px rgb(0 0 0 / 16%);
-  color: #4a4a4a;
-  font-size: 18px;
-  line-height: 1.4;
-}
-header .header-popover::before {
-  content: '';
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  margin-left: -8px;
-  border: 8px solid transparent;
-  border-top: 0;
-  border-bottom-color: #fff;
-}
-header .header-popover[hidden] { display: none; }
-header .header-popover p { margin: 0; }
-header .header-popover a:any-link { color: var(--ee-pink, #d84699); }
+header .header-lang:hover { background: #e4e4e4; }
 
 /* menu pill */
 header .header-menu-pill { display: flex; align-items: center; }
@@ -210,7 +178,7 @@ header .header-menu a[aria-current="page"] { color: var(--ee-pink, #d84699); }
   header .header-phone span { display: inline; }
   header .header-phone:hover span { color: var(--ee-pink, #d84699); }
 
-  header .header-lang { display: block; }
+  header .header-lang:any-link { display: flex; }
 
   header .header-menu-pill {
     height: 42px;

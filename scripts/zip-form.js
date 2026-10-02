@@ -1,4 +1,5 @@
 import { loadCSS } from './aem.js';
+import { localePrefix } from './locale.js';
 
 const ICONS = {
   yes: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h11v10H3zM14 9h4l3 3v3h-7zM6.5 18.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm11 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>',
@@ -9,7 +10,7 @@ let formCount = 0;
 
 /**
  * Builds the ZIP lookup card (floating-label ZIP input, moving Yes/No tiles, submit).
- * Submitting a valid ZIP navigates to /plans?zip=XXXXX[&moving=yes|no].
+ * Submitting a valid ZIP navigates to {locale}/plans?zip=XXXXX[&moving=yes|no].
  * @param {object} [options]
  * @param {string} [options.zipLabel] label for the ZIP input
  * @param {string} [options.movingLabel] question above the Yes/No tiles
@@ -28,7 +29,7 @@ export default async function buildZipForm({
   const form = document.createElement('form');
   form.className = 'zip-card';
   form.noValidate = true;
-  form.action = '/plans';
+  form.action = `${localePrefix()}/plans`;
   form.innerHTML = `<div class="zip-field">
       <input id="${id}" name="zip" type="text" inputmode="numeric" autocomplete="postal-code"
         maxlength="5" pattern="[0-9]{5}" placeholder=" " aria-describedby="${id}-error">
@@ -79,7 +80,7 @@ export default async function buildZipForm({
     input.removeAttribute('aria-invalid');
     const params = new URLSearchParams({ zip });
     if (moving) params.set('moving', moving);
-    window.location.href = `/plans?${params}`;
+    window.location.href = `${localePrefix()}/plans?${params}`;
   });
 
   return form;

@@ -1,5 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { getLocale, localePrefix, localizedHref } from '../../scripts/locale.js';
 
 const ICONS = {
   phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/><path d="M15 3.5a6 6 0 0 1 5.5 5.5M14.6 6.4a3 3 0 0 1 3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
@@ -14,7 +15,7 @@ function buildBrand(section) {
   const label = link?.textContent.trim() || 'Everything Energy';
   const brand = document.createElement('a');
   brand.className = 'header-logo';
-  brand.href = link?.getAttribute('href') || '/';
+  brand.href = link?.getAttribute('href') || `${localePrefix()}/`;
   const base = window.hlx.codeBasePath;
   brand.innerHTML = `<img class="logo-color" src="${base}/icons/logo.svg" alt="${label}" width="292" height="33">
     <img class="logo-white" src="${base}/icons/logo-white.svg" alt="${label}" width="292" height="33">`;
@@ -36,38 +37,18 @@ function buildTools(section) {
     tools.append(phone);
   }
 
-  // list items: first paragraph is the button label, the rest is the popover
-  section.querySelectorAll('li').forEach((li, i) => {
-    const [label, ...rest] = li.children;
-    if (!label || !rest.length) return;
-    const wrapper = document.createElement('div');
-    wrapper.className = 'header-lang';
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'header-lang-toggle';
-    btn.textContent = label.textContent.trim();
-    btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-controls', `header-popover-${i}`);
-    const pop = document.createElement('div');
-    pop.className = 'header-popover';
-    pop.id = `header-popover-${i}`;
-    pop.hidden = true;
-    pop.append(...rest);
-    pop.querySelectorAll('.button').forEach((a) => { a.className = ''; });
-    btn.addEventListener('click', () => {
-      const open = btn.getAttribute('aria-expanded') !== 'true';
-      btn.setAttribute('aria-expanded', open);
-      pop.hidden = !open;
-    });
-    wrapper.addEventListener('focusout', (e) => {
-      if (!wrapper.contains(e.relatedTarget)) {
-        btn.setAttribute('aria-expanded', 'false');
-        pop.hidden = true;
-      }
-    });
-    wrapper.append(btn, pop);
-    tools.append(wrapper);
-  });
+  // language switch: links to the same page in the other locale
+  const li = section.querySelector('li');
+  if (li) {
+    const target = getLocale() === 'es' ? 'en' : 'es';
+    const lang = document.createElement('a');
+    lang.className = 'header-lang';
+    lang.href = localizedHref(target);
+    lang.hreflang = target;
+    lang.lang = target;
+    lang.textContent = target === 'en' ? 'English' : li.firstElementChild?.textContent.trim() || 'Español';
+    tools.append(lang);
+  }
   return tools;
 }
 
@@ -168,7 +149,7 @@ function buildMenu(section, header, planLink) {
 
 export default async function decorate(block) {
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+  const navPath = navMeta ? new URL(navMeta, window.location).pathname : `${localePrefix()}/nav`;
   const fragment = await loadFragment(navPath);
   const [brandSection, menuSection, toolsSection] = fragment
     ? fragment.querySelectorAll(':scope > .section') : [];

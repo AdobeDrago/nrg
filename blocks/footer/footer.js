@@ -1,5 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { isHomePath, localePrefix } from '../../scripts/locale.js';
 
 /**
  * Groups each heading and the siblings that follow it into a column.
@@ -22,7 +23,7 @@ function buildColumns(wrapper) {
 
 export default async function decorate(block) {
   const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
+  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : `${localePrefix()}/footer`;
   const fragment = await loadFragment(footerPath);
 
   block.textContent = '';
@@ -32,7 +33,7 @@ export default async function decorate(block) {
   // a section holding a single home link becomes the brand logo
   const brand = [...footer.querySelectorAll('.section')].find((section) => {
     const links = section.querySelectorAll('a');
-    return links.length === 1 && new URL(links[0].href).pathname === '/'
+    return links.length === 1 && isHomePath(links[0].href)
       && section.textContent.trim() === links[0].textContent.trim();
   });
   if (brand) {
