@@ -1,5 +1,6 @@
 import { loadCSS } from '../../scripts/aem.js';
 import decorateArticle from '../area-service/area-service.js';
+import { localePrefix } from '../../scripts/locale.js';
 
 /**
  * Single FAQ (question) layout — same article + sticky "Fetch plans" sidebar as the
@@ -12,6 +13,8 @@ export default async function decorate(main) {
   const section = main.querySelector('.area-service-article');
   if (!section) return;
   section.classList.add('faq-question-article');
+  const back = section.querySelector('.area-service-back');
+  if (back) back.href = `${localePrefix()}/faqs`;
   const byline = section.querySelector('.default-content-wrapper h1 + p');
   if (byline && /^posted on/i.test(byline.textContent.trim())) byline.classList.add('faq-question-byline');
 }
