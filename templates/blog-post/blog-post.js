@@ -4,7 +4,7 @@ import {
   t, blogsPath, formatDate,
 } from '../../scripts/blog.js';
 
-const WORDS_PER_MINUTE = 200;
+const WORDS_PER_MINUTE = 190;
 
 const SEARCH_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 0 1 5.9 12.1l4.2 4.2-1.4 1.4-4.2-4.2A7.5 7.5 0 1 1 10.5 3zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11z"/></svg>';
 const BACK_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20z"/></svg>';
