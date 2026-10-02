@@ -1,0 +1,218 @@
+/* blog post template — matches everythingenergy.com single post layout */
+main > .section.blog-post-article {
+  padding: 24px 24px 64px;
+}
+
+main > .section.blog-post-article > .default-content-wrapper {
+  max-width: 630px;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.blog-post-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 38px;
+  padding: 10px 27px 10px 17px;
+  background-color: var(--ee-purple);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.blog-post-back:any-link {
+  color: #fff;
+}
+
+.blog-post-back:hover {
+  background-color: var(--ee-pink);
+  color: #fff;
+  text-decoration: none;
+}
+
+.blog-post-back svg {
+  width: 16px;
+  height: 16px;
+  fill: currentcolor;
+}
+
+.blog-post-article .default-content-wrapper h1 {
+  margin: 32px 0 0;
+  font-size: 40px;
+  line-height: 1.2;
+  color: var(--ee-text-title);
+}
+
+.blog-post-article .default-content-wrapper .blog-post-byline {
+  margin: 24px 0 40px;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--ee-text-dark);
+}
+
+.blog-post-byline em {
+  font-style: italic;
+}
+
+.blog-post-reading-time::before {
+  content: "•";
+  margin: 0 6px 0 8px;
+}
+
+.blog-post-article .default-content-wrapper p,
+.blog-post-article .default-content-wrapper li {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ee-text-dark);
+}
+
+.blog-post-article .default-content-wrapper p {
+  margin: 0 0 16px;
+}
+
+.blog-post-article .default-content-wrapper h2,
+.blog-post-article .default-content-wrapper h3,
+.blog-post-article .default-content-wrapper h4 {
+  margin: 32px 0 16px;
+  line-height: 1.25;
+  color: #000;
+}
+
+.blog-post-article .default-content-wrapper h2 { font-size: 28px; }
+.blog-post-article .default-content-wrapper h3 { font-size: 22px; }
+.blog-post-article .default-content-wrapper h4 { font-size: 20px; }
+
+.blog-post-article .default-content-wrapper ul,
+.blog-post-article .default-content-wrapper ol {
+  margin: 0 0 16px;
+  padding-left: 24px;
+}
+
+.blog-post-article .default-content-wrapper li + li {
+  margin-top: 8px;
+}
+
+.blog-post-article .default-content-wrapper a:any-link:not(.button) {
+  color: var(--ee-pink);
+  text-decoration: underline;
+}
+
+.blog-post-article .default-content-wrapper a:hover:not(.button) {
+  color: var(--ee-purple);
+}
+
+.blog-post-article .default-content-wrapper picture img {
+  display: block;
+  margin: 0 auto;
+}
+
+/* ZIP sidebar card */
+.blog-post-sidebar {
+  max-width: 630px;
+  margin: 48px auto 0;
+}
+
+.blog-post-zip {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 32px;
+  padding: 32px 24px;
+  background: #fff;
+  box-shadow: 0 10px 40px rgb(19 22 49 / 18%);
+}
+
+.blog-post-zip label {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ee-purple);
+}
+
+.blog-post-zip label strong {
+  font-weight: 700;
+}
+
+.blog-post-zip input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 52px;
+  border: 0;
+  border-radius: 50px;
+  padding: 0 24px;
+  background: var(--ee-light-gray);
+  font-size: 18px;
+  color: var(--ee-text-title);
+}
+
+.blog-post-zip input::placeholder {
+  color: var(--ee-text-dark);
+}
+
+.blog-post-zip input:focus-visible {
+  outline: 2px solid var(--ee-purple);
+}
+
+.blog-post-zip .blog-post-zip-error {
+  margin: -8px 0 0;
+  font-size: 14px;
+  color: #d0021b;
+}
+
+.blog-post-zip button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 53px;
+  margin: 0;
+  border-radius: 50px;
+  font-size: 20px;
+}
+
+.blog-post-zip button svg {
+  width: 24px;
+  height: 24px;
+  fill: currentcolor;
+}
+
+@media (width >= 900px) {
+  main > .section.blog-post-article {
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) minmax(0, 630px) minmax(24px, 1fr);
+    grid-template-areas:
+      "back . ."
+      "side content .";
+    column-gap: 48px;
+    padding: 48px 60px 96px;
+  }
+
+  .blog-post-back {
+    grid-area: back;
+    justify-self: start;
+  }
+
+  main > .section.blog-post-article > .default-content-wrapper {
+    grid-area: content;
+    width: 100%;
+  }
+
+  .blog-post-article .default-content-wrapper h1 {
+    margin-top: 12px;
+    font-size: 64px;
+    line-height: 1.2;
+  }
+
+  .blog-post-article .default-content-wrapper h2 { font-size: 32px; }
+  .blog-post-article .default-content-wrapper h3 { font-size: 24px; }
+
+  .blog-post-sidebar {
+    grid-area: side;
+    place-self: start start;
+    position: sticky;
+    top: calc(50vh - 82px);
+    width: 280px;
+    margin: 360px 0 0;
+  }
+}

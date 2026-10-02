@@ -1,6 +1,7 @@
 import {
   loadHeader, loadFooter, decorateIcons, decorateSections, decorateBlocks,
   decorateTemplateAndTheme, waitForFirstImage, loadSection, loadSections, loadCSS,
+  getMetadata, toClassName,
 } from './aem.js';
 import { getLocale } from './locale.js';
 
@@ -70,12 +71,33 @@ export function decorateMain(main) {
   decorateButtons(main);
 }
 
+const TEMPLATES = ['blog-post'];
+
+/**
+ * Loads /templates/{name}/{name}.css|js when the page has a known `template` metadata
+ * and lets the template decorate the (already decorated) main element.
+ * @param {Element} main
+ */
+async function loadTemplate(main) {
+  const name = toClassName(getMetadata('template'));
+  if (!TEMPLATES.includes(name)) return;
+  try {
+    const base = `${window.hlx.codeBasePath}/templates/${name}/${name}`;
+    const [mod] = await Promise.all([import(`${base}.js`), loadCSS(`${base}.css`)]);
+    if (mod.default) await mod.default(main);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(`failed to load template ${name}`, e);
+  }
+}
+
 async function loadEager(doc) {
   document.documentElement.lang = getLocale() || 'en';
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
+    await loadTemplate(main);
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
