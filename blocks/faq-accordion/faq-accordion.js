@@ -9,8 +9,6 @@ export default function decorate(block) {
       const summary = document.createElement('summary');
       summary.textContent = heading.textContent;
       wrapper.append(summary);
-      content.remove();
-      // Move any remaining content
       item.querySelectorAll('p, ul, ol').forEach((el) => wrapper.append(el));
       item.innerHTML = '';
       item.append(wrapper);

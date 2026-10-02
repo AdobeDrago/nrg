@@ -1,0 +1,221 @@
+/* FAQ category template — matches everythingenergy.com /faq-category/* */
+main > .section.faq-category-article { padding: 48px 16px 80px; }
+
+main > .section.faq-category-article > .default-content-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.faq-category-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 27px 10px 17px;
+  border-radius: 38px;
+  background-color: var(--ee-purple);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.faq-category-back:any-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.faq-category-back:hover {
+  background-color: var(--ee-pink);
+  color: #fff;
+}
+
+.faq-category-back svg {
+  width: 16px;
+  height: 16px;
+  fill: currentcolor;
+}
+
+.faq-category-article > .faq-category-back { margin: 0 0 56px; }
+
+.faq-category-head {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 64px;
+}
+
+.faq-category-head h1 {
+  margin: 0;
+  color: var(--ee-purple);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.faq-category-toggle {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin: 0 0 4px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--ee-purple);
+  color: #fff;
+  cursor: pointer;
+  transition: transform .2s;
+}
+
+.faq-category-toggle:hover { background: var(--ee-pink); }
+.faq-category-toggle[aria-expanded="true"] { transform: rotate(180deg); }
+
+.faq-category-toggle svg {
+  width: 22px;
+  height: 22px;
+  fill: currentcolor;
+}
+
+.faq-category-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 5;
+  min-width: 280px;
+  margin: 0;
+  padding: 12px 0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 10px 40px rgb(19 22 49 / 15%);
+  list-style: none;
+}
+
+.faq-category-menu[hidden] { display: none; }
+
+.faq-category-menu a:any-link {
+  display: block;
+  padding: 10px 24px;
+  color: var(--ee-text-title);
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.faq-category-menu a:hover,
+.faq-category-menu a[aria-current="page"] {
+  color: var(--ee-purple);
+  font-weight: 600;
+}
+
+.faq-category-nav { display: none; }
+
+.faq-category-item { scroll-margin-top: 24px; }
+.faq-category-item + .faq-category-item { margin-top: 40px; }
+
+.faq-category-item h2 {
+  margin: 0 0 16px;
+  color: var(--ee-text-title);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.faq-category-item a:any-link { color: var(--ee-pink); }
+.faq-category-item a:hover { color: var(--ee-purple); }
+
+.faq-category-item h2 a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+.faq-category-item h2 a:hover { color: var(--ee-purple); }
+
+.faq-category-item p,
+.faq-category-item li {
+  margin: 0 0 16px;
+  color: var(--ee-text-dark);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.faq-category-item ul {
+  margin: 0 0 16px;
+  padding-left: 20px;
+}
+
+.faq-category-top { margin: 64px 0 0; }
+
+@media (width >= 900px) {
+  main > .section.faq-category-article { padding: 64px 60px 100px; }
+
+  .faq-category-article > .faq-category-back { margin-bottom: 40px; }
+
+  .faq-category-head {
+    max-width: 686px;
+    margin: 0 0 56px 350px;
+  }
+
+  .faq-category-head h1 { font-size: 64px; }
+
+  .faq-category-toggle {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 10px;
+  }
+
+  .faq-category-body {
+    display: grid;
+    grid-template-columns: 330px minmax(0, 584px);
+    gap: 0 2px;
+  }
+
+  .faq-category-item h2 { font-size: 24px; }
+
+  .faq-category-item p,
+  .faq-category-item li {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .faq-category-nav {
+    display: block;
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    padding-top: 10px;
+  }
+
+  .faq-category-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .faq-category-nav li + li { margin-top: 12px; }
+
+  .faq-category-nav a:any-link {
+    position: relative;
+    display: block;
+    padding: 0 16px 0 20px;
+    color: var(--ee-text-dark);
+    font-size: 14px;
+    line-height: 1.6;
+    text-decoration: none;
+  }
+
+  .faq-category-nav a:hover,
+  .faq-category-nav a.selected { color: var(--ee-purple); }
+  .faq-category-nav a.selected { font-weight: 600; }
+
+  .faq-category-nav a.selected::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 0;
+    border: 5px solid transparent;
+    border-left: 8px solid var(--ee-purple);
+    border-right-width: 0;
+  }
+
+}
