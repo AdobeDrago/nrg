@@ -121,9 +121,9 @@ export default function decorate(main) {
     first.remove();
   } else {
     back = document.createElement('a');
-    back.href = `${localePrefix()}/faqs`;
     back.textContent = 'All FAQs';
   }
+  back.href = `${localePrefix()}/faqs`;
   section.prepend(pill(back, BACK_ICON, 'faq-category-back'));
 
   const list = h1.nextElementSibling?.tagName === 'UL' ? h1.nextElementSibling : null;
