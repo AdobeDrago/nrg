@@ -4,9 +4,9 @@ import {
 } from '../../scripts/blog.js';
 
 const DEFAULT_PAGE_SIZE = 6;
-const QUERY_INDEX = '/blog-index.json';
+const QUERY_INDEX = '/query-index.json';
 // Code-bus snapshot of the migrated posts (all locales); lowest priority, overridden by
-// the query index and the authored DA sheet when those are available.
+// query index rows once posts are published.
 const SEED = '/data/blog-posts.json';
 
 async function fetchSheet(url) {
@@ -21,15 +21,14 @@ async function fetchSheet(url) {
 }
 
 /**
- * Posts for the current locale, newest first. Merges the query index (picks up new
- * posts automatically once published) with the authored DA sheet `{locale}/blogs/posts`
- * and the code-bus seed of migrated posts.
- * @param {string} [source] optional explicit sheet / index URL
+ * Posts for the current locale, newest first. Merges the code-bus seed of migrated posts
+ * with the query index, which picks up new posts automatically once published.
+ * @param {string} [source] optional explicit sheet / index URL (e.g. a DA sheet)
  * @returns {Promise<object[]>}
  */
 async function fetchPosts(source) {
   const base = blogsPath();
-  const sources = source ? [source] : [SEED, QUERY_INDEX, `${base}posts.json`];
+  const sources = source ? [source] : [SEED, QUERY_INDEX];
   const lists = await Promise.all(sources.map(fetchSheet));
   const posts = new Map();
   lists.flat().forEach((row) => {
