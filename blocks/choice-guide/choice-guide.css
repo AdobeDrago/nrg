@@ -1,0 +1,137 @@
+/* How to pick the right plan — everythingenergy.com "choice-guide" */
+.choice-guide {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 56px 20px 64px;
+}
+
+.choice-guide .choice-guide-title {
+  position: relative;
+  max-width: 710px;
+  margin: 0 auto;
+  padding: 0 15px;
+  text-align: center;
+}
+
+.choice-guide .choice-guide-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 158px;
+  height: 4px;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #57a1d3, #d84699);
+  transform: translateX(-50%);
+}
+
+.choice-guide .choice-guide-title h2 {
+  margin: 24px 0 0;
+  padding-top: 24px;
+  color: var(--ee-text-title);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.choice-guide .choice-guide-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.choice-guide .choice-guide-image {
+  max-width: 374px;
+  margin-top: 24px;
+  padding: 0 24px;
+}
+
+.choice-guide img { display: block; width: 100%; height: auto; }
+.choice-guide .choice-guide-steps { margin-top: 40px; }
+
+.choice-guide .choice-guide-step {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.choice-guide .choice-guide-step + .choice-guide-step { margin-top: 60px; }
+
+.choice-guide .choice-guide-icon {
+  flex: none;
+  box-sizing: border-box;
+  width: 50px;
+  margin-right: 36px;
+}
+
+.choice-guide .choice-guide-summary p {
+  margin: 0;
+  color: var(--ee-text-dark);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.choice-guide .choice-guide-summary strong,
+.choice-guide .choice-guide-summary h4 {
+  display: inline;
+  color: var(--ee-purple);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+@media (width >= 900px) {
+  .choice-guide { padding: 50px 100px 88px; }
+
+  .choice-guide .choice-guide-title h2 {
+    margin-top: 56px;
+    padding-top: 0;
+    font-size: 48px;
+  }
+
+  .choice-guide .choice-guide-content {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 58px;
+  }
+
+  .choice-guide .choice-guide-image {
+    max-width: 440px;
+    margin: 0 80px 0 0;
+    padding: 0;
+  }
+
+  .choice-guide .choice-guide-steps {
+    position: relative;
+    margin-top: 0;
+    padding: 74px 0 115px;
+  }
+
+  .choice-guide .choice-guide-steps::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -40px;
+    width: 160px;
+    border: 1px dashed rgb(0 0 0 / 10%);
+    border-width: 0 0 0 1px;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .choice-guide .choice-guide-step { align-items: center; }
+  .choice-guide .choice-guide-step:first-child { align-items: flex-start; }
+  .choice-guide .choice-guide-step:first-child .choice-guide-summary { margin-top: 30px; }
+  .choice-guide .choice-guide-step:nth-child(2) { margin: 95px 0 0 70px; }
+  .choice-guide .choice-guide-step:nth-child(3) { margin-top: 110px; }
+
+  .choice-guide .choice-guide-icon {
+    position: relative;
+    z-index: 1;
+    width: 100px;
+    padding: 20px;
+    border-radius: 50%;
+    background: var(--ee-cards-bg);
+  }
+
+  .choice-guide .choice-guide-summary { max-width: 290px; }
+}

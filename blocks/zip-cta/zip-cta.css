@@ -1,0 +1,34 @@
+/* ZIP call to action — gradient band, heading and the shared ZIP card */
+.zip-cta {
+  position: relative;
+  padding: 0 20px 64px;
+  text-align: center;
+}
+
+.zip-cta::before {
+  content: '';
+  display: block;
+  height: 72px;
+  margin: 0 -20px 40px;
+  background: linear-gradient(90deg, #d8479a 0%, #b45fb0 30%, #7f86cc 70%, #6a9bd2 100%);
+  clip-path: ellipse(120% 100% at 60% 0%);
+}
+
+.zip-cta > div > div { max-width: 560px; margin: 0 auto; }
+
+.zip-cta h2 {
+  margin: 0 0 8px;
+  color: var(--ee-text-title);
+  font-size: var(--heading-font-size-l);
+}
+
+.zip-cta .zip-cta-content > p {
+  margin: 0 0 24px;
+  font-size: var(--body-font-size-s);
+}
+
+.zip-cta .zip-card { margin: 0 auto; }
+
+@media (width >= 900px) {
+  .zip-cta::before { height: 120px; margin-bottom: 48px; }
+}

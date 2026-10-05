@@ -1,0 +1,53 @@
+/* Plan explorer — gradient ZIP band from everythingenergy.com provider pages */
+main .section.plan-explorer-container {
+  background: linear-gradient(270deg, #57a1d3 0.01%, #d84699 98.37%);
+}
+
+.plan-explorer {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 30px 16px 110px;
+}
+
+.plan-explorer .plan-explorer-text { padding: 0 14px; color: #fff; }
+
+.plan-explorer .plan-explorer-text h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.plan-explorer .plan-explorer-text p {
+  margin: 15px 0 0;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.plan-explorer .plan-explorer-widget {
+  margin-top: 30px;
+  padding: 30px 21px 38px;
+  border-radius: 40px;
+  background: #fff;
+}
+
+@media (width >= 900px) {
+  .plan-explorer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 145px 90px;
+  }
+
+  .plan-explorer .plan-explorer-text { max-width: 405px; margin-right: 35px; padding: 0; }
+
+  .plan-explorer .plan-explorer-widget {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 410px;
+    margin-top: 0;
+    padding: 30px 24px 50px;
+  }
+}

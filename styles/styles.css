@@ -28,31 +28,31 @@
   --brand-secondary: #D8479A;
   --brand-accent: #D8479A;
 
-  /* fonts — Source Sans Pro matching original */
-  --body-font-family: "Source Sans Pro", "Source Sans 3", sans-serif;
-  --heading-font-family: "Source Sans Pro", "Source Sans 3", sans-serif;
+  /* fonts — Source Sans 3 (successor of Source Sans Pro used by the original) */
+  --body-font-family: "Source Sans 3", "Source Sans 3 Fallback", sans-serif;
+  --heading-font-family: "Source Sans 3", "Source Sans 3 Fallback", sans-serif;
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  --body-font-size-m: 18px;
+  --body-font-size-s: 16px;
+  --body-font-size-xs: 14px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 48px;
-  --heading-font-size-xl: 40px;
-  --heading-font-size-l: 32px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 20px;
+  --heading-font-size-xxl: 40px;
+  --heading-font-size-xl: 30px;
+  --heading-font-size-l: 26px;
+  --heading-font-size-m: 22px;
+  --heading-font-size-s: 20px;
+  --heading-font-size-xs: 18px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 72px;
 }
 
 /* fallback fonts */
 @font-face {
-  font-family: Source Sans Pro;
-  size-adjust: 100%;
+  font-family: "Source Sans 3 Fallback";
+  size-adjust: 93%;
   src: local('Arial');
 }
 
@@ -61,7 +61,7 @@
     --body-font-size-m: 18px;
     --body-font-size-s: 16px;
     --body-font-size-xs: 14px;
-    --heading-font-size-xxl: 40px;
+    --heading-font-size-xxl: 56px;
     --heading-font-size-xl: 32px;
     --heading-font-size-l: 28px;
     --heading-font-size-m: 22px;
@@ -143,7 +143,7 @@ a.button:any-link, button {
   text-align: center;
   text-decoration: none;
   background-color: var(--ee-purple);
-  color: #fff !important;
+  color: #fff;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -152,7 +152,7 @@ a.button:any-link, button {
 
 a.button:hover, a.button:focus, button:hover, button:focus {
   background-color: var(--ee-pink);
-  color: #fff !important;
+  color: #fff;
 }
 
 a.button.secondary, button.secondary {
@@ -181,6 +181,24 @@ main > .section > div {
 
 main > .section:first-of-type { margin-top: 0; }
 
+/* full-bleed blocks manage their own width and padding */
+main > .section > div[class$="-wrapper"]:not(.default-content-wrapper) {
+  max-width: none;
+  padding: 0;
+}
+
+/* default content — narrow reading column like the original */
+main > .section > .default-content-wrapper {
+  max-width: 760px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+main > .section:first-of-type > .default-content-wrapper { padding-top: 48px; }
+main > .section:last-of-type > .default-content-wrapper { padding-bottom: 64px; }
+main .default-content-wrapper h1 { font-weight: 700; line-height: 1.1; margin-top: 0.4em; }
+main .default-content-wrapper p { font-size: var(--body-font-size-s); line-height: 1.6; }
+
 @media (width >= 900px) {
   main > .section > div { padding: 0 32px; }
 }
@@ -191,40 +209,4 @@ main .section.highlight {
   background-color: var(--ee-cards-bg);
   margin: 0;
   padding: 40px 0;
-}
-
-/* CTA section */
-.zip-cta {
-  background: linear-gradient(135deg, #7564C1 0%, #D8479A 100%);
-  text-align: center;
-  padding: 80px 24px;
-}
-
-.zip-cta h2 {
-  color: #fff;
-  font-size: 36px;
-  font-weight: 700;
-  margin: 0 0 12px;
-}
-
-.zip-cta p {
-  color: rgba(255,255,255,0.9);
-  font-size: 18px;
-  margin: 0 0 24px;
-}
-
-.zip-cta a {
-  display: inline-block;
-  background: #fff;
-  color: #7564C1 !important;
-  border-radius: 40px;
-  padding: 14px 40px;
-  font-size: 18px;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.zip-cta a:hover {
-  background: #D8479A;
-  color: #fff !important;
 }

@@ -1,69 +1,281 @@
-export default function decorate(block) {
-  block.classList.add('plan-cards-block');
+import { localePrefix } from '../../scripts/locale.js';
 
-  // Find all plan rows (every row after the first which is the heading)
-  const rows = block.querySelectorAll(':scope > div:not(:first-child)');
-  rows.forEach((row) => {
-    const cell = row.querySelector('div');
-    if (cell) {
-      // Find the plan name (h3) and details
-      const h3 = cell.querySelector('h3');
-      const details = cell.querySelectorAll('p');
+const RATE = /^\$|\d\s*(cents|¢)|\/\s*kwh/i;
+const TERM = /\b\d+[\s-]*(month|mo|year|yr)s?\b|\bterm\b/i;
+const DATA_PATH = '/data/plans.json?sheet=zips&sheet=plans';
 
-      // Build a structured card
-      const card = document.createElement('div');
-      card.className = 'plan-card';
+// brand details from everythingenergy.com's embedded plansData
+const BRANDS = {
+  RE: {
+    name: 'Reliant', slug: 'reliant', hours: 'Available 24 hours everyday', match: /reliant/i,
+  },
+  CE: {
+    name: 'Cirro Energy', slug: 'cirro', hours: 'Daily 7 a.m. - 10 p.m. CST', match: /cirro/i,
+  },
+  PW: {
+    name: 'Discount Power', slug: 'discount-power', hours: 'Weekdays, 8 a.m. - 5 p.m. CST', match: /discount/i,
+  },
+  GM: {
+    name: 'Green Mountain Energy', slug: 'green-mountain', hours: 'Weekdays 7 a.m. – 10 p.m. CT', match: /green mountain/i,
+  },
+  DE: {
+    name: 'Direct Energy', slug: 'direct-energy', hours: 'Monday – Saturday, 7:30 a.m. – 8:00 p.m. CT', match: /direct/i,
+  },
+};
+const BRAND_PHONE = '877-241-9360';
 
-      if (h3) {
-        const name = document.createElement('div');
-        name.className = 'plan-name';
-        name.textContent = h3.textContent;
-        card.appendChild(name);
-      }
+function el(className, text, tag = 'div') {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  node.textContent = text;
+  return node;
+}
 
-      // Extract rate, term, details from paragraphs
-      details.forEach((p) => {
-        const text = p.textContent.trim();
-        if (!text) return;
+function safeHref(url) {
+  if (!url) return '';
+  try {
+    const parsed = new URL(url, window.location.href);
+    return ['http:', 'https:'].includes(parsed.protocol) ? parsed.href : '';
+  } catch {
+    return '';
+  }
+}
 
-        if (text.match(/^\$|cents|¢|kWh|rate|price/i)) {
-          const rate = document.createElement('div');
-          rate.className = 'plan-rate';
-          rate.textContent = text;
-          card.appendChild(rate);
-        } else if (text.match(/month|year|term|fixed|variable/i)) {
-          const term = document.createElement('div');
-          term.className = 'plan-term';
-          term.textContent = text;
-          card.appendChild(term);
-        } else if (text.match(/pool|renewable|green|free|night|weekend/i)) {
-          const tag = document.createElement('div');
-          tag.className = 'plan-tag';
-          tag.textContent = text;
-          card.appendChild(tag);
-        } else {
-          const desc = document.createElement('div');
-          desc.className = 'plan-desc';
-          desc.textContent = text;
-          card.appendChild(desc);
-        }
-      });
+function buttonLink(href, text, className = 'plan-button') {
+  const a = document.createElement('a');
+  a.href = href;
+  a.className = className;
+  a.textContent = text;
+  return a;
+}
 
-      // Find any links and make them CTA buttons
-      const links = cell.querySelectorAll('a');
-      if (links.length > 0) {
-        const cta = document.createElement('div');
-        cta.className = 'plan-cta';
-        const link = document.createElement('a');
-        link.href = links[0].href;
-        link.textContent = 'Choose this plan';
-        link.className = 'plan-button';
-        cta.appendChild(link);
-        card.appendChild(cta);
-      }
+function wrapRow(card, badge) {
+  const row = document.createElement('div');
+  row.className = 'plan-cards-row';
+  const cell = document.createElement('div');
+  if (badge) {
+    row.classList.add('featured');
+    cell.dataset.badge = badge;
+  }
+  cell.append(card);
+  row.append(cell);
+  return row;
+}
 
-      cell.innerHTML = '';
-      cell.appendChild(card);
+/** Turns an authored card cell into structured card markup. */
+function decorateAuthored(block) {
+  const [intro, ...rows] = block.querySelectorAll(':scope > div');
+  intro?.classList.add('plan-cards-intro');
+
+  rows.forEach((row, i) => {
+    const cell = row.querySelector(':scope > div');
+    if (!cell) return;
+    row.classList.add('plan-cards-row');
+    if (i === 0) {
+      row.classList.add('featured');
+      cell.dataset.badge = 'Best Value';
     }
+
+    const card = document.createElement('div');
+    card.className = 'plan-card';
+    const heading = cell.querySelector('h2, h3, h4');
+    if (heading) card.append(el('plan-name', heading.textContent.trim()));
+
+    const link = cell.querySelector('a');
+    const extras = [];
+    cell.querySelectorAll('p').forEach((p) => {
+      const text = p.textContent.trim();
+      if (!text || p.querySelector('a')) return;
+      if (!card.querySelector('.plan-rate') && RATE.test(text)) card.append(el('plan-rate', text));
+      else if (!card.querySelector('.plan-term') && TERM.test(text)) card.append(el('plan-term', text));
+      else extras.push(text);
+    });
+
+    // first remaining line is the provider, the rest describe the plan
+    const [provider, ...desc] = extras;
+    if (provider) card.append(el('plan-provider', provider));
+    desc.forEach((text) => card.append(el('plan-desc', text)));
+
+    if (link) {
+      const cta = el('plan-cta', '');
+      cta.append(buttonLink(link.href, link.textContent.trim() || 'Choose this plan'));
+      card.append(cta);
+    }
+
+    cell.replaceChildren(card);
   });
+}
+
+function tokens(value) {
+  return String(value || '').split(',').map((v) => v.trim().toLowerCase()).filter(Boolean);
+}
+
+/**
+ * A plan's zip column lists `*`, ZIPs, or region keys (the ZIP row's state or utility),
+ * so one row can cover every TX ZIP or one TDSP territory.
+ */
+function matchesZip(value, zip, zipInfo) {
+  const keys = [zip, zipInfo?.state, zipInfo?.utility].filter(Boolean).map((k) => k.toLowerCase());
+  return tokens(value).some((v) => v === '*' || keys.includes(v));
+}
+
+function brandOf(plan) {
+  return BRANDS[String(plan.brand || '').trim().toUpperCase()]
+    || Object.values(BRANDS).find((b) => b.match.test(plan.provider || ''));
+}
+
+function focusTags(plan) {
+  return String(plan.searchFocus || '').split(',').map((t) => t.trim()).filter(Boolean);
+}
+
+function termLabel(plan) {
+  const months = parseInt(plan.termMonths, 10);
+  if (!months) return 'Month to month';
+  const type = (plan.planType || 'fixed').toLowerCase();
+  return `${months}-month ${type} term`;
+}
+
+function buildDataCard(plan) {
+  const card = document.createElement('div');
+  card.className = 'plan-card';
+  const brand = brandOf(plan);
+  if (brand) {
+    const logo = document.createElement('img');
+    logo.className = 'plan-logo';
+    logo.src = `${window.hlx.codeBasePath}/icons/providers/${brand.slug}-logo.png`;
+    logo.alt = brand.name;
+    logo.width = 130;
+    logo.height = 64;
+    logo.loading = 'lazy';
+    card.append(logo);
+  }
+  card.append(el('plan-name', plan.planName, 'h3'));
+  if (plan.priceKwh) card.append(el('plan-rate', `${plan.priceKwh} cents/kWh`));
+  card.append(el('plan-term', termLabel(plan)));
+  if (plan.provider) card.append(el('plan-provider', plan.provider));
+  if (plan.highlight) card.append(el('plan-desc', plan.highlight));
+
+  const facts = [];
+  if (plan.monthlyEst1000) facts.push(`Est. $${plan.monthlyEst1000}/mo at 1,000 kWh`);
+  if (parseInt(plan.renewablePct, 10) > 0) facts.push(`${plan.renewablePct}% renewable`);
+  if (facts.length) card.append(el('plan-facts', facts.join(' · ')));
+  const tags = focusTags(plan);
+  if (tags.length) {
+    const ul = document.createElement('ul');
+    ul.className = 'plan-tags';
+    tags.forEach((tag) => ul.append(el('', tag, 'li')));
+    card.append(ul);
+  }
+
+  const cta = el('plan-cta', '');
+  const enroll = safeHref(plan.enrollUrl);
+  if (enroll) cta.append(buttonLink(enroll, 'Choose this plan'));
+  const efl = safeHref(plan.eflUrl);
+  if (efl) {
+    const link = buttonLink(efl, 'Electricity Facts Label', 'plan-efl');
+    link.target = '_blank';
+    link.rel = 'noopener';
+    cta.append(link);
+  }
+  if (cta.children.length) card.append(cta);
+  if (brand) {
+    const contact = el('plan-contact', '');
+    const tel = document.createElement('a');
+    tel.href = `tel:1-${BRAND_PHONE}`;
+    tel.textContent = BRAND_PHONE;
+    contact.append(tel, el('', brand.hours, 'span'));
+    card.append(contact);
+  }
+  return card;
+}
+
+/** searchFocus chips: single-select filter over the rendered cards. */
+function buildFilters(rows, plans) {
+  const all = [...new Set(plans.flatMap(focusTags))].sort();
+  if (all.length < 2) return null;
+  const bar = document.createElement('div');
+  bar.className = 'plan-cards-filters';
+  bar.setAttribute('role', 'group');
+  bar.setAttribute('aria-label', 'Filter plans');
+  const status = el('plan-cards-count', '');
+  status.setAttribute('aria-live', 'polite');
+  const apply = (tag) => {
+    let shown = 0;
+    rows.forEach((row, i) => {
+      const hit = !tag || focusTags(plans[i]).includes(tag);
+      row.hidden = !hit;
+      if (hit) shown += 1;
+    });
+    status.textContent = `${shown} plan${shown === 1 ? '' : 's'}`;
+    bar.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String((b.dataset.tag || '') === (tag || ''))));
+  };
+  ['', ...all].forEach((tag) => {
+    const btn = el('', tag || 'All plans', 'button');
+    btn.type = 'button';
+    if (tag) btn.dataset.tag = tag;
+    btn.addEventListener('click', () => apply(btn.getAttribute('aria-pressed') === 'true' ? '' : tag));
+    bar.append(btn);
+  });
+  bar.append(status);
+  apply('');
+  return bar;
+}
+
+function renderEmpty(block, zip) {
+  const intro = document.createElement('div');
+  intro.className = 'plan-cards-intro plan-cards-empty';
+  intro.append(el('', 'Sorry we currently do not offer residential electricity products in your area.', 'h2'));
+  const p = el('', `We couldn't find plans for ZIP ${zip}. `, 'p');
+  const retry = document.createElement('a');
+  retry.href = `${localePrefix()}/`;
+  retry.textContent = 'Try another ZIP code';
+  p.append(retry);
+  intro.append(p);
+  block.replaceChildren(intro);
+}
+
+function renderPlans(block, zip, zipInfo, plans) {
+  const intro = block.querySelector(':scope > div');
+  const heading = intro?.querySelector('h1, h2, h3');
+  const title = zipInfo?.headline || `Electricity Plans for ZIP ${zip}`;
+  const introCell = document.createElement('div');
+  introCell.className = 'plan-cards-intro';
+  introCell.append(el('', title, 'h2'));
+  const lead = [...(intro?.querySelectorAll('p') || [])].find((p) => p.textContent.trim() && p !== heading);
+  if (lead) introCell.append(el('', lead.textContent.trim(), 'p'));
+  const rows = plans.map((plan) => wrapRow(buildDataCard(plan), plan.badge));
+  const filters = buildFilters(rows, plans);
+  block.replaceChildren(introCell, ...(filters ? [filters] : []), ...rows);
+}
+
+async function loadData() {
+  const resp = await fetch(`${localePrefix()}${DATA_PATH}`);
+  if (!resp.ok) throw new Error(`plans data ${resp.status}`);
+  const json = await resp.json();
+  return { zips: json.zips?.data || [], plans: json.plans?.data || [] };
+}
+
+export default async function decorate(block) {
+  const zip = new URLSearchParams(window.location.search).get('zip')?.trim();
+  if (!zip || !/^\d{5}$/.test(zip)) {
+    decorateAuthored(block);
+    return;
+  }
+
+  let data;
+  try {
+    data = await loadData();
+  } catch {
+    // data source unavailable: keep the authored plans
+    decorateAuthored(block);
+    return;
+  }
+
+  const zipInfo = data.zips.find((row) => tokens(row.zip).includes(zip));
+  const plans = data.plans
+    .filter((plan) => plan.planName && matchesZip(plan.zip, zip, zipInfo))
+    .sort((a, b) => (parseFloat(a.sort) || 0) - (parseFloat(b.sort) || 0));
+
+  if (!plans.length) renderEmpty(block, zip);
+  else renderPlans(block, zip, zipInfo, plans);
 }

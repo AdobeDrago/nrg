@@ -1,0 +1,41 @@
+/* Provider contact — matches everythingenergy.com "details-contacts" */
+main .section.provider-contact-container { background: var(--ee-cards-bg); }
+
+.provider-contact {
+  max-width: 630px;
+  margin: 0 auto;
+  padding: 65px 14px;
+}
+
+.provider-contact h2,
+.provider-contact h3,
+.provider-contact h4 {
+  margin: 0;
+  color: var(--ee-pink);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.provider-contact p {
+  margin: 12px 0 0;
+  color: var(--ee-text-dark);
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.provider-contact p + p { margin-top: 27px; }
+
+.provider-contact strong {
+  color: var(--ee-text-dark);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+@media (width >= 900px) {
+  .provider-contact { padding: 100px 0 110px; }
+  .provider-contact p { font-size: 18px; }
+  .provider-contact p + p { margin-top: 10px; }
+}

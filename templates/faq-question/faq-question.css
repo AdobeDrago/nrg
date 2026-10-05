@@ -1,0 +1,26 @@
+/* Single FAQ — extends templates/area-service (everythingenergy.com faqs single) */
+main > .section.faq-question-article .default-content-wrapper h1 { margin-bottom: 32px; }
+main > .section.faq-question-article .default-content-wrapper h1::after { content: none; }
+
+main > .section.faq-question-article .default-content-wrapper p.faq-question-byline {
+  margin: 0 0 48px;
+  font-size: 14px;
+}
+
+main > .section.faq-question-article .default-content-wrapper a:any-link {
+  color: var(--ee-pink);
+  font-weight: 400;
+}
+
+main > .section.faq-question-article .default-content-wrapper a:hover { color: var(--ee-purple); }
+
+@media (width >= 900px) {
+  main > .section.faq-question-article .default-content-wrapper h1 { margin-bottom: 48px; }
+
+  main > .section.faq-question-article .default-content-wrapper p.faq-question-byline {
+    margin: 0 0 64px;
+    font-size: 14px;
+  }
+
+  main > .section.faq-question-article .area-service-sidebar { margin-top: 260px; }
+}

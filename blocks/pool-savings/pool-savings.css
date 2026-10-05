@@ -1,0 +1,70 @@
+/* Pool savings — tips grid */
+.pool-savings {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 20px;
+}
+
+.pool-savings .pool-savings-intro {
+  grid-column: 1 / -1;
+  max-width: 700px;
+  margin: 0 auto 16px;
+  text-align: center;
+}
+
+.pool-savings .pool-savings-intro h2 {
+  margin: 0 0 16px;
+  color: var(--ee-text-title, #131631);
+  font-size: 28px;
+}
+
+.pool-savings .pool-savings-intro p {
+  margin: 0;
+  color: #5b5c69;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.pool-savings .pool-savings-tip > div {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 28px 24px;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  background: var(--ee-cards-bg, #f8f7fc);
+}
+
+.pool-savings .pool-savings-tip h3 {
+  margin: 0;
+  color: var(--ee-purple, #7564c1);
+  font-size: 20px;
+}
+
+.pool-savings .pool-savings-tip p {
+  margin: 8px 0 0;
+  color: #5b5c69;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.pool-savings .pool-savings-tip p.savings-highlight {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: rgb(117 100 193 / 10%);
+  color: var(--ee-purple, #7564c1);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+@media (width >= 768px) {
+  .pool-savings {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    padding: 64px 32px;
+  }
+}
