@@ -2,12 +2,6 @@ import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 import { getLocale, localePrefix, localizedHref } from '../../scripts/locale.js';
 
-const ICONS = {
-  phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/><path d="M15 3.5a6 6 0 0 1 5.5 5.5M14.6 6.4a3 3 0 0 1 3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
-  menu: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
-  close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
-};
-
 const normalizePath = (path) => path.replace(/\/(index)?$/, '') || '/';
 
 function buildBrand(section) {
@@ -18,7 +12,8 @@ function buildBrand(section) {
   brand.href = link?.getAttribute('href') || `${localePrefix()}/`;
   const base = window.hlx.codeBasePath;
   brand.innerHTML = `<img class="logo-color" src="${base}/icons/logo.svg" alt="${label}" width="292" height="33">
-    <img class="logo-white" src="${base}/icons/logo-white.svg" alt="${label}" width="292" height="33">`;
+    <img class="logo-white" src="${base}/icons/logo-white.svg" alt="${label}" width="292" height="33">
+    <img class="logo-small" src="${base}/icons/nrg-logo-small.svg" alt="${label}" width="35" height="35">`;
   return brand;
 }
 
@@ -33,7 +28,7 @@ function buildTools(section) {
     phone.className = 'header-phone';
     phone.href = tel.getAttribute('href');
     phone.setAttribute('aria-label', `Call ${tel.textContent.trim()}`);
-    phone.innerHTML = `${ICONS.phone}<span>${tel.textContent.trim()}</span>`;
+    phone.innerHTML = `<i class="ico-tel" aria-hidden="true"></i><span>${tel.textContent.trim()}</span>`;
     tools.append(phone);
   }
 
@@ -68,7 +63,8 @@ function buildMenu(section, header, planLink) {
   toggle.setAttribute('aria-expanded', 'false');
   toggle.setAttribute('aria-controls', 'header-menu');
   toggle.setAttribute('aria-label', 'Open menu');
-  toggle.innerHTML = `${ICONS.menu}<span>Menu</span>`;
+  toggle.innerHTML = `<img class="logo-small" src="${window.hlx.codeBasePath}/icons/nrg-logo-small.svg" alt="" width="32" height="32">
+    <i class="ico-hamburger" aria-hidden="true"></i><span>Menu</span>`;
 
   const overlay = document.createElement('div');
   overlay.className = 'header-overlay-mask';
@@ -83,7 +79,7 @@ function buildMenu(section, header, planLink) {
   const close = document.createElement('button');
   close.type = 'button';
   close.className = 'header-menu-close';
-  close.innerHTML = `<span>Close</span>${ICONS.close}`;
+  close.innerHTML = '<span>Close</span><i class="ico-close" aria-hidden="true"></i>';
   close.setAttribute('aria-label', 'Close menu');
   menu.append(close);
 
@@ -169,4 +165,17 @@ export default async function decorate(block) {
 
   block.textContent = '';
   block.append(bar);
+
+  // like the original: once scrolled the bar turns into floating icons,
+  // which slide away while scrolling down and come back when scrolling up
+  let lastY = window.scrollY;
+  const onScroll = () => {
+    const y = window.scrollY;
+    const height = block.offsetHeight;
+    block.classList.toggle('scrolled', y >= height / 2);
+    block.classList.toggle('hide-up', y > lastY && y > height / 4 && !block.classList.contains('menu-open'));
+    lastY = y;
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 }

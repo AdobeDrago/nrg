@@ -221,17 +221,30 @@ function buildFilters(rows, plans) {
   return bar;
 }
 
-function renderEmpty(block, zip) {
-  const intro = document.createElement('div');
-  intro.className = 'plan-cards-intro plan-cards-empty';
-  intro.append(el('', 'Sorry we currently do not offer residential electricity products in your area.', 'h2'));
-  const p = el('', `We couldn't find plans for ZIP ${zip}. `, 'p');
-  const retry = document.createElement('a');
-  retry.href = `${localePrefix()}/`;
-  retry.textContent = 'Try another ZIP code';
-  p.append(retry);
+/** No plans for the ZIP: the original's hero-pending-results (back home, apology, areas link). */
+function renderEmpty(block) {
+  block.classList.add('no-results');
+  const hero = document.createElement('div');
+  hero.className = 'plan-cards-pending';
+
+  const back = document.createElement('a');
+  back.className = 'plan-cards-back';
+  back.href = `${localePrefix()}/`;
+  back.innerHTML = '<i class="ico-back-top" aria-hidden="true"></i>Home';
+
+  const text = el('plan-cards-pending-text', '');
+  text.append(el('', 'Sorry we currently do not offer residential electricity products in your area.', 'h1'));
+  const intro = el('plan-cards-pending-intro', '');
+  const p = el('', 'Go to our ', 'p');
+  const areas = document.createElement('a');
+  areas.href = `${localePrefix()}/areas-of-service/`;
+  areas.textContent = 'Areas of Service';
+  p.append(areas, ' page to see which areas are covered.');
   intro.append(p);
-  block.replaceChildren(intro);
+  text.append(intro);
+
+  hero.append(back, text);
+  block.replaceChildren(hero);
 }
 
 function renderPlans(block, zip, zipInfo, plans) {
@@ -276,6 +289,6 @@ export default async function decorate(block) {
     .filter((plan) => plan.planName && matchesZip(plan.zip, zip, zipInfo))
     .sort((a, b) => (parseFloat(a.sort) || 0) - (parseFloat(b.sort) || 0));
 
-  if (!plans.length) renderEmpty(block, zip);
+  if (!plans.length) renderEmpty(block);
   else renderPlans(block, zip, zipInfo, plans);
 }

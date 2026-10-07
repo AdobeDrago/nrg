@@ -90,17 +90,17 @@
   font-weight: 600;
 }
 
-.zip-card .zip-moving-option svg { width: 24px; height: 24px; fill: #5b5c69; }
+.zip-card .zip-moving-option [class^="ico-"] { display: block; font-size: 24px; color: #5b5c69; }
 
 .zip-card .zip-moving-option:hover,
 .zip-card .zip-moving-option:focus { background: #ebe8f7; color: var(--ee-text-title); }
 
 .zip-card .zip-moving-option[aria-pressed="true"] {
-  border-color: var(--ee-purple);
-  background: #ebe8f7;
+  background-color: #745ac0;
+  color: #fff;
 }
 
-.zip-card .zip-moving-option[aria-pressed="true"] svg { fill: var(--ee-purple); }
+.zip-card .zip-moving-option[aria-pressed="true"] [class^="ico-"] { color: #fff; }
 
 .zip-card .zip-submit {
   display: block;
@@ -139,6 +139,7 @@
   border: 1px solid var(--ee-light-gray);
   border-radius: 40px;
   background: var(--ee-light-gray);
+  margin-top: 35px;
 }
 
 .zip-search .zip-search-field:focus-within { border-color: var(--ee-purple); }

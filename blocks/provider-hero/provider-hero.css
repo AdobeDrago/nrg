@@ -113,7 +113,7 @@
   .provider-hero.landing {
     grid-template-columns: minmax(0, 580px) 1fr 340px;
     grid-template-areas: "title . image" "intro . image";
-    padding: 96px 196px 0 160px;
+    padding: 260px 30px 96px 105px;
   }
 
   .provider-hero .provider-hero-back { margin: 0 0 68px -105px; }

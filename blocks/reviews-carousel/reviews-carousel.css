@@ -9,9 +9,10 @@
 
 .reviews-carousel .reviews-heading h2,
 .reviews-carousel .reviews-heading h3 {
-  margin: 0 0 8px;
+  margin: 0 0 48px;
   color: var(--ee-text-title);
-  font-size: var(--heading-font-size-l);
+  font-size: 30px;
+  font-family: SourceSansPro-Semi-Bold, sans-serif;
 }
 
 .reviews-carousel .reviews-heading p { margin: 0 0 32px; font-size: var(--body-font-size-s); }

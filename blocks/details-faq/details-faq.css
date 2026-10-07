@@ -1,0 +1,106 @@
+/* Details FAQ — matches everythingenergy.com details-faq (title, question list, back to top) */
+.details-faq {
+  box-sizing: border-box;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 64px 39px;
+  font-family: var(--body-font-family);
+}
+
+.details-faq .details-faq-title {
+  margin: 0;
+  color: var(--ee-pink, #d8479a);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+.details-faq .details-faq-list {
+  margin: 25px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.details-faq .details-faq-list > li + li { margin-top: 90px; }
+
+.details-faq .details-faq-question {
+  margin: 0;
+  color: var(--ee-text-title, #131631);
+  font-family: var(--body-font-family);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.details-faq .details-faq-answer {
+  margin-top: 25px;
+  color: #5b5c69;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.details-faq .details-faq-answer p,
+.details-faq .details-faq-answer ul,
+.details-faq .details-faq-answer ol {
+  margin: 0;
+  padding-bottom: 16px;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.details-faq .details-faq-answer ul,
+.details-faq .details-faq-answer ol { padding-left: 24px; }
+
+/* the original leaves answer links in the browser's default blue */
+.details-faq .details-faq-answer a:any-link {
+  color: #00e;
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+.details-faq .details-faq-answer a:hover { text-decoration: underline; }
+
+/* back to top */
+.details-faq .details-faq-back {
+  padding-top: 70px;
+  text-align: center;
+}
+
+.details-faq .details-faq-back button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 27px 10px 17px;
+  border: 0;
+  border-radius: 38px;
+  background-color: var(--ee-purple, #7564c1);
+  color: #fff;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  cursor: pointer;
+}
+
+.details-faq .details-faq-back button:hover,
+.details-faq .details-faq-back button:focus { background-color: var(--ee-purple-dark, #6450b0); }
+
+.details-faq .details-faq-back .ico-back-top { font-size: 14px; }
+
+@media (width >= 1024px) {
+  .details-faq {
+    max-width: 630px;
+    padding: 70px 0 65px;
+  }
+
+  .details-faq .details-faq-list > li + li,
+  .details-faq .details-faq-answer { margin-top: 15px; }
+
+  .details-faq .details-faq-back {
+    padding: 70px 0 40px;
+    text-align: left;
+  }
+}

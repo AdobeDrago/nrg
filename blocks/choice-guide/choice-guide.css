@@ -16,7 +16,7 @@
 .choice-guide .choice-guide-title::before {
   content: "";
   position: absolute;
-  top: 0;
+  top: -56px;
   left: 50%;
   width: 158px;
   height: 4px;

@@ -12,11 +12,12 @@
 
 .provider-cards h2,
 .provider-cards h3 {
-  font-size: var(--heading-font-size-l);
   font-weight: 700;
   color: #131631;
   margin: 0 0 16px;
   text-align: center;
+  font-size: 30px;
+  font-family: SourceSansPro-Semi-Bold, sans-serif;
 }
 
 /* First row = heading, span all columns */

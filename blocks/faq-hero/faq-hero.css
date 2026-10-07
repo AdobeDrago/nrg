@@ -1,0 +1,132 @@
+/* FAQ hero — matches everythingenergy.com hero-single-col (title + accent bar + FAQ search).
+   Top padding is the original's minus our 72px in-flow header. */
+.faq-hero {
+  box-sizing: border-box;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 64px 20px 58px;
+}
+
+/* title with the short pink bar underneath */
+.faq-hero .faq-hero-title {
+  position: relative;
+  padding: 0 20px;
+}
+
+.faq-hero .faq-hero-title::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: 20px;
+  width: 19px;
+  height: 4px;
+  border-radius: 40px;
+  background-color: #d8479a;
+}
+
+.faq-hero h1,
+.faq-hero h2,
+.faq-hero h3 {
+  margin: 0;
+  color: var(--ee-text-title, #131631);
+  font-family: var(--heading-font-family, var(--body-font-family));
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* search pill */
+.faq-hero .faq-hero-search { margin-top: 75px; }
+
+.faq-hero .faq-hero-field {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2px 3px 2px 24px;
+  border: 1px solid #f2f2f2;
+  border-radius: 40px;
+  background-color: #f2f2f2;
+}
+
+.faq-hero .faq-hero-field input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0 30px 0 0;
+  border: 0;
+  background: transparent;
+  color: #5b5c69;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.faq-hero .faq-hero-field input:focus { outline: none; }
+.faq-hero .faq-hero-field:focus-within { border-color: var(--ee-purple, #7564c1); }
+
+.faq-hero .faq-hero-field button {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--ee-purple, #7564c1);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.faq-hero .faq-hero-field button:hover { background-color: var(--ee-purple-dark, #6450b0); }
+
+@media (width >= 1024px) {
+  .faq-hero {
+    display: flex;
+    justify-content: center;
+    padding: 188px 100px 60px;
+  }
+
+  .faq-hero .faq-hero-content { width: 100%; max-width: 495px; }
+  .faq-hero .faq-hero-title { padding: 0; }
+  .faq-hero .faq-hero-title::after { left: 0; }
+
+  .faq-hero h1,
+  .faq-hero h2,
+  .faq-hero h3 { font-size: 64px; }
+
+  .faq-hero .faq-hero-search { max-width: 460px; margin-top: 65px; }
+
+  .faq-hero .faq-hero-field input {
+    padding: 14px 30px 14px 10px;
+    color: var(--ee-text-title, #131631);
+    font-size: 20px;
+  }
+}
+
+@media (width >= 1440px) {
+  .faq-hero { padding: 208px 100px 75px 160px; }
+  .faq-hero .faq-hero-content { max-width: 600px; }
+  .faq-hero .faq-hero-title::after { bottom: -35px; }
+
+  .faq-hero h1,
+  .faq-hero h2,
+  .faq-hero h3 { font-size: 72px; }
+
+  .faq-hero .faq-hero-search { max-width: 600px; margin-top: 60px; }
+}
+
+/* with the secondary nav above (as on the original), keep the title at the same height */
+@media (width >= 1024px) {
+  main:has(.secondary-nav) .faq-hero { padding-top: 161px; }
+}
+
+@media (width >= 1440px) {
+  main:has(.secondary-nav) .faq-hero { padding-top: 181px; }
+}
