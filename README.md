@@ -1,6 +1,6 @@
 # Everything Energy
 
-AEM Edge Delivery Services site for NRG's electricity plan comparison site (Texas & Pennsylvania).
+AEM Edge Delivery Services site for NRG's electricity plan comparison site (Texas & Pennsylvania)..
 
 ## Environments
 
