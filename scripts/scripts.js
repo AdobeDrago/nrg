@@ -1,5 +1,5 @@
 import {
-  loadHeader, loadFooter, decorateIcons, decorateSections, decorateBlocks,
+  buildBlock, loadHeader, loadFooter, decorateIcons, decorateSections, decorateBlocks,
   decorateTemplateAndTheme, waitForFirstImage, loadSection, loadSections, loadCSS,
   getMetadata, toClassName,
 } from './aem.js';
@@ -22,7 +22,24 @@ async function loadFonts() {
   try { if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true'); } catch (e) {}
 }
 
-function buildAutoBlocks() {}
+const SECONDARY_NAV_TEMPLATES = ['blog-post', 'area-service', 'faq-category'];
+
+/**
+ * Blog posts and area of service pages get the secondary nav without authoring it on each page:
+ * an empty block at the top of the first section (falls back to the main menu links).
+ * Page main only: fragments (e.g. the nav the block itself loads) also run decorateMain,
+ * and injecting there would recurse forever.
+ */
+function buildSecondaryNav(main) {
+  if (main !== document.querySelector('body > main')) return;
+  if (!SECONDARY_NAV_TEMPLATES.includes(toClassName(getMetadata('template')))) return;
+  if (main.querySelector('.secondary-nav')) return;
+  main.querySelector(':scope > div')?.prepend(buildBlock('secondary-nav', [['']]));
+}
+
+function buildAutoBlocks(main) {
+  buildSecondaryNav(main);
+}
 
 /**
  * DA drops relative <img> sources on preview, so images kept in the code repo

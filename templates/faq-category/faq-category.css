@@ -146,8 +146,16 @@ main > .section.faq-category-article > .default-content-wrapper {
 
 .faq-category-top { margin: 64px 0 0; }
 
-@media (width >= 900px) {
-  main > .section.faq-category-article { padding: 64px 60px 100px; }
+@media (width >= 1024px) {
+  main > .section.faq-category-article { 
+    padding: 64px 60px 100px; 
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  /* secondary nav authored in the article section: full width above the back pill,
+     cancelling the section padding so it lines up with other pages */
+  main > .section.faq-category-article > .secondary-nav-wrapper { margin: -64px -60px 108px; }
 
   .faq-category-article > .faq-category-back { margin-bottom: 40px; }
 
@@ -218,4 +226,22 @@ main > .section.faq-category-article > .default-content-wrapper {
     border-right-width: 0;
   }
 
+}
+
+/* For a width smaller than 1024px */
+@media (width <= 1023px) {
+  .section.secondary-nav-container.faq-category-article {
+    padding: 150px 18px 60px;
+    max-width: 640px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .faq-category-list p.faq-category-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
 }

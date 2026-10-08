@@ -105,11 +105,21 @@ main > .section.area-service-article > .default-content-wrapper {
 
 .area-service-sidebar { padding: 64px 4px 80px; }
 
-@media (width >= 900px) {
+@media (width >= 1023px) {
   main > .section.area-service-article {
     display: grid;
-    grid-template: "back . ." auto "side content ." 1fr / 350px minmax(0, 630px) minmax(0, 1fr);
+    grid-template: "nav nav nav" auto "back . ." auto "side content ." 1fr / 350px minmax(0, 630px) minmax(0, 1fr);
     padding: 64px 60px 0;
+    max-width: 1320px;
+    margin: 0 auto;
+    column-gap: 36px;
+  }
+
+  /* secondary nav authored in the article section: full-width row above the back link,
+     cancelling the section padding so it lines up with other pages */
+  main > .section.area-service-article > .secondary-nav-wrapper {
+    grid-area: nav;
+    margin: -64px -60px 64px;
   }
 
   .area-service-back {
@@ -154,4 +164,8 @@ main > .section.area-service-article > .default-content-wrapper {
   }
 
   .area-service-sidebar .fetch-plans { margin: 0; }
+
+  a.area-service-back {
+    margin-top: 46px;
+  }
 }

@@ -3,6 +3,15 @@ main .section.plan-explorer-container {
   background: linear-gradient(270deg, #57a1d3 0.01%, #d84699 98.37%);
 }
 
+.section.plan-explorer-container .plan-explorer-wrapper {
+  background-image: url(https://everythingenergy.com/wp-content/uploads/2021/01/hp-hero-bg-1024x548.jpg);
+  background-attachment: fixed;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+}
+
 .plan-explorer {
   max-width: 1440px;
   margin: 0 auto;
