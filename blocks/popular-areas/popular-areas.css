@@ -2,7 +2,7 @@
 .popular-areas {
   max-width: 630px;
   margin: 0 auto;
-  padding: 48px 0 80px;
+  padding: 48px 0 80px 88px;
 }
 
 .popular-areas .popular-areas-title {
@@ -72,4 +72,20 @@
   color: var(--ee-text-dark);
   font-size: 16px;
   line-height: 1.5;
+}
+
+
+/* For a width smaller than 1451px */
+@media (width <= 1450px) {
+  .popular-areas {
+    margin: 0 auto 0 359px;
+  }
+}
+
+/* For a width smaller than 1023px */
+@media (width <= 1023px) {
+  .popular-areas {
+    margin: 0 auto;
+    padding: 48px 0 80px 28px;
+  }
 }

@@ -1,26 +1,44 @@
 import { buildZipSearch } from '../../scripts/zip-form.js';
 
+const MOBILE_MEDIA = '(width < 900px)';
+
+/**
+ * Combines the authored desktop and mobile images into one art-directed <picture>:
+ * the mobile image's sources (scoped to MOBILE_MEDIA) come first, then the desktop
+ * image's own responsive sources and <img>, so both keep their full-size renditions.
+ */
+function artDirected(desktop, mobile) {
+  const picture = document.createElement('picture');
+  const sourcesOf = (el) => (el.tagName === 'PICTURE' ? [...el.querySelectorAll('source')] : []);
+  const mobileImg = mobile.tagName === 'IMG' ? mobile : mobile.querySelector('img');
+  // remember the authored wrappers before their contents move into the new picture
+  const leftovers = [desktop, mobile].map((el) => el.closest('p') || el);
+  // media-bus pictures carry a min-width:600px rendition; on mobile only the smaller ones apply
+  const mobileSources = sourcesOf(mobile).filter((s) => !s.media);
+  if (!mobileSources.length) {
+    const fallback = document.createElement('source');
+    fallback.srcset = mobileImg.getAttribute('src');
+    mobileSources.push(fallback);
+  }
+  mobileSources.forEach((s) => { s.media = MOBILE_MEDIA; picture.append(s); });
+  picture.append(...sourcesOf(desktop), desktop.tagName === 'IMG' ? desktop : desktop.querySelector('img'));
+  leftovers.forEach((el) => el.remove());
+  return picture;
+}
+
 /**
  * Provider hero: optional back link, h1, intro copy and a logo/illustration.
  * Authoring: one row; cell 1 = [back link], heading, intro; cell 2 = image.
  * Without a back link the block renders the providers landing variant.
- * The `areas` variant adds the ZIP search and uses a second image (if any) on mobile.
+ * The `areas` variant adds the ZIP search; its image cell can hold two images,
+ * desktop first and mobile second, and the mobile one is shown below 900px.
  */
 export default async function decorate(block) {
   const cells = [...block.querySelectorAll(':scope > div > div')];
   const heading = block.querySelector('h1, h2');
   const images = [...block.querySelectorAll('picture, img:not(picture img)')];
   let picture = images[0];
-  if (block.classList.contains('areas') && images.length > 1) {
-    const [desktop, mobile] = images.map((i) => (i.tagName === 'IMG' ? i : i.querySelector('img')));
-    picture = document.createElement('picture');
-    const source = document.createElement('source');
-    source.media = '(width < 900px)';
-    source.srcset = mobile.currentSrc || mobile.src;
-    picture.append(source, desktop);
-    mobile.closest('p')?.remove();
-    mobile.remove();
-  }
+  if (block.classList.contains('areas') && images.length > 1) picture = artDirected(images[0], images[1]);
   const back = [...block.querySelectorAll('p > a[href]')]
     .find((a) => heading && (heading.compareDocumentPosition(a) & Node.DOCUMENT_POSITION_PRECEDING));
 

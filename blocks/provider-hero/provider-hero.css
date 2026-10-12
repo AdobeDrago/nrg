@@ -2,7 +2,7 @@
 .provider-hero {
   display: grid;
   grid-template-areas: "back" "title" "image" "intro";
-  max-width: 1180px;
+  max-width: 1020px;
   margin: 0 auto;
   padding: 48px 40px 64px;
 }
@@ -107,7 +107,7 @@
     grid-template-columns: minmax(0, 470px) 1fr minmax(0, 260px);
     grid-template-areas: "back back back" "title . image" "intro . image";
     align-items: start;
-    padding: 130px 260px 0px 160px;
+    padding: 130px 260px 110px 160px;
   }
 
   .provider-hero.landing {
