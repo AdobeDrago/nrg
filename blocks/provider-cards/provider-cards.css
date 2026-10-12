@@ -6,8 +6,7 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  column-gap: 32px;
-  row-gap: 48px;
+  gap: 48px 32px;
 }
 
 .provider-cards h2,
@@ -42,7 +41,7 @@
   background: #fff;
   border: 1px solid #eee;
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 20px rgb(0 0 0 / 6%);
   padding: 36px 32px 40px;
   text-align: center;
   transition: box-shadow 0.2s, transform 0.2s;
@@ -54,9 +53,9 @@
 }
 
 .provider-cards > div:not(:first-child) > div:hover {
-  box-shadow: 0 8px 30px rgba(117, 100, 193, 0.15);
+  box-shadow: 0 8px 30px rgb(117 100 193 / 15%);
   transform: translateY(-3px);
-  border-color: rgba(117, 100, 193, 0.3);
+  border-color: rgb(117 100 193 / 30%);
 }
 
 .provider-cards > div:not(:first-child) > div h3 {
@@ -110,16 +109,14 @@
   .provider-cards {
     padding: 40px 16px;
     grid-template-columns: 1fr;
-    column-gap: 20px;
-    row-gap: 32px;
+    gap: 32px 20px;
   }
 }
 
 /* Logo strip variant (cards with logos) */
 .provider-cards.logos {
   grid-template-columns: repeat(5, 1fr);
-  column-gap: 0;
-  row-gap: 0;
+  gap: 0;
   padding: 56px 32px 40px;
 }
 
@@ -154,7 +151,10 @@
   transition: transform 0.2s;
 }
 
-.provider-cards.logos .provider-logo:hover { background: none; transform: scale(1.05); }
+.provider-cards.logos .provider-logo:hover {
+  background: none;
+  transform: scale(1.05);
+}
 
 .provider-cards.logos .provider-logo img {
   width: auto;
@@ -164,7 +164,10 @@
 }
 
 @media (width <= 900px) {
-  .provider-cards.logos { grid-template-columns: repeat(2, 1fr); padding: 40px 16px; }
+  .provider-cards.logos {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 40px 16px;
+  }
 
   .provider-cards.logos > div:not(:first-child) > div {
     height: 100px;

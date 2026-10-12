@@ -5,21 +5,25 @@ import {
 } from './aem.js';
 import { getLocale } from './locale.js';
 
-function moveAttributes(from, to, attributes) {
-  if (!attributes) attributes = [...from.attributes].map(({ nodeName }) => nodeName);
-  attributes.forEach((attr) => {
+export function moveAttributes(from, to, attributes) {
+  const names = attributes || [...from.attributes].map(({ nodeName }) => nodeName);
+  names.forEach((attr) => {
     const value = from.getAttribute(attr);
     if (value) { to?.setAttribute(attr, value); from.removeAttribute(attr); }
   });
 }
 
-function moveInstrumentation(from, to) {
+export function moveInstrumentation(from, to) {
   moveAttributes(from, to, [...from.attributes].map(({ nodeName }) => nodeName).filter((attr) => attr.startsWith('data-aue-') || attr.startsWith('data-richtext-')));
 }
 
 async function loadFonts() {
   await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
-  try { if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true'); } catch (e) {}
+  try {
+    if (!window.location.hostname.includes('localhost')) sessionStorage.setItem('fonts-loaded', 'true');
+  } catch {
+    // sessionStorage unavailable (e.g. private mode): fonts just load later next time
+  }
 }
 
 const SECONDARY_NAV_TEMPLATES = ['blog-post', 'area-service', 'faq-category'];
@@ -67,15 +71,17 @@ function decorateButtons(main) {
     const p = a.closest('p');
     const text = a.textContent.trim();
     if (a.querySelector('img') || p.textContent.trim() !== text) return;
-    try { if (new URL(a.href).href === new URL(text, window.location).href) return; } catch {}
+    try {
+      if (new URL(a.href).href === new URL(text, window.location).href) return;
+    } catch {
+      // link text is not a URL: treat it as a normal label
+    }
     const strong = a.closest('strong');
     const em = a.closest('em');
     if (!strong && !em) return;
     p.className = 'button-wrapper';
     a.className = 'button';
-    if (strong && em) { a.classList.add('accent'); const outer = strong.contains(em) ? strong : em; outer.replaceWith(a); }
-    else if (strong) { a.classList.add('primary'); strong.replaceWith(a); }
-    else { a.classList.add('secondary'); em.replaceWith(a); }
+    if (strong && em) { a.classList.add('accent'); const outer = strong.contains(em) ? strong : em; outer.replaceWith(a); } else if (strong) { a.classList.add('primary'); strong.replaceWith(a); } else { a.classList.add('secondary'); em.replaceWith(a); }
   });
 }
 
@@ -118,7 +124,11 @@ async function loadEager(doc) {
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
-  try { if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) loadFonts(); } catch (e) {}
+  try {
+    if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) loadFonts();
+  } catch {
+    // sessionStorage unavailable: fonts load lazily instead
+  }
 }
 
 async function loadLazy(doc) {

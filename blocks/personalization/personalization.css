@@ -26,7 +26,7 @@
 
 .personalization-header p {
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgb(255 255 255 / 90%);
   line-height: 1.6;
   margin: 0;
 }
@@ -43,8 +43,8 @@
 .pzn-badge {
   display: inline-flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgb(255 255 255 / 20%);
+  border: 1px solid rgb(255 255 255 / 30%);
   color: #fff;
   padding: 10px 20px;
   border-radius: 30px;
@@ -68,7 +68,7 @@
 
 .pzn-recommendation p {
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgb(255 255 255 / 85%);
   margin: 0;
 }
 
@@ -92,11 +92,15 @@
 
 .pzn-cta a:hover {
   transform: scale(1.03);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 20px rgb(0 0 0 / 15%);
 }
 
 @media (width <= 768px) {
   .personalization { padding: 48px 20px; }
+
   .personalization-header h2,
-  .personalization-header h3 { font-size: 30px; overflow-wrap: anywhere; }
+  .personalization-header h3 {
+    font-size: 30px;
+    overflow-wrap: anywhere;
+  }
 }

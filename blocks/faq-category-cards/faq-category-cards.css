@@ -50,11 +50,17 @@
 .faq-category-cards a.faq-category-tile:hover { background: rgb(0 0 0 / 8%); }
 
 @media (width >= 900px) {
-  .faq-category-cards { gap: 26px; padding: 40px 32px 12px; }
+  .faq-category-cards {
+    gap: 26px;
+    padding: 40px 32px 12px;
+  }
 
   .faq-category-cards .faq-category-card { flex: 0 0 300px; }
 
-  .faq-category-cards .faq-category-tile { min-height: 185px; padding: 32px 40px; }
+  .faq-category-cards .faq-category-tile {
+    min-height: 185px;
+    padding: 32px 40px;
+  }
 
   .faq-category-cards .faq-category-title { font-size: 18px; }
 }

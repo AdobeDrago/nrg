@@ -38,7 +38,7 @@
   .secondary-nav a[aria-current="page"] { color: var(--ee-text-title, #131631); }
 }
 
-@media (min-width: 1440px) {
+@media (width >= 1440px) {
     .secondary-nav {
         padding-top: 32px;
     }

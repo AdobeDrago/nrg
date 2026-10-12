@@ -99,10 +99,17 @@ main .section.details-cards-container > .details-cards-wrapper {
   main .section.details-cards-container { padding: 90px 32px; }
   .details-cards-wrapper + .details-cards-wrapper .details-cards { margin-top: 84px; }
   .details-cards-wrapper + .details-cards-wrapper .details-cards-title::before { top: -40px; }
+
   .details-cards .details-cards-title h2,
   .details-cards .details-cards-title h3 { font-size: 36px; }
   .details-cards .details-cards-title p { font-size: 18px; }
-  .details-cards ul { flex-wrap: nowrap; justify-content: center; gap: 23px; margin-top: 72px; }
+
+  .details-cards ul {
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 23px;
+    margin-top: 72px;
+  }
 
   .details-cards li {
     flex: 0 1 302px;

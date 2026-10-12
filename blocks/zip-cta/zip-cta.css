@@ -14,7 +14,10 @@
   clip-path: ellipse(120% 100% at 60% 0%);
 }
 
-.zip-cta > div > div { max-width: 560px; margin: 0 auto; }
+.zip-cta > div > div {
+  max-width: 560px;
+  margin: 0 auto;
+}
 
 .zip-cta h2 {
   margin: 0 0 8px;
@@ -30,5 +33,8 @@
 .zip-cta .zip-card { margin: 0 auto; }
 
 @media (width >= 900px) {
-  .zip-cta::before { height: 120px; margin-bottom: 48px; }
+  .zip-cta::before {
+    height: 120px;
+    margin-bottom: 48px;
+  }
 }
