@@ -29,3 +29,30 @@ indices:
       lastModified:
         select: none
         value: dateValue(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+
+  # FAQ pages only, read by the faq-hero search (ffetch). Category pages are indexed
+  # too; the search keeps template = faq-question.
+  faqs:
+    include:
+      - /faqs/**
+      - /en/faqs/**
+      - /es/faqs/**
+    target: /faqs-index.json
+    properties:
+      # the question itself (og:title carries the " - everything energy" suffix)
+      title:
+        selectFirst: main h1
+        value: textContent(el)
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+      template:
+        select: head > meta[name="template"]
+        value: attribute(el, "content")
+      # answer copy for full-text matching
+      content:
+        selectFirst: main > div
+        value: words(el, 0, 300)
+      lastModified:
+        select: none
+        value: dateValue(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
