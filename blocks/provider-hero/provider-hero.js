@@ -39,8 +39,10 @@ export default async function decorate(block) {
   const images = [...block.querySelectorAll('picture, img:not(picture img)')];
   let picture = images[0];
   if (block.classList.contains('areas') && images.length > 1) picture = artDirected(images[0], images[1]);
-  const back = [...block.querySelectorAll('p > a[href]')]
-    .find((a) => heading && (heading.compareDocumentPosition(a) & Node.DOCUMENT_POSITION_PRECEDING));
+  // back link: a paragraph link placed before the heading
+  const back = [...block.querySelectorAll('p > a[href]')].find((a) => heading
+    // eslint-disable-next-line no-bitwise -- compareDocumentPosition returns a bit mask
+    && (heading.compareDocumentPosition(a) & Node.DOCUMENT_POSITION_PRECEDING));
 
   const title = document.createElement('div');
   title.className = 'provider-hero-title';

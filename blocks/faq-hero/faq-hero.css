@@ -93,7 +93,10 @@
     padding: 188px 100px 60px;
   }
 
-  .faq-hero .faq-hero-content { width: 100%; max-width: 495px; }
+  .faq-hero .faq-hero-content {
+    width: 100%;
+    max-width: 495px;
+  }
   .faq-hero .faq-hero-title { padding: 0; }
   .faq-hero .faq-hero-title::after { left: 0; }
 
@@ -101,7 +104,10 @@
   .faq-hero h2,
   .faq-hero h3 { font-size: 64px; }
 
-  .faq-hero .faq-hero-search { max-width: 460px; margin-top: 65px; }
+  .faq-hero .faq-hero-search {
+    max-width: 460px;
+    margin-top: 65px;
+  }
 
   .faq-hero .faq-hero-field input {
     padding: 14px 30px 14px 10px;
@@ -119,7 +125,10 @@
   .faq-hero h2,
   .faq-hero h3 { font-size: 72px; }
 
-  .faq-hero .faq-hero-search { max-width: 600px; margin-top: 60px; }
+  .faq-hero .faq-hero-search {
+    max-width: 600px;
+    margin-top: 60px;
+  }
 }
 
 /* with the secondary nav above (as on the original), keep the title at the same height */

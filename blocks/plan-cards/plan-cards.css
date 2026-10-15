@@ -140,6 +140,7 @@ main .plan-cards-wrapper { background: var(--ee-cards-bg, #f8f7fc); }
 }
 
 /* data mode: brand logo, focus tags, contact, filter chips */
+
 /* the logo's <picture> wrapper stays out of the card's flex layout */
 .plan-cards .plan-card > picture { display: contents; }
 
@@ -263,7 +264,11 @@ main .plan-cards-wrapper:has(.no-results) { background: none; }
 }
 
 .plan-cards .plan-cards-back:hover { background-color: var(--ee-purple-dark, #6450b0); }
-.plan-cards .plan-cards-back .ico-back-top { font-size: 14px; transform: rotate(-90deg); }
+
+.plan-cards .plan-cards-back .ico-back-top {
+  font-size: 14px;
+  transform: rotate(-90deg);
+}
 
 .plan-cards .plan-cards-pending-text { width: 100%; }
 
@@ -274,7 +279,7 @@ main .plan-cards-wrapper:has(.no-results) { background: none; }
   font-size: 48px;
   font-weight: 700;
   line-height: 1.1;
-  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .plan-cards .plan-cards-pending-intro {
@@ -284,7 +289,11 @@ main .plan-cards-wrapper:has(.no-results) { background: none; }
   line-height: 1.5;
 }
 
-.plan-cards .plan-cards-pending-intro p { margin: 0; font-size: inherit; line-height: inherit; }
+.plan-cards .plan-cards-pending-intro p {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
 
 .plan-cards .plan-cards-pending-intro a:any-link {
   color: #745ac0;
@@ -318,9 +327,15 @@ main .plan-cards-wrapper:has(.no-results) { background: none; }
 }
 
 @media (width >= 600px) {
-  .plan-cards { grid-template-columns: repeat(2, 1fr); padding: 64px 32px; }
+  .plan-cards {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 64px 32px;
+  }
 }
 
 @media (width >= 900px) {
-  .plan-cards { grid-template-columns: repeat(3, 1fr); column-gap: 32px; row-gap: 48px; }
+  .plan-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px 32px;
+  }
 }

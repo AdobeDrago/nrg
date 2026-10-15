@@ -68,6 +68,9 @@ main .section.details-cards-container + .section.area-list-container { padding-t
   .area-list h3,
   .area-list h4 { font-size: 22px; }
 
-  .area-list ul { margin-top: 30px; column-count: 7; }
+  .area-list ul {
+    margin-top: 30px;
+    column-count: 7;
+  }
   .area-list a:any-link { font-size: 17px; }
 }

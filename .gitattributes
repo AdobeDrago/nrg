@@ -1,0 +1,11 @@
+# keep LF line endings in the working tree on every OS (ESLint enforces linebreak-style: unix)
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary

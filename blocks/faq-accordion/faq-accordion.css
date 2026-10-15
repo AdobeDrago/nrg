@@ -16,7 +16,7 @@
 
 .faq-accordion details:hover {
   border-color: #7564C1;
-  box-shadow: 0 2px 12px rgba(117,100,193,0.1);
+  box-shadow: 0 2px 12px rgb(117 100 193 / 10%);
 }
 
 .faq-accordion summary {

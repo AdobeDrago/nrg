@@ -20,8 +20,15 @@ main > .section.area-service-article > .default-content-wrapper {
   line-height: 18px;
 }
 
-.area-service-back:any-link { color: #fff; text-decoration: none; }
-.area-service-back:hover { background-color: var(--ee-pink); color: #fff; }
+.area-service-back:any-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.area-service-back:hover {
+  background-color: var(--ee-pink);
+  color: #fff;
+}
 
 .area-service-back svg {
   width: 16px;
@@ -68,7 +75,10 @@ main > .section.area-service-article > .default-content-wrapper {
   line-height: 1.3;
 }
 
-.area-service-article .default-content-wrapper h3 { margin-top: 32px; font-size: 20px; }
+.area-service-article .default-content-wrapper h3 {
+  margin-top: 32px;
+  font-size: 20px;
+}
 
 .area-service-article .default-content-wrapper h2 + p,
 .area-service-article .default-content-wrapper h3 + p { margin-top: 0; }
@@ -141,7 +151,10 @@ main > .section.area-service-article > .default-content-wrapper {
     font-size: 64px;
   }
 
-  .area-service-article .default-content-wrapper h1::after { bottom: -40px; left: 0; }
+  .area-service-article .default-content-wrapper h1::after {
+    bottom: -40px;
+    left: 0;
+  }
 
   .area-service-article .default-content-wrapper p,
   .area-service-article .default-content-wrapper li { font-size: 18px; }
@@ -150,8 +163,15 @@ main > .section.area-service-article > .default-content-wrapper {
 
   .area-service-article .default-content-wrapper li { line-height: 1.4; }
 
-  .area-service-article .default-content-wrapper h2 { margin: 40px 0 16px; font-size: 32px; }
-  .area-service-article .default-content-wrapper h3 { margin: 32px 0 16px; font-size: 24px; }
+  .area-service-article .default-content-wrapper h2 {
+    margin: 40px 0 16px;
+    font-size: 32px;
+  }
+
+  .area-service-article .default-content-wrapper h3 {
+    margin: 32px 0 16px;
+    font-size: 24px;
+  }
   .area-service-article .default-content-wrapper ul { margin: 16px 0 0; }
 
   .area-service-sidebar {

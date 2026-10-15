@@ -18,7 +18,10 @@ main .section.plan-explorer-container {
   padding: 30px 16px 110px;
 }
 
-.plan-explorer .plan-explorer-text { padding: 0 14px; color: #fff; }
+.plan-explorer .plan-explorer-text {
+  padding: 0 14px;
+  color: #fff;
+}
 
 .plan-explorer .plan-explorer-text h2 {
   margin: 0;
@@ -50,7 +53,11 @@ main .section.plan-explorer-container {
     padding: 145px 90px;
   }
 
-  .plan-explorer .plan-explorer-text { max-width: 405px; margin-right: 35px; padding: 0; }
+  .plan-explorer .plan-explorer-text {
+    max-width: 405px;
+    margin-right: 35px;
+    padding: 0;
+  }
 
   .plan-explorer .plan-explorer-widget {
     box-sizing: border-box;

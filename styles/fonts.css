@@ -12,6 +12,7 @@
 
 [class^="ico-"],
 [class*=" ico-"] {
+  /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword -- icon font: a fallback would render letters */
   font-family: nrg-icons !important;
   font-style: normal;
   font-variant: normal;

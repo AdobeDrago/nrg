@@ -136,7 +136,9 @@ function tokens(value) {
  * so one row can cover every TX ZIP or one TDSP territory.
  */
 function matchesZip(value, zip, zipInfo) {
-  const keys = [zip, zipInfo?.state, zipInfo?.utility].filter(Boolean).map((k) => k.trim().toLowerCase());
+  const keys = [zip, zipInfo?.state, zipInfo?.utility]
+    .filter(Boolean)
+    .map((k) => k.trim().toLowerCase());
   return tokens(value).some((v) => v === '*' || keys.includes(v));
 }
 
@@ -161,7 +163,8 @@ function buildDataCard(plan, logos) {
   card.className = 'plan-card';
   const brand = brandOf(plan);
   if (brand && logos.has(brand)) {
-    const picture = createOptimizedPicture(logos.get(brand), brand.name, false, [{ width: LOGO_WIDTH }]);
+    const breakpoints = [{ width: LOGO_WIDTH }];
+    const picture = createOptimizedPicture(logos.get(brand), brand.name, false, breakpoints);
     const logo = picture.querySelector('img');
     logo.className = 'plan-logo';
     logo.width = 130;
