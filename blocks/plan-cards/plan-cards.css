@@ -140,6 +140,9 @@ main .plan-cards-wrapper { background: var(--ee-cards-bg, #f8f7fc); }
 }
 
 /* data mode: brand logo, focus tags, contact, filter chips */
+/* the logo's <picture> wrapper stays out of the card's flex layout */
+.plan-cards .plan-card > picture { display: contents; }
+
 .plan-cards .plan-logo {
   align-self: center;
   width: auto;

@@ -43,7 +43,7 @@ function buildAutoBlocks(main) {
 
 /**
  * DA drops relative <img> sources on preview, so images kept in the code repo
- * (e.g. /icons/providers/*.png) are authored as a standalone link to the file.
+ * (e.g. /icons/foo.png) are authored as a standalone link to the file.
  * Turns such links into images; the link text (if not the path) becomes the alt.
  */
 function decorateImageLinks(main) {
