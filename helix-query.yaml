@@ -30,28 +30,38 @@ indices:
         select: none
         value: dateValue(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
 
-  # FAQ pages only, read by the faq-hero search (ffetch). Category pages are indexed
-  # too; the search keeps template = faq-question.
-  faqs:
+  # Site-wide search index, read by the faq-hero search (ffetch).
+  search:
     include:
-      - /faqs/**
-      - /en/faqs/**
-      - /es/faqs/**
-    target: /faqs-index.json
+      - /**
+    exclude:
+      - /nav
+      - /footer
+      - /**/nav
+      - /**/footer
+      - /drafts/**
+      - /fragments/**
+      - /**/fragments/**
+      - /tools/**
+    target: /search-index.json
     properties:
-      # the question itself (og:title carries the " - everything energy" suffix)
+      # page heading (og:title carries the " - everything energy" suffix)
       title:
         selectFirst: main h1
         value: textContent(el)
+      # fallback for pages without an h1
+      pageTitle:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
       description:
         select: head > meta[name="description"]
         value: attribute(el, "content")
       template:
         select: head > meta[name="template"]
         value: attribute(el, "content")
-      # answer copy for full-text matching
+      # body copy for full-text matching
       content:
-        selectFirst: main > div
+        select: main
         value: words(el, 0, 300)
       lastModified:
         select: none

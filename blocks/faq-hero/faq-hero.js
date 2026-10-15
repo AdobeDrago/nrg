@@ -1,14 +1,14 @@
 import ffetch from '../../scripts/ffetch.js';
 import { localePrefix } from '../../scripts/locale.js';
 
-// Dedicated FAQ index (helix-query.yaml); the default index is the fallback until it is built.
-const FAQ_INDEX = '/faqs-index.json';
+// Site-wide search index (helix-query.yaml); the default index is the fallback until it is built.
+const SEARCH_INDEX = '/search-index.json';
 const QUERY_INDEX = '/query-index.json';
 const MAX_RESULTS = 6;
 const LABELS = {
-  en: { noResults: 'No questions match your search.', results: 'Suggested questions', search: 'Search' },
+  en: { noResults: 'No pages match your search.', results: 'Suggested pages', search: 'Search' },
   es: {
-    noResults: 'Ninguna pregunta coincide con tu búsqueda.', results: 'Preguntas sugeridas', search: 'Buscar',
+    noResults: 'Ninguna página coincide con tu búsqueda.', results: 'Páginas sugeridas', search: 'Buscar',
   },
 };
 
@@ -24,17 +24,24 @@ function cleanTitle(title) {
 let questionsPromise;
 
 /**
- * FAQ question pages of the current locale (the root site shows the English ones),
- * with their searchable text normalized once.
+ * True when a path belongs to the current locale: /es/ pages for Spanish,
+ * everything else (/en/ and root pages) for English.
+ */
+function inLocale(path) {
+  const isSpanish = path === '/es' || path.startsWith('/es/');
+  return localePrefix() === '/es' ? isSpanish : !isSpanish;
+}
+
+/**
+ * Pages of the current locale with their searchable text normalized once.
  * @returns {Promise<object[]>}
  */
 function loadQuestions() {
   if (questionsPromise) return questionsPromise;
-  const base = `${localePrefix() || '/en'}/faqs/`;
   const fetchFrom = (url) => ffetch(url)
-    .filter((row) => row.path?.startsWith(base) && row.template === 'faq-question')
+    .filter((row) => row.path && inLocale(row.path) && (row.title || row.pageTitle))
     .map((row) => {
-      const title = cleanTitle(row.title);
+      const title = cleanTitle(row.title || row.pageTitle);
       return {
         path: row.path,
         title,
@@ -46,7 +53,7 @@ function loadQuestions() {
       };
     })
     .all();
-  questionsPromise = fetchFrom(FAQ_INDEX)
+  questionsPromise = fetchFrom(SEARCH_INDEX)
     .then((rows) => (rows.length ? rows : fetchFrom(QUERY_INDEX)))
     .catch(() => []);
   return questionsPromise;
@@ -82,7 +89,7 @@ function search(questions, query) {
  * matching the original's hero-single-col.
  * Authoring: row 1 = heading; row 2 (optional) = search placeholder text,
  * plus an optional link to a search results page.
- * Typing suggests matching questions from the FAQ index (ffetch). With a results page
+ * Typing suggests matching pages from the site-wide search index (ffetch). With a results page
  * authored, submitting sends GET {results page}?search-faq=QUERY like the original;
  * otherwise it opens the best match.
  */
