@@ -1,10 +1,16 @@
 /* header */
 header .header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 10;
   width: 100%;
   background-color: var(--background-color, #fff);
+  transition: transform .4s ease-out, background-color .1s ease-in-out;
 }
+
+/* scrolling down slides the bar away, scrolling up brings it back (see header.js) */
+header .header.hide-up { transform: translateY(-100%); }
 
 body.header-over-hero header .header { background: transparent; }
 
@@ -23,9 +29,20 @@ header .header-bar {
 }
 
 /* logo */
-header .header-logo { display: inline-flex; flex-shrink: 0; }
-header .header-logo img { display: block; width: 192px; height: auto; }
-header .header-logo .logo-white { display: none; }
+header .header-logo {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+header .header-logo img {
+  display: block;
+  width: 192px;
+  height: auto;
+}
+
+header .header-logo .logo-white,
+header .header-logo .logo-small,
+header .header-menu-toggle .logo-small { display: none; }
 body.header-over-hero header .header-logo .logo-color { display: none; }
 body.header-over-hero header .header-logo .logo-white { display: block; }
 
@@ -36,7 +53,7 @@ header .header-tools {
   gap: 12px;
 }
 
-header svg { display: block; width: 18px; height: 18px; fill: currentcolor; }
+header [class^="ico-"] { display: block; }
 
 /* phone */
 header .header-phone:any-link {
@@ -51,7 +68,7 @@ header .header-phone:any-link {
   color: var(--ee-pink, #d84699);
   text-decoration: none;
 }
-header .header-phone svg { width: 24px; height: 24px; }
+header .header-phone .ico-tel { font-size: 24px; }
 header .header-phone span { display: none; }
 
 /* language switch */
@@ -69,7 +86,10 @@ header .header-lang:any-link {
 header .header-lang:hover { background: #e4e4e4; }
 
 /* menu pill */
-header .header-menu-pill { display: flex; align-items: center; }
+header .header-menu-pill {
+  display: flex;
+  align-items: center;
+}
 
 header .header-plan-link:any-link { display: none; }
 
@@ -90,7 +110,7 @@ header .header-menu-toggle {
   font: 700 16px/1 var(--body-font-family);
   cursor: pointer;
 }
-header .header-menu-toggle svg { width: 22px; height: 22px; }
+header .header-menu-toggle .ico-hamburger { font-size: 22px; }
 header .header-menu-toggle span { display: none; }
 
 /* flyout */
@@ -100,6 +120,7 @@ header .header-overlay-mask {
   z-index: 20;
   background: rgb(0 0 0 / 45%);
 }
+
 header .header-overlay-mask[hidden],
 header .header-menu[hidden] { display: none; }
 
@@ -132,7 +153,7 @@ header .header-menu-close {
   font: 700 16px/1 var(--body-font-family);
   cursor: pointer;
 }
-header .header-menu-close svg { width: 22px; height: 22px; }
+header .header-menu-close .ico-close { font-size: 22px; }
 header .header-menu-close span { display: none; }
 
 header .header-menu ul {
@@ -151,6 +172,7 @@ header .header-menu a:any-link {
   line-height: 1.2;
   text-decoration: none;
 }
+
 header .header-menu a:hover,
 header .header-menu a[aria-current="page"] { color: var(--ee-pink, #d84699); }
 
@@ -160,7 +182,10 @@ header .header-menu a[aria-current="page"] { color: var(--ee-pink, #d84699); }
 
   body.header-over-hero header .header { background-color: var(--background-color, #fff); }
   body.header-over-hero header .header-logo .logo-color { display: block; }
-  body.header-over-hero header .header-logo .logo-white { display: none; }
+
+  body.header-over-hero header .header-logo .logo-white,
+  header .header-logo .logo-small,
+  header .header-menu-toggle .logo-small { display: none; }
 
   header .header-actions { gap: 64px; }
   header .header-tools { gap: 64px; }
@@ -174,7 +199,7 @@ header .header-menu a[aria-current="page"] { color: var(--ee-pink, #d84699); }
     font-size: 20px;
     font-weight: 700;
   }
-  header .header-phone svg { color: var(--ee-pink, #d84699); }
+  header .header-phone .ico-tel { color: var(--ee-pink, #d84699); }
   header .header-phone span { display: inline; }
   header .header-phone:hover span { color: var(--ee-pink, #d84699); }
 
@@ -188,6 +213,7 @@ header .header-menu a[aria-current="page"] { color: var(--ee-pink, #d84699); }
   }
 
   header .header-plan-link:any-link {
+    font-size: 16px;
     display: flex;
     align-items: center;
     height: 100%;
@@ -208,28 +234,102 @@ header .header-menu a[aria-current="page"] { color: var(--ee-pink, #d84699); }
     box-shadow: none;
     color: #fff;
   }
-  header .header-menu-toggle svg { width: 18px; height: 18px; }
+  header .header-menu-toggle .ico-hamburger { font-size: 18px; }
+  /* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */
   header .header-menu-toggle span { display: inline; }
+
+  /* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */
   header .header-plan-link:hover,
   header .header-menu-toggle:hover { background: rgb(0 0 0 / 12%); }
 
   header .header-overlay-mask { background: rgb(0 0 0 / 12%); }
 
   header .header-menu {
-    top: 16px;
+    top: 15px;
     right: 16px;
     width: 388px;
     padding: 64px 40px 48px;
   }
-  header .header-menu-close { top: 28px; right: 28px; font-size: 16px; }
+
+  header .header-menu-close {
+    top: 28px;
+    right: 28px;
+    font-size: 16px;
+  }
+  /* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */
   header .header-menu-close span { display: inline; }
-  header .header-menu-close svg { width: 18px; height: 18px; }
+  header .header-menu-close .ico-close { font-size: 18px; }
   header .header-menu ul { gap: 28px; }
-  header .header-menu a:any-link { font-size: 30px; font-weight: 600; }
+
+  header .header-menu a:any-link {
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+    
+  a.blog-post-back {
+    margin-top: 62px;
+  }
 }
 
 /* small screens: transparent header overlaps the hero gradient */
 @media (width < 1024px) {
   body.header-over-hero header { height: 0; }
-  body.header-over-hero header .header { position: absolute; top: 0; left: 0; }
+}
+
+/* scrolled: the bar loses its background and only floating icons remain */
+header .header.scrolled,
+body.header-over-hero header .header.scrolled { background-color: transparent; }
+
+header .header.scrolled .header-logo .logo-color,
+header .header.scrolled .header-logo .logo-white,
+header .header.scrolled .header-lang:any-link { display: none; }
+
+@media (width < 1024px) {
+  header .header.scrolled .header-logo { visibility: hidden; }
+
+  header .header.scrolled .header-phone:any-link {
+    width: 55px;
+    height: 55px;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
+  }
+
+  /* menu button becomes a white pill with the small logo, like the original */
+  header .header.scrolled .header-menu-toggle {
+    gap: 17px;
+    width: auto;
+    padding: 11px 22px 11px 9px;
+    border-radius: 100px;
+  }
+
+  header .header.scrolled .header-menu-toggle .logo-small {
+    display: block;
+    width: 32px;
+    height: auto;
+  }
+}
+
+@media (width >= 1024px) {
+  header .header.scrolled .header-logo {
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  header .header.scrolled .header-logo .logo-small {
+    display: block;
+    box-sizing: border-box;
+    width: 55px;
+    padding: 10px;
+  }
+
+  header .header.scrolled .header-phone:any-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f2f2f2;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
+  }
+  header .header.scrolled .header-actions { gap: 12px; }
+  header .header.scrolled .header-phone .ico-tel { font-size: 16px; }
+  header .header.scrolled .header-phone span { display: none; }
 }

@@ -13,7 +13,10 @@ export default function decorate(block) {
     if (!cell) return;
     const heading = cell.querySelector('h2, h3, h4');
     [...cell.children].forEach((child) => {
-      if (child.tagName === 'P' && heading && (child.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING)) {
+      const beforeHeading = heading
+        // eslint-disable-next-line no-bitwise -- compareDocumentPosition returns a bit mask
+        && (child.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING);
+      if (child.tagName === 'P' && beforeHeading) {
         child.className = 'popular-areas-tag';
       }
       li.append(child);

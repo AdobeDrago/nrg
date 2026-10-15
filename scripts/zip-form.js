@@ -1,11 +1,6 @@
 import { loadCSS } from './aem.js';
 import { localePrefix } from './locale.js';
 
-const ICONS = {
-  yes: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h11v10H3zM14 9h4l3 3v3h-7zM6.5 18.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm11 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>',
-  no: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9h-6v-6H9v6H3z"/></svg>',
-};
-
 let formCount = 0;
 
 /**
@@ -39,8 +34,8 @@ export default async function buildZipForm({
     <fieldset class="zip-moving">
       <legend></legend>
       <div class="zip-moving-options">
-        <button type="button" class="zip-moving-option" data-moving="yes" aria-pressed="false">${ICONS.yes}<span>Yes</span></button>
-        <button type="button" class="zip-moving-option" data-moving="no" aria-pressed="false">${ICONS.no}<span>No</span></button>
+        <button type="button" class="zip-moving-option" data-moving="yes" aria-pressed="false"><i class="ico-truck" aria-hidden="true"></i><span>Yes</span></button>
+        <button type="button" class="zip-moving-option" data-moving="no" aria-pressed="false"><i class="ico-house" aria-hidden="true"></i><span>No</span></button>
       </div>
     </fieldset>
     <button type="submit" class="zip-submit"></button>`;

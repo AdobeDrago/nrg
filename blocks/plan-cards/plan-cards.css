@@ -140,6 +140,10 @@ main .plan-cards-wrapper { background: var(--ee-cards-bg, #f8f7fc); }
 }
 
 /* data mode: brand logo, focus tags, contact, filter chips */
+
+/* the logo's <picture> wrapper stays out of the card's flex layout */
+.plan-cards .plan-card > picture { display: contents; }
+
 .plan-cards .plan-logo {
   align-self: center;
   width: auto;
@@ -223,20 +227,115 @@ main .plan-cards-wrapper { background: var(--ee-cards-bg, #f8f7fc); }
 
 .plan-cards .plan-cards-row[hidden] { display: none; }
 
-/* no plans for the requested ZIP */
-.plan-cards .plan-cards-empty { max-width: 760px; padding: 48px 0; text-align: left; }
+/* no plans for the requested ZIP — matches everythingenergy.com hero-pending-results.
+   Top padding is the original's minus our 72px in-flow header. */
+main .plan-cards-wrapper:has(.no-results) { background: none; }
 
-.plan-cards .plan-cards-empty h2 {
-  font-size: var(--heading-font-size-xl);
-  line-height: 1.2;
+.plan-cards.no-results {
+  display: block;
+  max-width: none;
+  padding: 0;
+  background: #fff;
 }
 
-.plan-cards .plan-cards-empty a:any-link { color: var(--ee-purple, #7564c1); font-weight: 600; }
+.plan-cards .plan-cards-pending {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 73px 40px 64px;
+  background: #fff;
+}
+
+.plan-cards .plan-cards-back:any-link {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 17px -16px;
+  padding: 10px 27px 10px 17px;
+  border-radius: 38px;
+  background-color: var(--ee-purple, #7564c1);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  text-decoration: none;
+}
+
+.plan-cards .plan-cards-back:hover { background-color: var(--ee-purple-dark, #6450b0); }
+
+.plan-cards .plan-cards-back .ico-back-top {
+  font-size: 14px;
+  transform: rotate(-90deg);
+}
+
+.plan-cards .plan-cards-pending-text { width: 100%; }
+
+.plan-cards .plan-cards-pending h1 {
+  margin: 0;
+  color: var(--ee-text-title, #131631);
+  font-family: var(--heading-font-family);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.plan-cards .plan-cards-pending-intro {
+  margin-top: 40px;
+  color: #5b5c69;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.plan-cards .plan-cards-pending-intro p {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.plan-cards .plan-cards-pending-intro a:any-link {
+  color: #745ac0;
+  font-weight: inherit;
+  text-decoration: underline;
+}
+
+@media (width >= 1024px) {
+  .plan-cards .plan-cards-pending { padding: 188px 57px 96px; }
+
+  /* floats at the left, a quarter down the original (taller) hero */
+  .plan-cards .plan-cards-back:any-link {
+    position: absolute;
+    top: calc(25% - 54px);
+    left: 57px;
+    margin: 0;
+  }
+
+  .plan-cards .plan-cards-pending-text { max-width: 630px; }
+  .plan-cards .plan-cards-pending h1 { font-size: 64px; }
+  .plan-cards .plan-cards-pending-intro { margin-top: 45px; }
+}
+
+@media (width >= 1440px) {
+  .plan-cards .plan-cards-pending { 
+    padding: 208px 57px 110px;
+    max-width: 1316px;
+    margin: 0 auto;
+  }
+  .plan-cards .plan-cards-pending-intro { margin-top: 55px; }
+}
 
 @media (width >= 600px) {
-  .plan-cards { grid-template-columns: repeat(2, 1fr); padding: 64px 32px; }
+  .plan-cards {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 64px 32px;
+  }
 }
 
 @media (width >= 900px) {
-  .plan-cards { grid-template-columns: repeat(3, 1fr); column-gap: 32px; row-gap: 48px; }
+  .plan-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px 32px;
+  }
 }

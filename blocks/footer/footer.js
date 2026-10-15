@@ -42,7 +42,7 @@ export default async function decorate(block) {
     const label = link.textContent.trim();
     link.className = '';
     link.removeAttribute('title');
-    link.innerHTML = `<img src="${window.hlx.codeBasePath}/icons/favicon.svg" alt="" width="32" height="32">
+    link.innerHTML = `<img src="${window.hlx.codeBasePath}/icons/nrg-logo-small.svg" alt="" width="32" height="32">
       <img src="${window.hlx.codeBasePath}/icons/logo.svg" alt="${label}" width="292" height="33">`;
   }
 

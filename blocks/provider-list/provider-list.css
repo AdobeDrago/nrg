@@ -83,7 +83,10 @@ main .section.provider-list-container {
   background: var(--ee-purple) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M9.5 16.2 5.3 12l-1.4 1.4 5.6 5.6 11-11-1.4-1.4z'/%3E%3C/svg%3E") center / 10px no-repeat;
 }
 
-.provider-list .provider-list-cta-wrapper { margin: auto 0 26px; text-align: center; }
+.provider-list .provider-list-cta-wrapper {
+  margin: auto 0 26px;
+  text-align: center;
+}
 
 .provider-list a.provider-list-cta {
   display: inline-block;
@@ -101,7 +104,10 @@ main .section.provider-list-container {
 }
 
 .provider-list a.provider-list-cta:hover,
-.provider-list a.provider-list-cta:focus-visible { background: #d84699; color: #fff; }
+.provider-list a.provider-list-cta:focus-visible {
+  background: #d84699;
+  color: #fff;
+}
 
 .provider-list .provider-list-widget {
   padding: 44px 18px 60px;
@@ -119,6 +125,7 @@ main .section.provider-list-container {
   line-height: 1.4;
 }
 
+/* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */
 .provider-list .provider-list-widget > p {
   max-width: 200px;
   margin: 0 0 0 12px;
@@ -140,5 +147,8 @@ main .section.provider-list-container {
     margin: 20px;
   }
 
-  .provider-list .provider-list-body > p:first-child { height: 200px; box-sizing: border-box; }
+  .provider-list .provider-list-body > p:first-child {
+    height: 200px;
+    box-sizing: border-box;
+  }
 }

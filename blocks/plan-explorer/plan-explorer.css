@@ -3,13 +3,25 @@ main .section.plan-explorer-container {
   background: linear-gradient(270deg, #57a1d3 0.01%, #d84699 98.37%);
 }
 
+.section.plan-explorer-container .plan-explorer-wrapper {
+  background-image: var(--plan-explorer-bg, none); /* authored row 2; the section gradient shows without it */
+  background-attachment: fixed;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+}
+
 .plan-explorer {
   max-width: 1440px;
   margin: 0 auto;
   padding: 30px 16px 110px;
 }
 
-.plan-explorer .plan-explorer-text { padding: 0 14px; color: #fff; }
+.plan-explorer .plan-explorer-text {
+  padding: 0 14px;
+  color: #fff;
+}
 
 .plan-explorer .plan-explorer-text h2 {
   margin: 0;
@@ -41,7 +53,11 @@ main .section.plan-explorer-container {
     padding: 145px 90px;
   }
 
-  .plan-explorer .plan-explorer-text { max-width: 405px; margin-right: 35px; padding: 0; }
+  .plan-explorer .plan-explorer-text {
+    max-width: 405px;
+    margin-right: 35px;
+    padding: 0;
+  }
 
   .plan-explorer .plan-explorer-widget {
     box-sizing: border-box;

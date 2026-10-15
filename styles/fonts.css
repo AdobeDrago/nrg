@@ -1,2 +1,33 @@
 /* Source Sans 3 — open-source successor of Source Sans Pro used by everythingenergy.com */
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;900&display=swap');
+
+/* nrg-icons — IcoMoon icon font from everythingenergy.com; use as <i class="ico-NAME"></i> */
+@font-face {
+  font-family: nrg-icons;
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('../fonts/nrg-icons.woff') format('woff');
+}
+
+[class^="ico-"],
+[class*=" ico-"] {
+  /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword -- icon font: a fallback would render letters */
+  font-family: nrg-icons !important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: none;
+  speak: never;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ico-back-top::before { content: "\e905"; }
+.ico-close::before { content: "\e90b"; }
+.ico-hamburger::before { content: "\e90c"; }
+.ico-search::before { content: "\e909"; }
+.ico-truck::before { content: "\e913"; }
+.ico-house::before { content: "\e914"; }
+.ico-tel::before { content: "\e915"; }

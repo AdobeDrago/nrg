@@ -10,7 +10,10 @@
   text-align: left;
 }
 
-.zip-card .zip-field { position: relative; padding-top: 14px; }
+.zip-card .zip-field {
+  position: relative;
+  padding-top: 14px;
+}
 
 .zip-card .zip-field input {
   box-sizing: border-box;
@@ -90,17 +93,24 @@
   font-weight: 600;
 }
 
-.zip-card .zip-moving-option svg { width: 24px; height: 24px; fill: #5b5c69; }
-
-.zip-card .zip-moving-option:hover,
-.zip-card .zip-moving-option:focus { background: #ebe8f7; color: var(--ee-text-title); }
-
-.zip-card .zip-moving-option[aria-pressed="true"] {
-  border-color: var(--ee-purple);
-  background: #ebe8f7;
+.zip-card .zip-moving-option [class^="ico-"] {
+  display: block;
+  font-size: 24px;
+  color: #5b5c69;
 }
 
-.zip-card .zip-moving-option[aria-pressed="true"] svg { fill: var(--ee-purple); }
+.zip-card .zip-moving-option:hover,
+.zip-card .zip-moving-option:focus {
+  background: #ebe8f7;
+  color: var(--ee-text-title);
+}
+
+.zip-card .zip-moving-option[aria-pressed="true"] {
+  background-color: #745ac0;
+  color: #fff;
+}
+
+.zip-card .zip-moving-option[aria-pressed="true"] [class^="ico-"] { color: #fff; }
 
 .zip-card .zip-submit {
   display: block;
@@ -116,12 +126,16 @@
 .zip-card .zip-submit:focus { background: var(--ee-purple); }
 
 @media (width >= 900px) {
-  .zip-card { width: 376px; padding: 40px 32px 36px; }
+  .zip-card {
+    width: 376px;
+    padding: 40px 32px 36px;
+  }
 }
 
 /* compact "Enter your location" pill search (providers pages) */
 .zip-search { text-align: left; }
 
+/* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */
 .zip-search label {
   display: block;
   margin: 0 0 12px 20px;
@@ -139,11 +153,14 @@
   border: 1px solid var(--ee-light-gray);
   border-radius: 40px;
   background: var(--ee-light-gray);
+  margin-top: 35px;
 }
 
 .zip-search .zip-search-field:focus-within { border-color: var(--ee-purple); }
+/* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */
 .zip-search input[aria-invalid="true"] { color: var(--ee-pink); }
 
+/* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */
 .zip-search input {
   flex: 1;
   min-width: 0;
@@ -174,7 +191,12 @@
 
 .zip-search button:hover,
 .zip-search button:focus-visible { background: var(--ee-pink); }
-.zip-search button svg { width: 20px; height: 20px; fill: #fff; }
+
+.zip-search button svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}
 
 .zip-search .zip-error {
   margin: 8px 0 0 20px;
@@ -184,6 +206,7 @@
 
 /* stacked variant: full-width "Fetch plans" button below the input (area sidebar) */
 .zip-search.zip-search-stacked .zip-search-field { padding: 13px 24px; }
+/* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */
 .zip-search.zip-search-stacked input { padding: 0; }
 
 .zip-search.zip-search-stacked button {
@@ -200,4 +223,7 @@
   font-weight: 600;
 }
 
-.zip-search.zip-search-stacked button svg { width: 24px; height: 24px; }
+.zip-search.zip-search-stacked button svg {
+  width: 24px;
+  height: 24px;
+}

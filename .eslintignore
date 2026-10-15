@@ -1,0 +1,6 @@
+helix-importer-ui
+*.min.js
+# vendored third-party code
+deps/
+# condensed copy of the boilerplate's aem.js, kept as is
+scripts/aem.js

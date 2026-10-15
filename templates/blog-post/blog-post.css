@@ -177,15 +177,25 @@ main > .section.blog-post-article > .default-content-wrapper {
   fill: currentcolor;
 }
 
-@media (width >= 900px) {
+@media (width >= 1024px) {
   main > .section.blog-post-article {
     display: grid;
     grid-template-columns: minmax(240px, 1fr) minmax(0, 630px) minmax(24px, 1fr);
     grid-template-areas:
+      "nav nav nav"
       "back . ."
       "side content .";
-    column-gap: 48px;
+    column-gap: 110px;
     padding: 48px 60px 96px;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  /* secondary nav authored in the article section: full-width row above the back link,
+     cancelling the section padding so it lines up with other pages */
+  main > .section.blog-post-article > .secondary-nav-wrapper {
+    grid-area: nav;
+    margin: -48px -60px 48px;
   }
 
   .blog-post-back {
