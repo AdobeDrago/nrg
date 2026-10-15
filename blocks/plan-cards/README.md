@@ -3,7 +3,9 @@
 List of electricity plan cards. It has two modes:
 
 - **Authored** (no `?zip=` in the URL): shows the plan cards written in the block.
-- **ZIP results** (`?zip=75001` and similar): replaces the authored cards with the plans for that ZIP from `<locale>/data/plans.json` (sheets `zips` and `plans`). Each card shows the provider's logo, taken from the block's logo row.
+- **ZIP results** (`?zip=75001` and similar): replaces the authored cards with the plans for that ZIP from `<locale>/data/plans.json` (sheets `zips` and `plans`).
+
+In both modes each card shows its provider's logo, taken from the block's logo row (matched on the provider line for authored cards).
 
 ## Authoring in DA
 
@@ -44,7 +46,7 @@ Put the five provider logos in **one row, as images only** (no text in the row).
 +---------------------------------------------------------------+
 ```
 
-- The logo row is never shown as a row. The block removes it and uses the logos on the ZIP-result cards.
+- The logo row is never shown as a row. The block removes it and uses the logos on the cards.
 - Keep the provider names in the alt text untranslated on Spanish pages: they are brand names, and the block matches them in English.
 - A provider with no logo in the row gets a card without a logo.
 - The logos display at up to 130px wide. Use images at least 260px wide; the originals are 520px.

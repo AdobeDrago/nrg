@@ -70,6 +70,18 @@ function buttonLink(href, text, className = 'plan-button') {
   return a;
 }
 
+/** The brand's logo from the logo row, sized for the card, or null when there is none. */
+function logoPicture(brand, logos) {
+  if (!brand || !logos.has(brand)) return null;
+  const breakpoints = [{ width: LOGO_WIDTH }];
+  const picture = createOptimizedPicture(logos.get(brand), brand.name, false, breakpoints);
+  const logo = picture.querySelector('img');
+  logo.className = 'plan-logo';
+  logo.width = 130;
+  logo.height = 64;
+  return picture;
+}
+
 function wrapRow(card, badge) {
   const row = document.createElement('div');
   row.className = 'plan-cards-row';
@@ -84,7 +96,7 @@ function wrapRow(card, badge) {
 }
 
 /** Turns an authored card cell into structured card markup. */
-function decorateAuthored(block) {
+function decorateAuthored(block, logos) {
   const [intro, ...rows] = block.querySelectorAll(':scope > div');
   intro?.classList.add('plan-cards-intro');
 
@@ -114,6 +126,8 @@ function decorateAuthored(block) {
 
     // first remaining line is the provider, the rest describe the plan
     const [provider, ...desc] = extras;
+    const logo = logoPicture(Object.values(BRANDS).find((b) => b.match.test(provider || '')), logos);
+    if (logo) card.prepend(logo);
     if (provider) card.append(el('plan-provider', provider));
     desc.forEach((text) => card.append(el('plan-desc', text)));
 
@@ -162,15 +176,8 @@ function buildDataCard(plan, logos) {
   const card = document.createElement('div');
   card.className = 'plan-card';
   const brand = brandOf(plan);
-  if (brand && logos.has(brand)) {
-    const breakpoints = [{ width: LOGO_WIDTH }];
-    const picture = createOptimizedPicture(logos.get(brand), brand.name, false, breakpoints);
-    const logo = picture.querySelector('img');
-    logo.className = 'plan-logo';
-    logo.width = 130;
-    logo.height = 64;
-    card.append(picture);
-  }
+  const logo = logoPicture(brand, logos);
+  if (logo) card.append(logo);
   card.append(el('plan-name', plan.planName, 'h3'));
   if (plan.priceKwh) card.append(el('plan-rate', `${plan.priceKwh} cents/kWh`));
   card.append(el('plan-term', termLabel(plan)));
@@ -294,7 +301,7 @@ export default async function decorate(block) {
   const logos = takeLogos(block);
   const zip = new URLSearchParams(window.location.search).get('zip')?.trim();
   if (!zip || !/^\d{5}$/.test(zip)) {
-    decorateAuthored(block);
+    decorateAuthored(block, logos);
     return;
   }
 
@@ -303,7 +310,7 @@ export default async function decorate(block) {
     data = await loadData();
   } catch {
     // data source unavailable: keep the authored plans
-    decorateAuthored(block);
+    decorateAuthored(block, logos);
     return;
   }
 
