@@ -231,6 +231,7 @@ main .plan-cards-wrapper:has(.no-results) { background: none; }
   display: block;
   max-width: none;
   padding: 0;
+  background: #fff;
 }
 
 .plan-cards .plan-cards-pending {
@@ -305,7 +306,11 @@ main .plan-cards-wrapper:has(.no-results) { background: none; }
 }
 
 @media (width >= 1440px) {
-  .plan-cards .plan-cards-pending { padding: 208px 57px 110px; }
+  .plan-cards .plan-cards-pending { 
+    padding: 208px 57px 110px;
+    max-width: 1316px;
+    margin: 0 auto;
+  }
   .plan-cards .plan-cards-pending-intro { margin-top: 55px; }
 }
 

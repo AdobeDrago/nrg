@@ -106,16 +106,13 @@
   }
 
   .choice-guide .choice-guide-steps::before {
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NjEiIGhlaWdodD0iNjYyIiBmaWxsPSJub25lIj48cGF0aCBzdHJva2U9IiMwMDAiIHN0cm9rZS1kYXNoYXJyYXk9IjEwIDEwIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utb3BhY2l0eT0iLjEiIGQ9Ik0zMjkuNTEyIDEuNDg4YzE4MS45ODQgMTgxLjk4NSAxODEuOTg0IDQ3Ny4wMzkgMCA2NTkuMDI0Ii8+PC9zdmc+) no-repeat;
     content: "";
+    height: 661px;
+    left: -340px;
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -40px;
-    width: 160px;
-    border: 1px dashed rgb(0 0 0 / 10%);
-    border-width: 0 0 0 1px;
-    border-radius: 50%;
-    pointer-events: none;
+    top: 40px;
+    width: 466px;
   }
 
   .choice-guide .choice-guide-step { align-items: center; }

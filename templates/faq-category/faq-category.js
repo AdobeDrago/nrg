@@ -124,7 +124,10 @@ export default function decorate(main) {
     back.textContent = 'All FAQs';
   }
   back.href = `${localePrefix()}/faqs`;
-  section.prepend(pill(back, BACK_ICON, 'faq-category-back'));
+  // keep the secondary nav (authored or auto-blocked) above the back pill
+  const secondaryNav = section.querySelector(':scope > .secondary-nav-wrapper');
+  if (secondaryNav) secondaryNav.after(pill(back, BACK_ICON, 'faq-category-back'));
+  else section.prepend(pill(back, BACK_ICON, 'faq-category-back'));
 
   const list = h1.nextElementSibling?.tagName === 'UL' ? h1.nextElementSibling : null;
   const head = buildTitle(h1, list);

@@ -169,8 +169,8 @@ header .header-menu a[aria-current="page"] { color: var(--ee-pink, #d84699); }
   body.header-over-hero header .header { background-color: var(--background-color, #fff); }
   body.header-over-hero header .header-logo .logo-color { display: block; }
   body.header-over-hero header .header-logo .logo-white,
-header .header-logo .logo-small,
-header .header-menu-toggle .logo-small { display: none; }
+  header .header-logo .logo-small,
+  header .header-menu-toggle .logo-small { display: none; }
 
   header .header-actions { gap: 64px; }
   header .header-tools { gap: 64px; }
@@ -198,6 +198,7 @@ header .header-menu-toggle .logo-small { display: none; }
   }
 
   header .header-plan-link:any-link {
+    font-size: 16px;
     display: flex;
     align-items: center;
     height: 100%;
@@ -236,6 +237,11 @@ header .header-menu-toggle .logo-small { display: none; }
   header .header-menu-close .ico-close { font-size: 18px; }
   header .header-menu ul { gap: 28px; }
   header .header-menu a:any-link { font-size: 30px; font-weight: 600; }
+
+    
+  a.blog-post-back {
+    margin-top: 62px;
+  }
 }
 
 /* small screens: transparent header overlaps the hero gradient */
