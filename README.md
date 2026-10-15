@@ -1,6 +1,6 @@
 # Everything Energy
 
-AEM Edge Delivery Services site for NRG's electricity plan comparison site (Texas & Pennsylvania).
+AEM Edge Delivery Services site for NRG's electricity plan comparison site (Texas & Pennsylvania)..
 
 ## Environments
 
@@ -10,6 +10,11 @@ AEM Edge Delivery Services site for NRG's electricity plan comparison site (Texa
 | Live | https://main--everything-energy--AdobeDrago.aem.live/ |
 | Document Authoring | https://da.live/#/AdobeDrago/everything-energy |
 | GitHub | https://github.com/AdobeDrago/everything-energy |
+
+## Update Notes
+
+The [site update notes and working ZIP codes](docs/index.md) are ready for GitHub Pages.
+To publish them, push the changes and select **Deploy from a branch**, **main**, and **/docs** in the repository's **Settings > Pages**.
 
 ## Content Source
 
