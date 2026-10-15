@@ -29,3 +29,40 @@ indices:
       lastModified:
         select: none
         value: dateValue(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+
+  # Site-wide search index, read by the faq-hero search (ffetch).
+  search:
+    include:
+      - /**
+    exclude:
+      - /nav
+      - /footer
+      - /**/nav
+      - /**/footer
+      - /drafts/**
+      - /fragments/**
+      - /**/fragments/**
+      - /tools/**
+    target: /search-index.json
+    properties:
+      # page heading (og:title carries the " - everything energy" suffix)
+      title:
+        selectFirst: main h1
+        value: textContent(el)
+      # fallback for pages without an h1
+      pageTitle:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+      template:
+        select: head > meta[name="template"]
+        value: attribute(el, "content")
+      # body copy for full-text matching
+      content:
+        select: main
+        value: words(el, 0, 300)
+      lastModified:
+        select: none
+        value: dateValue(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
