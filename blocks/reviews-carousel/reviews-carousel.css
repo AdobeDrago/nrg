@@ -13,7 +13,7 @@
 .reviews-carousel .reviews-heading h2,
 .reviews-carousel .reviews-heading h3 {
   margin: 0 0 48px;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
   font-size: 30px;
   font-family: SourceSansPro-Semi-Bold, sans-serif;
 }
@@ -45,23 +45,24 @@
 .reviews-carousel .reviews-track::-webkit-scrollbar { display: none; }
 
 .reviews-carousel .review-card {
-  --quote-color: var(--ee-pink);
+  --quote-color: var(--palette-pink-500);
 
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 32px 24px;
-  border: 1px solid #ececf1;
-  border-radius: 24px;
-  background: #fff;
-  box-shadow: 0 4px 16px rgb(19 22 49 / 8%);
+  border: var(--border-width-thin) solid var(--color-border-divider);
+  border-radius: var(--radius-large);
+  background: var(--color-surface-raised);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--color-shadow-ink) 8%, transparent);
   scroll-snap-align: start;
   text-align: center;
 }
 
-.reviews-carousel .review-card:nth-child(4n + 2) { --quote-color: #3aa76d; }
-.reviews-carousel .review-card:nth-child(4n + 3) { --quote-color: #f26a2e; }
-.reviews-carousel .review-card:nth-child(4n + 4) { --quote-color: #2bb3e6; }
+/* quote-mark artwork colors stay the same in every theme */
+.reviews-carousel .review-card:nth-child(4n + 2) { --quote-color: var(--palette-green-600); }
+.reviews-carousel .review-card:nth-child(4n + 3) { --quote-color: var(--palette-orange-500); }
+.reviews-carousel .review-card:nth-child(4n + 4) { --quote-color: var(--palette-cyan-500); }
 
 .reviews-carousel .review-card::before {
   content: '\201C';
@@ -73,7 +74,7 @@
   margin-bottom: 16px;
   border-radius: 50%;
   background: var(--quote-color);
-  color: #fff;
+  color: var(--color-text-on-accent);
   font-family: Georgia, serif;
   font-size: 40px;
   font-weight: 700;
@@ -84,14 +85,14 @@
 
 .reviews-carousel .review-card h3 {
   margin: 0 0 4px;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
   font-size: 18px;
   font-weight: 700;
 }
 
 .reviews-carousel .review-card p {
   margin: 0;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
   font-size: 15px;
   line-height: 1.6;
   text-align: left;
@@ -122,7 +123,7 @@
   width: 12px;
   height: 12px;
   margin: auto;
-  border: solid var(--ee-purple);
+  border: solid var(--color-accent-strong);
   border-width: 3px 3px 0 0;
   transform: rotate(45deg);
 }
@@ -132,7 +133,7 @@
 .reviews-carousel .reviews-next { right: 0; }
 
 .reviews-carousel .reviews-nav:hover,
-.reviews-carousel .reviews-nav:focus { background: #ebe8f7; }
+.reviews-carousel .reviews-nav:focus { background: var(--color-surface-hover); }
 
 .reviews-carousel .reviews-nav:disabled {
   opacity: 0.25;

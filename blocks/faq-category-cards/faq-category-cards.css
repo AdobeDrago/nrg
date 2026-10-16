@@ -1,4 +1,5 @@
-/* FAQ category cards — gradient tiles */
+/* FAQ category cards — gradient tiles. The gradients are artwork, so they and
+   their white foreground stay the same in every theme. */
 .faq-category-cards {
   display: flex;
   flex-wrap: wrap;
@@ -12,13 +13,13 @@
 .faq-category-cards .faq-category-card {
   flex: 0 0 calc(50% - 8px);
   border-radius: 12px;
-  background: linear-gradient(90deg, #79b3dc, #67a85f);
+  background: linear-gradient(90deg, var(--palette-blue-300), var(--palette-green-500));
   overflow: hidden;
 }
 
-.faq-category-cards .faq-category-card-3 { background: linear-gradient(90deg, #f6cf6b, #79b3dc); }
-.faq-category-cards .faq-category-card-4 { background: linear-gradient(90deg, #e46aa9, #f6d576); }
-.faq-category-cards .faq-category-card-5 { background: linear-gradient(90deg, #5c5a8c, #79b3dc); }
+.faq-category-cards .faq-category-card-3 { background: linear-gradient(90deg, var(--palette-yellow-400), var(--palette-blue-300)); }
+.faq-category-cards .faq-category-card-4 { background: linear-gradient(90deg, var(--palette-pink-400), var(--palette-yellow-300)); }
+.faq-category-cards .faq-category-card-5 { background: linear-gradient(90deg, var(--palette-indigo-600), var(--palette-blue-300)); }
 
 .faq-category-cards .faq-category-tile {
   display: flex;
@@ -30,7 +31,7 @@
   height: 100%;
   min-height: 150px;
   padding: 24px 16px;
-  color: #fff;
+  color: var(--color-text-on-accent);
   text-align: center;
   text-decoration: none;
 }
@@ -38,7 +39,7 @@
 .faq-category-cards .faq-category-tile svg {
   width: 44px;
   height: 44px;
-  fill: rgb(255 255 255 / 85%);
+  fill: color-mix(in srgb, var(--color-text-on-accent) 85%, transparent);
 }
 
 .faq-category-cards .faq-category-title {
@@ -47,7 +48,10 @@
   line-height: 1.4;
 }
 
-.faq-category-cards a.faq-category-tile:hover { background: rgb(0 0 0 / 8%); }
+.faq-category-cards a.faq-category-tile:hover {
+  background: color-mix(in srgb, var(--color-shadow-neutral) 8%, transparent);
+  color: var(--color-text-on-accent);
+}
 
 @media (width >= 900px) {
   .faq-category-cards {

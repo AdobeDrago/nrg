@@ -42,8 +42,10 @@ export default async function decorate(block) {
     const label = link.textContent.trim();
     link.className = '';
     link.removeAttribute('title');
-    link.innerHTML = `<img src="${window.hlx.codeBasePath}/icons/nrg-logo-small.svg" alt="" width="32" height="32">
-      <img src="${window.hlx.codeBasePath}/icons/logo.svg" alt="${label}" width="292" height="33">`;
+    const base = window.hlx.codeBasePath;
+    link.innerHTML = `<img class="logo-small" src="${base}/icons/nrg-logo-small.svg" alt="" width="32" height="32">
+      <img class="logo-color" src="${base}/icons/logo.svg" alt="${label}" width="292" height="33">
+      <img class="logo-white" src="${base}/icons/logo-white.svg" alt="${label}" width="292" height="33">`;
   }
 
   footer.querySelectorAll('.default-content-wrapper').forEach(buildColumns);

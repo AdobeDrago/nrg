@@ -1,7 +1,7 @@
 /* Details cards — matches everythingenergy.com provider "details-cards" rows */
 main .section.details-cards-container {
   padding: 64px 24px 56px;
-  background: var(--ee-cards-bg);
+  background: var(--color-surface-subtle);
 }
 
 main .section.details-cards-container > .details-cards-wrapper {
@@ -24,14 +24,14 @@ main .section.details-cards-container > .details-cards-wrapper {
   width: 158px;
   height: 4px;
   border-radius: 20px;
-  background: linear-gradient(90deg, #57a1d3, #d84699);
+  background: var(--gradient-accent-rule);
   transform: translateX(-50%);
 }
 
 .details-cards .details-cards-title h2,
 .details-cards .details-cards-title h3 {
   margin: 0;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
   font-size: 24px;
   font-weight: 600;
   line-height: 1.17;
@@ -40,7 +40,7 @@ main .section.details-cards-container > .details-cards-wrapper {
 .details-cards .details-cards-title p {
   max-width: 440px;
   margin: 10px auto 0;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
   font-size: 14px;
 }
 
@@ -61,9 +61,9 @@ main .section.details-cards-container > .details-cards-wrapper {
   box-sizing: border-box;
   width: 100%;
   padding: 64px 24px;
-  border-radius: 24px;
-  background: #fff;
-  box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
+  border-radius: var(--radius-large);
+  background: var(--color-surface-raised);
+  box-shadow: var(--shadow-card);
   text-align: center;
 }
 
@@ -80,7 +80,7 @@ main .section.details-cards-container > .details-cards-wrapper {
 .details-cards .details-cards-body h3,
 .details-cards .details-cards-body h4 {
   margin: 0;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
   font-size: 18px;
   font-weight: 700;
   line-height: 1.4;
@@ -88,7 +88,7 @@ main .section.details-cards-container > .details-cards-wrapper {
 
 .details-cards .details-cards-body p {
   margin: 8px 0 0;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
   font-size: 18px;
   line-height: 1.4;
 }

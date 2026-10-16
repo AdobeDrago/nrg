@@ -21,14 +21,14 @@
   width: 158px;
   height: 4px;
   border-radius: 20px;
-  background: linear-gradient(90deg, #57a1d3, #d84699);
+  background: var(--gradient-accent-rule);
   transform: translateX(-50%);
 }
 
 .choice-guide .choice-guide-title h2 {
   margin: 24px 0 0;
   padding-top: 24px;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
   font-size: 36px;
   font-weight: 700;
   line-height: 1.2;
@@ -69,7 +69,7 @@
 
 .choice-guide .choice-guide-summary p {
   margin: 0;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
   font-size: 18px;
   line-height: 1.5;
 }
@@ -77,7 +77,7 @@
 .choice-guide .choice-guide-summary strong,
 .choice-guide .choice-guide-summary h4 {
   display: inline;
-  color: var(--ee-purple);
+  color: var(--color-accent-strong);
   font-size: 18px;
   font-weight: 700;
 }
@@ -110,7 +110,9 @@
   }
 
   .choice-guide .choice-guide-steps::before {
-    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NjEiIGhlaWdodD0iNjYyIiBmaWxsPSJub25lIj48cGF0aCBzdHJva2U9IiMwMDAiIHN0cm9rZS1kYXNoYXJyYXk9IjEwIDEwIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utb3BhY2l0eT0iLjEiIGQ9Ik0zMjkuNTEyIDEuNDg4YzE4MS45ODQgMTgxLjk4NSAxODEuOTg0IDQ3Ny4wMzkgMCA2NTkuMDI0Ii8+PC9zdmc+") no-repeat;
+    /* dashed arc artwork: the mask keeps its shape, the ink follows the page theme */
+    background: color-mix(in srgb, var(--color-text-strong) 10%, transparent);
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='661' height='662' fill='none'%3E%3Cpath stroke='%23000' stroke-dasharray='10 10' stroke-linejoin='round' d='M329.512 1.488c181.984 181.985 181.984 477.039 0 659.024'/%3E%3C/svg%3E") no-repeat;
     content: "";
     height: 661px;
     left: -340px;
@@ -131,7 +133,7 @@
     width: 100px;
     padding: 20px;
     border-radius: 50%;
-    background: var(--ee-cards-bg);
+    background: var(--color-surface-subtle);
   }
 
   /* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */

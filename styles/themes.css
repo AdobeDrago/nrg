@@ -1,0 +1,49 @@
+/* Page themes. Light is the foundation in brand.css. A theme overrides semantic
+   roles on the root so derived roles (header, footer, shadows, --ee-* aliases)
+   follow automatically. Section schemes and block variants remain independent.
+   scripts/page-theme.js sets <html data-page-theme="light|dark">. */
+:root[data-page-theme="dark"] {
+  --color-text-primary: var(--palette-slate-50);
+  --color-text-secondary: var(--palette-slate-300);
+  --color-text-tertiary: var(--palette-slate-400);
+  --color-text-strong: var(--palette-white);
+  --color-text-neutral: var(--palette-slate-300);
+  --color-surface-default: var(--palette-navy-950);
+  --color-surface-raised: var(--palette-navy-800);
+  --color-surface-subtle: var(--palette-navy-850);
+  --color-surface-muted: var(--palette-navy-750);
+  --color-surface-muted-hover: var(--palette-navy-700);
+  --color-surface-hover: var(--palette-purple-850);
+  --color-surface-highlight: var(--palette-purple-900);
+
+  /* Inverse sections stay dark, one step deeper than the page. */
+  --color-surface-inverse: var(--palette-navy-1000);
+  --color-surface-inverse-raised: var(--palette-navy-850);
+  --color-surface-logo-well: var(--palette-slate-50);
+  --color-scrim: color-mix(in srgb, var(--palette-black) 65%, transparent);
+  --color-scrim-light: color-mix(in srgb, var(--palette-black) 40%, transparent);
+  --color-border-subtle: var(--palette-navy-750);
+  --color-border-default: var(--palette-navy-700);
+  --color-border-divider: var(--palette-navy-750);
+  --color-border-separator: var(--palette-navy-700);
+  --color-border-control: var(--palette-navy-600);
+  --color-border-accent: var(--palette-purple-300);
+  --color-link: var(--palette-purple-300);
+  --color-link-hover: var(--palette-pink-300);
+  --color-link-accent: var(--palette-pink-300);
+  --color-link-accent-hover: var(--palette-purple-300);
+  --color-link-plain: var(--palette-blue-500);
+  --color-accent: var(--palette-pink-400);
+  --color-accent-strong: var(--palette-purple-300);
+  --color-accent-tint: color-mix(in srgb, var(--palette-purple-300) 16%, transparent);
+  --color-focus: var(--palette-purple-300);
+  --color-status-error: var(--palette-red-300);
+  --color-shadow-ink: var(--palette-black);
+  --color-shadow-brand: var(--palette-black);
+  --logo-color-display: none;
+  --logo-white-display: block;
+  --logo-plate-padding: var(--space-4) var(--space-8);
+  --logo-plate-radius: var(--radius-medium);
+
+  color-scheme: dark;
+}

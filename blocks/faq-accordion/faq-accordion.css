@@ -6,30 +6,30 @@
 }
 
 .faq-accordion details {
-  border: 1px solid #E0E0E0;
+  border: var(--border-width-thin) solid var(--color-border-default);
   border-radius: 12px;
   margin-bottom: 12px;
   overflow: hidden;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  background: #fff;
+  transition: border-color var(--motion-duration-normal), box-shadow var(--motion-duration-normal);
+  background: var(--color-surface-raised);
 }
 
 .faq-accordion details:hover {
-  border-color: #7564C1;
-  box-shadow: 0 2px 12px rgb(117 100 193 / 10%);
+  border-color: var(--color-border-accent);
+  box-shadow: 0 2px 12px color-mix(in srgb, var(--color-shadow-brand) 10%, transparent);
 }
 
 .faq-accordion summary {
   padding: 18px 20px;
   font-size: 18px;
   font-weight: 600;
-  color: #131631;
+  color: var(--color-text-primary);
   cursor: pointer;
   list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff;
+  background: var(--color-surface-raised);
 }
 
 .faq-accordion summary::-webkit-details-marker {
@@ -39,7 +39,7 @@
 .faq-accordion summary::after {
   content: '+';
   font-size: 22px;
-  color: #7564C1;
+  color: var(--color-accent-strong);
   font-weight: 300;
 }
 
@@ -51,6 +51,6 @@
   padding: 0 20px 18px;
   font-size: 16px;
   line-height: 1.6;
-  color: #5B5C69;
+  color: var(--color-text-secondary);
   margin: 0;
 }

@@ -1,12 +1,18 @@
 /* ZIP lookup card shared by zip-hero and zip-cta */
 .zip-card {
+  --heading-color: var(--color-text-primary);
+  --text-color: var(--color-text-secondary);
+  --link-color: var(--color-link);
+  --link-hover-color: var(--color-link-hover);
+
   box-sizing: border-box;
   width: 100%;
   max-width: 400px;
   padding: 32px 20px;
-  border-radius: 24px;
-  background: #fff;
-  box-shadow: 0 8px 32px rgb(19 22 49 / 12%);
+  border-radius: var(--radius-large);
+  background: var(--color-surface-raised);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--color-shadow-ink) 12%, transparent);
+  color: var(--text-color);
   text-align: left;
 }
 
@@ -20,25 +26,25 @@
   width: 100%;
   padding: 8px 0 10px;
   border: 0;
-  border-bottom: 2px solid var(--ee-purple);
+  border-bottom: var(--border-width-strong) solid var(--color-border-accent);
   border-radius: 0;
   background: transparent;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
   font-family: inherit;
   font-size: 18px;
   font-weight: 600;
   outline: none;
 }
 
-.zip-card .zip-field input:focus { border-bottom-color: var(--ee-pink); }
-.zip-card .zip-field input[aria-invalid="true"] { border-bottom-color: var(--ee-pink); }
+.zip-card .zip-field input:focus { border-bottom-color: var(--color-accent); }
+.zip-card .zip-field input[aria-invalid="true"] { border-bottom-color: var(--color-accent); }
 
 /* floating label: sits in the input until focused or filled */
 .zip-card .zip-field label {
   position: absolute;
   top: 22px;
   left: 0;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
   font-size: 18px;
   font-weight: 600;
   pointer-events: none;
@@ -48,13 +54,13 @@
 
 .zip-card .zip-field input:focus + label,
 .zip-card .zip-field input:not(:placeholder-shown) + label {
-  color: var(--ee-purple);
+  color: var(--color-accent-strong);
   transform: translateY(-22px) scale(.72);
 }
 
 .zip-card .zip-error {
   margin: 8px 0 0;
-  color: var(--ee-pink);
+  color: var(--color-accent);
   font-size: 14px;
   font-weight: 600;
 }
@@ -67,7 +73,7 @@
 
 .zip-card .zip-moving legend {
   padding: 0;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
   font-size: 15px;
 }
 
@@ -86,9 +92,9 @@
   margin: 0;
   padding: 14px 8px 10px;
   border: 2px solid transparent;
-  border-radius: 8px;
-  background: #f2f2f2;
-  color: var(--ee-text-title);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface-muted);
+  color: var(--color-text-primary);
   font-size: 14px;
   font-weight: 600;
 }
@@ -96,34 +102,34 @@
 .zip-card .zip-moving-option [class^="ico-"] {
   display: block;
   font-size: 24px;
-  color: #5b5c69;
+  color: var(--color-text-secondary);
 }
 
 .zip-card .zip-moving-option:hover,
 .zip-card .zip-moving-option:focus {
-  background: #ebe8f7;
-  color: var(--ee-text-title);
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
 }
 
 .zip-card .zip-moving-option[aria-pressed="true"] {
-  background-color: #745ac0;
-  color: #fff;
+  background-color: var(--color-action-selected);
+  color: var(--color-action-selected-text);
 }
 
-.zip-card .zip-moving-option[aria-pressed="true"] [class^="ico-"] { color: #fff; }
+.zip-card .zip-moving-option[aria-pressed="true"] [class^="ico-"] { color: var(--color-action-selected-text); }
 
 .zip-card .zip-submit {
   display: block;
   min-width: 140px;
   margin: 24px auto 0;
   padding: 10px 28px;
-  background: var(--ee-pink);
-  color: #fff;
+  background: var(--color-action-accent);
+  color: var(--color-action-accent-text);
   font-size: 16px;
 }
 
 .zip-card .zip-submit:hover,
-.zip-card .zip-submit:focus { background: var(--ee-purple); }
+.zip-card .zip-submit:focus { background: var(--color-action-accent-hover); }
 
 @media (width >= 900px) {
   .zip-card {
@@ -139,7 +145,7 @@
 .zip-search label {
   display: block;
   margin: 0 0 12px 20px;
-  color: var(--ee-purple);
+  color: var(--color-accent-strong);
   font-size: 16px;
   font-weight: 700;
   line-height: 1.5;
@@ -150,15 +156,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 2px 3px 2px 24px;
-  border: 1px solid var(--ee-light-gray);
+  border: var(--border-width-thin) solid var(--color-surface-muted);
   border-radius: 40px;
-  background: var(--ee-light-gray);
+  background: var(--color-surface-muted);
   margin-top: 35px;
 }
 
-.zip-search .zip-search-field:focus-within { border-color: var(--ee-purple); }
+.zip-search .zip-search-field:focus-within { border-color: var(--color-border-accent); }
 /* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */
-.zip-search input[aria-invalid="true"] { color: var(--ee-pink); }
+.zip-search input[aria-invalid="true"] { color: var(--color-accent); }
 
 /* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */
 .zip-search input {
@@ -167,13 +173,13 @@
   padding: 10px 0;
   border: 0;
   background: transparent;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
   font: inherit;
   font-size: 18px;
   outline: none;
 }
 
-.zip-search input::placeholder { color: #828282; }
+.zip-search input::placeholder { color: var(--color-text-tertiary); }
 
 .zip-search button {
   display: grid;
@@ -185,22 +191,22 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: var(--ee-purple);
+  background: var(--color-action-primary);
   cursor: pointer;
 }
 
 .zip-search button:hover,
-.zip-search button:focus-visible { background: var(--ee-pink); }
+.zip-search button:focus-visible { background: var(--color-action-primary-hover); }
 
 .zip-search button svg {
   width: 20px;
   height: 20px;
-  fill: #fff;
+  fill: var(--color-action-primary-text);
 }
 
 .zip-search .zip-error {
   margin: 8px 0 0 20px;
-  color: var(--ee-pink);
+  color: var(--color-accent);
   font-size: 14px;
 }
 
@@ -217,7 +223,7 @@
   height: 53px;
   margin-top: 24px;
   border-radius: 40px;
-  color: #fff;
+  color: var(--color-action-primary-text);
   font: inherit;
   font-size: 20px;
   font-weight: 600;

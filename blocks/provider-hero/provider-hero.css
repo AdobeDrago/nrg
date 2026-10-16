@@ -21,8 +21,8 @@
   margin: 0 0 43px -22px;
   padding: 10px 16px 10px 12px;
   border-radius: 38px;
-  background: var(--ee-purple);
-  color: #fff;
+  background: var(--color-action-primary);
+  color: var(--color-action-primary-text);
   font-size: 14px;
   font-weight: 600;
   line-height: 1.2;
@@ -39,8 +39,8 @@
 
 .provider-hero .provider-hero-back:hover,
 .provider-hero .provider-hero-back:focus-visible {
-  background: var(--ee-purple-dark);
-  color: #fff;
+  background: var(--color-action-primary-strong);
+  color: var(--color-action-primary-text);
 }
 
 .provider-hero .provider-hero-title {
@@ -52,7 +52,7 @@
 .provider-hero .provider-hero-title h1,
 .provider-hero .provider-hero-title h2 {
   margin: 0;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
   font-size: 48px;
   font-weight: 700;
   line-height: 1;
@@ -66,14 +66,14 @@
   width: 19px;
   height: 4px;
   border-radius: 40px;
-  background: var(--ee-pink);
+  background: var(--color-accent);
 }
 
 .provider-hero.landing .provider-hero-title { margin-top: 40px; }
 
 .provider-hero.landing .provider-hero-title::after {
   bottom: -40px;
-  background: #745ac0;
+  background: var(--color-accent-strong);
 }
 
 .provider-hero .provider-hero-image {
@@ -107,7 +107,7 @@
 
 .provider-hero .provider-hero-intro p {
   margin: 0;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
   font-size: 20px;
   font-weight: 600;
   line-height: 1.5;
@@ -168,7 +168,7 @@
 
 .provider-hero.landing.areas .provider-hero-title::after {
   bottom: -16px;
-  background: var(--ee-pink);
+  background: var(--color-accent);
 }
 
 .provider-hero.landing.areas .provider-hero-image {
@@ -182,7 +182,7 @@
 }
 
 .provider-hero.landing.areas .provider-hero-intro p {
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
   font-size: 18px;
   font-weight: 600;
   line-height: 1.5;

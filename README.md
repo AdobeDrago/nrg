@@ -29,6 +29,19 @@ This site uses **DA (Document Authoring)** as the content source:
 2. Start local dev server: `aem up` (opens browser at http://localhost:3000)
 3. Open DA.live for content authoring
 
+## Style system and dark mode
+
+Styling follows a layered token system. For the architecture, file map, DA examples and extension guidance, see the [style system guide](docs/style-system.md).
+
+| Layer | File | Purpose |
+|---|---|---|
+| Palette and semantic roles | `styles/brand.css` | `--palette-*` colors, `--color-*` roles, type, spacing and layout scales |
+| Page themes | `styles/themes.css` | The dark theme, which overrides semantic roles |
+| Sections | `styles/sections.css`, `scripts/section-authoring.js` | Section Metadata: Container, Grid, Gap, Spacing, Color Scheme, Background, Align, Anchor |
+| Blocks | `blocks/{name}/{name}.css` | Each block consumes semantic roles and owns its layout |
+
+The existing look is the **light** theme. **Dark** follows the visitor's OS setting, and visitors can change it with the **Dark mode** switch in the header menu. To pin a page to one theme, set page Metadata `Theme` to `light` or `dark`.
+
 ## Blocks
 
 | Block | Description |
