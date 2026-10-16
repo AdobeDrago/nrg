@@ -13,20 +13,20 @@ main > .section.faq-category-article > .default-content-wrapper {
   gap: 8px;
   padding: 10px 27px 10px 17px;
   border-radius: 38px;
-  background-color: var(--ee-purple);
+  background-color: var(--color-action-primary);
   font-size: 14px;
   font-weight: 600;
   line-height: 18px;
 }
 
 .faq-category-back:any-link {
-  color: #fff;
+  color: var(--color-action-primary-text);
   text-decoration: none;
 }
 
 .faq-category-back:hover {
-  background-color: var(--ee-pink);
-  color: #fff;
+  background-color: var(--color-action-primary-hover);
+  color: var(--color-action-primary-text);
 }
 
 .faq-category-back svg {
@@ -48,7 +48,7 @@ main > .section.faq-category-article > .default-content-wrapper {
 
 .faq-category-head h1 {
   margin: 0;
-  color: var(--ee-purple);
+  color: var(--color-accent-strong);
   font-size: 36px;
   font-weight: 700;
   line-height: 1.1;
@@ -64,13 +64,13 @@ main > .section.faq-category-article > .default-content-wrapper {
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: var(--ee-purple);
-  color: #fff;
+  background: var(--color-action-primary);
+  color: var(--color-action-primary-text);
   cursor: pointer;
-  transition: transform .2s;
+  transition: transform var(--motion-duration-normal);
 }
 
-.faq-category-toggle:hover { background: var(--ee-pink); }
+.faq-category-toggle:hover { background: var(--color-action-primary-hover); }
 .faq-category-toggle[aria-expanded="true"] { transform: rotate(180deg); }
 
 .faq-category-toggle svg {
@@ -83,13 +83,13 @@ main > .section.faq-category-article > .default-content-wrapper {
   position: absolute;
   top: calc(100% + 12px);
   right: 0;
-  z-index: 5;
+  z-index: var(--layer-dropdown);
   min-width: 280px;
   margin: 0;
   padding: 12px 0;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 10px 40px rgb(19 22 49 / 15%);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-raised);
+  box-shadow: 0 10px 40px color-mix(in srgb, var(--color-shadow-ink) 15%, transparent);
   list-style: none;
 }
 
@@ -98,14 +98,14 @@ main > .section.faq-category-article > .default-content-wrapper {
 .faq-category-menu a:any-link {
   display: block;
   padding: 10px 24px;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
   font-size: 16px;
   text-decoration: none;
 }
 
 .faq-category-menu a:hover,
 .faq-category-menu a[aria-current="page"] {
-  color: var(--ee-purple);
+  color: var(--color-link);
   font-weight: 600;
 }
 
@@ -116,25 +116,25 @@ main > .section.faq-category-article > .default-content-wrapper {
 
 .faq-category-item h2 {
   margin: 0 0 16px;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
   font-size: 22px;
   font-weight: 700;
   line-height: 1.6;
 }
 
-.faq-category-item a:any-link { color: var(--ee-pink); }
-.faq-category-item a:hover { color: var(--ee-purple); }
+.faq-category-item a:any-link { color: var(--color-link-accent); }
+.faq-category-item a:hover { color: var(--color-link-accent-hover); }
 
 .faq-category-item h2 a:any-link {
   color: inherit;
   text-decoration: none;
 }
-.faq-category-item h2 a:hover { color: var(--ee-purple); }
+.faq-category-item h2 a:hover { color: var(--color-link-accent-hover); }
 
 .faq-category-item p,
 .faq-category-item li {
   margin: 0 0 16px;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
   font-size: 16px;
   line-height: 1.6;
 }
@@ -206,14 +206,14 @@ main > .section.faq-category-article > .default-content-wrapper {
     position: relative;
     display: block;
     padding: 0 16px 0 20px;
-    color: var(--ee-text-dark);
+    color: var(--color-text-secondary);
     font-size: 14px;
     line-height: 1.6;
     text-decoration: none;
   }
 
   .faq-category-nav a:hover,
-  .faq-category-nav a.selected { color: var(--ee-purple); }
+  .faq-category-nav a.selected { color: var(--color-link); }
   .faq-category-nav a.selected { font-weight: 600; }
 
   .faq-category-nav a.selected::before {
@@ -222,7 +222,7 @@ main > .section.faq-category-article > .default-content-wrapper {
     top: 6px;
     left: 0;
     border: 5px solid transparent;
-    border-left: 8px solid var(--ee-purple);
+    border-left: 8px solid var(--color-link);
     border-right-width: 0;
   }
 

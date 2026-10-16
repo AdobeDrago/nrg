@@ -8,7 +8,7 @@
 .popular-areas .popular-areas-title {
   position: relative;
   padding-top: 20px;
-  color: var(--ee-pink);
+  color: var(--color-accent);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: .5px;
@@ -23,7 +23,7 @@
   width: 19px;
   height: 4px;
   border-radius: 40px;
-  background: var(--ee-pink);
+  background: var(--color-accent);
 }
 
 .popular-areas .popular-areas-title > * {
@@ -41,12 +41,12 @@
 .popular-areas li + li {
   margin-top: 40px;
   padding-top: 40px;
-  border-top: 1px solid #ececf2;
+  border-top: var(--border-width-thin) solid var(--color-border-divider);
 }
 
 .popular-areas .popular-areas-tag {
   margin: 0 0 3px;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
   font-size: 13px;
   line-height: 1.57;
 }
@@ -61,15 +61,15 @@
 }
 
 .popular-areas h3 a:any-link {
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
   text-decoration: none;
 }
 
-.popular-areas h3 a:hover { color: var(--ee-purple); }
+.popular-areas h3 a:hover { color: var(--color-link); }
 
 .popular-areas li p:not(.popular-areas-tag) {
   margin: 0;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
   font-size: 16px;
   line-height: 1.5;
 }

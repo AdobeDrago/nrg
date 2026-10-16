@@ -1,5 +1,5 @@
 /* Provider contact — matches everythingenergy.com "details-contacts" */
-main .section.provider-contact-container { background: var(--ee-cards-bg); }
+main .section.provider-contact-container { background: var(--color-surface-subtle); }
 
 .provider-contact {
   max-width: 630px;
@@ -11,7 +11,7 @@ main .section.provider-contact-container { background: var(--ee-cards-bg); }
 .provider-contact h3,
 .provider-contact h4 {
   margin: 0;
-  color: var(--ee-pink);
+  color: var(--color-accent);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -21,7 +21,7 @@ main .section.provider-contact-container { background: var(--ee-cards-bg); }
 
 .provider-contact p {
   margin: 12px 0 0;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
   font-size: 20px;
   line-height: 1.5;
 }
@@ -29,7 +29,7 @@ main .section.provider-contact-container { background: var(--ee-cards-bg); }
 .provider-contact p + p { margin-top: 27px; }
 
 .provider-contact strong {
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
   font-size: 22px;
   font-weight: 700;
 }

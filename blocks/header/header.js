@@ -1,6 +1,7 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 import { getLocale, localePrefix, localizedHref } from '../../scripts/locale.js';
+import { isThemeLocked, setPageTheme } from '../../scripts/page-theme.js';
 
 const normalizePath = (path) => path.replace(/\/(index)?$/, '') || '/';
 
@@ -45,6 +46,24 @@ function buildTools(section) {
     tools.append(lang);
   }
   return tools;
+}
+
+/** Light/dark switch for the visitor; hidden when the page pins a theme in its metadata. */
+function buildThemeToggle() {
+  if (isThemeLocked()) return null;
+  const toggle = document.createElement('button');
+  toggle.type = 'button';
+  toggle.className = 'header-theme-toggle';
+  toggle.setAttribute('role', 'switch');
+  toggle.innerHTML = `<span>${getLocale() === 'es' ? 'Modo oscuro' : 'Dark mode'}</span>
+    <span class="header-theme-toggle-track" aria-hidden="true"></span>`;
+  const sync = () => toggle.setAttribute('aria-checked', document.documentElement.dataset.pageTheme === 'dark');
+  toggle.addEventListener('click', () => {
+    setPageTheme(toggle.getAttribute('aria-checked') === 'true' ? 'light' : 'dark');
+  });
+  document.addEventListener('ee:page-theme', sync);
+  sync();
+  return toggle;
 }
 
 function buildMenu(section, header, planLink) {
@@ -95,6 +114,8 @@ function buildMenu(section, header, planLink) {
     });
     menu.append(list);
   }
+  const themeToggle = buildThemeToggle();
+  if (themeToggle) menu.append(themeToggle);
 
   const focusables = () => [...menu.querySelectorAll('a[href], button')];
 

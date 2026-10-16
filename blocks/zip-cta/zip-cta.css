@@ -10,7 +10,7 @@
   display: block;
   height: 72px;
   margin: 0 -20px 40px;
-  background: linear-gradient(90deg, #d8479a 0%, #b45fb0 30%, #7f86cc 70%, #6a9bd2 100%);
+  background: linear-gradient(90deg, var(--palette-pink-500) 0%, var(--palette-orchid-500) 30%, var(--palette-periwinkle-400) 70%, var(--palette-blue-450) 100%);
   clip-path: ellipse(120% 100% at 60% 0%);
 }
 
@@ -21,7 +21,7 @@
 
 .zip-cta h2 {
   margin: 0 0 8px;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
   font-size: var(--heading-font-size-l);
 }
 

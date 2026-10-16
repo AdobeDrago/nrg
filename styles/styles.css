@@ -1,83 +1,59 @@
+@import url('brand.css');
+@import url('themes.css');
+@import url('sections.css');
+
 /*
  * Everything Energy — EDS Site
- * Matches everythingenergy.com UI
+ * Matches everythingenergy.com UI. Tokens live in brand.css, page themes in
+ * themes.css and authored section options in sections.css; see docs/style-system.md.
  */
 
 :root {
-  /* brand colors — matching everythingenergy.com */
-  --ee-purple: #7564C1;
-  --ee-purple-dark: #6450B0;
-  --ee-pink: #D8479A;
-  --ee-pink-dark: #C8368A;
-  --ee-text-dark: #5B5C69;
-  --ee-text-title: #131631;
-  --ee-light-gray: #F2F2F2;
-  --ee-cards-bg: #F8F8F8;
-  --ee-white: #FFF;
+  /* EDS compatibility aliases, mapped to the foundation. */
+  --background-color: var(--color-surface-default);
+  --light-color: var(--color-surface-subtle);
+  --dark-color: var(--color-surface-inverse);
 
-  /* mapped to EDS vars */
-  --background-color: #FFF;
-  --light-color: #F8F8F8;
-  --dark-color: #131631;
-  --text-color: #5B5C69;
-  --link-color: #7564C1;
-  --link-hover-color: #D8479A;
+  /* Inherited foreground hooks. Sections and owned block surfaces rebind them. */
+  --heading-color: var(--color-text-primary);
+  --text-color: var(--color-text-secondary);
+  --link-color: var(--color-link);
+  --link-hover-color: var(--color-link-hover);
 
   /* brand colors */
-  --brand-primary: #7564C1;
-  --brand-secondary: #D8479A;
-  --brand-accent: #D8479A;
+  --brand-primary: var(--color-action-primary);
+  --brand-secondary: var(--color-accent);
+  --brand-accent: var(--color-accent);
 
   /* fonts — Source Sans 3 (successor of Source Sans Pro used by the original) */
-  --body-font-family: "Source Sans 3", "Source Sans 3 Fallback", sans-serif;
-  --heading-font-family: "Source Sans 3", "Source Sans 3 Fallback", sans-serif;
+  --body-font-family: var(--font-family-body);
+  --heading-font-family: var(--font-family-heading);
 
   /* body sizes */
-  --body-font-size-m: 18px;
-  --body-font-size-s: 16px;
-  --body-font-size-xs: 14px;
+  --body-font-size-m: var(--text-body-size);
+  --body-font-size-s: var(--text-copy-size);
+  --body-font-size-xs: var(--text-label-size);
 
-  /* heading sizes */
-  --heading-font-size-xxl: 40px;
-  --heading-font-size-xl: 30px;
-  --heading-font-size-l: 26px;
-  --heading-font-size-m: 22px;
-  --heading-font-size-s: 20px;
-  --heading-font-size-xs: 18px;
+  /* heading sizes; the 900px desktop scale is owned by brand.css */
+  --heading-font-size-xxl: var(--text-heading-1-size);
+  --heading-font-size-xl: var(--text-heading-2-size);
+  --heading-font-size-l: var(--text-heading-3-size);
+  --heading-font-size-m: var(--text-heading-4-size);
+  --heading-font-size-s: var(--text-heading-5-size);
+  --heading-font-size-xs: var(--text-heading-6-size);
 
   /* nav height */
-  --nav-height: 72px;
-}
-
-/* fallback fonts */
-@font-face {
-  font-family: "Source Sans 3 Fallback";
-  size-adjust: 93%;
-  src: local('Arial');
-}
-
-@media (width >= 900px) {
-  :root {
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-    --heading-font-size-xxl: 56px;
-    --heading-font-size-xl: 32px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
-  }
+  --nav-height: var(--layout-header-height);
 }
 
 body {
   display: none;
   margin: 0;
   background-color: var(--background-color);
-  color: var(--ee-text-dark);
+  color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.5;
+  line-height: var(--line-height-body);
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
 }
@@ -93,10 +69,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 700;
-  line-height: 1.25;
-  color: var(--ee-text-title);
-  scroll-margin: 40px;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading);
+  color: var(--heading-color);
+  scroll-margin: var(--space-40);
 }
 
 h1 { font-size: var(--heading-font-size-xxl); }
@@ -109,7 +85,7 @@ h6 { font-size: var(--heading-font-size-xs); }
 p, dl, ol, ul, pre, blockquote {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
-  color: var(--ee-text-dark);
+  color: var(--text-color);
 }
 
 main > div { margin: 0; }
@@ -118,13 +94,13 @@ input, textarea, select, button { font: inherit; }
 
 /* links — purple, hover pink, matching original */
 a:any-link {
-  color: var(--ee-purple);
+  color: var(--link-color);
   text-decoration: none;
   overflow-wrap: break-word;
 }
 
 a:hover {
-  color: var(--ee-pink);
+  color: var(--link-hover-color);
   text-decoration: underline;
 }
 
@@ -134,16 +110,16 @@ a.button:any-link, button {
   display: inline-block;
   max-width: 100%;
   margin: 12px 0;
-  border: 2px solid transparent;
+  border: var(--border-width-strong) solid transparent;
   border-radius: 2.4em;
   padding: 0.5em 1.2em;
   font-family: var(--body-font-family);
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading);
   text-align: center;
   text-decoration: none;
-  background-color: var(--ee-purple);
-  color: #fff;
+  background-color: var(--color-action-primary);
+  color: var(--color-action-primary-text);
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -151,14 +127,14 @@ a.button:any-link, button {
 }
 
 a.button:hover, a.button:focus, button:hover, button:focus {
-  background-color: var(--ee-pink);
-  color: #fff;
+  background-color: var(--color-action-primary-hover);
+  color: var(--color-action-primary-text);
 }
 
 a.button.secondary, button.secondary {
   background-color: unset;
-  border: 2px solid var(--ee-pink);
-  color: var(--ee-pink);
+  border: var(--border-width-strong) solid var(--color-action-accent);
+  color: var(--color-action-accent);
 }
 
 main img {
@@ -182,9 +158,9 @@ main img {
 main > .section { margin: 0; }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: var(--layout-container-max);
   margin: auto;
-  padding: 0 24px;
+  padding: 0 var(--space-24);
 }
 
 main > .section:first-of-type { margin-top: 0; }
@@ -197,33 +173,25 @@ main > .section > div[class$="-wrapper"]:not(.default-content-wrapper) {
 
 /* default content — narrow reading column like the original */
 main > .section > .default-content-wrapper {
-  max-width: 760px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  max-width: var(--layout-copy-max);
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
 }
 
-main > .section:first-of-type > .default-content-wrapper { padding-top: 48px; }
-main > .section:last-of-type > .default-content-wrapper { padding-bottom: 64px; }
+main > .section:first-of-type > .default-content-wrapper { padding-top: var(--space-48); }
+main > .section:last-of-type > .default-content-wrapper { padding-bottom: var(--space-64); }
 
 main .default-content-wrapper h1 {
-  font-weight: 700;
-  line-height: 1.1;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-display);
   margin-top: 0.4em;
 }
 
 main .default-content-wrapper p {
   font-size: var(--body-font-size-s);
-  line-height: 1.6;
+  line-height: var(--line-height-copy);
 }
 
 @media (width >= 900px) {
-  main > .section > div { padding: 0 32px; }
-}
-
-/* section metadata */
-main .section.light,
-main .section.highlight {
-  background-color: var(--ee-cards-bg);
-  margin: 0;
-  padding: 40px 0;
+  main > .section > div { padding: 0 var(--space-32); }
 }

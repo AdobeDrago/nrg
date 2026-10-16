@@ -1,11 +1,14 @@
 /* Fetch plans card — matches everythingenergy.com .blog-cta sidebar card */
 .fetch-plans {
+  --heading-color: var(--color-text-primary);
+  --text-color: var(--color-text-secondary);
+
   max-width: 318px;
   margin: 0 auto;
   padding: 32px 24px 36px;
   border-radius: 32px;
-  background: #fff;
-  box-shadow: 0 10px 40px rgb(19 22 49 / 18%);
+  background: var(--color-surface-raised);
+  box-shadow: var(--shadow-panel);
 }
 
 .fetch-plans .zip-search label {

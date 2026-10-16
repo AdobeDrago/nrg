@@ -1,8 +1,12 @@
 /* footer */
 footer {
-  background-color: var(--ee-light-gray);
+  --heading-color: var(--color-footer-heading);
+  --text-color: var(--color-footer-text);
+  --link-hover-color: var(--color-footer-link-hover);
+
+  background-color: var(--color-footer-surface);
   font-size: var(--body-font-size-xs);
-  color: var(--ee-text-dark);
+  color: var(--color-footer-text);
 }
 
 footer .footer > div {
@@ -32,7 +36,7 @@ footer .footer ul {
 footer .footer a:any-link { color: currentcolor; }
 
 footer .footer a:hover {
-  color: var(--ee-pink);
+  color: var(--link-hover-color);
   text-decoration: none;
 }
 
@@ -42,7 +46,7 @@ footer .footer h4 {
   margin: 0 0 12px;
   font-size: 15px;
   font-weight: 700;
-  color: var(--ee-text-title);
+  color: var(--heading-color);
 }
 
 /* brand */
@@ -56,8 +60,15 @@ footer .footer .footer-brand img {
   display: block;
   height: auto;
 }
-footer .footer .footer-brand img:first-child { width: 40px; }
-footer .footer .footer-brand img:last-child { width: 220px; }
+
+footer .footer .footer-brand .logo-small { width: 40px; }
+
+footer .footer .footer-brand .logo-color,
+footer .footer .footer-brand .logo-white { width: 220px; }
+
+/* the page theme picks the wordmark that suits the footer surface */
+footer .footer .footer-brand .logo-color { display: var(--logo-color-display); }
+footer .footer .footer-brand .logo-white { display: var(--logo-white-display); }
 
 /* columns */
 footer .footer .footer-columns {
