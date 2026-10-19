@@ -5,7 +5,7 @@ title: Everything Energy style system
 
 # Everything Energy style system
 
-This guide explains how styling works in this repository: how values reach the page, which files own each responsibility, and how to author or extend the system. It describes the current code. The structure follows the [E*TRADE style system](https://github.com/AdobeDrago/etrade/blob/c0173edf2b401636262f14f78a7268e5ba5c3172/docs/style-system.md), adapted to Everything Energy's blocks and its light and dark themes.
+This guide explains how styling works in this repository: how values reach the page, which files own each responsibility, and how to author or extend the system. It describes the current code. It covers Everything Energy's blocks and its light and dark themes.
 
 For authoring, start with [page themes](#page-themes-light-and-dark) and [section controls](#authoring-sections-in-da). For development, start with the [repository map](#repository-map) and [change guidance](#making-a-change).
 
