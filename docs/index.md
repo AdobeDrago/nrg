@@ -5,6 +5,11 @@ title: NRG Site Updates
 
 # NRG Site Updates
 
+## Guides
+
+- [Adding a new provider](adding-a-provider.html): step-by-step guide for marketers new to DA. Covers creating the provider page, adding its plans to the plans sheet, listing it across the site and publishing.
+- [Style system](style-system.html): how styling, tokens and dark mode work.
+
 ## Working ZIP Codes
 
 The following ZIP codes were reported as working. Plan availability and counts may change.
