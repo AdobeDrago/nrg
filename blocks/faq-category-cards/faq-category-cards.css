@@ -35,10 +35,11 @@
   text-decoration: none;
 }
 
-.faq-category-cards .faq-category-tile svg {
-  width: 44px;
-  height: 44px;
-  fill: rgb(255 255 255 / 85%);
+/* original's icons render at up to 50px (the EE marque is an 80px PNG) */
+.faq-category-cards .faq-category-tile img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
 }
 
 .faq-category-cards .faq-category-title {
@@ -46,8 +47,6 @@
   font-weight: 600;
   line-height: 1.4;
 }
-
-.faq-category-cards a.faq-category-tile:hover { background: rgb(0 0 0 / 8%); }
 
 @media (width >= 900px) {
   .faq-category-cards {
@@ -63,4 +62,16 @@
   }
 
   .faq-category-cards .faq-category-title { font-size: 18px; }
+}
+
+/* the original's hover: desktop only, the card grows by 10% */
+@media (width >= 1024px) {
+  .faq-category-cards .faq-category-card { transition: all 0.2s ease-in-out; }
+
+  .faq-category-cards .faq-category-card:hover,
+  .faq-category-cards .faq-category-card:focus-within { transform: scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-category-cards .faq-category-card { transition: none; }
 }
