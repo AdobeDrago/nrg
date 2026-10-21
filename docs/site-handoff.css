@@ -1,0 +1,550 @@
+/* Handoff documentation only; independent from the site's runtime styles.
+   Layout and components follow the Elevance author guide; colors use the
+   Everything Energy palette. */
+body.author-guide {
+  --guide-ink: #131631;
+  --guide-muted: #5b5c69;
+  --guide-line: #e2e0ec;
+  --guide-soft: #f6f5fb;
+  --guide-link: #5b49b0;
+  --guide-link-hover: #b8327f;
+  --guide-accent: #7564c1;
+  --guide-pink: #d8479a;
+  --guide-warn-bg: #fff6e6;
+  --guide-warn-line: #d79a2b;
+
+  margin: 0;
+  background: #fff;
+  color: var(--guide-ink);
+  font: 16px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body.author-guide * {
+  box-sizing: border-box;
+}
+
+body.author-guide img {
+  max-width: 100%;
+  height: auto;
+}
+
+body.author-guide figure {
+  margin: 0;
+}
+
+body.author-guide a {
+  color: var(--guide-link);
+  text-underline-offset: 3px;
+}
+
+body.author-guide a:hover {
+  color: var(--guide-link-hover);
+}
+
+body.author-guide :focus-visible {
+  outline: 3px solid var(--guide-pink);
+  outline-offset: 4px;
+}
+
+body.author-guide .skip-link {
+  position: absolute;
+  left: 24px;
+  top: -100px;
+  z-index: 5;
+  padding: 12px;
+  background: #fff;
+}
+
+body.author-guide .skip-link:focus {
+  top: 8px;
+}
+
+body.author-guide .guide-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--guide-line);
+  background: var(--guide-soft);
+}
+
+body.author-guide .guide-header a {
+  font-weight: 700;
+  text-decoration: none;
+}
+
+body.author-guide .guide-header span {
+  color: var(--guide-muted);
+}
+
+body.author-guide .guide-layout {
+  display: grid;
+  grid-template-columns: 245px minmax(0, 1fr);
+  max-width: 1440px;
+  margin: auto;
+}
+
+body.author-guide .guide-nav {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  max-height: 100vh;
+  overflow: auto;
+  padding: 34px 24px;
+}
+
+body.author-guide .guide-nav a {
+  display: block;
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+body.author-guide main {
+  min-width: 0;
+  max-width: 1050px;
+  padding: 42px 44px 80px;
+  border-left: 1px solid var(--guide-line);
+}
+
+body.author-guide section {
+  margin-bottom: 60px;
+  scroll-margin-top: 24px;
+}
+
+body.author-guide h1 {
+  margin: 6px 0 18px;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.15;
+  letter-spacing: -1px;
+}
+
+body.author-guide h2 {
+  margin: 0 0 20px;
+  font-size: 27px;
+  line-height: 1.25;
+}
+
+body.author-guide .guide-nav h2 {
+  font-size: 14px;
+  margin: 0 0 14px;
+  color: var(--guide-muted);
+}
+
+body.author-guide h3 {
+  margin: 30px 0 12px;
+  font-size: 21px;
+  line-height: 1.3;
+}
+
+body.author-guide h4 {
+  margin: 22px 0 4px;
+  font-size: 16px;
+}
+
+body.author-guide p {
+  margin: 0 0 16px;
+}
+
+body.author-guide h4 + p {
+  margin-top: 0;
+}
+
+body.author-guide li {
+  margin-bottom: 10px;
+}
+
+body.author-guide .lead {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+body.author-guide .eyebrow {
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: var(--guide-muted);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+body.author-guide .note {
+  padding: 16px 20px;
+  border-left: 4px solid var(--guide-accent);
+  background: var(--guide-soft);
+  border-radius: 0 6px 6px 0;
+}
+
+body.author-guide .note.warn {
+  border-left-color: var(--guide-warn-line);
+  background: var(--guide-warn-bg);
+}
+
+body.author-guide code {
+  padding: 2px 5px;
+  border-radius: 3px;
+  background: #efeef5;
+  font-size: 0.87em;
+  overflow-wrap: anywhere;
+}
+
+body.author-guide pre {
+  padding: 20px;
+  border: 1px solid var(--guide-line);
+  border-radius: 6px;
+  background: #faf9fd;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+body.author-guide .prompt {
+  margin: 0 0 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--guide-line);
+  border-left: 4px solid var(--guide-pink);
+  border-radius: 0 6px 6px 0;
+  background: #fff;
+  font-size: 15px;
+}
+
+body.author-guide .table-scroll {
+  overflow-x: auto;
+  margin: 20px 0 24px;
+}
+
+body.author-guide table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+body.author-guide caption {
+  text-align: left;
+  padding-bottom: 8px;
+  color: var(--guide-muted);
+  font-size: 13px;
+}
+
+body.author-guide th {
+  background: #efedf7;
+  text-align: left;
+  font-weight: 700;
+}
+
+body.author-guide td,
+body.author-guide th {
+  padding: 12px 14px;
+  vertical-align: top;
+  border: 1px solid var(--guide-line);
+  overflow-wrap: anywhere;
+}
+
+body.author-guide .authoring-example th {
+  background: #30355a;
+  color: #fff;
+}
+
+body.author-guide .quick-links,
+body.author-guide .catalog-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin: 24px 0;
+}
+
+body.author-guide .quick-links a,
+body.author-guide .catalog-index a {
+  display: block;
+  border: 1px solid var(--guide-line);
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 14px;
+  text-decoration: none;
+  background: #fff;
+}
+
+body.author-guide label {
+  display: block;
+  font-weight: 600;
+  margin-top: 24px;
+}
+
+body.author-guide input {
+  width: 100%;
+  max-width: 520px;
+  padding: 12px 14px;
+  margin: 8px 0;
+  border: 1px solid #8c8aa3;
+  border-radius: 6px;
+  font: inherit;
+}
+
+body.author-guide #block-count {
+  color: var(--guide-muted);
+  font-size: 14px;
+}
+
+body.author-guide .block-entry {
+  padding: 28px 0 36px;
+  border-top: 2px solid var(--guide-line);
+  scroll-margin-top: 24px;
+}
+
+body.author-guide .block-entry h3 {
+  margin: 0 0 14px;
+  font-size: 25px;
+}
+
+body.author-guide .tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #efedf7;
+  color: var(--guide-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  vertical-align: middle;
+}
+
+body.author-guide .tag.custom {
+  background: #fbe7f2;
+  color: #a02a6d;
+}
+
+body.author-guide .reference-link {
+  font-size: 13px;
+  color: var(--guide-muted);
+}
+
+body.author-guide .block-visuals {
+  margin: 20px 0 26px;
+}
+
+body.author-guide .block-visuals > a {
+  display: block;
+  padding: 8px;
+  border: 1px solid var(--guide-line);
+  border-radius: 6px;
+  background: #faf9fd;
+}
+
+body.author-guide .block-visuals img {
+  display: block;
+  width: 100%;
+  max-height: 520px;
+  height: auto;
+  object-fit: contain;
+}
+
+body.author-guide .screenshot-note {
+  color: var(--guide-muted);
+  font-size: 14px;
+}
+
+body.author-guide .screenshot-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin: 20px 0 26px;
+}
+
+body.author-guide .screenshot-pair figure {
+  min-width: 0;
+  margin: 0;
+}
+
+body.author-guide .screenshot-pair figcaption {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+body.author-guide .screenshot-pair a {
+  display: grid;
+  min-height: 180px;
+  padding: 8px;
+  place-items: center;
+  border: 1px solid var(--guide-line);
+  border-radius: 6px;
+  background: #faf9fd;
+}
+
+body.author-guide .screenshot-pair img {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  height: auto;
+  object-fit: contain;
+}
+
+body.author-guide .swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 20px 0 24px;
+}
+
+body.author-guide .swatch {
+  border: 1px solid var(--guide-line);
+  border-radius: 6px;
+  overflow: hidden;
+  font-size: 13px;
+}
+
+body.author-guide .swatch span {
+  display: block;
+  height: 54px;
+}
+
+body.author-guide .swatch p {
+  margin: 0;
+  padding: 8px 10px;
+  line-height: 1.4;
+}
+
+body.author-guide .swatch code {
+  padding: 0;
+  background: none;
+}
+
+body.author-guide .button-demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0 20px;
+}
+
+body.author-guide .button-demo span {
+  display: inline-block;
+  border: 2px solid transparent;
+  border-radius: 2.4em;
+  padding: 0.45em 1.2em;
+  font-weight: 600;
+}
+
+body.author-guide .button-demo .primary {
+  background: #7564c1;
+  color: #fff;
+}
+
+body.author-guide .button-demo .secondary {
+  border-color: #d8479a;
+  color: #b8327f;
+}
+
+body.author-guide .guide-footer {
+  padding: 20px 32px;
+  background: var(--guide-soft);
+  color: var(--guide-muted);
+  font-size: 13px;
+}
+
+body.author-guide [hidden] {
+  display: none;
+}
+
+@media (width <= 850px) {
+  body.author-guide .screenshot-pair {
+    grid-template-columns: 1fr;
+  }
+
+  body.author-guide .guide-layout {
+    display: block;
+  }
+
+  body.author-guide .guide-nav {
+    position: static;
+    max-height: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    padding: 20px;
+    border-bottom: 1px solid var(--guide-line);
+  }
+
+  body.author-guide .guide-nav h2 {
+    width: 100%;
+    margin: 0;
+  }
+
+  body.author-guide .guide-nav a {
+    margin: 0;
+  }
+
+  body.author-guide main {
+    padding: 30px 22px 60px;
+    border: 0;
+  }
+
+  body.author-guide .guide-header {
+    padding: 16px 20px;
+    font-size: 14px;
+  }
+
+  body.author-guide td,
+  body.author-guide th {
+    padding: 10px;
+    overflow-wrap: normal;
+  }
+
+  /* wide tables scroll inside their own box instead of breaking words */
+  body.author-guide .table-scroll table {
+    min-width: 600px;
+  }
+
+  body.author-guide .table-scroll .authoring-example {
+    min-width: 0;
+  }
+}
+
+@media print {
+  body.author-guide {
+    font-size: 11pt;
+  }
+
+  body.author-guide .guide-nav,
+  body.author-guide .skip-link,
+  body.author-guide .quick-links,
+  body.author-guide .catalog-index,
+  body.author-guide #block-filter,
+  body.author-guide label[for="block-filter"],
+  body.author-guide #block-count {
+    display: none;
+  }
+
+  body.author-guide .guide-layout {
+    display: block;
+  }
+
+  body.author-guide main {
+    max-width: none;
+    border: 0;
+    padding: 20px 0;
+  }
+
+  body.author-guide .block-entry[hidden] {
+    display: block;
+  }
+
+  body.author-guide .table-scroll {
+    overflow: visible;
+  }
+
+  body.author-guide h2,
+  body.author-guide h3,
+  body.author-guide h4 {
+    break-after: avoid;
+  }
+
+  body.author-guide tr {
+    break-inside: avoid;
+  }
+
+  body.author-guide a {
+    color: inherit;
+  }
+}
