@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Step-by-step guide for marketers new to DA: create a provider page, add its plans to the plans sheet, list it across the site, and publish.">
+<title>Adding a Provider in DA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+/* Layout: a working manual — sticky step index on the left, one reading column, DA tables drawn as they look in the editor. */
+:root {
+  --bg: #fbfaf8;
+  --surface: #ffffff;
+  --ink: #17182e;
+  --ink-soft: #55576b;
+  --line: #e4e1ea;
+  --brand: #6a58b8;
+  --brand-soft: #efecf9;
+  --accent: #c93b8c;
+  --note-bg: #fff6e5;
+  --note-line: #e6b85c;
+  --stop-bg: #fdecef;
+  --stop-line: #d9667c;
+  --cell-head: #ecebf0;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --step: 1.0625rem;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14141c; --surface: #1c1c27; --ink: #ecebf3; --ink-soft: #a9a8bb; --line: #2f2e3d;
+    --brand: #a497e6; --brand-soft: #262340; --accent: #ec7ab9;
+    --note-bg: #2b2414; --note-line: #9c7a33; --stop-bg: #2e1a20; --stop-line: #b4566a; --cell-head: #282735;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14141c; --surface: #1c1c27; --ink: #ecebf3; --ink-soft: #a9a8bb; --line: #2f2e3d;
+  --brand: #a497e6; --brand-soft: #262340; --accent: #ec7ab9;
+  --note-bg: #2b2414; --note-line: #9c7a33; --stop-bg: #2e1a20; --stop-line: #b4566a; --cell-head: #282735;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step);
+  line-height: 1.6;
+  padding-inline: 16px;
+  padding-block: 0 64px;
+}
+a { color: var(--brand); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+code, .path {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  background: var(--brand-soft);
+  padding: 0.08em 0.35em;
+  border-radius: 4px;
+  overflow-wrap: anywhere;
+}
+h1, h2, h3 { line-height: 1.2; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+
+.wrap { max-width: 1120px; margin: 0 auto; }
+
+/* masthead */
+.mast { padding-block: 48px 32px; border-bottom: 1px solid var(--line); display: grid; gap: 14px; }
+.eyebrow { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.mast h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -0.01em; }
+.mast .lede { max-width: 62ch; color: var(--ink-soft); font-size: 1.15rem; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 0.92rem; color: var(--ink-soft); }
+.facts b { color: var(--ink); font-weight: 600; }
+
+/* body grid */
+.layout { display: grid; grid-template-columns: 1fr; gap: 40px; padding-top: 32px; }
+@media (min-width: 960px) { .layout { grid-template-columns: 220px minmax(0, 1fr); gap: 56px; } }
+
+nav.toc { font-size: 0.92rem; }
+@media (min-width: 960px) { nav.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; } }
+nav.toc p { font-weight: 700; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 8px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; counter-reset: toc; }
+nav.toc li a { display: flex; gap: 10px; padding: 5px 8px; border-radius: 6px; color: var(--ink); text-decoration: none; }
+nav.toc li a:hover { background: var(--brand-soft); }
+nav.toc .n { font-family: var(--font-mono); color: var(--brand); min-width: 1.4em; font-size: 0.85em; padding-top: 0.15em; }
+
+main { min-width: 0; display: grid; gap: 56px; }
+section { display: grid; gap: 18px; scroll-margin-top: 24px; }
+section > * { max-width: 68ch; }
+section > .wide { max-width: none; }
+.sec-head { display: flex; gap: 14px; align-items: baseline; }
+.sec-head .num {
+  font-family: var(--font-mono); font-weight: 500; font-size: 0.95rem; color: var(--brand);
+  border: 1.5px solid var(--brand); border-radius: 999px; min-width: 2.1em; height: 2.1em;
+  display: inline-grid; place-items: center; flex-shrink: 0; transform: translateY(-0.15em);
+}
+section h2 { font-size: 1.65rem; font-weight: 800; }
+section h3 { font-size: 1.15rem; font-weight: 700; margin-top: 8px; }
+.who { font-size: 0.9rem; color: var(--ink-soft); }
+
+ol.steps { margin: 0; padding-left: 1.4em; display: grid; gap: 10px; }
+ol.steps li::marker { color: var(--brand); font-weight: 700; }
+ul.plain { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+
+.note, .stop {
+  border-left: 4px solid var(--note-line); background: var(--note-bg);
+  padding: 14px 18px; border-radius: 0 8px 8px 0; display: grid; gap: 6px;
+}
+.stop { border-left-color: var(--stop-line); background: var(--stop-bg); }
+.note strong:first-child, .stop strong:first-child { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* DA block tables, drawn the way they look in the editor */
+.da-table { overflow-x: auto; }
+.da-table table { border-collapse: collapse; width: 100%; min-width: 480px; background: var(--surface); font-size: 0.93rem; }
+.da-table th, .da-table td { border: 1px solid var(--line); padding: 10px 12px; vertical-align: top; text-align: left; }
+.da-table th { background: var(--cell-head); font-weight: 700; }
+.da-table td .ph { color: var(--ink-soft); font-style: italic; }
+.da-table td .tag { font-family: var(--font-mono); font-size: 0.78rem; color: var(--brand); display: block; margin-bottom: 2px; }
+.caption { font-size: 0.88rem; color: var(--ink-soft); }
+
+/* reference tables */
+.ref { overflow-x: auto; }
+.ref table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.93rem; }
+.ref th { text-align: left; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); padding: 8px 12px; border-bottom: 2px solid var(--line); }
+.ref td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.ref td:first-child { font-family: var(--font-mono); font-size: 0.86rem; white-space: nowrap; color: var(--brand); }
+.ref td.ex { font-family: var(--font-mono); font-size: 0.84rem; color: var(--ink-soft); overflow-wrap: anywhere; }
+.req { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-left: 6px; font-family: var(--font-body); }
+
+/* where-it-appears map */
+.places { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.place { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+.place b { font-size: 0.98rem; }
+.place span { font-size: 0.88rem; color: var(--ink-soft); }
+.place .path { justify-self: start; font-size: 0.8rem; }
+
+/* checklist */
+.checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.checklist label { display: flex; gap: 12px; align-items: flex-start; padding: 8px 10px; border-radius: 8px; cursor: pointer; }
+.checklist label:hover { background: var(--brand-soft); }
+.checklist input { width: 18px; height: 18px; margin-top: 0.25em; accent-color: var(--brand); flex-shrink: 0; }
+.checklist input:checked + span { color: var(--ink-soft); text-decoration: line-through; }
+.progress { font-size: 0.9rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+button.reset { font: inherit; font-size: 0.85rem; background: none; border: 1px solid var(--line); color: var(--ink-soft); border-radius: 6px; padding: 4px 10px; cursor: pointer; justify-self: start; }
+
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 0 16px; }
+details + details { margin-top: 8px; }
+summary { cursor: pointer; padding: 12px 0; font-weight: 600; }
+details > div { padding-bottom: 14px; display: grid; gap: 8px; color: var(--ink-soft); }
+
+footer.end { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 0.88rem; color: var(--ink-soft); }
+
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+.crumb { font-size: 0.88rem; }
+.crumb a { text-decoration: none; }
+.crumb a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <p class="crumb"><a href="./">NRG docs</a></p>
+    <p class="eyebrow">Everything Energy · Document Authoring (DA)</p>
+    <h1>Adding a new provider</h1>
+    <p class="lede">How to put a new electricity provider on the site: its own page, its plans in the plans sheet, and links from the pages where providers are listed. Written for marketers using DA for the first time.</p>
+    <div class="facts">
+      <span><b>Time:</b> about 1–2 hours for English, plus the Spanish copy</span>
+      <span><b>You need:</b> edit access to <a href="https://da.live/#/adobedrago/nrg" target="_blank" rel="noopener">da.live/#/adobedrago/nrg</a></span>
+      <span><b>Help from a developer:</b> one small code change (step 1)</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Steps">
+      <p>On this page</p>
+      <ol>
+        <li><a href="#basics"><span class="n">—</span>DA in five minutes</a></li>
+        <li><a href="#gather"><span class="n">—</span>What to gather first</a></li>
+        <li><a href="#developer"><span class="n">1</span>Ask a developer to register the brand</a></li>
+        <li><a href="#logo"><span class="n">2</span>Upload the logo</a></li>
+        <li><a href="#page"><span class="n">3</span>Create the provider page</a></li>
+        <li><a href="#plans"><span class="n">4</span>Add the plans to the sheet</a></li>
+        <li><a href="#links"><span class="n">5</span>List the provider on the site</a></li>
+        <li><a href="#spanish"><span class="n">6</span>Make the Spanish version</a></li>
+        <li><a href="#publish"><span class="n">7</span>Check and publish</a></li>
+        <li><a href="#help"><span class="n">?</span>When something looks wrong</a></li>
+      </ol>
+    </nav>
+
+    <main>
+      <!-- BASICS -->
+      <section id="basics">
+        <div class="sec-head"><h2>DA in five minutes</h2></div>
+        <p>DA (Document Authoring, at <a href="https://da.live" target="_blank" rel="noopener">da.live</a>) is where the site's content lives. It looks like a file browser with folders, documents and spreadsheets. Each document becomes one page of the website, and its location becomes the page address: the document <code>en/providers/reliant</code> is the page <code>/en/providers/reliant</code>.</p>
+        <ul class="plain">
+          <li><b>Documents</b> are pages. You edit them like a word-processor file.</li>
+          <li><b>Sheets</b> are spreadsheets that feed data to the site. The plans sheet is one of them.</li>
+          <li><b>Blocks</b> are the designed parts of a page, such as a hero or a row of cards. In a document a block looks like a table: the shaded top row holds the block's name, and the rows below hold its content. Keep the name row exactly as it is; it tells the site how to display the content.</li>
+          <li><b>Sections</b> are separated by a horizontal line (<code>---</code>). Each section is a band on the page.</li>
+        </ul>
+        <h3>Preview and Publish</h3>
+        <p>Saving in DA happens automatically, but nothing changes on the website until you use the <b>Preview</b> and <b>Publish</b> buttons at the top right of the editor.</p>
+        <ul class="plain">
+          <li><b>Preview</b> updates the private test site, <code>main--nrg--adobedrago.aem.page</code>. Only people with the link see it. Use it to check your work.</li>
+          <li><b>Publish</b> updates the live site, <code>main--nrg--adobedrago.aem.live</code>, which visitors see.</li>
+        </ul>
+        <p>Always preview first, check the page, then publish.</p>
+      </section>
+
+      <!-- GATHER -->
+      <section id="gather">
+        <div class="sec-head"><h2>What to gather first</h2></div>
+        <p>Collect these before you start. Having them ready makes the rest of the guide mostly copy and paste.</p>
+        <ul class="plain">
+          <li><b>Provider name</b>, written exactly as the brand writes it (for example <i>Green Mountain Energy</i>).</li>
+          <li><b>Page name for the address</b>: short, lower case, words joined with hyphens (for example <code>green-mountain</code>). It becomes <code>/en/providers/green-mountain</code>, so choose it carefully; changing it later breaks links.</li>
+          <li><b>Logo</b> as a PNG with a transparent background, at least 520 pixels wide.</li>
+          <li><b>Hero image</b> for the top of the provider page (the existing pages use the logo on a soft background, about 1000 × 550 pixels).</li>
+          <li><b>Page copy</b>: a short introduction, three to six benefits or features (a title and a paragraph each), and contact details with a phone number and opening hours.</li>
+          <li><b>Plan details</b> for every plan: name, term, price per kWh, the estimated monthly bill at 1,000 kWh, renewable percentage, a one-line highlight, and links to the Electricity Facts Label (EFL) and to enrollment.</li>
+          <li><b>Where the plans are sold</b>: all of Texas, certain utility areas (such as Oncor or CenterPoint), or a list of ZIP codes.</li>
+          <li><b>Spanish translations</b> of the page copy and plan text, if the provider will also appear on the Spanish site.</li>
+        </ul>
+      </section>
+
+      <!-- STEP 1 -->
+      <section id="developer">
+        <div class="sec-head"><span class="num">1</span><h2>Ask a developer to register the brand</h2></div>
+        <p class="who">Who: a developer · When: first, because it takes a code release</p>
+        <div class="stop">
+          <strong>Do this before anything else</strong>
+          <p>The plan cards in ZIP search results only know the five current providers (Reliant, Cirro Energy, Discount Power, Green Mountain Energy and Direct Energy). A new provider's plans will still appear, but <b>without its logo and without the customer-service line</b> until a developer adds the brand to the site's code.</p>
+        </div>
+        <p>Send the developer:</p>
+        <ul class="plain">
+          <li>the provider name as it should appear on the cards;</li>
+          <li>a two-letter brand code you'll use in the sheet (the current ones are <code>RE</code>, <code>CE</code>, <code>PW</code>, <code>GM</code> and <code>DE</code>), for example <code>XE</code>;</li>
+          <li>the customer-service hours to show on each card, for example <i>Weekdays, 8 a.m. – 5 p.m. CST</i>.</li>
+        </ul>
+        <p class="caption">For the developer: add an entry to <code>BRANDS</code> in <code>blocks/plan-cards/plan-cards.js</code> (name, hours, and a name pattern), then merge to <code>main</code>. All cards share one phone number, <code>BRAND_PHONE</code>.</p>
+        <p>You can carry on with steps 2 to 5 while you wait. Just don't publish the plans until the code change is live.</p>
+      </section>
+
+      <!-- STEP 2 -->
+      <section id="logo">
+        <div class="sec-head"><span class="num">2</span><h2>Upload the logo</h2></div>
+        <p class="who">Who: you · Where: the <code>media/providers</code> folder in DA</p>
+        <ol class="steps">
+          <li>In DA, open the site's top folder (<a href="https://da.live/#/adobedrago/nrg" target="_blank" rel="noopener">adobedrago / nrg</a>), then <code>media</code>, then <code>providers</code>.</li>
+          <li>Rename your logo file to the page name followed by <code>-logo.png</code>, for example <code>green-mountain-logo.png</code>. This matches the five logos already there.</li>
+          <li>Drag the file from your computer into the DA folder window. It appears in the list once uploaded.</li>
+        </ol>
+        <div class="note">
+          <strong>Images inside pages</strong>
+          <p>You don't have to upload other images to a folder first. When you drag an image straight into a document, DA uploads it for you and stores it next to that page.</p>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section id="page">
+        <div class="sec-head"><span class="num">3</span><h2>Create the provider page</h2></div>
+        <p class="who">Who: you · Where: the <code>en/providers</code> folder in DA</p>
+        <p>The easiest way to get the right layout is to copy an existing provider page and replace its content. Reliant's page is a good starting point because it uses every section.</p>
+        <ol class="steps">
+          <li>In DA, open <code>en</code>, then <code>providers</code>. You'll see the five provider documents and <code>index</code> (the Providers landing page).</li>
+          <li>Click <b>New</b>, choose <b>Document</b>, and give it your page name (for example <code>green-mountain</code>). The new, empty document opens.</li>
+          <li>In another browser tab, open the <code>reliant</code> document. Click inside it, press <b>Ctrl + A</b> (<b>Cmd + A</b> on a Mac) to select everything, then <b>Ctrl + C</b> to copy.</li>
+          <li>Go back to your new document, click inside it and press <b>Ctrl + V</b> to paste. All the block tables come across with their layout.</li>
+          <li>Close the Reliant tab without changing anything.</li>
+          <li>Now replace Reliant's content with the new provider's, section by section, as shown below.</li>
+        </ol>
+
+        <h3>Section by section</h3>
+        <p><b>Secondary nav.</b> The first block is an empty table named <i>Secondary Nav</i>. Leave it as it is; it shows the menu bar under the header.</p>
+
+        <p><b>Provider Hero</b>: the introduction at the top of the page.</p>
+        <div class="da-table wide">
+          <table>
+            <tr><th colspan="2">Provider Hero</th></tr>
+            <tr>
+              <td><span class="tag">link</span>Providers <span class="ph">(keep as is: it's the "back to Providers" link)</span><br>
+                <span class="tag">Heading 1</span><span class="ph">Provider name</span><br>
+                <span class="tag">paragraph</span><span class="ph">Two or three sentences introducing the provider.</span></td>
+              <td><span class="tag">image</span><span class="ph">Hero image. Delete Reliant's, then drag yours in. Right-click the image to set its alt text, for example "Green Mountain Energy logo".</span></td>
+            </tr>
+          </table>
+        </div>
+
+        <p><b>Details Cards</b>: two blocks of three benefit cards. The first row is the block's heading; each following row is one card.</p>
+        <div class="da-table wide">
+          <table>
+            <tr><th colspan="2">Details Cards</th></tr>
+            <tr><td colspan="2"><span class="tag">Heading 2</span><span class="ph">Why choose [provider]?</span></td></tr>
+            <tr><td style="width:28%"><span class="tag">image</span><span class="ph">Icon</span></td><td><span class="tag">Heading 4</span><span class="ph">Benefit title</span><br><span class="tag">paragraph</span><span class="ph">One short paragraph.</span></td></tr>
+            <tr><td><span class="tag">image</span><span class="ph">Icon</span></td><td><span class="ph">… next benefit …</span></td></tr>
+          </table>
+        </div>
+        <p class="caption">The icons on Reliant's page are generic (savings, stability, innovation, benefits, community), so you can keep any that fit and replace the rest. Update each icon's alt text so it describes the new card.</p>
+
+        <p><b>Provider Contact</b>: the "Contact [provider]" band.</p>
+        <div class="da-table wide">
+          <table>
+            <tr><th>Provider Contact</th></tr>
+            <tr><td><span class="tag">Heading 3</span><span class="ph">Contact [provider]</span><br>
+              <span class="tag">paragraph</span><span class="ph">How and when shoppers can reach them.</span><br>
+              <span class="tag">paragraph</span>Call us at <b>(000) 000-0000</b>. <span class="ph">(keep the number in bold)</span></td></tr>
+          </table>
+        </div>
+
+        <p><b>Plan Explorer</b>: the ZIP code search with a background photo. It's the same on every provider page, so leave it unchanged.</p>
+
+        <p><b>Metadata</b>: the last table on the page. It isn't shown on the page; it sets the browser-tab title and what search engines and social posts show.</p>
+        <div class="da-table wide">
+          <table>
+            <tr><th colspan="2">Metadata</th></tr>
+            <tr><td style="width:28%">Title</td><td><span class="ph">[Provider name] - everything energy</span></td></tr>
+            <tr><td>Description</td><td><span class="ph">One sentence, under 160 characters.</span></td></tr>
+            <tr><td>Image</td><td><span class="ph">The image shown when the page is shared. Use the hero image.</span></td></tr>
+          </table>
+        </div>
+
+        <h3>Preview it</h3>
+        <ol class="steps">
+          <li>Click <b>Preview</b> at the top right of the editor. The test page opens in a new tab.</li>
+          <li>Read the whole page. Check the logo, every card, the phone number and the tab title.</li>
+          <li>Search the page for "Reliant" (<b>Ctrl + F</b>) to catch anything you missed.</li>
+        </ol>
+      </section>
+
+      <!-- STEP 4 -->
+      <section id="plans">
+        <div class="sec-head"><span class="num">4</span><h2>Add the plans to the sheet</h2></div>
+        <p class="who">Who: you · Where: <a href="https://da.live/sheet#/adobedrago/nrg/en/data/plans" target="_blank" rel="noopener">en/data/plans</a></p>
+        <p>When a shopper enters a ZIP code, the plans page reads this sheet and shows every plan sold at that ZIP. The sheet has two tabs at the bottom:</p>
+        <ul class="plain">
+          <li><b>plans</b>: one row per plan. This is where you add the new provider's plans.</li>
+          <li><b>zips</b>: one row per ZIP code, with its city, state and utility. Leave it alone unless the provider serves a ZIP that isn't listed yet.</li>
+        </ul>
+
+        <ol class="steps">
+          <li>Open the <a href="https://da.live/sheet#/adobedrago/nrg/en/data/plans" target="_blank" rel="noopener">plans sheet</a> and click the <b>plans</b> tab.</li>
+          <li>Go to the first empty row below the existing plans. Add one row per plan; don't leave empty rows between plans.</li>
+          <li>Fill in the columns as described below. Copying an existing row and editing it is the quickest way to keep the format right.</li>
+          <li>Don't rename, reorder or delete columns. The site finds each value by its column name.</li>
+        </ol>
+
+        <h3>Column by column</h3>
+        <div class="ref wide">
+          <table>
+            <thead><tr><th>Column</th><th>What to enter</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>zip <span class="req">required</span></td><td>Where the plan is sold. Enter any of the following, separated by commas:<br>• <code>TX</code> for every Texas ZIP in the zips tab<br>• a utility name from the zips tab: <i>Oncor</i>, <i>CenterPoint</i>, <i>AEP Texas Central</i>, <i>AEP Texas North</i>, <i>TNMP</i> or <i>Lubbock Power &amp; Light</i><br>• individual ZIP codes<br>• <code>*</code> for everywhere</td><td class="ex">Oncor,CenterPoint</td></tr>
+              <tr><td>provider</td><td>The provider name shown on the card.</td><td class="ex">Green Mountain Energy</td></tr>
+              <tr><td>planName <span class="req">required</span></td><td>The plan's name. A row without a plan name is skipped.</td><td class="ex">Pollution Free Reliable 12</td></tr>
+              <tr><td>termMonths</td><td>Contract length in months, as a number only. Leave empty for month-to-month plans.</td><td class="ex">12</td></tr>
+              <tr><td>planType</td><td><code>Fixed</code> or <code>Variable</code>. Shown as "12-month fixed term".</td><td class="ex">Fixed</td></tr>
+              <tr><td>priceKwh</td><td>Price in cents per kWh, as a number only. The site adds "cents/kWh".</td><td class="ex">15.9</td></tr>
+              <tr><td>monthlyEst1000</td><td>Estimated monthly bill at 1,000 kWh, in dollars, as a number only.</td><td class="ex">159</td></tr>
+              <tr><td>renewablePct</td><td>Renewable share as a number from 0 to 100. Shown only when above 0.</td><td class="ex">100</td></tr>
+              <tr><td>highlight</td><td>One short selling line under the plan name.</td><td class="ex">100% renewable wind and solar energy</td></tr>
+              <tr><td>badge</td><td>Optional ribbon that makes the card stand out. Current badges are <i>Best Value</i>, <i>Most Popular</i> and <i>100% Renewable</i>. Use it sparingly.</td><td class="ex">100% Renewable</td></tr>
+              <tr><td>eflUrl</td><td>Full link to the plan's Electricity Facts Label. Adds an "Electricity Facts Label" link to the card.</td><td class="ex">https://…/efl.pdf</td></tr>
+              <tr><td>enrollUrl</td><td>Where "Choose this plan" goes: the provider's enrollment page, or the provider page you made in step 3.</td><td class="ex">/en/providers/green-mountain</td></tr>
+              <tr><td>sort</td><td>Display order, lowest first. Look at the numbers already used and pick ones that place the new plans where you want them.</td><td class="ex">103</td></tr>
+              <tr><td>brand</td><td>The two-letter brand code from step 1. It links the plan to its logo and customer-service hours.</td><td class="ex">GM</td></tr>
+              <tr><td>searchFocus</td><td>Optional filter tags, separated by commas. Each tag becomes a filter button above the results. Reuse existing tags where you can, such as <i>Renewable Option</i>, <i>Long-term</i>, <i>Short-term</i>, <i>Autopay</i>, <i>Higher Usage</i>, <i>Lower Usage</i> or <i>Perks and Rewards</i>.</td><td class="ex">Renewable Option,Long-term</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note">
+          <strong>Numbers only</strong>
+          <p>Type <code>15.9</code>, not <code>15.9¢</code> or <code>$159</code>, in the price, estimate, term and renewable columns. The site adds the units, so extra symbols show up twice.</p>
+        </div>
+
+        <h3>Preview the sheet and test it</h3>
+        <ol class="steps">
+          <li>Click <b>Preview</b> at the top right of the sheet.</li>
+          <li>Open the test plans page with a ZIP where the plans should appear, for example <a href="https://main--nrg--adobedrago.aem.page/en/plans?zip=75001" target="_blank" rel="noopener">…/en/plans?zip=75001</a> (Addison, Oncor). Change the five digits at the end to try other ZIPs.</li>
+          <li>Check each new card: name, price, term, highlight, badge, both links and the filter buttons. Also check a ZIP where the plans should <i>not</i> appear.</li>
+        </ol>
+        <p class="caption">Until the developer's change from step 1 is live, the new cards have no logo and no phone line. That's expected.</p>
+      </section>
+
+      <!-- STEP 5 -->
+      <section id="links">
+        <div class="sec-head"><span class="num">5</span><h2>List the provider on the site</h2></div>
+        <p class="who">Who: you · Where: four kinds of pages</p>
+        <p>The new page isn't linked from anywhere yet. Add the provider wherever the other providers appear. In each place, copy an existing provider's row or entry and edit it, so the layout stays the same.</p>
+        <div class="places wide">
+          <div class="place"><b>Providers landing page</b><span>The <i>Provider List</i> block: one row per provider with the logo on the left, and a description, two bullet points and a "Learn more" link on the right.</span><code class="path">en/providers/index</code></div>
+          <div class="place"><b>Homepage logo strip</b><span>The <i>Provider Cards</i> block under "Featured providers": the logo, name, a line of copy and a "View plans" link.</span><code class="path">en/index</code></div>
+          <div class="place"><b>Footer</b><span>The "Providers" list. Add a bullet linking the name to the new page.</span><code class="path">en/footer</code></div>
+          <div class="place"><b>Plan card logos</b><span>The last row of the <i>Plan Cards</i> block holds only logos. Drag the new logo into that row, next to the others.</span><code class="path">en/plans · en/personalized/92677</code></div>
+        </div>
+        <div class="note">
+          <strong>The logo's alt text matters here</strong>
+          <p>On the plans pages, the site matches each logo to its plans by the logo's alt text. Set it to the provider's name, in English, exactly as you gave it to the developer. Right-click the image in DA to edit its alt text.</p>
+        </div>
+        <p>The site also has a set of pages without <code>en</code> in their address (the top-level <code>index</code>, <code>footer</code>, <code>plans</code>, <code>personalized/92677</code> and <code>data/plans</code>). If those are still in use, make the same changes there.</p>
+        <p>Preview each page you changed.</p>
+      </section>
+
+      <!-- STEP 6 -->
+      <section id="spanish">
+        <div class="sec-head"><span class="num">6</span><h2>Make the Spanish version</h2></div>
+        <p class="who">Who: you, with the translations · Where: the <code>es</code> folder</p>
+        <p>The Spanish site is a separate set of documents under <code>es</code>. Repeat steps 3 to 5 there:</p>
+        <ol class="steps">
+          <li><b>Page:</b> in <code>es/providers</code>, create a document with the <b>same page name</b> as the English one (for example <code>green-mountain</code>). Copy in the content of <code>es/providers/reliant</code> and replace it with the translated copy. Change the back link at the top to point to <code>/es/providers/</code>.</li>
+          <li><b>Plans:</b> add the same rows to the Spanish sheet, <a href="https://da.live/sheet#/adobedrago/nrg/es/data/plans" target="_blank" rel="noopener">es/data/plans</a>, with the plan text translated and <code>enrollUrl</code> pointing to the <code>/es/…</code> page. Keep the <code>brand</code> code the same.</li>
+          <li><b>Listings:</b> update <code>es/providers/index</code>, <code>es/index</code>, <code>es/footer</code>, <code>es/plans</code> and <code>es/personalized/92677</code>.</li>
+        </ol>
+        <div class="note">
+          <strong>Keep brand names in English</strong>
+          <p>Logo alt text and the provider name stay in English on Spanish pages. They're brand names, and the plans page matches them in English.</p>
+        </div>
+      </section>
+
+      <!-- STEP 7 -->
+      <section id="publish">
+        <div class="sec-head"><span class="num">7</span><h2>Check and publish</h2></div>
+        <p>Publish in this order, so a visitor never lands on a link to a page that isn't live yet:</p>
+        <ol class="steps">
+          <li>Confirm with the developer that the brand change from step 1 is live.</li>
+          <li>Publish the provider pages (English and Spanish).</li>
+          <li>Publish the plans sheets (English and Spanish).</li>
+          <li>Publish the pages that link to the provider: the Providers landing pages, the homepages, the footers and the plans pages.</li>
+          <li>Open the live site in a private browser window and repeat the checks: the provider page, a ZIP search, the homepage strip and the footer link.</li>
+        </ol>
+
+        <h3>Final checklist</h3>
+        <p class="progress" id="progress" aria-live="polite"></p>
+        <ul class="checklist" id="checklist">
+          <li><label><input type="checkbox" id="c1"><span>Developer has added the brand code and it's live</span></label></li>
+          <li><label><input type="checkbox" id="c2"><span>Logo uploaded to <code>media/providers</code></span></label></li>
+          <li><label><input type="checkbox" id="c3"><span>English provider page created, with no Reliant text left</span></label></li>
+          <li><label><input type="checkbox" id="c4"><span>Metadata title, description and image filled in</span></label></li>
+          <li><label><input type="checkbox" id="c5"><span>Plans added to <code>en/data/plans</code> and tested with a ZIP search</span></label></li>
+          <li><label><input type="checkbox" id="c6"><span>Added to the Providers landing page, homepage strip and footer</span></label></li>
+          <li><label><input type="checkbox" id="c7"><span>Logo added to the Plan Cards logo row, with alt text set to the provider name</span></label></li>
+          <li><label><input type="checkbox" id="c8"><span>Spanish page, sheet rows and listings done</span></label></li>
+          <li><label><input type="checkbox" id="c9"><span>Everything previewed and checked</span></label></li>
+          <li><label><input type="checkbox" id="c10"><span>Published in order and checked on the live site</span></label></li>
+        </ul>
+        <button type="button" class="reset" id="reset">Clear checklist</button>
+      </section>
+
+      <!-- HELP -->
+      <section id="help">
+        <div class="sec-head"><h2>When something looks wrong</h2></div>
+        <div class="wide">
+          <details>
+            <summary>The new plans don't show up for a ZIP</summary>
+            <div>
+              <p>Check that the sheet was previewed (or published, for the live site) after your last edit.</p>
+              <p>Check the <code>zip</code> column. A utility name must be spelled exactly as in the zips tab, and the ZIP itself must be listed in the zips tab, or a <code>TX</code> or utility value won't reach it.</p>
+              <p>Check that <code>planName</code> isn't empty.</p>
+            </div>
+          </details>
+          <details>
+            <summary>The plan card has no logo or no phone line</summary>
+            <div>
+              <p>Either the developer's change from step 1 isn't live yet, the <code>brand</code> column doesn't match the code you agreed, or the logo is missing from the Plan Cards logo row (or its alt text doesn't match the provider name).</p>
+            </div>
+          </details>
+          <details>
+            <summary>Prices show "cents/kWh" twice, or "$$"</summary>
+            <div><p>Remove the units and symbols from the sheet cell; enter the number only.</p></div>
+          </details>
+          <details>
+            <summary>A section of the new page looks unstyled, like a plain table</summary>
+            <div><p>The block's name row was probably edited or deleted while pasting. Compare it with the same block on Reliant's page and restore the name exactly, for example <i>Provider Hero</i> or <i>Details Cards</i>.</p></div>
+          </details>
+          <details>
+            <summary>My change is on the test site but not the live site</summary>
+            <div><p>Preview only updates the test site. Click <b>Publish</b> on that document or sheet. The live site can take a minute to update.</p></div>
+          </details>
+          <details>
+            <summary>I need to take a provider down</summary>
+            <div><p>Remove its rows from both plans sheets and its entries from the listing pages, then publish those. Then ask a developer or site admin to unpublish the provider page, so old links don't land on it.</p></div>
+          </details>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="end">Everything Energy on AEM Edge Delivery Services · Content in DA at <code>adobedrago/nrg</code>.</footer>
+</div>
+
+<script>
+(function () {
+  var KEY = 'provider-guide-checklist';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#checklist input'));
+  var progress = document.getElementById('progress');
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { saved = {}; }
+  function update() {
+    var done = boxes.filter(function (b) { return b.checked; }).length;
+    progress.textContent = done + ' of ' + boxes.length + ' done';
+  }
+  function save() {
+    var state = {};
+    boxes.forEach(function (b) { state[b.id] = b.checked; });
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable: checklist still works for this visit */ }
+  }
+  boxes.forEach(function (b) {
+    b.checked = !!saved[b.id];
+    b.addEventListener('change', function () { update(); save(); });
+  });
+  document.getElementById('reset').addEventListener('click', function () {
+    boxes.forEach(function (b) { b.checked = false; });
+    update(); save();
+  });
+  update();
+})();
+</script>
+</body>
+</html>
