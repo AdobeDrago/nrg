@@ -7,7 +7,7 @@ main .section.blog-list-container .default-content-wrapper h1 {
   margin: 0;
   font-size: 40px;
   line-height: 1.1;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
 }
 
 main .section.blog-list-container .default-content-wrapper h1::after {
@@ -17,7 +17,7 @@ main .section.blog-list-container .default-content-wrapper h1::after {
   height: 4px;
   margin-top: 24px;
   border-radius: 2px;
-  background: var(--ee-pink);
+  background: var(--color-accent);
 }
 
 main .blog-list {
@@ -34,7 +34,7 @@ main .blog-list {
   line-height: 1.4;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: var(--ee-pink);
+  color: var(--color-accent);
 }
 
 .blog-list .blog-list-cards {
@@ -52,14 +52,14 @@ main .blog-list {
   height: 100%;
   border-radius: 4px;
   overflow: hidden;
-  background: #f4f4f4;
-  color: var(--ee-text-title);
+  background: var(--color-surface-muted);
+  color: var(--color-text-primary);
   text-decoration: none;
 }
 
 .blog-list .blog-list-card-image {
   height: 200px;
-  background: var(--ee-light-gray);
+  background: var(--color-surface-muted);
 }
 
 .blog-list .blog-list-card-image picture,
@@ -81,7 +81,7 @@ main .blog-list {
   margin: 0 0 4px;
   font-size: 11px;
   line-height: 1.4;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
 }
 
 .blog-list .blog-list-card-title {
@@ -89,12 +89,12 @@ main .blog-list {
   font-size: 18px;
   font-weight: 700;
   line-height: 1.3;
-  color: var(--ee-text-title);
-  transition: color 0.2s;
+  color: var(--color-text-primary);
+  transition: color var(--motion-duration-normal);
 }
 
 .blog-list .blog-list-card a:hover .blog-list-card-title {
-  color: var(--ee-purple);
+  color: var(--color-link);
 }
 
 .blog-list .blog-list-card-meta {
@@ -105,7 +105,7 @@ main .blog-list {
   padding-top: 8px;
   font-size: 13px;
   line-height: 20px;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
 }
 
 .blog-list .blog-list-card-author::before {

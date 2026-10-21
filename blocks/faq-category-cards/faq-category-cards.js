@@ -1,10 +1,24 @@
+// The original's category icons (white PNGs), keyed by the category slug in the card link;
+// cards with another link fall back to their position.
 const ICONS = [
-  '<path d="M13 2 5 14h6l-1 8 8-12h-6z"/>',
-  '<path d="M12 3a9 9 0 1 0 8.5 12h-4.2A5 5 0 1 1 17 10H9.5v3H21A9 9 0 0 0 12 3z"/>',
-  '<circle cx="12" cy="4" r="2.4"/><circle cx="5" cy="17" r="2.4"/><circle cx="12" cy="17" r="2.4"/><circle cx="19" cy="17" r="2.4"/><circle cx="12" cy="21" r="2.4"/><path d="M11 6h2v4h7v5h-2v-3h-5v3h-2v-3H6v3H4v-5h7z"/>',
-  '<path d="M6.5 9a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2.2a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6zM17.5 9a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2.2a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6zM8 7h8v4H8z"/>',
-  '<path d="M12 4a8 8 0 0 1 7.4 5H22l-3.5 4-3.5-4h2.2A5.8 5.8 0 0 0 6.6 8.6L5 7A8 8 0 0 1 12 4zM12 20a8 8 0 0 1-7.4-5H2l3.5-4L9 15H6.8a5.8 5.8 0 0 0 10.6.4L19 17a8 8 0 0 1-7 3z"/>',
+  ['about-electricity-plans', 'faq-lighting.png'],
+  ['about-everything-energy', 'faq-marque.png'],
+  ['industry-infrastructure', 'faq-infra.png'],
+  ['power-outages', 'faq-ocu.png'],
+  ['switching-providers', 'faq-refresh.png'],
 ];
+
+function iconFor(href, index) {
+  const slug = href ? new URL(href, window.location).pathname.replace(/\/$/, '').split('/').pop() : '';
+  const [, file] = ICONS.find(([key]) => key === slug) || ICONS[index % ICONS.length];
+  const img = document.createElement('img');
+  img.src = `${window.hlx.codeBasePath}/icons/faq/${file}`;
+  img.alt = '';
+  img.width = 50;
+  img.height = 50;
+  img.loading = 'lazy';
+  return img;
+}
 
 export default function decorate(block) {
   [...block.children].forEach((row, i) => {
@@ -18,7 +32,7 @@ export default function decorate(block) {
     tile.className = 'faq-category-tile';
     if (link) tile.href = link.getAttribute('href');
     if (desc) tile.title = desc.textContent.trim();
-    tile.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[i % ICONS.length]}</svg>`;
+    tile.append(iconFor(link?.getAttribute('href'), i));
     const title = document.createElement('span');
     title.className = 'faq-category-title';
     title.textContent = heading?.textContent.trim() || link?.textContent.trim() || '';

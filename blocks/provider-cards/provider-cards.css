@@ -1,6 +1,6 @@
 /* Featured providers — multi-column grid matching everythingenergy.com */
 .provider-cards {
-  background: #fff;
+  background: var(--color-surface-default);
   padding: 64px 32px;
   max-width: 1200px;
   margin: 0 auto;
@@ -12,7 +12,7 @@
 .provider-cards h2,
 .provider-cards h3 {
   font-weight: 700;
-  color: #131631;
+  color: var(--color-text-primary);
   margin: 0 0 16px;
   text-align: center;
   font-size: 30px;
@@ -31,17 +31,17 @@
 }
 
 .provider-cards > div:first-child > div > p {
-  color: #5B5C69;
+  color: var(--color-text-secondary);
   font-size: 18px;
   margin: 0;
 }
 
 /* Each provider card */
 .provider-cards > div:not(:first-child) > div {
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgb(0 0 0 / 6%);
+  background: var(--color-surface-raised);
+  border: var(--border-width-thin) solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--color-shadow-neutral) 6%, transparent);
   padding: 36px 32px 40px;
   text-align: center;
   transition: box-shadow 0.2s, transform 0.2s;
@@ -53,15 +53,15 @@
 }
 
 .provider-cards > div:not(:first-child) > div:hover {
-  box-shadow: 0 8px 30px rgb(117 100 193 / 15%);
+  box-shadow: var(--shadow-card-brand-hover);
   transform: translateY(-3px);
-  border-color: rgb(117 100 193 / 30%);
+  border-color: color-mix(in srgb, var(--color-border-accent) 30%, transparent);
 }
 
 .provider-cards > div:not(:first-child) > div h3 {
   font-size: 20px;
   font-weight: 700;
-  color: #7564C1;
+  color: var(--color-accent-strong);
   margin: 0 0 16px;
   text-align: center;
 }
@@ -69,7 +69,7 @@
 .provider-cards > div:not(:first-child) > div p {
   font-size: 15px;
   line-height: 1.6;
-  color: #5B5C69;
+  color: var(--color-text-secondary);
   margin: 0 0 16px;
 }
 
@@ -80,8 +80,8 @@
 /* View plans button — white text, pill shaped */
 .provider-cards > div:not(:first-child) > div a {
   display: inline-block;
-  background: #7564C1;
-  color: #fff;
+  background: var(--color-action-primary);
+  color: var(--color-action-primary-text);
   font-weight: 600;
   text-decoration: none;
   font-size: 15px;
@@ -92,8 +92,8 @@
 }
 
 .provider-cards > div:not(:first-child) > div a:hover {
-  background: #D8479A;
-  color: #fff;
+  background: var(--color-action-primary-hover);
+  color: var(--color-action-primary-text);
   transform: scale(1.03);
 }
 
@@ -126,7 +126,7 @@
   height: 120px;
   padding: 0 24px;
   border: 0;
-  border-left: 1px solid #e4e4ea;
+  border-left: var(--border-width-thin) solid var(--color-border-separator);
   border-radius: 0;
   box-shadow: none;
   justify-content: center;
@@ -135,7 +135,7 @@
 .provider-cards.logos > div:nth-child(2) > div { border-left: 0; }
 
 .provider-cards.logos > div:not(:first-child) > div:hover {
-  border-color: #e4e4ea;
+  border-color: var(--color-border-separator);
   box-shadow: none;
   transform: none;
 }
@@ -157,6 +157,9 @@
 }
 
 .provider-cards.logos .provider-logo img {
+  padding: var(--logo-plate-padding);
+  border-radius: var(--logo-plate-radius);
+  background: var(--color-surface-logo);
   width: auto;
   max-width: 100%;
   max-height: 72px;

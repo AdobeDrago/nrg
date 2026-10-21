@@ -1,8 +1,12 @@
-/* Personalization block — personalized recommendations */
+/* Personalization block — personalized recommendations.
+   Owns a brand-gradient surface, so its white foreground is the same in every theme. */
 .personalization {
-  background: linear-gradient(135deg, #7564C1 0%, #D8479A 100%);
+  --heading-color: var(--color-text-on-accent);
+  --text-color: var(--color-text-on-accent);
+
+  background: var(--gradient-brand);
   padding: 80px 24px;
-  color: #fff;
+  color: var(--color-text-on-accent);
 }
 
 .personalization > div {
@@ -20,13 +24,13 @@
 .personalization-header h3 {
   font-size: 36px;
   font-weight: 800;
-  color: #fff;
+  color: var(--color-text-on-accent);
   margin: 0 0 16px;
 }
 
 .personalization-header p {
   font-size: 18px;
-  color: rgb(255 255 255 / 90%);
+  color: color-mix(in srgb, var(--color-text-on-accent) 90%, transparent);
   line-height: 1.6;
   margin: 0;
 }
@@ -43,9 +47,9 @@
 .pzn-badge {
   display: inline-flex;
   align-items: center;
-  background: rgb(255 255 255 / 20%);
-  border: 1px solid rgb(255 255 255 / 30%);
-  color: #fff;
+  background: color-mix(in srgb, var(--color-text-on-accent) 20%, transparent);
+  border: var(--border-width-thin) solid color-mix(in srgb, var(--color-text-on-accent) 30%, transparent);
+  color: var(--color-text-on-accent);
   padding: 10px 20px;
   border-radius: 30px;
   font-size: 14px;
@@ -62,13 +66,13 @@
 .pzn-recommendation h3 {
   font-size: 24px;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-on-accent);
   margin: 0 0 8px;
 }
 
 .pzn-recommendation p {
   font-size: 16px;
-  color: rgb(255 255 255 / 85%);
+  color: color-mix(in srgb, var(--color-text-on-accent) 85%, transparent);
   margin: 0;
 }
 
@@ -80,8 +84,8 @@
 
 .pzn-cta a {
   display: inline-block;
-  background: #fff;
-  color: #7564C1;
+  background: var(--palette-white);
+  color: var(--palette-purple-500);
   padding: 14px 36px;
   border-radius: 30px;
   font-weight: 700;
@@ -92,7 +96,7 @@
 
 .pzn-cta a:hover {
   transform: scale(1.03);
-  box-shadow: 0 4px 20px rgb(0 0 0 / 15%);
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--color-shadow-neutral) 15%, transparent);
 }
 
 @media (width <= 768px) {

@@ -13,16 +13,16 @@
 
 .columns > div > div {
   padding: 28px 24px;
-  border-radius: 16px;
-  background: var(--ee-cards-bg, #f8f7fc);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-subtle);
 }
 
 .columns h3 {
   margin-top: 0;
-  color: var(--ee-text-title, #131631);
+  color: var(--color-text-primary);
 }
 
-.columns p { color: #5b5c69; }
+.columns p { color: var(--color-text-secondary); }
 
 @media (width >= 900px) {
   .columns { padding: 40px 32px; }

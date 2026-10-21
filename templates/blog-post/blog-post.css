@@ -15,19 +15,19 @@ main > .section.blog-post-article > .default-content-wrapper {
   gap: 6px;
   border-radius: 38px;
   padding: 10px 27px 10px 17px;
-  background-color: var(--ee-purple);
+  background-color: var(--color-action-primary);
   font-size: 14px;
   font-weight: 600;
   line-height: 18px;
 }
 
 .blog-post-back:any-link {
-  color: #fff;
+  color: var(--color-action-primary-text);
 }
 
 .blog-post-back:hover {
-  background-color: var(--ee-pink);
-  color: #fff;
+  background-color: var(--color-action-primary-hover);
+  color: var(--color-action-primary-text);
   text-decoration: none;
 }
 
@@ -41,14 +41,14 @@ main > .section.blog-post-article > .default-content-wrapper {
   margin: 32px 0 0;
   font-size: 36px;
   line-height: 1.2;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
 }
 
 .blog-post-article .default-content-wrapper .blog-post-byline {
   margin: 24px 0 40px;
   font-size: 14px;
   line-height: 22px;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
 }
 
 .blog-post-byline em {
@@ -64,7 +64,7 @@ main > .section.blog-post-article > .default-content-wrapper {
 .blog-post-article .default-content-wrapper li {
   font-size: 18px;
   line-height: 1.6;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
 }
 
 .blog-post-article .default-content-wrapper p {
@@ -76,7 +76,7 @@ main > .section.blog-post-article > .default-content-wrapper {
 .blog-post-article .default-content-wrapper h4 {
   margin: 32px 0 16px;
   line-height: 1.25;
-  color: #000;
+  color: var(--color-text-strong);
 }
 
 .blog-post-article .default-content-wrapper h2 { font-size: 28px; }
@@ -94,12 +94,12 @@ main > .section.blog-post-article > .default-content-wrapper {
 }
 
 .blog-post-article .default-content-wrapper a:any-link:not(.button) {
-  color: var(--ee-pink);
+  color: var(--color-link-accent);
   text-decoration: underline;
 }
 
 .blog-post-article .default-content-wrapper a:hover:not(.button) {
-  color: var(--ee-purple);
+  color: var(--color-link-accent-hover);
 }
 
 .blog-post-article .default-content-wrapper picture img {
@@ -114,19 +114,22 @@ main > .section.blog-post-article > .default-content-wrapper {
 }
 
 .blog-post-zip {
+  --heading-color: var(--color-text-primary);
+  --text-color: var(--color-text-secondary);
+
   display: flex;
   flex-direction: column;
   gap: 16px;
   border-radius: 32px;
   padding: 32px 24px;
-  background: #fff;
-  box-shadow: 0 10px 40px rgb(19 22 49 / 18%);
+  background: var(--color-surface-raised);
+  box-shadow: var(--shadow-panel);
 }
 
 .blog-post-zip label {
   font-size: 18px;
   line-height: 1.5;
-  color: var(--ee-purple);
+  color: var(--color-accent-strong);
 }
 
 .blog-post-zip label strong {
@@ -140,23 +143,23 @@ main > .section.blog-post-article > .default-content-wrapper {
   border: 0;
   border-radius: 50px;
   padding: 0 24px;
-  background: var(--ee-light-gray);
+  background: var(--color-surface-muted);
   font-size: 18px;
-  color: var(--ee-text-title);
+  color: var(--color-text-primary);
 }
 
 .blog-post-zip input::placeholder {
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
 }
 
 .blog-post-zip input:focus-visible {
-  outline: 2px solid var(--ee-purple);
+  outline: var(--focus-ring-width) solid var(--color-focus);
 }
 
 .blog-post-zip .blog-post-zip-error {
   margin: -8px 0 0;
   font-size: 14px;
-  color: #d0021b;
+  color: var(--color-status-error);
 }
 
 .blog-post-zip button {

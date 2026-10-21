@@ -4,6 +4,8 @@ import {
   getMetadata, toClassName,
 } from './aem.js';
 import { getLocale } from './locale.js';
+import decoratePageTheme from './page-theme.js';
+import decorateSectionAuthoring from './section-authoring.js';
 
 export function moveAttributes(from, to, attributes) {
   const names = attributes || [...from.attributes].map(({ nodeName }) => nodeName);
@@ -90,6 +92,7 @@ export function decorateMain(main) {
   decorateImageLinks(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  decorateSectionAuthoring(main);
   decorateBlocks(main);
   decorateButtons(main);
 }
@@ -117,6 +120,7 @@ async function loadTemplate(main) {
 async function loadEager(doc) {
   document.documentElement.lang = getLocale() || 'en';
   decorateTemplateAndTheme();
+  decoratePageTheme();
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
