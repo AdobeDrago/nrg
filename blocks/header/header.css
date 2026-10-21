@@ -73,7 +73,7 @@ header .header-phone:any-link {
   color: var(--color-accent);
   text-decoration: none;
 }
-header .header-phone .ico-tel { font-size: 24px; }
+header .header-phone .ico-tel { font-size: 22px; }
 header .header-phone span { display: none; }
 
 /* language switch */
@@ -193,7 +193,7 @@ header .header-menu a[aria-current="page"] { color: var(--color-link-hover); }
   header .header-logo .logo-small,
   header .header-menu-toggle .logo-small { display: none; }
 
-  header .header-actions { gap: 64px; }
+  header .header-actions { gap: 22px; }
   header .header-tools { gap: 64px; }
 
   header .header-phone:any-link {
@@ -335,7 +335,7 @@ header .header.scrolled .header-lang:any-link { display: none; }
     background: var(--color-surface-muted);
     box-shadow: var(--shadow-control);
   }
-  header .header.scrolled .header-actions { gap: 12px; }
+  header .header.scrolled .header-actions { gap: 16px; }
   header .header.scrolled .header-phone .ico-tel { font-size: 16px; }
   header .header.scrolled .header-phone span { display: none; }
 }
