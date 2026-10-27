@@ -107,7 +107,7 @@ main .section.details-cards-container > .details-cards-wrapper {
   .details-cards ul {
     flex-wrap: nowrap;
     justify-content: center;
-    gap: 23px;
+    gap: 40px;
     margin-top: 72px;
   }
 
