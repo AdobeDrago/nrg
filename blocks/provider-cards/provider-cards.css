@@ -9,14 +9,15 @@
   gap: 48px 32px;
 }
 
+/* the original's "SourceSansPro-Semi-Bold" face reports weight 400 but draws semibold glyphs */
 .provider-cards h2,
 .provider-cards h3 {
-  font-weight: 700;
+  font-weight: 600;
   color: var(--color-text-primary);
   margin: 0 0 16px;
   text-align: center;
   font-size: 30px;
-  font-family: SourceSansPro-Semi-Bold, sans-serif;
+  font-family: var(--font-family-body);
 }
 
 /* First row = heading, span all columns */
@@ -160,9 +161,11 @@
   padding: var(--logo-plate-padding);
   border-radius: var(--logo-plate-radius);
   background: var(--color-surface-logo);
-  width: auto;
+
+  /* fixed width like the original strip; height follows each logo's aspect ratio */
+  width: 160px;
   max-width: 100%;
-  max-height: 72px;
+  height: auto;
   object-fit: contain;
 }
 
