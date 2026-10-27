@@ -1,3 +1,41 @@
+/** "Green Mountain Energy" -> "green-mountain-energy"; keys the provider's quote color */
+const slug = (text) => text.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+/**
+ * Card layout from the original: head (quote mark, title, author), review text,
+ * and an optional provider logo footer (an authored image; its alt names the provider).
+ */
+function buildCard(cell) {
+  const li = document.createElement('li');
+  li.className = 'review-card';
+
+  const picture = cell.querySelector('picture') || cell.querySelector('img');
+  const logoImg = picture?.tagName === 'IMG' ? picture : picture?.querySelector('img');
+  // drop the paragraph DA wraps around the image so it isn't read as review text
+  if (picture) (picture.closest('p') || picture).remove();
+
+  const head = document.createElement('div');
+  head.className = 'review-head';
+  const title = cell.querySelector('h2, h3, h4');
+  const [author, ...text] = [...cell.querySelectorAll(':scope > p')];
+  author?.classList.add('review-author');
+  head.append(...[title, author].filter(Boolean));
+
+  const body = document.createElement('div');
+  body.className = 'review-text';
+  body.append(...text);
+  li.append(head, body);
+
+  if (picture) {
+    const logo = document.createElement('figure');
+    logo.className = 'review-logo';
+    logo.append(picture);
+    li.append(logo);
+    if (logoImg?.alt) li.dataset.provider = slug(logoImg.alt);
+  }
+  return li;
+}
+
 export default function decorate(block) {
   const [heading, ...reviews] = block.querySelectorAll(':scope > div');
   heading?.classList.add('reviews-heading');
@@ -5,13 +43,7 @@ export default function decorate(block) {
   const track = document.createElement('ul');
   track.className = 'reviews-track';
   reviews.forEach((row) => {
-    const li = document.createElement('li');
-    li.className = 'review-card';
-    const cell = row.querySelector(':scope > div');
-    const [author] = cell.querySelectorAll('p');
-    author?.classList.add('review-author');
-    li.append(...cell.childNodes);
-    track.append(li);
+    track.append(buildCard(row.querySelector(':scope > div')));
     row.remove();
   });
 
@@ -20,8 +52,9 @@ export default function decorate(block) {
   viewport.append(track);
 
   const scrollBy = (dir) => {
-    const card = track.querySelector('.review-card');
-    const step = card ? card.getBoundingClientRect().width + 24 : track.clientWidth;
+    // one card per click: the distance between neighbouring cards includes the column gap
+    const [first, second] = track.querySelectorAll('.review-card');
+    const step = second ? second.offsetLeft - first.offsetLeft : track.clientWidth;
     track.scrollBy({ left: dir * step, behavior: 'smooth' });
   };
   ['prev', 'next'].forEach((dir) => {
