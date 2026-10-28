@@ -155,6 +155,8 @@ header .header-menu-close {
   padding: 4px;
   border: 0;
   background: none;
+
+  overflow: visible;
   color: var(--color-accent-strong);
   font: 700 16px/1 var(--body-font-family);
   cursor: pointer;
@@ -251,20 +253,24 @@ header .header-menu a[aria-current="page"] { color: var(--color-link-hover); }
   header .header-overlay-mask { background: var(--color-scrim-light); }
 
   header .header-menu {
-    top: 15px;
-    right: 16px;
+    top: 16px;
+    right: max(16px, calc((100% - 1440px) / 2 + 16px));
     width: 388px;
-    padding: 64px 40px 48px;
+    padding: 64px 40px 61px;
+    box-shadow: 0 20px 40px color-mix(in srgb, var(--color-shadow-neutral) 30%, transparent);
   }
 
   header .header-menu-close {
-    top: 28px;
-    right: 28px;
+    top: 20px;
+    right: 26px;
+    gap: 13px;
+    padding: 0;
     font-size: 16px;
+    font-weight: 600;
   }
   /* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */
   header .header-menu-close span { display: inline; }
-  header .header-menu-close .ico-close { font-size: 18px; }
+  header .header-menu-close .ico-close { font-size: 15px; }
   header .header-menu ul { gap: 28px; }
 
   header .header-menu a:any-link {
