@@ -44,8 +44,10 @@ footer .footer h2,
 footer .footer h3,
 footer .footer h4 {
   margin: 0 0 12px;
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 16px;
+
+  /* the original's "SourceSansPro-Semi-Bold" face reports weight 400 but draws semibold glyphs */
+  font-weight: 600;
   color: var(--heading-color);
 }
 
@@ -81,7 +83,7 @@ footer .footer .footer-columns .footer-col:first-child { grid-column: 1 / -1; }
 footer .footer .footer-col ul { flex-direction: column; }
 
 @media (width >= 900px) {
-  footer .footer > div { padding: 56px 56px 40px; }
+  footer .footer > div { padding: 76px 56px 44px; }
 
   footer .footer .footer-columns {
     grid-template-columns: 2fr repeat(4, 1fr);
