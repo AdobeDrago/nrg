@@ -9,7 +9,6 @@ helix-importer-ui
 .idea
 .playwright-mcp/
 
-
 # Ensure these files are tracked
 !CLAUDE.md
 !AGENTS.md

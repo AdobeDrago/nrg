@@ -76,24 +76,114 @@
   .zip-hero h1 { font-size: 36px; }
 }
 
+/* desktop sizes match the original site's hero (728px below the header, 376 × 401 ZIP card) */
+@media (width >= 1024px) {
+  .zip-hero {
+    align-items: flex-start;
+    gap: 70px;
+    min-height: 456px; /* + 272px vertical padding = 728px */
+    padding: 208px 80px 64px;
+  }
+
+  .zip-hero .zip-hero-copy {
+    max-width: 380px;
+    padding-top: 16px;
+  }
+
+  .zip-hero h1 {
+    font-size: 40px;
+    line-height: 1.1;
+  }
+
+  .zip-hero h1::after {
+    height: 4px;
+    margin: 36px 0 8px;
+  }
+
+  .zip-hero .zip-hero-copy p {
+    max-width: 200px;
+    font-size: 24px;
+    line-height: 1.1;
+  }
+
+  /* ZIP card: overrides the shared styles/zip-form.css, which loads after this file */
+  .zip-hero .zip-card { padding: 32px 32px 40px; }
+  .zip-hero .zip-card .zip-field { padding-top: 2px; }
+
+  .zip-hero .zip-card .zip-field input,
+  .zip-hero .zip-card .zip-field label { font-size: 24px; }
+
+  .zip-hero .zip-card .zip-field label { top: 12px; }
+  .zip-hero .zip-card .zip-moving { margin-top: 32px; }
+
+  .zip-hero .zip-card .zip-moving legend {
+    font-size: 18px;
+    line-height: 23px;
+  }
+
+  .zip-hero .zip-card .zip-moving-options {
+    grid-template-columns: repeat(2, 146px);
+    justify-content: space-between;
+    margin-top: 18px;
+  }
+
+  .zip-hero .zip-card .zip-moving-option {
+    box-sizing: border-box;
+    justify-content: flex-start;
+    gap: 8px;
+    height: 96px;
+    padding: 28px 14px 16px;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .zip-hero .zip-card .zip-moving-option .ico-truck { font-size: 26px; }
+  .zip-hero .zip-card .zip-moving-option .ico-house { font-size: 28px; }
+
+  .zip-hero .zip-card .zip-submit {
+    min-width: 206px;
+    margin-top: 46px;
+    padding: 16px 32px;
+    font-size: 20px;
+    line-height: 20px;
+  }
+}
+
 /* curved gradient swoosh, anchored to the block so it tracks the content on any display width */
-@media (width > 1024px) {
+@media (width >= 1024px) {
   .zip-hero::before {
     content: '';
     position: absolute;
     z-index: 0;
-    inset: -148px 377px 0 -100vw;
+    inset: -148px 160px 0 -100vw;
     background: var(--zip-hero-swoosh, none) no-repeat; /* authored row 6 */
     background-position: right -16px top -40px;
+    background-size: auto calc(100% + 40px); /* fill the 728px hero to its bottom edge */
     pointer-events: none;
   }
 }
 
 /* make room for the transparent header that overlaps the hero on small screens */
-@media (width <= 1024px) {
+@media (width < 1024px) {
   body.header-over-hero main .zip-hero {
     padding-top: calc(var(--nav-height) + 24px);
     flex-direction: column-reverse;
+    margin: 0 135px;
+    gap: 40px;
+  }
+
+  .zip-hero-form form.zip-card {
+    width: 100%;
+    max-width: unset;
+  }
+
+  .zip-hero > div {
+    width: 100%;
+  }
+
+  .zip-hero .zip-hero-copy  {
+    max-width: unset;
+    margin-top: 60px;
   }
 }
 
@@ -111,5 +201,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0 64px;
+  }
+}
+
+@media (width <= 425px) {
+  body.header-over-hero main .zip-hero {
+    margin: 0 5px;
   }
 }
