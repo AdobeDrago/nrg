@@ -155,7 +155,6 @@ header .header-menu-close {
   padding: 4px;
   border: 0;
   background: none;
-
   overflow: visible;
   color: var(--color-accent-strong);
   font: 700 16px/1 var(--body-font-family);
