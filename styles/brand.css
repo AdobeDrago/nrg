@@ -73,6 +73,13 @@
   --palette-yellow-300: #f6d576;
   --palette-yellow-400: #f6cf6b;
 
+  /* Provider brand colors from the original site (review quote marks) */
+  --palette-reliant: #d8479a;
+  --palette-green-mountain: #1ead72;
+  --palette-direct-energy: #f15d22;
+  --palette-cirro: #16c0f3;
+  --palette-discount-power: #ffa300;
+
   /* Semantic colors: text. Primary is the title ink, secondary the body copy. */
   --color-text-primary: var(--palette-navy-900);
   --color-text-secondary: var(--palette-slate-600);
