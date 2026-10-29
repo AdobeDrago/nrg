@@ -131,9 +131,10 @@
   .provider-hero.landing {
     box-sizing: border-box;
     max-width: 1440px;
-    grid-template-columns: minmax(0, 580px) 1fr auto;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: "title . image" "intro . image";
+    grid-template:
+      "title . image" auto
+      "intro . image" 1fr
+      / minmax(0, 580px) 1fr auto;
     padding: 130px 30px 0 105px;
   }
 
