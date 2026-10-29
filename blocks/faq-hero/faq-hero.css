@@ -21,15 +21,15 @@
   width: 19px;
   height: 4px;
   border-radius: 40px;
-  background-color: #d8479a;
+  background-color: var(--color-accent);
 }
 
 .faq-hero h1,
 .faq-hero h2,
 .faq-hero h3 {
   margin: 0;
-  color: var(--ee-text-title, #131631);
-  font-family: var(--heading-font-family, var(--body-font-family));
+  color: var(--color-text-primary);
+  font-family: var(--heading-font-family);
   font-size: 48px;
   font-weight: 700;
   line-height: 1;
@@ -48,9 +48,9 @@
   justify-content: space-between;
   width: 100%;
   padding: 2px 3px 2px 24px;
-  border: 1px solid #f2f2f2;
+  border: var(--border-width-thin) solid var(--color-surface-muted);
   border-radius: 40px;
-  background-color: #f2f2f2;
+  background-color: var(--color-surface-muted);
 }
 
 .faq-hero .faq-hero-field input {
@@ -61,14 +61,14 @@
   padding: 0 30px 0 0;
   border: 0;
   background: transparent;
-  color: #5b5c69;
+  color: var(--color-text-secondary);
   font-family: var(--body-font-family);
   font-size: 18px;
   line-height: 1.5;
 }
 
 .faq-hero .faq-hero-field input:focus { outline: none; }
-.faq-hero .faq-hero-field:focus-within { border-color: var(--ee-purple, #7564c1); }
+.faq-hero .faq-hero-field:focus-within { border-color: var(--color-border-accent); }
 
 .faq-hero .faq-hero-field button {
   display: flex;
@@ -81,18 +81,18 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background-color: var(--ee-purple, #7564c1);
-  color: #fff;
+  background-color: var(--color-action-primary);
+  color: var(--color-action-primary-text);
   font-size: 16px;
   cursor: pointer;
 }
 
-.faq-hero .faq-hero-field button:hover { background-color: var(--ee-purple-dark, #6450b0); }
+.faq-hero .faq-hero-field button:hover { background-color: var(--color-action-primary-strong); }
 
 /* question suggestions under the pill */
 .faq-hero .faq-hero-results {
   position: absolute;
-  z-index: 10;
+  z-index: var(--layer-popover);
   top: calc(100% + 8px);
   right: 0;
   left: 0;
@@ -100,9 +100,9 @@
   margin: 0;
   padding: 8px 0;
   overflow-y: auto;
-  border-radius: 16px;
-  background-color: #fff;
-  box-shadow: 0 8px 24px rgb(19 22 49 / 16%);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface-raised);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-shadow-ink) 16%, transparent);
   list-style: none;
 }
 
@@ -111,7 +111,7 @@
 .faq-hero .faq-hero-results a {
   display: block;
   padding: 12px 24px;
-  color: var(--ee-text-title, #131631);
+  color: var(--color-text-primary);
   font-family: var(--body-font-family);
   font-size: 16px;
   line-height: 1.4;
@@ -120,13 +120,13 @@
 
 .faq-hero .faq-hero-results a:hover,
 .faq-hero .faq-hero-results [aria-selected="true"] a {
-  background-color: #f2f2f2;
-  color: var(--ee-purple, #7564c1);
+  background-color: var(--color-surface-muted);
+  color: var(--color-link);
 }
 
 .faq-hero .faq-hero-status {
   margin: 12px 24px 0;
-  color: #5b5c69;
+  color: var(--color-text-secondary);
   font-size: 16px;
 }
 
@@ -157,7 +157,7 @@
 
   .faq-hero .faq-hero-field input {
     padding: 14px 30px 14px 10px;
-    color: var(--ee-text-title, #131631);
+    color: var(--color-text-primary);
     font-size: 20px;
   }
 }

@@ -25,7 +25,7 @@ function buildBackground(bg, bgMobile) {
   const picture = document.createElement('picture');
   picture.className = 'zip-hero-bg';
   if (bgMobile) {
-    picture.innerHTML = `<source media="(max-width: 1024px)" type="image/webp" srcset="${sized(bgMobile, 1024, 'webply')}">`;
+    picture.innerHTML = `<source media="(max-width: 1023px)" type="image/webp" srcset="${sized(bgMobile, 1024, 'webply')}">`;
   }
   picture.insertAdjacentHTML('beforeend', `<source type="image/webp" srcset="${sized(bg, 2000, 'webply')}">`);
 

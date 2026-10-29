@@ -1,0 +1,301 @@
+/*
+ * Shared Everything Energy design tokens. Loaded globally through styles.css.
+ * A palette value identifies a color. A semantic token describes its purpose.
+ * A page theme (themes.css) can change that semantic value. A section chooses an
+ * inherited color scheme and outer layout (sections.css). A block consumes these
+ * values and owns its internal presentation (blocks/{name}/{name}.css).
+ * Use semantic tokens in blocks; keep block layout in the block stylesheet.
+ */
+
+/* Size-adjusted local fallback keeps layout stable while Source Sans 3 loads. */
+@font-face {
+  font-family: "Source Sans 3 Fallback";
+  size-adjust: 93%;
+  src: local('Arial');
+}
+
+:root {
+  /* Palette. Numbered shades run from light to dark. Values match the existing
+     everythingenergy.com styles; the navy 800–1000 and light tints are added for
+     the dark theme. A palette token is not, by itself, an official brand color. */
+  --palette-white: #fff;
+  --palette-black: #000;
+  --palette-neutral-50: #f8f8f8;
+  --palette-neutral-150: #f2f2f2;
+  --palette-neutral-200: #eee;
+  --palette-neutral-250: #e4e4e4;
+  --palette-neutral-300: #e0e0e0;
+  --palette-neutral-500: #828282;
+  --palette-neutral-700: #4f4f4f;
+  --palette-slate-50: #f3f3f8;
+  --palette-slate-100: #ececf2;
+  --palette-slate-200: #e4e4ea;
+  --palette-slate-300: #c3c5d4;
+  --palette-slate-400: #9597ab;
+  --palette-slate-600: #5b5c69;
+  --palette-navy-600: #3d4275;
+  --palette-navy-700: #30355a;
+  --palette-navy-750: #262a4d;
+  --palette-navy-800: #1e2242;
+  --palette-navy-850: #181b37;
+  --palette-navy-900: #131631;
+  --palette-navy-950: #0e1024;
+  --palette-navy-1000: #080a1a;
+  --palette-purple-25: #f8f7fc;
+  --palette-purple-50: #ebe8f7;
+  --palette-purple-100: #d9d6ec;
+  --palette-purple-300: #a596e8;
+  --palette-purple-500: #7564c1;
+  --palette-purple-600: #6450b0;
+  --palette-purple-850: #2c2756;
+  --palette-purple-900: #1d1a3d;
+  --palette-pink-300: #f08cc4;
+  --palette-pink-400: #e46aa9;
+  --palette-pink-500: #d8479a;
+  --palette-pink-600: #c8368a;
+  --palette-red-300: #ff8095;
+  --palette-red-600: #d0021b;
+  --palette-blue-300: #79b3dc;
+  --palette-blue-400: #57a1d3;
+  --palette-blue-450: #6a9bd2;
+  --palette-blue-500: #8ab4f8;
+  --palette-blue-700: #00e;
+
+  /* Existing illustration and campaign colors (gradients, quote marks, category
+     tiles). They extend the palette for artwork and are not UI roles. */
+  --palette-periwinkle-400: #7f86cc;
+  --palette-orchid-500: #b45fb0;
+  --palette-indigo-600: #5c5a8c;
+  --palette-green-500: #67a85f;
+  --palette-green-600: #3aa76d;
+  --palette-orange-500: #f26a2e;
+  --palette-cyan-500: #2bb3e6;
+  --palette-yellow-300: #f6d576;
+  --palette-yellow-400: #f6cf6b;
+
+  /* Provider brand colors from the original site (review quote marks) */
+  --palette-reliant: #d8479a;
+  --palette-green-mountain: #1ead72;
+  --palette-direct-energy: #f15d22;
+  --palette-cirro: #16c0f3;
+  --palette-discount-power: #ffa300;
+
+  /* Semantic colors: text. Primary is the title ink, secondary the body copy. */
+  --color-text-primary: var(--palette-navy-900);
+  --color-text-secondary: var(--palette-slate-600);
+  --color-text-tertiary: var(--palette-neutral-500);
+  --color-text-strong: var(--palette-black);
+  --color-text-neutral: var(--palette-neutral-700);
+  --color-text-inverse: var(--palette-white);
+  --color-text-inverse-secondary: color-mix(in srgb, var(--palette-white) 85%, transparent);
+
+  /* Foreground on brand-colored artwork (gradients, photos, accent pills). These
+     stay white in every theme because the artwork does not change. */
+  --color-text-on-accent: var(--palette-white);
+
+  /* Surfaces. Default is the page; raised is a card or popover on the page;
+     subtle is a tinted band; muted is a filled control such as an input pill. */
+  --color-surface-default: var(--palette-white);
+  --color-surface-raised: var(--palette-white);
+  --color-surface-subtle: var(--palette-neutral-50);
+  --color-surface-muted: var(--palette-neutral-150);
+  --color-surface-muted-hover: var(--palette-neutral-250);
+  --color-surface-hover: var(--palette-purple-50);
+  --color-surface-highlight: var(--palette-purple-25);
+  --color-surface-inverse: var(--palette-navy-900);
+  --color-surface-inverse-raised: var(--palette-navy-800);
+
+  /* Logo plates stay light in every theme so third-party logos remain legible. */
+  --color-surface-logo: var(--palette-white);
+  --color-surface-logo-well: var(--palette-neutral-150);
+  --color-scrim: color-mix(in srgb, var(--palette-black) 45%, transparent);
+  --color-scrim-light: color-mix(in srgb, var(--palette-black) 12%, transparent);
+
+  /* Borders */
+  --color-border-subtle: var(--palette-neutral-200);
+  --color-border-default: var(--palette-neutral-300);
+  --color-border-divider: var(--palette-slate-100);
+  --color-border-separator: var(--palette-slate-200);
+  --color-border-control: var(--palette-purple-100);
+  --color-border-accent: var(--palette-purple-500);
+
+  /* Links. The default pair is purple → pink; the accent pair (articles, FAQs)
+     is pink → purple; plain matches the original's browser-blue answer links. */
+  --color-link: var(--palette-purple-500);
+  --color-link-hover: var(--palette-pink-500);
+  --color-link-accent: var(--palette-pink-500);
+  --color-link-accent-hover: var(--palette-purple-500);
+  --color-link-plain: var(--palette-blue-700);
+  --color-link-inverse: var(--palette-purple-300);
+  --color-link-inverse-hover: var(--palette-pink-300);
+
+  /* Actions. Primary pills are purple with a pink hover (or the deeper purple
+     where the original uses it); accent pills are the pink ZIP submit. */
+  --color-action-primary: var(--palette-purple-500);
+  --color-action-primary-hover: var(--palette-pink-500);
+  --color-action-primary-strong: var(--palette-purple-600);
+  --color-action-primary-text: var(--palette-white);
+  --color-action-accent: var(--palette-pink-500);
+  --color-action-accent-hover: var(--palette-purple-500);
+  --color-action-accent-text: var(--palette-white);
+  --color-action-selected: var(--palette-purple-500);
+  --color-action-selected-text: var(--palette-white);
+
+  /* Accents: short title bars, eyebrow labels, provider names, icons. */
+  --color-accent: var(--palette-pink-500);
+  --color-accent-strong: var(--palette-purple-500);
+  --color-accent-tint: color-mix(in srgb, var(--palette-purple-500) 10%, transparent);
+  --gradient-accent-rule: linear-gradient(90deg, var(--palette-blue-400), var(--palette-pink-500));
+  --gradient-accent-band: linear-gradient(270deg, var(--palette-blue-400) 0.01%, var(--palette-pink-500) 98.37%);
+  --gradient-brand: linear-gradient(135deg, var(--palette-purple-500) 0%, var(--palette-pink-500) 100%);
+
+  /* Focus and status */
+  --color-focus: var(--palette-purple-500);
+  --color-status-error: var(--palette-red-600);
+
+  /* Shadow inks. Geometry stays with the consumer; themes change only the ink. */
+  --color-shadow-neutral: var(--palette-black);
+  --color-shadow-ink: var(--palette-navy-900);
+  --color-shadow-brand: var(--palette-purple-500);
+
+  /* Page chrome roles, derived so a theme only needs to change the base roles. */
+  --color-header-surface: var(--color-surface-default);
+  --color-header-text: var(--color-text-primary);
+  --color-footer-surface: var(--color-surface-muted);
+  --color-footer-text: var(--color-text-secondary);
+  --color-footer-heading: var(--color-text-primary);
+  --color-footer-link-hover: var(--color-link-hover);
+
+  /* Which bundled logo suits the current page surface (header and footer). */
+  --logo-color-display: block;
+  --logo-white-display: none;
+
+  /* Padding around third-party logos; themes with dark surfaces add a light plate. */
+  --logo-plate-padding: 0;
+  --logo-plate-radius: 0;
+
+  /* Typography. Size suffixes give pixel equivalents at a 16px browser default.
+     The root font size stays unset so rem values respect browser preferences. */
+  --font-family-body: "Source Sans 3", "Source Sans 3 Fallback", sans-serif;
+  --font-family-heading: var(--font-family-body);
+  --font-family-icon: nrg-icons;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-size-14: 0.875rem;
+  --font-size-16: 1rem;
+  --font-size-18: 1.125rem;
+  --font-size-20: 1.25rem;
+  --font-size-22: 1.375rem;
+  --font-size-26: 1.625rem;
+  --font-size-28: 1.75rem;
+  --font-size-30: 1.875rem;
+  --font-size-32: 2rem;
+  --font-size-40: 2.5rem;
+  --font-size-56: 3.5rem;
+  --line-height-body: 1.5;
+  --line-height-copy: 1.6;
+  --line-height-heading: 1.25;
+  --line-height-display: 1.1;
+
+  /* Text roles. HTML heading defaults switch to the desktop scale at 900px. */
+  --text-body-size: var(--font-size-18);
+  --text-copy-size: var(--font-size-16);
+  --text-label-size: var(--font-size-14);
+  --text-heading-1-size: var(--font-size-40);
+  --text-heading-2-size: var(--font-size-30);
+  --text-heading-3-size: var(--font-size-26);
+  --text-heading-4-size: var(--font-size-22);
+  --text-heading-5-size: var(--font-size-20);
+  --text-heading-6-size: var(--font-size-18);
+
+  /* Spacing. Suffixes use the same 16px-default convention as font sizes. */
+  --space-0: 0;
+  --space-4: 0.25rem;
+  --space-8: 0.5rem;
+  --space-12: 0.75rem;
+  --space-16: 1rem;
+  --space-24: 1.5rem;
+  --space-32: 2rem;
+  --space-40: 2.5rem;
+  --space-48: 3rem;
+  --space-64: 4rem;
+  --space-96: 6rem;
+
+  /* Author-facing spacing names, used by Section Metadata Gap and Spacing. */
+  --spacing-xs: var(--space-4);
+  --spacing-s: var(--space-8);
+  --spacing-m: var(--space-12);
+  --spacing-l: var(--space-24);
+  --spacing-xl: var(--space-32);
+  --spacing-xxl: var(--space-48);
+
+  /* Layout. Physical widths preserve the existing page grid and header height. */
+  --layout-container-max: 1200px;
+  --layout-copy-max: 760px;
+  --layout-narrow-max: 800px;
+  --layout-gutter: var(--space-24);
+  --layout-grid-gap: var(--space-24);
+  --layout-header-height: 72px;
+
+  /* Shapes, borders, and focus. Thin strokes stay in physical pixels. */
+  --radius-small: 4px;
+  --radius-medium: 8px;
+  --radius-card: 16px;
+  --radius-large: 24px;
+  --radius-round: 50%;
+  --radius-pill: 100px;
+  --border-width-thin: 1px;
+  --border-width-strong: 2px;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+
+  /* Recurring elevations. One-off shadows mix a shadow ink locally. */
+  --shadow-card: 0 4px 20px color-mix(in srgb, var(--color-shadow-neutral) 10%, transparent);
+  --shadow-card-brand-hover: 0 8px 30px color-mix(in srgb, var(--color-shadow-brand) 15%, transparent);
+  --shadow-panel: 0 10px 40px color-mix(in srgb, var(--color-shadow-ink) 18%, transparent);
+  --shadow-control: 0 4px 10px color-mix(in srgb, var(--color-shadow-neutral) 10%, transparent);
+
+  /* Motion and layers */
+  --motion-duration-fast: 150ms;
+  --motion-duration-normal: 200ms;
+  --motion-duration-slow: 400ms;
+  --layer-dropdown: 5;
+  --layer-popover: 10;
+  --layer-header: 10;
+  --layer-overlay: 20;
+  --layer-menu: 21;
+
+  /* Native controls and scrollbars follow the page theme. */
+  color-scheme: light;
+
+  /* Compatibility aliases for the original --ee-* names. New rules use semantic tokens. */
+  --ee-purple: var(--color-link);
+  --ee-purple-dark: var(--color-action-primary-strong);
+  --ee-pink: var(--color-accent);
+  --ee-pink-dark: var(--palette-pink-600);
+  --ee-text-dark: var(--color-text-secondary);
+  --ee-text-title: var(--color-text-primary);
+  --ee-light-gray: var(--color-surface-muted);
+  --ee-cards-bg: var(--color-surface-subtle);
+  --ee-white: var(--color-surface-default);
+}
+
+/* Native custom properties cannot be used in media conditions. 900px is the
+   shared heading breakpoint; other breakpoints stay with their block layouts. */
+@media (width >= 900px) {
+  :root {
+    --text-heading-1-size: var(--font-size-56);
+    --text-heading-2-size: var(--font-size-32);
+    --text-heading-3-size: var(--font-size-28);
+    --layout-gutter: var(--space-32);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-fast: 0s;
+    --motion-duration-normal: 0s;
+    --motion-duration-slow: 0s;
+  }
+}

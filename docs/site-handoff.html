@@ -1,0 +1,1309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Handoff guide for the Everything Energy site on AEM Edge Delivery Services: block authoring, templates, branding, Experience Workspace editing, bulk and chat-based authoring, the design system and dark mode, custom blocks, and preview and publishing.">
+<title>Site handoff guide | Everything Energy</title>
+<link rel="stylesheet" href="site-handoff.css">
+<script src="site-handoff.js" defer></script>
+</head>
+<body class="author-guide">
+<a class="skip-link" href="#main">Skip to guide</a>
+<header class="guide-header">
+<a href="./">NRG documentation</a>
+<span>Site handoff guide</span>
+</header>
+<div class="guide-layout">
+<nav class="guide-nav" aria-label="Guide contents">
+<h2>In this guide</h2>
+<a href="#start">Overview</a>
+<a href="#environments">Sites and ownership</a>
+<a href="#block-authoring">How blocks are authored</a>
+<a href="#templates">Templates</a>
+<a href="#branding">Branding: headings, links, lists</a>
+<a href="#adhoc">Ad-hoc block edits</a>
+<a href="#template-ops">Template-level operations</a>
+<a href="#design-system">Design system and dark mode</a>
+<a href="#chat-content">Chat authoring: content only</a>
+<a href="#chat-full">Chat authoring: full-fledged</a>
+<a href="#bulk">Other bulk operations</a>
+<a href="#custom-blocks">Custom blocks</a>
+<a href="#block-catalog">All 28 blocks</a>
+<a href="#publish">Preview and publish</a>
+<a href="#open-items">Open items</a>
+<a href="#troubleshooting">Troubleshooting</a>
+<a href="#reference">Technical reference</a>
+</nav>
+<main id="main">
+
+<section id="start">
+<p class="eyebrow">Everything Energy · AEM Edge Delivery Services · Handoff</p>
+<h1>Site handoff guide</h1>
+<p class="lead">Everything you need to run the Everything Energy site after handoff: how pages and blocks are authored in Experience Workspace (DA), how templates and the brand styles work, how to make single edits and site-wide changes, how to use the AI assistant, and how to preview and publish.</p>
+<p>The site has English (<code>/en/</code>), Spanish (<code>/es/</code>) and a set of top-level pages without a language prefix. Content lives in Experience Workspace at <a href="https://da.live/#/adobedrago/nrg">adobedrago/nrg</a>; code lives in the <a href="https://github.com/AdobeDrago/nrg">AdobeDrago/nrg</a> repository.</p>
+<p class="note"><strong>Reference date: October 20, 2026.</strong> Block behavior follows the current repository code. Usage counts come from the 294 pages in the preview index on that date. Rendered screenshots were captured from preview content with the repository code at 1280px wide. DA screenshots were captured in the da.live document editor (classic view, <strong>New Authoring</strong> switched off) on the same date. Select any image for full size.</p>
+<div class="quick-links">
+<a href="#block-authoring">Author a block</a>
+<a href="#templates">Start a page from a template</a>
+<a href="#adhoc">Make a quick edit</a>
+<a href="#template-ops">Change many pages</a>
+<a href="#design-system">Demo dark mode</a>
+<a href="#chat-content">Use the assistant</a>
+<a href="#publish">Preview and publish</a>
+</div>
+</section>
+
+<section id="environments">
+<h2>Sites, environments and ownership</h2>
+<div class="table-scroll">
+<table>
+<thead><tr><th>What</th><th>Where</th><th>Use it for</th></tr></thead>
+<tbody>
+<tr><td>Content (Experience Workspace / DA)</td><td><a href="https://da.live/#/adobedrago/nrg">da.live/#/adobedrago/nrg</a></td><td>Pages, sheets, nav and footer, media, templates and the block library</td></tr>
+<tr><td>Preview site</td><td><a href="https://main--nrg--adobedrago.aem.page/en/">https://main--nrg--adobedrago.aem.page</a></td><td>Reviewing changes before they go live. Not indexed by search engines.</td></tr>
+<tr><td>Live site</td><td><a href="https://main--nrg--adobedrago.aem.live/en/">https://main--nrg--adobedrago.aem.live</a></td><td>What visitors see after <strong>Publish</strong></td></tr>
+<tr><td>Code</td><td><a href="https://github.com/AdobeDrago/nrg">github.com/AdobeDrago/nrg</a>, branch <code>main</code></td><td>Blocks, templates, styles and configuration. Changes reach the site through Code Sync when merged to <code>main</code>.</td></tr>
+<tr><td>Style system reference</td><td><a href="style-system.html">style-system</a></td><td>Tokens, themes and section options in depth</td></tr>
+<tr><td>Provider walkthrough</td><td><a href="adding-a-provider.html">Adding a new provider</a></td><td>Step-by-step guide for marketers</td></tr>
+</tbody>
+</table>
+</div>
+<h3>Who owns what</h3>
+<p><strong>Authors and marketers</strong> own page copy, images, links, page and section metadata, the nav and footer documents, the plans and ZIP data sheets, and preview/publish. <strong>Developers</strong> own block code and styles, the code templates, design tokens, the search and query indexes (<code>helix-query.yaml</code>), the provider brand list used by Plan Cards, and anything the assistant cannot do safely on its own.</p>
+</section>
+
+<section id="block-authoring">
+<h2>How individual blocks are authored</h2>
+<p>A page is a document. Plain headings, paragraphs, lists and images are <em>default content</em>. Designed components are <em>blocks</em>. In the document a block is a table: the first, shaded row holds the block's name, and the rows below hold its content. The site reads the name to decide how to display the content, and each block reads its rows and cells in a particular order, which the <a href="#block-catalog">block catalog</a> documents for every block.</p>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Example: a Provider Contact block as it appears in the document</caption>
+<thead><tr><th>Provider Contact</th></tr></thead>
+<tbody><tr><td>H3: Contact Reliant<br>Shoppers in Texas can contact us via online chat, phone or email.<br>Call us at <strong>(833) 577-2884</strong>.</td></tr></tbody>
+</table>
+</div>
+<figure><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/da-editor-overview.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: The Reliant provider page open in the DA document editor, showing the secondary-nav and provider-hero block tables"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/da-editor-overview.jpg" width="1440" height="900" loading="lazy" decoding="async" alt="The Reliant provider page open in the DA document editor, showing the secondary-nav and provider-hero block tables"></a><figcaption class="screenshot-note">A provider page in the DA document editor: each shaded header row names a block. The <strong>New Authoring</strong> switch at the top right opens the same document in Experience Workspace.</figcaption></figure>
+<h3>Rules that apply to every block</h3>
+<ul>
+<li><strong>Keep the name row exact.</strong> The name is matched case-insensitively with spaces turned into hyphens: <code>Provider Hero</code> loads <code>provider-hero</code>. A typo leaves the block unstyled.</li>
+<li><strong>Variants go in brackets</strong> after the name: <code>Provider Hero (areas)</code>. Only variants listed in the catalog do anything.</li>
+<li><strong>Rows and cells are read by position</strong> for most blocks. Keep the order, and leave an optional row empty rather than deleting it when the catalog says so.</li>
+<li><strong>Images</strong>: drag images straight into the cell; DA uploads them next to the page. Set alt text on meaningful images (right-click the image). Decorative backgrounds ignore alt text.</li>
+<li><strong>Sections</strong> are separated by a horizontal rule (<code>---</code>). Each section becomes a band on the page and can be configured with a <code>Section Metadata</code> table (see <a href="#branding">Branding</a>).</li>
+<li><strong>Page metadata</strong> goes in a <code>Metadata</code> table at the end of the page: <code>Title</code>, <code>Description</code>, <code>Image</code>, and when needed <code>Template</code> and <code>Theme</code>.</li>
+</ul>
+<figure style="max-width:620px"><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/metadata-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: The Metadata table at the end of the Reliant provider page in DA, with Title, Description and Image rows"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/metadata-da.jpg" width="801" height="423" loading="lazy" decoding="async" alt="The Metadata table at the end of the Reliant provider page in DA, with Title, Description and Image rows"></a><figcaption class="screenshot-note">The Metadata table on <code>/en/providers/reliant</code>.</figcaption></figure>
+<h3>Inserting blocks</h3>
+<p>In Experience Workspace, open a page and choose <strong>Content</strong> mode, then press <code>/</code> and choose a block, or open the tools panel and use <strong>Outline</strong> (hover a section, then <strong>add block</strong>) or <strong>Blocks</strong>. The blocks offered come from the site's block library (<code>/tools/sidekick/library/blocks.json</code> in DA). The most reliable way to get a correct structure is still to copy the block from an existing page listed in the catalog.</p>
+<p class="note warn"><strong>Block library needs a clean-up.</strong> The library currently registers Accordion (no such block exists in the code), contains three empty rows, and has example pages for Tabs and for Hero and Cards variants that the code does not style. Until a developer fixes it, copy blocks from the pages linked in the catalog. See <a href="#open-items">Open items</a>.</p>
+</section>
+
+<section id="templates">
+<h2>Leveraging templates when creating pages</h2>
+<p>Two kinds of templates work together on this site.</p>
+<h3>1. Starter templates in the DA library (content)</h3>
+<p>A starter template is a ready-made document that gets copied into a new page. It gives you the right blocks in the right order with example content to replace. Changing a starter template only affects pages created from it afterwards.</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Template</th><th>Contains</th><th>Use for</th></tr></thead>
+<tbody>
+<tr><td>Landing Page</td><td>ZIP Hero, Provider Cards, Reviews Carousel</td><td>Homepage-style pages</td></tr>
+<tr><td>Plans Page</td><td>Plan Cards (with the provider logo row)</td><td>ZIP results pages</td></tr>
+<tr><td>Personalized Page</td><td>Personalization, Pool Savings, Plan Cards</td><td>Personalized results such as <code>/personalized/92677</code></td></tr>
+<tr><td>Service Area Page</td><td>Article copy, Fetch Plans, Popular Areas, Metadata with <code>Template: area-service</code></td><td>New city pages under <code>areas-of-service</code></td></tr>
+<tr><td>FAQs <em>(file exists, not registered)</em></td><td>FAQ Category Cards, FAQ Accordion</td><td>Not offered in the library yet; see <a href="#open-items">Open items</a></td></tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>In Experience Workspace, create the document at its final address (lower case, hyphens): for example <code>en/areas-of-service/round-rock</code>.</li>
+<li>Open the tools panel and switch to <strong>Templates</strong>. Use the preview button to check a template, then the insert button to copy it into the page.</li>
+<li>Replace every example value, including the Metadata table. Keep the block names and the <code>Template</code> metadata row.</li>
+<li>Preview, check, then publish (see <a href="#publish">Preview and publish</a>).</li>
+</ol>
+<p>Provider pages have no starter template yet; duplicate an existing provider page as described in <a href="adding-a-provider.html">Adding a new provider</a>.</p>
+<h3>2. Page templates in code (layout)</h3>
+<p>A page's <code>Template</code> metadata switches on a layout implemented in code. These are what make hundreds of pages look consistent, and a developer change to one of them updates every page that uses it at once.</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Template value</th><th>Pages</th><th>What the code adds automatically</th></tr></thead>
+<tbody>
+<tr><td><code>area-service</code></td><td>125 city pages</td><td>Back link to Areas of Service, article layout with figures and captions, sticky Fetch Plans sidebar, Secondary Nav</td></tr>
+<tr><td><code>blog-post</code></td><td>101 posts</td><td>Back link, byline and reading time, ZIP card sidebar, Secondary Nav</td></tr>
+<tr><td><code>faq-category</code></td><td>10 category pages</td><td>Title with a category drop-down, back and "back to top" pills, Secondary Nav</td></tr>
+<tr><td><code>faq-question</code></td><td>24 question pages</td><td>Article layout with sticky Fetch Plans sidebar, "Posted on … by …" byline, back link to the FAQs</td></tr>
+<tr><td><code>blog-index</code></td><td>1 (blog landing)</td><td>Marks the landing page so it is left out of the post list</td></tr>
+</tbody>
+</table>
+</div>
+<div class="screenshot-pair">
+<figure><figcaption><strong>area-service</strong> template</figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/tpl-area-service.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Area of service page using the area-service template"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/tpl-area-service.jpg" width="1280" height="900" loading="lazy" decoding="async" alt="Area of service page using the area-service template"></a></figure>
+<figure><figcaption><strong>blog-post</strong> template</figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/tpl-blog-post.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Blog post page using the blog-post template"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/tpl-blog-post.jpg" width="1280" height="900" loading="lazy" decoding="async" alt="Blog post page using the blog-post template"></a></figure>
+<figure><figcaption><strong>faq-category</strong> template</figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/tpl-faq-category.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: FAQ category page using the faq-category template"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/tpl-faq-category.jpg" width="1280" height="900" loading="lazy" decoding="async" alt="FAQ category page using the faq-category template"></a></figure>
+<figure><figcaption><strong>faq-question</strong> template</figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/tpl-faq-question.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: FAQ question page using the faq-question template"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/tpl-faq-question.jpg" width="1280" height="900" loading="lazy" decoding="async" alt="FAQ question page using the faq-question template"></a></figure>
+</div>
+</section>
+
+<section id="branding">
+<h2>Implementing the brand: headings, links, buttons, lists and sections</h2>
+<p>Authors don't pick colors or fonts. The brand is applied by the style system from the structure you author, so using the right element is how you apply the brand.</p>
+<h3>Headings</h3>
+<p>All headings use <strong>Source Sans 3</strong> in bold, in the brand navy (light theme). Sizes step down from H1 to H6, and H1–H3 switch to a larger desktop scale at 900px. Use one H1 per page, then H2 for sections and H3/H4 inside blocks as the catalog shows. Some blocks add their own treatment to a heading, such as the pink accent bar under the FAQ Hero title.</p>
+<h3>Links and buttons</h3>
+<p>Formatting decides how a link looks. A link becomes a button only when it is the only thing in its paragraph.</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Author this</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>A link inside a sentence</td><td>Text link: purple, pink with underline on hover. In articles and FAQs the pair is reversed (pink, then purple).</td></tr>
+<tr><td>A <strong>bold</strong> link alone in a paragraph</td><td>Primary button: purple pill, pink on hover</td></tr>
+<tr><td>An <em>italic</em> link alone in a paragraph</td><td>Secondary button: outlined pill in pink</td></tr>
+<tr><td>A <strong><em>bold and italic</em></strong> link alone in a paragraph</td><td>Accent button. <em>Currently looks the same as the primary button; no separate style is defined yet.</em></td></tr>
+<tr><td>A plain link alone in a paragraph</td><td>Stays a text link</td></tr>
+</tbody>
+</table>
+</div>
+<div class="button-demo" aria-hidden="true"><span class="primary">Primary (bold)</span><span class="secondary">Secondary (italic)</span><a href="#branding">Text link</a></div>
+<h3>Lists</h3>
+<p>Bulleted and numbered lists use the body text color and size. Several blocks give lists their own design: <a href="#block-area-list">Area List</a> turns a list of links into a city grid, <a href="#block-provider-list">Provider List</a> shows feature bullets, the footer turns each heading-plus-list into a column, and the nav's list becomes the menu. Keep list items short, and use links inside list items where the catalog calls for them.</p>
+<h3>Section styling with Section Metadata</h3>
+<p>Add a <code>Section Metadata</code> table inside a section to change its width, layout, spacing, background or color scheme. No page uses it yet, so every option below is available without affecting existing content.</p>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Example: a standard-width, three-column, dark section</caption>
+<thead><tr><th colspan="2">Section Metadata</th></tr></thead>
+<tbody>
+<tr><td>Container</td><td>standard</td></tr>
+<tr><td>Grid</td><td>3</td></tr>
+<tr><td>Gap</td><td>m</td></tr>
+<tr><td>Spacing</td><td>l</td></tr>
+<tr><td>Color Scheme</td><td>dark</td></tr>
+<tr><td>Align</td><td>center</td></tr>
+</tbody>
+</table>
+</div>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Field</th><th>Values</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Container</td><td><code>narrow</code>, <code>standard</code>, <code>full</code></td><td>800px, 1200px, or full width</td></tr>
+<tr><td>Grid</td><td><code>1</code>–<code>6</code></td><td>Blocks side by side: stacked below 768px, up to two columns from 768px, the chosen count from 1200px</td></tr>
+<tr><td>Gap / Spacing</td><td><code>none</code>, <code>xs</code>, <code>s</code>, <code>m</code>, <code>l</code>, <code>xl</code>, <code>xxl</code></td><td>Space between grid items / padding above and below the section</td></tr>
+<tr><td>Color Scheme</td><td><code>light</code>, <code>dark</code></td><td>Dark uses the inverse (navy) surface and light text</td></tr>
+<tr><td>Background</td><td><code>subtle</code>, <code>muted</code>, <code>highlight</code>, <code>inverse</code>, a brand gradient such as <code>--gradient-brand</code>, or an image</td><td>Section background. Set Color Scheme too when using a custom color or image.</td></tr>
+<tr><td>Align</td><td><code>left</code>, <code>center</code>, <code>right</code></td><td>Alignment of plain text in the section</td></tr>
+<tr><td>Anchor</td><td>an ID without spaces</td><td>Link target, e.g. <code>/en/#featured-plans</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>The older <code>Style: light</code> and <code>Style: highlight</code> values still give a tinted band. Full details are in the <a href="style-system.html#authoring-sections-in-da">style system guide</a>.</p>
+</section>
+
+<section id="adhoc">
+<h2>Individual, low-impact edits in Experience Workspace</h2>
+<p>Most day-to-day work is a small change to one block on one page. Experience Workspace has three editing modes: <strong>Layout</strong> (the page as visitors see it; click an element with a blue border and type), <strong>Content</strong> (the underlying document with block tables) and <strong>Split</strong> (both side by side). Use Layout for wording and images, and Content or Split when you need to see rows and cells.</p>
+<p class="note">These edits affect only the page you are on. Nothing changes on the site until you preview and publish that page.</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Block</th><th>Safe ad-hoc edits (Layout mode)</th><th>Use Content mode for</th></tr></thead>
+<tbody>
+<tr><td>ZIP Hero</td><td>Headline, subhead, ZIP label, moving question</td><td>Swapping the background photos (rows 4–6)</td></tr>
+<tr><td>Provider Hero</td><td>H1, intro copy, image and its alt text</td><td>Adding or removing the back link; the mobile image of the <code>areas</code> variant</td></tr>
+<tr><td>Details Cards</td><td>Card titles, copy, icon and alt text</td><td>Adding or removing a card row</td></tr>
+<tr><td>Provider Contact</td><td>Heading, copy, phone number (keep it bold)</td><td>—</td></tr>
+<tr><td>Plan Explorer</td><td>Heading and copy</td><td>Background photo row</td></tr>
+<tr><td>Provider List / Provider Cards</td><td>Descriptions, bullet points, link text</td><td>Adding a provider row; logos</td></tr>
+<tr><td>Plan Cards</td><td>Intro heading and lead paragraph</td><td>The logo row and hand-authored cards. ZIP results come from the plans sheet, not the page.</td></tr>
+<tr><td>Personalization / Pool Savings</td><td>Greeting, recommendation heading, tip copy and "Save …" lines</td><td>Badges row; adding tips</td></tr>
+<tr><td>FAQ Hero</td><td>Title, placeholder text</td><td>Adding a results-page link</td></tr>
+<tr><td>FAQ Category Cards</td><td>Category title, description, link text</td><td>Adding or reordering categories</td></tr>
+<tr><td>Details FAQ / FAQ Accordion</td><td>Question and answer text</td><td>Adding, removing or reordering questions</td></tr>
+<tr><td>Choice Guide</td><td>Step titles and copy</td><td>Illustration and step icons</td></tr>
+<tr><td>Reviews Carousel</td><td>Review text and author line</td><td>Adding or removing reviews</td></tr>
+<tr><td>Area List / Popular Areas</td><td>City names and excerpts</td><td>Adding entries (each needs its link)</td></tr>
+<tr><td>Fetch Plans</td><td>Intro text and button label on that page</td><td>— (to change all pages, see the next section)</td></tr>
+<tr><td>Columns</td><td>Text and images in each column</td><td>Adding or removing a column</td></tr>
+</tbody>
+</table>
+</div>
+<h3>Quick edit routine</h3>
+<ol>
+<li>Open the page in Experience Workspace (or use <strong>Edit</strong> in the Sidekick from the preview page).</li>
+<li>Make the change in Layout mode. Check the result in Split view if the block has several rows.</li>
+<li>Use the <strong>Send</strong> menu → <strong>Preview</strong>, check the page at desktop and phone width, then <strong>Publish</strong>.</li>
+<li>If something goes wrong, open <strong>Version History</strong> to compare or restore the previous version.</li>
+</ol>
+</section>
+
+<section id="template-ops">
+<h2>Template-level operations that affect many pages</h2>
+<p>Some changes are made once and appear on every related page. Use these instead of editing pages one by one. Each row says what to change, where, and how many pages it reaches.</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Change</th><th>Edit this</th><th>Reaches</th><th>After editing</th></tr></thead>
+<tbody>
+<tr><td>Menu links, phone number, Español line, Find a Plan button</td><td><code>/en/nav</code>, <code>/es/nav</code>, <code>/nav</code></td><td>Every page in that language, plus the Secondary Nav, which reuses the menu</td><td>Preview and publish the nav document only</td></tr>
+<tr><td>Footer columns, provider links, service hours, copyright</td><td><code>/en/footer</code>, <code>/es/footer</code>, <code>/footer</code></td><td>Every page in that language</td><td>Preview and publish the footer document</td></tr>
+<tr><td>Plan prices, terms, badges, filter tags, which plans show for which ZIP</td><td>Sheets <a href="https://da.live/sheet#/adobedrago/nrg/en/data/plans">en/data/plans</a>, <a href="https://da.live/sheet#/adobedrago/nrg/es/data/plans">es/data/plans</a>, <code>data/plans</code> (tabs <code>plans</code> and <code>zips</code>)</td><td>Every ZIP search on the plans and personalized pages</td><td>Preview and publish the sheet</td></tr>
+<tr><td>Layout of all city pages, blog posts, FAQ categories or FAQ questions</td><td>Code template (developer): <code>templates/{name}/</code></td><td>125 / 101 / 10 / 24 pages</td><td>Merge to <code>main</code>; no republishing needed</td></tr>
+<tr><td>Look of a block everywhere (e.g. all plan cards)</td><td>Block code and CSS (developer)</td><td>Every page using the block</td><td>Merge to <code>main</code></td></tr>
+<tr><td>Brand colors, fonts, spacing, dark theme</td><td><code>styles/brand.css</code>, <code>styles/themes.css</code> (developer)</td><td>The whole site</td><td>Merge to <code>main</code></td></tr>
+<tr><td>Starting point for future pages</td><td>Starter templates in <code>/tools/sidekick/templates/</code></td><td>Only pages created afterwards</td><td>Nothing to publish</td></tr>
+<tr><td>Redirects for moved or removed pages</td><td><code>redirects.json</code> sheet in DA</td><td>The listed addresses</td><td>Preview and publish the sheet</td></tr>
+</tbody>
+</table>
+</div>
+<h3>Content that repeats but is authored on each page</h3>
+<p>Two blocks hold the same kind of content on many pages but are typed into each page separately: <strong>Fetch Plans</strong> (149 pages) and <strong>Popular Areas</strong> (125 pages). Changing their wording everywhere is a bulk edit:</p>
+<ul>
+<li><strong>Short term:</strong> ask the assistant to make the same change across the folder (see <a href="#chat-full">full-fledged chat authoring</a>), then preview and publish the changed pages with the <a href="#bulk">Bulk app</a>.</li>
+<li><strong>Recommended:</strong> have a developer move the shared Fetch Plans copy into a <a href="#block-fragment">Fragment</a> (for example <code>/en/fragments/fetch-plans</code>) or into the template code, so the next change is a single edit.</li>
+</ul>
+<p>Page metadata that should be the same across a folder (for example a default social image for all area pages) can also be managed centrally with a bulk metadata sheet. This site doesn't use one yet; a developer can add it.</p>
+</section>
+
+<section id="design-system">
+<h2>Design system approach and dark mode</h2>
+<p>The site's styling is a layered token system, documented in full in the <a href="style-system.html">style system guide</a>. In short:</p>
+<ol>
+<li><strong>Palette tokens</strong> name raw colors (<code>--palette-purple-500</code> is <code>#7564c1</code>).</li>
+<li><strong>Semantic roles</strong> describe a purpose (<code>--color-text-primary</code>, <code>--color-surface-raised</code>, <code>--color-link</code>). Blocks use roles, never hex values.</li>
+<li><strong>Themes</strong> remap roles: the light theme is the foundation in <code>styles/brand.css</code>; the dark theme in <code>styles/themes.css</code> overrides roles only, so every block follows without changes.</li>
+<li><strong>Sections</strong> can switch scheme and layout through Section Metadata.</li>
+<li><strong>Blocks</strong> own their internal layout and any brand artwork (gradients, photos), which stays the same in both themes.</li>
+</ol>
+<div class="swatches">
+<div class="swatch"><span style="background:#131631"></span><p>Navy · <code>#131631</code><br>Titles, inverse surface</p></div>
+<div class="swatch"><span style="background:#7564c1"></span><p>Purple · <code>#7564c1</code><br>Links, primary buttons</p></div>
+<div class="swatch"><span style="background:#d8479a"></span><p>Pink · <code>#d8479a</code><br>Accents, hover, eyebrows</p></div>
+<div class="swatch"><span style="background:#5b5c69"></span><p>Slate · <code>#5b5c69</code><br>Body copy</p></div>
+<div class="swatch"><span style="background:#f2f2f2"></span><p>Muted · <code>#f2f2f2</code><br>Inputs, tags, footer</p></div>
+<div class="swatch"><span style="background:linear-gradient(135deg,#7564c1,#d8479a)"></span><p>Brand gradient<br><code>--gradient-brand</code></p></div>
+</div>
+<h3>Extending the system</h3>
+<ul>
+<li>Change a color everywhere: edit its semantic role in <code>brand.css</code> (and its dark value in <code>themes.css</code>).</li>
+<li>Add a block: use semantic roles only; choose its surface (<code>raised</code> for cards) and bind its foreground hooks so it stays readable in dark sections.</li>
+<li>Third-party logos: put them on the logo plate tokens so they get a light plate in dark mode.</li>
+<li>Check every change in both themes and inside a <code>Color Scheme: dark</code> section, at phone and desktop widths.</li>
+</ul>
+<h3>Demo: dark mode</h3>
+<p>Dark mode is chosen in this order: a page's <code>Theme</code> metadata (pins the page), then the visitor's switch, then the device setting, then light.</p>
+<ol>
+<li>Open any page, for example the <a href="https://main--nrg--adobedrago.aem.page/en/">English homepage</a>.</li>
+<li>Select <strong>Menu</strong> and turn on <strong>Dark mode</strong> (<strong>Modo oscuro</strong> on Spanish pages). The page switches instantly and the choice is remembered on that device.</li>
+<li>Browse to a provider page, a ZIP search such as <a href="https://main--nrg--adobedrago.aem.page/en/plans?zip=75001">75001</a>, and the FAQs to show how cards, plan results and forms adapt while brand artwork stays the same.</li>
+<li>To show the automatic behavior, turn the switch off, clear the site's data in the browser, and change the operating system's appearance to dark: the site follows it live.</li>
+<li>To show pinning, add <code>Theme | light</code> to a page's Metadata: the switch disappears on that page.</li>
+</ol>
+<figure style="margin:0 0 24px"><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/dark-mode-switch.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: The menu open on the homepage, showing the Dark mode switch"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/dark-mode-switch.jpg" width="1280" height="900" loading="lazy" decoding="async" alt="The menu open on the homepage, showing the Dark mode switch"></a><figcaption class="screenshot-note">The Dark mode switch at the bottom of the menu.</figcaption></figure>
+<div class="screenshot-pair">
+<figure><figcaption><strong>Homepage</strong> · light</figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-home-light.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Homepage in the light theme"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-home-light.jpg" width="1280" height="900" loading="lazy" decoding="async" alt="Homepage in the light theme"></a></figure>
+<figure><figcaption><strong>Homepage</strong> · dark</figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-home-dark.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Homepage in the dark theme"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-home-dark.jpg" width="1280" height="900" loading="lazy" decoding="async" alt="Homepage in the dark theme"></a></figure>
+<figure><figcaption><strong>Plan results (75001)</strong> · light</figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-plans-light.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Plan results in the light theme"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-plans-light.jpg" width="1280" height="900" loading="lazy" decoding="async" alt="Plan results in the light theme"></a></figure>
+<figure><figcaption><strong>Plan results (75001)</strong> · dark</figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-plans-dark.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Plan results in the dark theme"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-plans-dark.jpg" width="1280" height="900" loading="lazy" decoding="async" alt="Plan results in the dark theme"></a></figure>
+<figure><figcaption><strong>Provider page</strong> · light</figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-provider-light.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Reliant provider page in the light theme"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-provider-light.jpg" width="1280" height="900" loading="lazy" decoding="async" alt="Reliant provider page in the light theme"></a></figure>
+<figure><figcaption><strong>Provider page</strong> · dark</figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-provider-dark.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Reliant provider page in the dark theme"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-provider-dark.jpg" width="1280" height="900" loading="lazy" decoding="async" alt="Reliant provider page in the dark theme"></a></figure>
+<figure><figcaption><strong>FAQs</strong> · light</figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-faqs-light.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: FAQ landing page in the light theme"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-faqs-light.jpg" width="1280" height="900" loading="lazy" decoding="async" alt="FAQ landing page in the light theme"></a></figure>
+<figure><figcaption><strong>FAQs</strong> · dark</figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-faqs-dark.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: FAQ landing page in the dark theme"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/theme-faqs-dark.jpg" width="1280" height="900" loading="lazy" decoding="async" alt="FAQ landing page in the dark theme"></a></figure>
+</div>
+<p class="note warn"><strong>Known dark-mode gap:</strong> the benefit icons on provider pages are authored PNGs in dark purple line art, so they have low contrast on dark cards (visible in the provider screenshot above). Options: upload light versions, or have a developer add a light plate behind Details Cards icons in dark mode.</p>
+</section>
+
+<section id="chat-content">
+<h2>Chat-based authoring: content only</h2>
+<p>Experience Workspace includes an <strong>Assistant</strong> panel (the AI chat available in most windows). In content-only mode you use it to change <em>what the page says</em> without changing its structure: no blocks added, removed or renamed, and no change to rows, cells, templates or metadata keys.</p>
+<h3>Good content-only tasks</h3>
+<ul>
+<li>Rewrite or shorten copy in a block, keeping its rows and cells.</li>
+<li>Fix spelling, tone and terminology across a page.</li>
+<li>Write or improve alt text, page titles and descriptions.</li>
+<li>Draft Spanish copy for a page from its English version for a translator to review.</li>
+<li>Fix preflight warnings such as a missing H1 or title.</li>
+</ul>
+<h3>Example prompts</h3>
+<p class="prompt">On this page, rewrite the intro paragraph in the Provider Hero to be under 50 words and more benefit-led. Don't change any other block.</p>
+<p class="prompt">Check every image on this page for missing or unhelpful alt text and suggest improvements. Apply them after I confirm.</p>
+<p class="prompt">Write a meta description under 155 characters for this page and put it in the Metadata table's Description row.</p>
+<p class="prompt">Translate the Details Cards copy on /en/providers/cirro into Spanish for /es/providers/cirro. Keep brand names and the table structure exactly the same.</p>
+<h3>Guardrails</h3>
+<ul>
+<li>Start prompts with the scope ("on this page", "in the Details Cards block only") and say what must not change.</li>
+<li>The assistant asks for confirmation before it changes content; read the proposal before approving. Responses can be wrong.</li>
+<li>Always preview the page before publishing an assistant change. Use Version History to undo.</li>
+<li>Keep brand names, prices and legal text (PUCT registration, plan terms) exactly as supplied. Never let the assistant invent plan details.</li>
+</ul>
+</section>
+
+<section id="chat-full">
+<h2>Chat-based authoring: full-fledged</h2>
+<p>Full-fledged chat authoring lets the assistant change structure as well as content: create pages, insert templates and blocks, restructure sections and work across many pages. It is powerful and needs a review step every time.</p>
+<h3>What it can do on this site</h3>
+<ul>
+<li><strong>Create pages from a template</strong>: "Create /en/areas-of-service/pflugerville from the Service Area Page template, using this copy…"</li>
+<li><strong>Add or rearrange blocks</strong>: "Add a Reviews Carousel after the Provider Cards on /en/ with these three reviews."</li>
+<li><strong>Apply section styling</strong>: "Put the Choice Guide on /en/providers/ in a section with Background subtle and Spacing l."</li>
+<li><strong>Fix pages to match the catalog</strong>: "Check every block on this page against the documented structure and fix rows that are out of order."</li>
+<li><strong>Multi-page edits</strong>: "In every page under /en/areas-of-service/, change the Fetch Plans button text to 'Compare plans'. List the pages you changed."</li>
+<li><strong>Maintain the block library</strong>: the assistant has already been used to fix the library pages (separating each example heading and block into their own sections).</li>
+</ul>
+<h3>Assistant memory and skills</h3>
+<p>The assistant keeps project memory in <code>/.da/agent/memory.md</code> and a log of recent changes in <code>/.da/agent/recent-pages.json</code>. Prompts and skills are managed from the <strong>+</strong> menu (<strong>Manage Prompts</strong>, <strong>Manage Coworker</strong>).</p>
+<p class="note warn"><strong>Correct the memory before relying on it.</strong> The current memory file describes blocks and variants that do not exist in the code (Accordion, Tabs, Hero "left aligned/centered/dark", Cards "icon/two-up") and treats the block library as the source of truth. Replace those entries with the <a href="#block-catalog">block catalog</a> in this guide, and add rules such as "use absolute <code>content.da.live</code> image URLs in library pages" that are still valid.</p>
+<h3>Developer-side AI agents</h3>
+<p>Developers also use coding agents (for example Claude Code with Adobe's AEM Edge Delivery skills) on the repository. These can build or change blocks, import pages from the original site, and push content to DA through its API. Treat them like any developer: work on a branch, open a pull request, review on a preview branch URL, and only then merge and publish.</p>
+<h3>Review checklist for structural changes</h3>
+<ol>
+<li>Ask the assistant to list every page it changed.</li>
+<li>Open each page in Split view and check block names, row order and metadata.</li>
+<li>Preview all changed pages (one at a time, or with the Bulk app) and check desktop and phone widths.</li>
+<li>Publish only after review. Restore from Version History if needed.</li>
+</ol>
+</section>
+
+<section id="bulk">
+<h2>Other bulk authoring operations</h2>
+<h3>Bulk preview, publish, version, index and delete</h3>
+<p>The <strong>Bulk</strong> app (under <strong>Apps</strong> in Experience Workspace) runs one operation on a list of page addresses.</p>
+<ol>
+<li>Collect the addresses: in the content browser, tick documents (or the folder's select-all box) and choose <strong>Share</strong> to copy their URLs. The <strong>Traverse</strong> tool lists everything below a folder.</li>
+<li>Open <strong>Apps → Bulk</strong>, paste the URLs, choose an operation (<strong>Preview</strong>, <strong>Publish</strong>, <strong>Version</strong>, <strong>Index</strong> or <strong>Delete</strong>) and select <strong>Submit</strong>.</li>
+<li>Watch the Remaining, Errors, Success and Total counts; open each category to see which pages failed.</li>
+</ol>
+<p class="note">Delete removes pages from the preview and live sites and from the indexes. It does not delete the documents themselves. Use it to take pages down; delete the documents separately if they are no longer needed.</p>
+<h3>Data sheets</h3>
+<p>The plans and ZIP data is edited as a spreadsheet, which is itself a bulk operation: one sheet edit updates every ZIP search. See <a href="adding-a-provider.html#plans">the plans sheet column guide</a>.</p>
+<h3>Translation projects</h3>
+<p>Translation is configured for this site (English as the source language, Google as the service, merge on rollout to keep regional edits). Use <strong>Translation Projects</strong> to send a set of English pages for translation and roll the results out to <code>/es/</code>, then review and publish the Spanish pages.</p>
+<h3>Search and query indexes</h3>
+<p>Two indexes are built automatically when pages are published: <code>/query-index.json</code> (used by the Blog List) and <code>/search-index.json</code> (used by the FAQ search). If a published page is missing from search, run <strong>Index</strong> on it with the Bulk app. Index fields are defined by developers in <code>helix-query.yaml</code>.</p>
+<h3>Snapshots</h3>
+<p>A snapshot groups several pages, across languages if needed, so they can be reviewed and published together, for example a new provider in English and Spanish. Each page gets a shareable review URL (optionally password-protected). <strong>Request review</strong> locks the snapshot; a reviewer then chooses <strong>Approve &amp; publish</strong> to release the whole group or <strong>Reject &amp; unlock</strong> to send it back. Scheduled publishing is an early-access option Adobe must enable.</p>
+</section>
+
+<section id="custom-blocks">
+<h2>Highly customized blocks</h2>
+<p>13 blocks were built specifically for this site and contain logic beyond layout. They are the ones to understand before changing content or code.</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Block</th><th>What makes it custom</th><th>Depends on</th><th>Developer needed for</th></tr></thead>
+<tbody>
+<tr><td><a href="#block-plan-cards">Plan Cards</a></td><td>Reads the ZIP from the address, filters the plans sheet by ZIP, state or utility, sorts, renders badges, logos, contact lines and filter chips; falls back to authored cards</td><td><code>{locale}/data/plans.json</code>, the logo row, <code>BRANDS</code> in code</td><td>New providers (name, hours, logo matching), the shared phone number</td></tr>
+<tr><td><a href="#block-zip-hero">ZIP Hero</a></td><td>Art-directed background photos, swoosh overlay, shared ZIP form with moving question</td><td><code>scripts/zip-form.js</code></td><td>Changes to the ZIP form or where it sends visitors</td></tr>
+<tr><td><a href="#block-faq-hero">FAQ Hero</a></td><td>Type-ahead search over the site search index with keyboard support and Spanish accent handling</td><td><code>/search-index.json</code>, the ffetch library</td><td>Search fields or ranking</td></tr>
+<tr><td><a href="#block-faq-category-cards">FAQ Category Cards</a></td><td>Icons chosen from the category link, gradient artwork, zoom-on-hover</td><td><code>icons/faq/</code></td><td>Icons for new categories</td></tr>
+<tr><td><a href="#block-details-faq">Details FAQ</a></td><td>Infers title, questions and button label from cell contents</td><td>—</td><td>—</td></tr>
+<tr><td><a href="#block-personalization">Personalization</a> and <a href="#block-pool-savings">Pool Savings</a></td><td>Badges split from text; "Save …" highlighting</td><td>—</td><td>Real personalization data</td></tr>
+<tr><td><a href="#block-provider-hero">Provider Hero</a></td><td>Detects detail vs landing layout; <code>areas</code> variant merges two images into one responsive picture and adds the ZIP form</td><td><code>scripts/zip-form.js</code></td><td>—</td></tr>
+<tr><td><a href="#block-plan-explorer">Plan Explorer</a> and <a href="#block-fetch-plans">Fetch Plans</a></td><td>ZIP search embedded in authored content</td><td><code>scripts/zip-form.js</code></td><td>Making Fetch Plans shared (fragment or template)</td></tr>
+<tr><td><a href="#block-blog-list">Blog List</a></td><td>Merges a bundled post snapshot with the query index; featured card and Load more</td><td><code>data/blog-posts.json</code>, <code>/query-index.json</code></td><td>Retiring the snapshot once all posts are indexed</td></tr>
+<tr><td><a href="#block-secondary-nav">Secondary Nav</a></td><td>Auto-inserted by template; reuses the nav menu; highlights the current section</td><td>The <code>nav</code> document</td><td>Which templates get it</td></tr>
+<tr><td><a href="#block-popular-areas">Popular Areas</a></td><td>Tag/heading/excerpt list built from free-form rows</td><td>—</td><td>Generating it automatically instead of per page</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="block-catalog">
+<h2>Block catalog</h2>
+<p>All 28 blocks in the repository are covered below, highly customized blocks first. The "Used on" counts come from the preview index on the reference date. Header and footer are built automatically from the nav and footer documents.</p>
+<label for="block-filter">Filter blocks by name, purpose or option</label>
+<input id="block-filter" type="search" placeholder="Try zip, logo, faq or variant" aria-describedby="block-count">
+<p id="block-count" role="status">28 blocks</p>
+<div class="catalog-index">
+<a href="#block-zip-hero">ZIP Hero</a>
+<a href="#block-plan-cards">Plan Cards</a>
+<a href="#block-personalization">Personalization</a>
+<a href="#block-pool-savings">Pool Savings</a>
+<a href="#block-faq-hero">FAQ Hero</a>
+<a href="#block-faq-category-cards">FAQ Category Cards</a>
+<a href="#block-details-faq">Details FAQ</a>
+<a href="#block-provider-hero">Provider Hero</a>
+<a href="#block-plan-explorer">Plan Explorer</a>
+<a href="#block-fetch-plans">Fetch Plans</a>
+<a href="#block-blog-list">Blog List</a>
+<a href="#block-secondary-nav">Secondary Nav</a>
+<a href="#block-popular-areas">Popular Areas</a>
+<a href="#block-provider-cards">Provider Cards</a>
+<a href="#block-provider-list">Provider List</a>
+<a href="#block-provider-contact">Provider Contact</a>
+<a href="#block-details-cards">Details Cards</a>
+<a href="#block-choice-guide">Choice Guide</a>
+<a href="#block-reviews-carousel">Reviews Carousel</a>
+<a href="#block-area-list">Area List</a>
+<a href="#block-faq-accordion">FAQ Accordion</a>
+<a href="#block-zip-cta">ZIP CTA</a>
+<a href="#block-columns">Columns</a>
+<a href="#block-cards">Cards</a>
+<a href="#block-hero">Hero</a>
+<a href="#block-fragment">Fragment</a>
+<a href="#block-header">Header</a>
+<a href="#block-footer">Footer</a>
+</div>
+<article class="block-entry" id="block-zip-hero">
+<p class="eyebrow">Custom block <span class="tag custom">built for this site</span></p>
+<h3>ZIP Hero</h3>
+<p><code>zip-hero</code> · Homepage hero: headline, the ZIP lookup card, a full-bleed photo and the purple/pink swoosh.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/index">/en/index in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/zip-hero.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: ZIP Hero as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/zip-hero.jpg" width="1265" height="558" loading="lazy" decoding="async" alt="ZIP Hero as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/zip-hero-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: ZIP Hero authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/zip-hero-da.jpg" width="800" height="1000" loading="lazy" decoding="async" alt="ZIP Hero authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">ZIP Hero</th></tr></thead>
+<tbody>
+<tr><td>H1: Find your energy match.<br>Paragraph: Shop and compare electricity plans…</td></tr>
+<tr><td>ZIP field label: Enter your ZIP code</td></tr>
+<tr><td>Moving question: Moving to a new address? Yes No</td></tr>
+<tr><td>Image: desktop background photo</td></tr>
+<tr><td>Image (optional): mobile background photo</td></tr>
+<tr><td>Image (optional): transparent swoosh PNG</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants. Rows are read by position: leave an optional image row empty rather than deleting it.</p>
+<h4>Authoring notes</h4>
+<p>Put it in the first section so the header overlaps it. Submitting a ZIP opens <code>{locale}/plans?zip=XXXXX</code>, which the Plan Cards block reads. The Yes/No buttons are generated from the words in row 3. Full reference: <a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/zip-hero/README.md">zip-hero README</a>.</p>
+<p class="reference-link">Used on 2 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/">/en/</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/index">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/es/">/es/</a> (<a href="https://da.live/edit#/adobedrago/nrg/es/index">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/zip-hero/zip-hero.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-plan-cards">
+<p class="eyebrow">Custom block <span class="tag custom">built for this site</span></p>
+<h3>Plan Cards</h3>
+<p><code>plan-cards</code> · Plan results for a ZIP code, read from the plans sheet, with filter chips; or hand-authored plan cards when there is no ZIP in the address.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/plans">/en/plans in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/plan-cards.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Plan Cards as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/plan-cards.jpg" width="1265" height="1500" loading="lazy" decoding="async" alt="Plan Cards as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/plan-cards-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Plan Cards authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/plan-cards-da.jpg" width="800" height="1000" loading="lazy" decoding="async" alt="Plan Cards authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">Plan Cards</th></tr></thead>
+<tbody>
+<tr><td>H2: Electricity Plans for ZIP 92677<br>Lead paragraph</td></tr>
+<tr><td>H3: plan name · rate (e.g. 9.9 cents/kWh) · term · provider · description · link<br><em>one row per authored card; the first gets the "Best Value" badge</em></td></tr>
+<tr><td>Logo row: one image per provider, nothing else (alt text = provider name)</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>Two modes. <strong>ZIP results</strong> (<code>?zip=75001</code>): cards come from <code>{locale}/data/plans.json</code> (<code>zips</code> and <code>plans</code> tabs). <strong>Authored</strong> (no ZIP): shows the cards written in the block.</p>
+<h4>Authoring notes</h4>
+<p>The logo row is never shown as a row; each logo is matched to plans by its alt text. Provider names, customer-service hours and the shared phone number are set in code (<code>BRANDS</code>), so a new provider needs a developer (see <a href="adding-a-provider.html">Adding a new provider</a>). Full reference: <a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/plan-cards/README.md">plan-cards README</a>.</p>
+<p class="reference-link">Used on 5 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/plans">/en/plans</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/plans">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/es/plans">/es/plans</a> (<a href="https://da.live/edit#/adobedrago/nrg/es/plans">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/plans">/plans</a> (<a href="https://da.live/edit#/adobedrago/nrg/plans">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/en/personalized/92677">/en/personalized/92677</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/personalized/92677">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/es/personalized/92677">/es/personalized/92677</a> (<a href="https://da.live/edit#/adobedrago/nrg/es/personalized/92677">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/plan-cards/plan-cards.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-personalization">
+<p class="eyebrow">Custom block <span class="tag custom">built for this site</span></p>
+<h3>Personalization</h3>
+<p><code>personalization</code> · Gradient band at the top of a personalized results page: a greeting, the shopper's ZIP and pool badges, and a recommendation heading.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/personalized/92677">/en/personalized/92677 in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/personalization.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Personalization as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/personalization.jpg" width="1265" height="488" loading="lazy" decoding="async" alt="Personalization as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/personalization-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Personalization authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/personalization-da.jpg" width="801" height="293" loading="lazy" decoding="async" alt="Personalization authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">Personalization</th></tr></thead>
+<tbody>
+<tr><td>Heading + personalized intro</td></tr>
+<tr><td>Badges, separated by commas or "and": e.g. 92677, Pool owner and High usage</td></tr>
+<tr><td>Recommendation heading</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants. Rows are read by position.</p>
+<h4>Authoring notes</h4>
+<p>Row 2 is split into separate pill badges at commas and the word "and". Used with Pool Savings and Plan Cards on the personalized template.</p>
+<p class="reference-link">Used on 2 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/personalized/92677">/en/personalized/92677</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/personalized/92677">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/es/personalized/92677">/es/personalized/92677</a> (<a href="https://da.live/edit#/adobedrago/nrg/es/personalized/92677">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/personalization/personalization.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-pool-savings">
+<p class="eyebrow">Custom block <span class="tag custom">built for this site</span></p>
+<h3>Pool Savings</h3>
+<p><code>pool-savings</code> · Intro plus a set of energy-saving tips, each ending in a highlighted "Save …" line.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/personalized/92677">/en/personalized/92677 in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/pool-savings.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Pool Savings as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/pool-savings.jpg" width="1265" height="703" loading="lazy" decoding="async" alt="Pool Savings as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/pool-savings-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Pool Savings authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/pool-savings-da.jpg" width="801" height="702" loading="lazy" decoding="async" alt="Pool Savings authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">Pool Savings</th></tr></thead>
+<tbody>
+<tr><td>Intro: heading + paragraph</td></tr>
+<tr><td>Tip: icon/heading, copy, last paragraph "Save $… a year"</td></tr>
+<tr><td>… one row per tip</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants.</p>
+<h4>Authoring notes</h4>
+<p>A tip's last paragraph is highlighted automatically when it starts with the word "Save".</p>
+<p class="reference-link">Used on 2 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/personalized/92677">/en/personalized/92677</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/personalized/92677">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/es/personalized/92677">/es/personalized/92677</a> (<a href="https://da.live/edit#/adobedrago/nrg/es/personalized/92677">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/pool-savings/pool-savings.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-faq-hero">
+<p class="eyebrow">Custom block <span class="tag custom">built for this site</span></p>
+<h3>FAQ Hero</h3>
+<p><code>faq-hero</code> · FAQ landing title with the pink accent bar and a search box that suggests matching questions as you type.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/faqs">/en/faqs in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/faq-hero.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: FAQ Hero as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/faq-hero.jpg" width="1265" height="478" loading="lazy" decoding="async" alt="FAQ Hero as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/faq-hero-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: FAQ Hero authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/faq-hero-da.jpg" width="801" height="106" loading="lazy" decoding="async" alt="FAQ Hero authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">FAQ Hero</th></tr></thead>
+<tbody>
+<tr><td>H1: Frequently asked questions</td></tr>
+<tr><td>(optional) Placeholder text, e.g. Escribe tu pregunta, plus an optional link to a results page</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants. With a results-page link in row 2, submitting sends <code>?search-faq=…</code> to that page; without one, it opens the best match.</p>
+<h4>Authoring notes</h4>
+<p>Suggestions come from the site search index (<code>/search-index.json</code>, defined in <code>helix-query.yaml</code>) through the ffetch library. New or changed FAQ pages appear in search after they are published and re-indexed.</p>
+<p class="reference-link">Used on 2 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/faqs">/en/faqs</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/faqs">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/es/faqs">/es/faqs</a> (<a href="https://da.live/edit#/adobedrago/nrg/es/faqs">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/faq-hero/faq-hero.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-faq-category-cards">
+<p class="eyebrow">Custom block <span class="tag custom">built for this site</span></p>
+<h3>FAQ Category Cards</h3>
+<p><code>faq-category-cards</code> · Gradient tiles linking to the five FAQ categories, with the original site's icons and zoom-on-hover.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/faqs">/en/faqs in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/faq-category-cards.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: FAQ Category Cards as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/faq-category-cards.jpg" width="1265" height="448" loading="lazy" decoding="async" alt="FAQ Category Cards as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/faq-category-cards-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: FAQ Category Cards authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/faq-category-cards-da.jpg" width="801" height="624" loading="lazy" decoding="async" alt="FAQ Category Cards authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">FAQ Category Cards</th></tr></thead>
+<tbody>
+<tr><td>H3: About electricity plans<br>Description (used as the tile's tooltip)<br>Bold link: Learn more → /en/faqs/about-electricity-plans</td></tr>
+<tr><td>… one row per category</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants. Tile colors follow row position (5 gradients).</p>
+<h4>Authoring notes</h4>
+<p>The icon is chosen from the category name at the end of the link (e.g. <code>power-outages</code>), so reordering rows keeps icons correct. A new category gets an icon by position until a developer adds one in <code>icons/faq/</code>.</p>
+<p class="reference-link">Used on 3 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/faqs">/en/faqs</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/faqs">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/es/faqs">/es/faqs</a> (<a href="https://da.live/edit#/adobedrago/nrg/es/faqs">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/faqs">/faqs</a> (<a href="https://da.live/edit#/adobedrago/nrg/faqs">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/faq-category-cards/faq-category-cards.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-details-faq">
+<p class="eyebrow">Custom block <span class="tag custom">built for this site</span></p>
+<h3>Details FAQ</h3>
+<p><code>details-faq</code> · A titled list of questions with their full answers and a "Back to top" button.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/faqs">/en/faqs in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/details-faq.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Details FAQ as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/details-faq.jpg" width="1265" height="831" loading="lazy" decoding="async" alt="Details FAQ as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/details-faq-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Details FAQ authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/details-faq-da.jpg" width="801" height="535" loading="lazy" decoding="async" alt="Details FAQ authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="2">Details FAQ</th></tr></thead>
+<tbody>
+<tr><td>Most frequently asked</td><td>(empty)</td></tr>
+<tr><td>What is a fixed-rate energy plan?</td><td>Answer copy</td></tr>
+<tr><td>… one row per question</td><td></td></tr>
+<tr><td>Back to top</td><td>(empty)</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants. A one-cell row before the questions is the title; one after them is the button label.</p>
+<h4>Authoring notes</h4>
+<p>A row counts as a question only when its second cell has content. Links inside answers stay plain links (not buttons).</p>
+<p class="reference-link">Used on 1 page. Example: <a href="https://main--nrg--adobedrago.aem.page/en/faqs">/en/faqs</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/faqs">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/details-faq/details-faq.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-provider-hero">
+<p class="eyebrow">Custom block <span class="tag custom">built for this site</span></p>
+<h3>Provider Hero</h3>
+<p><code>provider-hero</code> · Hero for provider pages, the Providers landing page and the Areas of Service landing page.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/providers/reliant">/en/providers/reliant in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-hero.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Provider Hero as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-hero.jpg" width="1265" height="595" loading="lazy" decoding="async" alt="Provider Hero as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-hero-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Provider Hero authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-hero-da.jpg" width="801" height="293" loading="lazy" decoding="async" alt="Provider Hero authoring view in da.live"></a></figure></div>
+<p class="screenshot-note">Provider Hero (areas) on the Areas of Service landing page</p><div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-hero-areas.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Provider Hero (areas) on the Areas of Service landing page as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-hero-areas.jpg" width="1265" height="654" loading="lazy" decoding="async" alt="Provider Hero (areas) on the Areas of Service landing page as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-hero-areas-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Provider Hero (areas) on the Areas of Service landing page authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-hero-areas-da.jpg" width="801" height="832" loading="lazy" decoding="async" alt="Provider Hero (areas) on the Areas of Service landing page authoring view in da.live"></a></figure></div>
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="2">Provider Hero</th></tr></thead>
+<tbody>
+<tr><td>Link: Providers (back link, optional)<br>H1: Reliant Energy<br>Intro paragraph</td><td>Image</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p><code>Provider Hero</code>: with a back link it is a provider detail page; without one, the landing layout. <code>Provider Hero (areas)</code>: adds the ZIP search and takes two images (desktop first, mobile second).</p>
+<h4>Authoring notes</h4>
+<p>If the image has no alt text, the heading is used. Full reference: <a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/provider-hero/README.md">provider-hero README</a>.</p>
+<p class="reference-link">Used on 14 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/providers/reliant">/en/providers/reliant</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/providers/reliant">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/en/providers/">/en/providers/</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/providers/index">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/en/areas-of-service/">/en/areas-of-service/</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/areas-of-service/index">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/provider-hero/provider-hero.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-plan-explorer">
+<p class="eyebrow">Custom block <span class="tag custom">built for this site</span></p>
+<h3>Plan Explorer</h3>
+<p><code>plan-explorer</code> · Full-width band with copy and a white ZIP-search card over a fixed background photo and gradient.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/providers/reliant">/en/providers/reliant in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/plan-explorer.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Plan Explorer as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/plan-explorer.jpg" width="1265" height="483" loading="lazy" decoding="async" alt="Plan Explorer as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/plan-explorer-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Plan Explorer authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/plan-explorer-da.jpg" width="801" height="601" loading="lazy" decoding="async" alt="Plan Explorer authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="2">Plan Explorer</th></tr></thead>
+<tbody>
+<tr><td>H2: Find all energy electricity rates in your area<br>Paragraph</td><td>(optional) search label</td></tr>
+<tr><td>Image: background photo</td><td></td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants. Without row 2 only the gradient shows.</p>
+<h4>Authoring notes</h4>
+<p>Same content on every provider page. Full reference: <a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/plan-explorer/README.md">plan-explorer README</a>.</p>
+<p class="reference-link">Used on 13 pages. Example: <a href="https://main--nrg--adobedrago.aem.page/en/providers/reliant">/en/providers/reliant</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/providers/reliant">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/plan-explorer/plan-explorer.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-fetch-plans">
+<p class="eyebrow">Custom block <span class="tag custom">built for this site</span></p>
+<h3>Fetch Plans</h3>
+<p><code>fetch-plans</code> · Small ZIP card ("Enter your location to find plans") used in the sticky sidebar of article pages.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/areas-of-service/arlington">/en/areas-of-service/arlington in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/fetch-plans.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Fetch Plans as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/fetch-plans.jpg" width="318" height="316" loading="lazy" decoding="async" alt="Fetch Plans as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/fetch-plans-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Fetch Plans authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/fetch-plans-da.jpg" width="801" height="107" loading="lazy" decoding="async" alt="Fetch Plans authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="2">Fetch Plans</th></tr></thead>
+<tbody>
+<tr><td><strong>Enter your location</strong> to find plans in your area</td><td>(optional) button text: Fetch plans</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants.</p>
+<h4>Authoring notes</h4>
+<p>Authored on each of the 149 area, FAQ question and similar pages, so changing its wording everywhere is a bulk operation (see <a href="#template-ops">Template-level operations</a>). The article templates move it into the sidebar.</p>
+<p class="reference-link">Used on 149 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/areas-of-service/arlington">/en/areas-of-service/arlington</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/areas-of-service/arlington">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/en/faqs/what-is-a-tdsp">/en/faqs/what-is-a-tdsp</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/faqs/what-is-a-tdsp">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/fetch-plans/fetch-plans.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-blog-list">
+<p class="eyebrow">Custom block <span class="tag custom">built for this site</span></p>
+<h3>Blog List</h3>
+<p><code>blog-list</code> · Blog landing: a featured latest post, a grid of cards and a "Load more" button.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/blogs/index">/en/blogs/index in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/blog-list.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Blog List as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/blog-list.jpg" width="1265" height="1286" loading="lazy" decoding="async" alt="Blog List as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/blog-list-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Blog List authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/blog-list-da.jpg" width="801" height="83" loading="lazy" decoding="async" alt="Blog List authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="2">Blog List</th></tr></thead>
+<tbody>
+<tr><td>source</td><td>(optional) sheet or index URL</td></tr>
+<tr><td>page size</td><td>(optional) cards per load, default 6</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>Both rows are optional settings. An empty block lists the current language's posts.</p>
+<h4>Authoring notes</h4>
+<p>Posts come from a bundled snapshot of the migrated posts (<code>data/blog-posts.json</code> in the code) merged with the query index, so a newly published post appears automatically. Post cards use the post's Metadata (Title, Image, Date, Category).</p>
+<p class="reference-link">Used on 1 page. Example: <a href="https://main--nrg--adobedrago.aem.page/en/blogs/">/en/blogs/</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/blogs/index">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/blog-list/blog-list.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-secondary-nav">
+<p class="eyebrow">Custom block <span class="tag custom">built for this site</span></p>
+<h3>Secondary Nav</h3>
+<p><code>secondary-nav</code> · Desktop-only row of section links under the header, highlighting the current section.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/providers/reliant">/en/providers/reliant in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/secondary-nav.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Secondary Nav as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/secondary-nav.jpg" width="1265" height="27" loading="lazy" decoding="async" alt="Secondary Nav as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/secondary-nav-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Secondary Nav authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/secondary-nav-da.jpg" width="801" height="82" loading="lazy" decoding="async" alt="Secondary Nav authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">Secondary Nav</th></tr></thead>
+<tbody>
+<tr><td>(optional) bulleted list of links; leave empty to reuse the main menu</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants.</p>
+<h4>Authoring notes</h4>
+<p>Added automatically (no authoring) to pages whose Template is <code>blog-post</code>, <code>area-service</code> or <code>faq-category</code>. Authored as an empty block on 18 other pages.</p>
+<p class="reference-link">Used on 18 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/faqs">/en/faqs</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/faqs">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/en/providers/reliant">/en/providers/reliant</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/providers/reliant">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/secondary-nav/secondary-nav.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-popular-areas">
+<p class="eyebrow">Custom block <span class="tag custom">built for this site</span></p>
+<h3>Popular Areas</h3>
+<p><code>popular-areas</code> · A titled list of other areas, each with a small tag, a linked heading and an excerpt.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/areas-of-service/arlington">/en/areas-of-service/arlington in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/popular-areas.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Popular Areas as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/popular-areas.jpg" width="1265" height="872" loading="lazy" decoding="async" alt="Popular Areas as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/popular-areas-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Popular Areas authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/popular-areas-da.jpg" width="801" height="645" loading="lazy" decoding="async" alt="Popular Areas authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">Popular Areas</th></tr></thead>
+<tbody>
+<tr><td>Title (e.g. Popular areas)</td></tr>
+<tr><td>Tag paragraph · H3 with link · excerpt</td></tr>
+<tr><td>… one row per area</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants.</p>
+<h4>Authoring notes</h4>
+<p>Authored separately on all 125 area pages; see <a href="#template-ops">Template-level operations</a> before changing it site-wide.</p>
+<p class="reference-link">Used on 125 pages. Example: <a href="https://main--nrg--adobedrago.aem.page/en/areas-of-service/arlington">/en/areas-of-service/arlington</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/areas-of-service/arlington">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/popular-areas/popular-areas.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-provider-cards">
+<p class="eyebrow">Project block</p>
+<h3>Provider Cards</h3>
+<p><code>provider-cards</code> · "Featured providers": a logo strip on the homepage, or cards when some rows have no logo.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/index">/en/index in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-cards.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Provider Cards as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-cards.jpg" width="1265" height="286" loading="lazy" decoding="async" alt="Provider Cards as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-cards-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Provider Cards authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-cards-da.jpg" width="800" height="1000" loading="lazy" decoding="async" alt="Provider Cards authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">Provider Cards</th></tr></thead>
+<tbody>
+<tr><td>H3: Featured providers</td></tr>
+<tr><td>Logo · H3 Reliant Energy · paragraph · bold link View plans</td></tr>
+<tr><td>… one row per provider</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>When every card has a logo, the block becomes a linked logo strip (the homepage layout).</p>
+<h4>Authoring notes</h4>
+<p>If a logo has no alt text, the provider name from the heading is used.</p>
+<p class="reference-link">Used on 2 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/">/en/</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/index">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/es/">/es/</a> (<a href="https://da.live/edit#/adobedrago/nrg/es/index">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/provider-cards/provider-cards.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-provider-list">
+<p class="eyebrow">Project block</p>
+<h3>Provider List</h3>
+<p><code>provider-list</code> · Providers landing list: logo on the left, description, two bullet points and "Learn more" on the right.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/providers/index">/en/providers/index in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-list.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Provider List as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-list.jpg" width="1265" height="1229" loading="lazy" decoding="async" alt="Provider List as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-list-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Provider List authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-list-da.jpg" width="800" height="1000" loading="lazy" decoding="async" alt="Provider List authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="2">Provider List</th></tr></thead>
+<tbody>
+<tr><td>Logo</td><td>Description · bulleted features · link Learn more</td></tr>
+<tr><td>… one row per provider</td><td></td></tr>
+<tr><td>(no logo) Heading + copy for the "Ready to explore plans?" card</td><td></td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>A row without a logo becomes the ZIP search card and is moved to the end.</p>
+<h4>Authoring notes</h4>
+<p>The last link in a row is the call to action and also links the logo.</p>
+<p class="reference-link">Used on 2 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/providers/">/en/providers/</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/providers/index">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/es/providers/">/es/providers/</a> (<a href="https://da.live/edit#/adobedrago/nrg/es/providers/index">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/provider-list/provider-list.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-provider-contact">
+<p class="eyebrow">Project block</p>
+<h3>Provider Contact</h3>
+<p><code>provider-contact</code> · "Contact [provider]" band with a short paragraph and a "Call us at" line.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/providers/reliant">/en/providers/reliant in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-contact.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Provider Contact as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-contact.jpg" width="1265" height="340" loading="lazy" decoding="async" alt="Provider Contact as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-contact-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Provider Contact authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/provider-contact-da.jpg" width="801" height="158" loading="lazy" decoding="async" alt="Provider Contact authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">Provider Contact</th></tr></thead>
+<tbody>
+<tr><td>H3: Contact Reliant<br>Paragraph<br>Call us at <strong>(833) 577-2884</strong>.</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants.</p>
+<h4>Authoring notes</h4>
+<p>Keep the phone number bold.</p>
+<p class="reference-link">Used on 10 pages. Example: <a href="https://main--nrg--adobedrago.aem.page/en/providers/reliant">/en/providers/reliant</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/providers/reliant">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/provider-contact/provider-contact.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-details-cards">
+<p class="eyebrow">Project block</p>
+<h3>Details Cards</h3>
+<p><code>details-cards</code> · A heading followed by a row of icon cards (title and copy).</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/providers/reliant">/en/providers/reliant in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/details-cards.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Details Cards as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/details-cards.jpg" width="1201" height="586" loading="lazy" decoding="async" alt="Details Cards as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/details-cards-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Details Cards authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/details-cards-da.jpg" width="800" height="1000" loading="lazy" decoding="async" alt="Details Cards authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="2">Details Cards</th></tr></thead>
+<tbody>
+<tr><td>H2: Why choose Reliant?</td><td></td></tr>
+<tr><td>Icon image</td><td>H4: Affordable choices<br>Paragraph</td></tr>
+<tr><td>… one row per card</td><td></td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>The first row is a title when it has a heading and no image.</p>
+<h4>Authoring notes</h4>
+<p>Used twice on each provider page. Update each icon's alt text so it describes the card.</p>
+<p class="reference-link">Used on 12 pages. Example: <a href="https://main--nrg--adobedrago.aem.page/en/providers/reliant">/en/providers/reliant</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/providers/reliant">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/details-cards/details-cards.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-choice-guide">
+<p class="eyebrow">Project block</p>
+<h3>Choice Guide</h3>
+<p><code>choice-guide</code> · "How to pick the right plan": optional title, an illustration and numbered steps.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/providers/index">/en/providers/index in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/choice-guide.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Choice Guide as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/choice-guide.jpg" width="1280" height="1059" loading="lazy" decoding="async" alt="Choice Guide as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/choice-guide-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Choice Guide authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/choice-guide-da.jpg" width="800" height="925" loading="lazy" decoding="async" alt="Choice Guide authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="2">Choice Guide</th></tr></thead>
+<tbody>
+<tr><td>H2: title (optional)</td><td></td></tr>
+<tr><td>Illustration image</td><td></td></tr>
+<tr><td>Step icon</td><td><strong>Step title</strong><br>Copy</td></tr>
+<tr><td>… one row per step</td><td></td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants.</p>
+<h4>Authoring notes</h4>
+<p>A one-cell row holding only an image is the illustration; rows with an icon and text are steps.</p>
+<p class="reference-link">Used on 2 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/providers/">/en/providers/</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/providers/index">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/es/providers/">/es/providers/</a> (<a href="https://da.live/edit#/adobedrago/nrg/es/providers/index">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/choice-guide/choice-guide.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-reviews-carousel">
+<p class="eyebrow">Project block</p>
+<h3>Reviews Carousel</h3>
+<p><code>reviews-carousel</code> · Customer reviews in a horizontally scrolling row with previous/next buttons.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/index">/en/index in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/reviews-carousel.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Reviews Carousel as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/reviews-carousel.jpg" width="1265" height="540" loading="lazy" decoding="async" alt="Reviews Carousel as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/reviews-carousel-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Reviews Carousel authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/reviews-carousel-da.jpg" width="800" height="695" loading="lazy" decoding="async" alt="Reviews Carousel authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">Reviews Carousel</th></tr></thead>
+<tbody>
+<tr><td>Heading row</td></tr>
+<tr><td>Review: first paragraph = author, then the quote</td></tr>
+<tr><td>… one row per review</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants.</p>
+<h4>Authoring notes</h4>
+<p>The first paragraph of each review is styled as the author line.</p>
+<p class="reference-link">Used on 2 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/">/en/</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/index">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/es/">/es/</a> (<a href="https://da.live/edit#/adobedrago/nrg/es/index">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/reviews-carousel/reviews-carousel.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-area-list">
+<p class="eyebrow">Project block</p>
+<h3>Area List</h3>
+<p><code>area-list</code> · Region heading followed by an alphabetical list of city links.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/areas-of-service/index">/en/areas-of-service/index in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/area-list.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Area List as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/area-list.jpg" width="945" height="404" loading="lazy" decoding="async" alt="Area List as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/area-list-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Area List authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/area-list-da.jpg" width="800" height="1000" loading="lazy" decoding="async" alt="Area List authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">Area List</th></tr></thead>
+<tbody>
+<tr><td>H2: Texas<br>Bulleted list of city links</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants.</p>
+<h4>Authoring notes</h4>
+<p>Add a city by adding a bullet with a link to its area page.</p>
+<p class="reference-link">Used on 2 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/areas-of-service/">/en/areas-of-service/</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/areas-of-service/index">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/es/areas-of-service/">/es/areas-of-service/</a> (<a href="https://da.live/edit#/adobedrago/nrg/es/areas-of-service/index">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/area-list/area-list.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-faq-accordion">
+<p class="eyebrow">Project block</p>
+<h3>FAQ Accordion</h3>
+<p><code>faq-accordion</code> · Questions that expand to show their answers.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/es/faqs">/es/faqs in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/faq-accordion.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: FAQ Accordion as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/faq-accordion.jpg" width="1265" height="215" loading="lazy" decoding="async" alt="FAQ Accordion as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/faq-accordion-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: FAQ Accordion authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/faq-accordion-da.jpg" width="801" height="419" loading="lazy" decoding="async" alt="FAQ Accordion authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">FAQ Accordion</th></tr></thead>
+<tbody>
+<tr><td>H3: question<br>Answer paragraph(s) or list</td></tr>
+<tr><td>… one row per question</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants.</p>
+<h4>Authoring notes</h4>
+<p>Each row needs an H3 and at least one paragraph, or it is left as plain content.</p>
+<p class="reference-link">Used on 2 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/es/faqs">/es/faqs</a> (<a href="https://da.live/edit#/adobedrago/nrg/es/faqs">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/faqs">/faqs</a> (<a href="https://da.live/edit#/adobedrago/nrg/faqs">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/faq-accordion/faq-accordion.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-zip-cta">
+<p class="eyebrow">Project block</p>
+<h3>ZIP CTA</h3>
+<p><code>zip-cta</code> · Copy with the shared ZIP lookup card; any authored link is replaced by the card's "View plans" button.</p>
+<p class="screenshot-note">No screenshots: this block is not used on any page at the reference date.</p>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">ZIP CTA</th></tr></thead>
+<tbody>
+<tr><td>Heading + copy (+ a link, which is removed)</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants.</p>
+<h4>Authoring notes</h4>
+<p>Not used on any page at the reference date.</p>
+<p class="reference-link">Not used on any page at the reference date.</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/zip-cta/zip-cta.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-columns">
+<p class="eyebrow">Standard block</p>
+<h3>Columns</h3>
+<p><code>columns</code> · Side-by-side content: one cell per column.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/about">/en/about in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/columns.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Columns as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/columns.jpg" width="1265" height="352" loading="lazy" decoding="async" alt="Columns as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/columns-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Columns authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/columns-da.jpg" width="801" height="206" loading="lazy" decoding="async" alt="Columns authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="2">Columns</th></tr></thead>
+<tbody>
+<tr><td>Column 1 content</td><td>Column 2 content</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants in code. (The DA block library lists "2-col", "Three Columns" and "4 Columns" examples; these are just different cell counts.)</p>
+<h4>Authoring notes</h4>
+<p>Used on the About pages.</p>
+<p class="reference-link">Used on 3 pages. Examples: <a href="https://main--nrg--adobedrago.aem.page/en/about">/en/about</a> (<a href="https://da.live/edit#/adobedrago/nrg/en/about">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/es/about">/es/about</a> (<a href="https://da.live/edit#/adobedrago/nrg/es/about">edit</a>) · <a href="https://main--nrg--adobedrago.aem.page/about">/about</a> (<a href="https://da.live/edit#/adobedrago/nrg/about">edit</a>)</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/columns/columns.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-cards">
+<p class="eyebrow">Standard block</p>
+<h3>Cards</h3>
+<p><code>cards</code> · Boilerplate cards: one card per row.</p>
+<p class="screenshot-note">No screenshots: this block is not used on any page at the reference date.</p>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="2">Cards</th></tr></thead>
+<tbody>
+<tr><td>Image</td><td>Text</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants in code. The DA library's "2-Up" and "Icon Cards" examples have no matching styles.</p>
+<h4>Authoring notes</h4>
+<p>Not used on any site page at the reference date. Prefer Details Cards or Provider Cards, which match the site design.</p>
+<p class="reference-link">Not used on any page at the reference date.</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/cards/cards.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-hero">
+<p class="eyebrow">Standard block</p>
+<h3>Hero</h3>
+<p><code>hero</code> · Boilerplate hero.</p>
+<p class="screenshot-note">No screenshots: this block is not used on any page at the reference date.</p>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">Hero</th></tr></thead>
+<tbody>
+<tr><td>Image<br>H1 + copy</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants in code. The DA library's "Left Aligned", "Centered" and "Dark Overlay" examples have no matching styles.</p>
+<h4>Authoring notes</h4>
+<p>Not used on any site page. Use ZIP Hero, Provider Hero or FAQ Hero.</p>
+<p class="reference-link">Not used on any page at the reference date.</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/hero/hero.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-fragment">
+<p class="eyebrow">Standard block</p>
+<h3>Fragment</h3>
+<p><code>fragment</code> · Includes another document's content in the page.</p>
+<p class="screenshot-note">No screenshots: this block is not used on any page at the reference date.</p>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">Fragment</th></tr></thead>
+<tbody>
+<tr><td>Link to the fragment document, e.g. /en/fragments/fetch-plans</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>No variants.</p>
+<h4>Authoring notes</h4>
+<p>Not used yet, but it is the tool for content that repeats on many pages (see <a href="#template-ops">Template-level operations</a>).</p>
+<p class="reference-link">Not used on any page at the reference date.</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/fragment/fragment.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-header">
+<p class="eyebrow">Standard block</p>
+<h3>Header</h3>
+<p><code>header</code> · Site header built from the <code>nav</code> document: logo, phone, Español, Find a Plan and the menu with the Dark mode switch.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/nav">/en/nav in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/header.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Header as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/header.jpg" width="1265" height="72" loading="lazy" decoding="async" alt="Header as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/header-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Header authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/header-da.jpg" width="900" height="732" loading="lazy" decoding="async" alt="Header authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">nav document (three sections)</th></tr></thead>
+<tbody>
+<tr><td>Section 1: link to the home page (becomes the logo)</td></tr>
+<tr><td>Section 2: bulleted list of menu links</td></tr>
+<tr><td>Section 3: phone link · Español item · Find a Plan link</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>Separate documents per language: <code>/en/nav</code>, <code>/es/nav</code> and <code>/nav</code>.</p>
+<h4>Authoring notes</h4>
+<p>Keep the three sections in order. Editing the nav changes every page in that language once the nav is previewed/published.</p>
+<p class="reference-link">Built on every page from <a href="https://da.live/edit#/adobedrago/nrg/en/nav">/en/nav</a>, <a href="https://da.live/edit#/adobedrago/nrg/es/nav">/es/nav</a> and <a href="https://da.live/edit#/adobedrago/nrg/nav">/nav</a>.</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/header/header.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+<article class="block-entry" id="block-footer">
+<p class="eyebrow">Standard block</p>
+<h3>Footer</h3>
+<p><code>footer</code> · Site footer built from the <code>footer</code> document.</p>
+<div class="block-visuals">
+<h4>Rendered and authoring views</h4>
+<p class="screenshot-note">Rendered from current preview content with the repository code (1280px wide). The DA screenshot shows the same block's table in the document editor; tall tables are cropped to their first 1,000 pixels. Select either image for full size.</p>
+<p class="reference-link">Capture source: <a href="https://da.live/edit#/adobedrago/nrg/en/footer">/en/footer in DA</a></p>
+<div class="screenshot-pair"><figure><figcaption><strong>Rendered site block</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/footer.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Footer as rendered on the site"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/footer.jpg" width="1265" height="639" loading="lazy" decoding="async" alt="Footer as rendered on the site"></a></figure><figure><figcaption><strong>DA editor view</strong></figcaption><a href="https://main--nrg--adobedrago.aem.live/media/docs/handoff/footer-da.jpg" target="_blank" rel="noopener" aria-label="Open full-size image: Footer authoring view in da.live"><img src="https://main--nrg--adobedrago.aem.live/media/docs/handoff/footer-da.jpg" width="900" height="1000" loading="lazy" decoding="async" alt="Footer authoring view in da.live"></a></figure></div>
+
+</div>
+<div class="table-scroll">
+<table class="authoring-example">
+<caption>Authoring table structure in DA</caption>
+<thead><tr><th colspan="1">footer document</th></tr></thead>
+<tbody>
+<tr><td>Section 1: home link (logo)</td></tr>
+<tr><td>Section 2: H3 + copy/list pairs; each H3 starts a column (Services, Providers, Resources, About us)</td></tr>
+<tr><td>Section 3: Service Hours</td></tr>
+<tr><td>Section 4: copyright line</td></tr>
+</tbody>
+</table>
+</div>
+<h4>Options and variants</h4>
+<p>Separate documents per language: <code>/en/footer</code>, <code>/es/footer</code> and <code>/footer</code>.</p>
+<h4>Authoring notes</h4>
+<p>Each heading and what follows it becomes a column.</p>
+<p class="reference-link">Built on every page from <a href="https://da.live/edit#/adobedrago/nrg/en/footer">/en/footer</a>, <a href="https://da.live/edit#/adobedrago/nrg/es/footer">/es/footer</a> and <a href="https://da.live/edit#/adobedrago/nrg/footer">/footer</a>.</p>
+<p class="reference-link"><a href="https://github.com/AdobeDrago/nrg/blob/main/blocks/footer/footer.js">Implementation</a> · <a href="#block-catalog">Back to catalog</a></p>
+</article>
+</section>
+
+<section id="publish">
+<h2>Preview and publication workflows</h2>
+<p>Saving happens automatically in Experience Workspace, but the website only changes when you preview or publish. Code changes are separate: they go live when merged to <code>main</code>.</p>
+<h3>Single page</h3>
+<ol>
+<li>In the editor, open the <strong>Send</strong> menu and choose <strong>Preview</strong>. The preview page opens in a new tab on <code>main--nrg--adobedrago.aem.page</code>.</li>
+<li>Check the page at desktop and phone width, in light and dark mode, and test its links and forms (a ZIP search for plan pages).</li>
+<li>Optionally run the preflight checks from the <strong>Prepare</strong> menu (for example a missing H1 or page title).</li>
+<li>Open the <strong>Send</strong> menu again and choose <strong>Publish</strong>. The live page opens on <code>main--nrg--adobedrago.aem.live</code>.</li>
+<li>From a preview or live page you can also use the <strong>Sidekick</strong> browser extension to publish, unpublish or jump back to editing.</li>
+</ol>
+<h3>Sheets, nav, footer and media</h3>
+<ul>
+<li><strong>Sheets</strong> (plans, ZIPs, redirects) are previewed and published like pages. Preview first and test a ZIP search before publishing.</li>
+<li><strong>Nav and footer</strong> are documents: publish them and every page in that language picks up the change without republishing the pages.</li>
+<li><strong>Images</strong> are published with the page that uses them.</li>
+</ul>
+<h3>Many pages</h3>
+<p>Use the <a href="#bulk">Bulk app</a> to preview or publish a list of pages, or a snapshot for a coordinated release. Publish in dependency order: target pages first, then sheets, then the pages and navigation that link to them.</p>
+<h3>Taking a page down</h3>
+<ol>
+<li>Open the <strong>Prepare</strong> menu and choose <strong>Unpublish</strong>, type <code>YES</code> and confirm. This removes both the preview and live versions.</li>
+<li>Remove links to the page from navigation, footer and listings, and add a redirect in <code>redirects.json</code> if the address had traffic.</li>
+</ol>
+<h3>Release checklist</h3>
+<ol>
+<li>One H1; Metadata Title, Description and Image filled in; Template set where required.</li>
+<li>Block names and row order match the catalog; no example text left from a template.</li>
+<li>Checked on preview at desktop and phone width, light and dark.</li>
+<li>Any code the content depends on (for example a new provider brand) is already merged to <code>main</code>.</li>
+<li>Published, then checked on the live site in a private window.</li>
+</ol>
+</section>
+
+<section id="open-items">
+<h2>Open items at handoff</h2>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Item</th><th>Impact</th><th>Suggested fix</th><th>Owner</th></tr></thead>
+<tbody>
+<tr><td>Block library (<code>blocks.json</code>) registers Accordion, has 3 empty rows, and its example pages include Tabs and Hero/Cards variants with no code</td><td>Authors can insert blocks that render unstyled</td><td>Register only real blocks (catalog above) with an example page each</td><td>Developer</td></tr>
+<tr><td>FAQs starter template exists but isn't registered; no Provider Page template</td><td>Fewer starting points for authors</td><td>Add both rows to <code>templates.json</code></td><td>Developer / lead author</td></tr>
+<tr><td>Assistant memory (<code>/.da/agent/memory.md</code>) describes non-existent blocks</td><td>Assistant may build broken content</td><td>Rewrite from this catalog</td><td>Lead author</td></tr>
+<tr><td>Accent button (bold + italic link) has no style</td><td>Looks like a primary button</td><td>Define it in <code>styles.css</code> or stop using it</td><td>Developer</td></tr>
+<tr><td>Provider page icons are dark on dark cards in dark mode</td><td>Low contrast</td><td>Light icon versions or a logo plate</td><td>Author / developer</td></tr>
+<tr><td>Fetch Plans (149 pages) and Popular Areas (125 pages) are authored per page</td><td>Site-wide wording changes are bulk edits</td><td>Move into a fragment or template</td><td>Developer</td></tr>
+<tr><td>New providers need a code change (<code>BRANDS</code> in Plan Cards)</td><td>No logo/contact line until added</td><td>Move provider details into a sheet</td><td>Developer</td></tr>
+<tr><td>Top-level pages without a language prefix duplicate <code>/en/</code></td><td>Double maintenance (nav, footer, plans data, homepage)</td><td>Decide to keep or redirect to <code>/en/</code></td><td>Product owner</td></tr>
+<tr><td>Old HTML files at the repository root (<code>index.html</code>, <code>faqs.html</code>, <code>about.html</code>, <code>plans.html</code>, <code>nav.html</code>, <code>footer.html</code>)</td><td>Local development shows them instead of DA content</td><td>Remove from the repository</td><td>Developer</td></tr>
+<tr><td>The authored Plan Cards on <code>/en/plans</code> contain a stray <code>{dynamic_content}</code> placeholder after the first card's term</td><td>Shows on the page when there is no ZIP in the address</td><td>Delete the placeholder in DA, then preview and publish</td><td>Author</td></tr>
+<tr><td>Cards, Hero, ZIP CTA and Fragment are unused</td><td>None</td><td>Keep for future use or remove</td><td>Developer</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="troubleshooting">
+<h2>Troubleshooting and ownership</h2>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Symptom</th><th>Author check</th><th>When to involve a developer</th></tr></thead>
+<tbody>
+<tr><td>A block shows as a plain table or unstyled text</td><td>Block name row spelled exactly as in the catalog; variant in brackets</td><td>The name is correct but it still doesn't render</td></tr>
+<tr><td>Content in a block is missing or in the wrong place</td><td>Row and cell order; optional rows left empty instead of deleted</td><td>The structure matches the catalog</td></tr>
+<tr><td>Change visible in the editor but not on the site</td><td>Previewed? Published? Correct language folder?</td><td>Published but stale after several minutes</td></tr>
+<tr><td>A ZIP shows "Sorry, we currently do not offer…"</td><td>ZIP listed in the <code>zips</code> tab; plan rows' <code>zip</code> values match its state or utility; sheet published</td><td>Data is correct but results are empty</td></tr>
+<tr><td>Plan card without a logo or phone line</td><td>Logo row alt text matches the provider name; <code>brand</code> column filled</td><td>New provider: brand must be added in code</td></tr>
+<tr><td>A new FAQ doesn't appear in the FAQ search</td><td>Page published; run <strong>Index</strong> in the Bulk app</td><td>Still missing after indexing</td></tr>
+<tr><td>Something looks wrong only in dark mode</td><td>Is it authored artwork (images) or site styling?</td><td>Site styling: a block uses a fixed color instead of a role</td></tr>
+<tr><td>The assistant produced an unexpected structure</td><td>Restore from Version History; restate the prompt with scope and constraints</td><td>Recurring: update the assistant memory or skills</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="reference">
+<h2>Maintenance and technical reference</h2>
+<p>Code is deployed from <code>main</code> by Code Sync; content is published from Experience Workspace. Run the site locally with <code>aem up --url https://main--nrg--adobedrago.aem.page</code> from the repository and open <code>http://localhost:3000/en/</code>. Run <code>npm run lint</code> before opening a pull request.</p>
+<p>Experience Workspace is turned on with the <code>ew.enabled</code> flag in the site or organization config, and the Sidekick's edit link can point to the canvas editor (<code>https://da.live/canvas#/&#123;&#123;org&#125;&#125;/&#123;&#123;site&#125;&#125;&#123;&#123;pathname&#125;&#125;</code>). Adobe's documentation: <a href="https://www.aem.live/docs/ew/about">About Experience Workspace</a>, <a href="https://www.aem.live/docs/ew/authoring/editing-docs">Authoring pages</a>, <a href="https://www.aem.live/docs/ew/authoring/assistant">Assistant</a>, <a href="https://www.aem.live/docs/ew/authoring/bulk-operations">Bulk operations</a>, <a href="https://www.aem.live/docs/ew/authoring/publishing">Publishing</a>.</p>
+<ul>
+<li><a href="https://github.com/AdobeDrago/nrg/blob/main/scripts/scripts.js">Page loading, auto blocks (Secondary Nav), templates and button decoration</a></li>
+<li><a href="https://github.com/AdobeDrago/nrg/blob/main/scripts/page-theme.js">Theme selection (dark mode)</a> and <a href="https://github.com/AdobeDrago/nrg/blob/main/scripts/section-authoring.js">Section Metadata</a></li>
+<li><a href="https://github.com/AdobeDrago/nrg/blob/main/styles/brand.css">Design tokens</a> and <a href="https://github.com/AdobeDrago/nrg/blob/main/styles/themes.css">dark theme</a></li>
+<li><a href="https://github.com/AdobeDrago/nrg/blob/main/scripts/zip-form.js">Shared ZIP form</a></li>
+<li><a href="https://github.com/AdobeDrago/nrg/blob/main/helix-query.yaml">Query and search index definitions</a></li>
+<li><a href="https://github.com/AdobeDrago/nrg/blob/main/templates">Code templates</a></li>
+</ul>
+<p>This guide is a static page in <code>docs/</code> (<code>site-handoff.html</code>, <code>site-handoff.css</code> and <code>site-handoff.js</code>). Commit them together. It is served on GitHub Pages and at <code>/docs/site-handoff.html</code> on the preview and live hosts; use the <code>.html</code> extension.</p>
+<p>Its screenshots are stored in DA under <a href="https://da.live/#/adobedrago/nrg/media/docs/handoff"><code>/media/docs/handoff/</code></a> and loaded from the live host (<code>https://main--nrg--adobedrago.aem.live/media/docs/handoff/…</code>). DA media in this organization is private, so each image is previewed and published to make it public. To replace a screenshot, upload a file with the same name to that folder, then preview and publish it.</p>
+</section>
+</main>
+</div>
+<footer class="guide-footer">Everything Energy · Site handoff guide · October 20, 2026</footer>
+</body>
+</html>

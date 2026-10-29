@@ -1,7 +1,7 @@
 /* Provider list — the providers landing card grid on everythingenergy.com */
 main .section.provider-list-container {
   padding: 40px 8px;
-  background: var(--ee-cards-bg);
+  background: var(--color-surface-subtle);
 }
 
 .provider-list > ul {
@@ -15,15 +15,20 @@ main .section.provider-list-container {
 }
 
 .provider-list > ul > li {
+  --heading-color: var(--color-text-neutral);
+  --text-color: var(--color-text-secondary);
+  --link-color: var(--color-link);
+  --link-hover-color: var(--color-link-hover);
+
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
   margin: 16px 12px;
   padding: 12px;
-  border-radius: 24px;
-  background: #fff;
-  box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
+  border-radius: var(--radius-large);
+  background: var(--color-surface-raised);
+  box-shadow: var(--shadow-card);
 }
 
 .provider-list .provider-list-logo {
@@ -32,7 +37,7 @@ main .section.provider-list-container {
   justify-content: center;
   height: 170px;
   border-radius: 14px;
-  background: var(--ee-light-gray);
+  background: var(--color-surface-logo-well);
 }
 
 .provider-list .provider-list-logo img {
@@ -52,7 +57,7 @@ main .section.provider-list-container {
 .provider-list .provider-list-body > p:first-child {
   margin: 0;
   padding: 16px 10px;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
   font-size: 18px;
   line-height: 1.4;
 }
@@ -68,7 +73,7 @@ main .section.provider-list-container {
   align-items: flex-start;
   gap: 11px;
   margin: 8px 0 0;
-  color: var(--ee-text-dark);
+  color: var(--color-text-secondary);
   font-size: 18px;
   line-height: 1.4;
 }
@@ -80,7 +85,7 @@ main .section.provider-list-container {
   height: 14px;
   margin-top: 4px;
   border-radius: 50%;
-  background: var(--ee-purple) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M9.5 16.2 5.3 12l-1.4 1.4 5.6 5.6 11-11-1.4-1.4z'/%3E%3C/svg%3E") center / 10px no-repeat;
+  background: var(--color-action-primary) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M9.5 16.2 5.3 12l-1.4 1.4 5.6 5.6 11-11-1.4-1.4z'/%3E%3C/svg%3E") center / 10px no-repeat;
 }
 
 .provider-list .provider-list-cta-wrapper {
@@ -93,9 +98,9 @@ main .section.provider-list-container {
   box-sizing: border-box;
   width: 130px;
   height: 40px;
-  border: 2px solid #d84699;
+  border: var(--border-width-strong) solid var(--color-action-accent);
   border-radius: 50px;
-  color: #d84699;
+  color: var(--color-action-accent);
   font-size: 16px;
   font-weight: 600;
   line-height: 36px;
@@ -105,13 +110,13 @@ main .section.provider-list-container {
 
 .provider-list a.provider-list-cta:hover,
 .provider-list a.provider-list-cta:focus-visible {
-  background: #d84699;
-  color: #fff;
+  background: var(--color-action-accent);
+  color: var(--color-action-accent-text);
 }
 
 .provider-list .provider-list-widget {
   padding: 44px 18px 60px;
-  color: #4f4f4f;
+  color: var(--color-text-neutral);
   line-height: 1.4;
 }
 
@@ -119,7 +124,7 @@ main .section.provider-list-container {
 .provider-list .provider-list-widget h3,
 .provider-list .provider-list-widget h4 {
   margin: 0 0 0 12px;
-  color: #4f4f4f;
+  color: var(--color-text-neutral);
   font-size: 48px;
   font-weight: 700;
   line-height: 1.4;
@@ -133,8 +138,29 @@ main .section.provider-list-container {
   font-size: 18px;
 }
 
-.provider-list .provider-list-widget .zip-search { margin: auto -4px 0; }
-.provider-list .provider-list-widget .zip-search label { margin-bottom: 16px; }
+/* ZIP search sized like the original card (256 × 54 field, 48px button); overrides the
+   shared styles/zip-form.css, which loads after this file. The original nests the form
+   12px deeper than this card, so the 8px side margin puts the field at its x and width. */
+.provider-list .provider-list-widget .zip-search { margin: auto 8px 0; }
+
+.provider-list .provider-list-widget .zip-search label {
+  margin: 0 0 16px 4px;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.provider-list .provider-list-widget .zip-search .zip-search-field { margin-top: 0; }
+
+.provider-list .provider-list-widget .zip-search button {
+  width: 48px;
+  height: 48px;
+}
+
+/* the magnifier fills ~74% of its viewBox, so 22px draws the original's 16px glyph */
+.provider-list .provider-list-widget .zip-search button svg {
+  width: 22px;
+  height: 22px;
+}
 
 @media (width >= 900px) {
   main .section.provider-list-container { padding: 82px 0; }
