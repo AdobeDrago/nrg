@@ -138,8 +138,29 @@ main .section.provider-list-container {
   font-size: 18px;
 }
 
-.provider-list .provider-list-widget .zip-search { margin: auto -4px 0; }
-.provider-list .provider-list-widget .zip-search label { margin-bottom: 16px; }
+/* ZIP search sized like the original card (256 × 54 field, 48px button); overrides the
+   shared styles/zip-form.css, which loads after this file. The original nests the form
+   12px deeper than this card, so the 8px side margin puts the field at its x and width. */
+.provider-list .provider-list-widget .zip-search { margin: auto 8px 0; }
+
+.provider-list .provider-list-widget .zip-search label {
+  margin: 0 0 16px 4px;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.provider-list .provider-list-widget .zip-search .zip-search-field { margin-top: 0; }
+
+.provider-list .provider-list-widget .zip-search button {
+  width: 48px;
+  height: 48px;
+}
+
+/* the magnifier fills ~74% of its viewBox, so 22px draws the original's 16px glyph */
+.provider-list .provider-list-widget .zip-search button svg {
+  width: 22px;
+  height: 22px;
+}
 
 @media (width >= 900px) {
   main .section.provider-list-container { padding: 82px 0; }
