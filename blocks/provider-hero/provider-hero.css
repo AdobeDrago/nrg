@@ -190,14 +190,33 @@
 
 .provider-hero.areas .zip-search { margin: 64px -20px 0; }
 
+/* ZIP search sized like the original (18px label, 48px button); overrides the shared
+   styles/zip-form.css, which loads after this file */
+.provider-hero.areas .zip-search label {
+  margin-bottom: 0;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.provider-hero.areas .zip-search button {
+  width: 48px;
+  height: 48px;
+}
+
+/* the magnifier fills ~74% of its viewBox, so 22px draws the original's 16px glyph */
+.provider-hero.areas .zip-search button svg {
+  width: 22px;
+  height: 22px;
+}
+
 @media (width >= 1024px) {
   .provider-hero.landing.areas {
     display: block;
-    min-height: 654px;
+    min-height: 678px; /* the original hero's height below the header */
     box-sizing: border-box;
     padding-left: 160px;
     max-width: none;
-    margin-left: calc((100vw - 1440px) / 2);
+    margin-left: calc((100% - 1440px) / 2); /* % excludes the scrollbar, unlike vw */
     padding-top: 182px;
   }
 
@@ -224,7 +243,7 @@
 
   .provider-hero.areas .zip-search {
     max-width: 325px;
-    margin: 28px 0 0 -12px;
+    margin: 28px 0 0 -20px; /* field 20px left of the text, as on the original */
   }
 }
 
