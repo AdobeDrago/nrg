@@ -4,7 +4,8 @@ main .section.details-cards-container {
   background: var(--color-surface-subtle);
 }
 
-main .section.details-cards-container > .details-cards-wrapper {
+/* div: matches the specificity of the full-bleed wrapper rule in styles.css, which loads first */
+main > .section.details-cards-container > div.details-cards-wrapper {
   max-width: 1028px;
   margin: 0 auto;
 }
@@ -104,15 +105,19 @@ main .section.details-cards-container > .details-cards-wrapper {
   .details-cards .details-cards-title h3 { font-size: 36px; }
   .details-cards .details-cards-title p { font-size: 18px; }
 
+  /* the original gives each of 3 cards an equal share of the row with 20px around it:
+     40.67px gaps at the full 1028px, never under 40px as the row narrows */
   .details-cards ul {
     flex-wrap: nowrap;
     justify-content: center;
-    gap: 40px;
+    gap: max(40px, calc((100% - 906px) / 3));
     margin-top: 72px;
+    padding: 20px 0;
   }
 
   .details-cards li {
     flex: 0 1 302px;
+    min-height: 400px;
     padding: 72px 32px 40px;
   }
 
