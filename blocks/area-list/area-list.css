@@ -35,7 +35,9 @@ main .section.details-cards-container + .section.area-list-container { padding-t
   break-inside: avoid;
 }
 
+/* block, so the row height follows this line-height instead of the li's inherited 27px */
 .area-list a:any-link {
+  display: block;
   color: var(--color-text-secondary);
   font-size: 16px;
   line-height: 1.3;
@@ -71,6 +73,7 @@ main .section.details-cards-container + .section.area-list-container { padding-t
   .area-list ul {
     margin-top: 30px;
     column-count: 7;
+    column-gap: 15px;
   }
   .area-list a:any-link { font-size: 17px; }
 }
