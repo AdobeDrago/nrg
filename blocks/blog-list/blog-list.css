@@ -22,14 +22,14 @@ main .section.blog-list-container .default-content-wrapper h1::after {
 
 main .blog-list {
   box-sizing: border-box;
-  max-width: 968px;
+  max-width: 944px;
   margin: 0 auto;
   padding: 0 16px 40px;
 }
 
 .blog-list .blog-list-label {
   margin: 40px 0 24px 20px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1.4;
   letter-spacing: 0.02em;
@@ -79,7 +79,7 @@ main .blog-list {
 
 .blog-list .blog-list-card-category {
   margin: 0 0 4px;
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.4;
   color: var(--color-text-secondary);
 }
@@ -116,7 +116,7 @@ main .blog-list {
 .blog-list .blog-list-more {
   display: block;
   margin: 48px auto 0;
-  padding: 17px 28px;
+  padding: 15px 26px;
   font-size: 20px;
   font-weight: 600;
 }
