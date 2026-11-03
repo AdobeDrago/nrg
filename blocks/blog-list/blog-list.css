@@ -79,7 +79,7 @@ main .blog-list {
 
 .blog-list .blog-list-card-category {
   margin: 0 0 4px;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.4;
   color: var(--color-text-secondary);
 }
@@ -182,7 +182,7 @@ main .blog-list {
   }
 
   .blog-list .blog-list-featured .blog-list-card-category {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .blog-list .blog-list-featured .blog-list-card-title {
