@@ -74,7 +74,7 @@ main .blog-list {
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 24px 18px 20px;
+  padding: 24px 18px 16px;
 }
 
 .blog-list .blog-list-card-category {
@@ -85,7 +85,7 @@ main .blog-list {
 }
 
 .blog-list .blog-list-card-title {
-  margin: 0 0 16px;
+  margin: 0 0 12px;
   font-size: 18px;
   font-weight: 700;
   line-height: 1.3;
