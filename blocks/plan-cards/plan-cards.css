@@ -333,6 +333,18 @@ main .plan-cards-wrapper:has(.no-results) { background: none; }
   .plan-cards .plan-cards-pending-intro { margin-top: 55px; }
 }
 
+/* with the secondary nav above (as on the original), keep the title and the Home button
+   the original's distance below the nav links: 177px / 94px, and 165px / 73px at 1440px+ */
+@media (width >= 1024px) {
+  main:has(.secondary-nav) .plan-cards .plan-cards-pending { padding-top: 164px; }
+  main:has(.secondary-nav) .plan-cards .plan-cards-back:any-link { top: calc(25% - 72px); }
+}
+
+@media (width >= 1440px) {
+  main:has(.secondary-nav) .plan-cards .plan-cards-pending { padding-top: 152px; }
+  main:has(.secondary-nav) .plan-cards .plan-cards-back:any-link { top: calc(25% - 96px); }
+}
+
 @media (width >= 600px) {
   .plan-cards {
     grid-template-columns: repeat(2, 1fr);

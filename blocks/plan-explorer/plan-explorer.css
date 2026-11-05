@@ -51,6 +51,21 @@ main .section.plan-explorer-container {
   background: var(--color-surface-raised);
 }
 
+/* ZIP search sized like the original card (12px under the label, 48px button); overrides
+   the shared styles/zip-form.css, which loads after this file */
+.plan-explorer .zip-search .zip-search-field { margin-top: 12px; }
+
+.plan-explorer .zip-search button {
+  width: 48px;
+  height: 48px;
+}
+
+/* the magnifier fills ~74% of its viewBox, so 22px draws the original's 16px glyph */
+.plan-explorer .zip-search button svg {
+  width: 22px;
+  height: 22px;
+}
+
 @media (width >= 900px) {
   .plan-explorer {
     display: flex;
