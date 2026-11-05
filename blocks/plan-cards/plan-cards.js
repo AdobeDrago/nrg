@@ -378,4 +378,6 @@ export default async function decorate(block) {
 
   if (!plans.length) renderEmpty(block);
   else renderPlans(block, zip, zipInfo, plans, logos);
+  // the authored title describes the sample ZIP; name the one searched instead
+  document.title = zipInfo?.headline?.trim() || T.title(zip);
 }
