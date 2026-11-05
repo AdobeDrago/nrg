@@ -53,7 +53,8 @@ export default async function decorate(block) {
 
   const form = await buildZipForm({
     zipLabel: zipRow?.textContent.trim() || undefined,
-    movingLabel: movingRow?.textContent.replace(/\s*Yes\s*No\s*$/i, '').trim() || undefined,
+    // the authored row ends with the tile labels ("Yes No" / "Sí No"); the form adds its own
+    movingLabel: movingRow?.textContent.trim().replace(/(?:Yes|S[ií])\s*No$/i, '').trim() || undefined,
   });
 
   const cardRow = document.createElement('div');
