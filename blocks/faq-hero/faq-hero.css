@@ -182,6 +182,7 @@
   main:has(.secondary-nav) .faq-hero { padding-top: 161px; }
 }
 
+/* 1440px+: the title 165px below the secondary nav links, as on the original */
 @media (width >= 1440px) {
-  main:has(.secondary-nav) .faq-hero { padding-top: 181px; }
+  main:has(.secondary-nav) .faq-hero { padding-top: 152px; }
 }
