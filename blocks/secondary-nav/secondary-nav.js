@@ -46,7 +46,7 @@ export default async function decorate(block) {
   });
 
   const nav = document.createElement('nav');
-  nav.setAttribute('aria-label', 'Secondary');
+  nav.setAttribute('aria-label', localePrefix() === '/es' ? 'Secundaria' : 'Secondary');
   nav.append(list);
   block.replaceChildren(nav);
 }

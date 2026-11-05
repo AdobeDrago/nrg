@@ -5,6 +5,29 @@ import { isThemeLocked, setPageTheme } from '../../scripts/page-theme.js';
 
 const normalizePath = (path) => path.replace(/\/(index)?$/, '') || '/';
 
+// UI text by locale; the root site uses English
+const LABELS = {
+  en: {
+    call: (number) => `Call ${number}`,
+    darkMode: 'Dark mode',
+    menu: 'Menu',
+    openMenu: 'Open menu',
+    mainMenu: 'Main menu',
+    close: 'Close',
+    closeMenu: 'Close menu',
+  },
+  es: {
+    call: (number) => `Llamar al ${number}`,
+    darkMode: 'Modo oscuro',
+    menu: 'Menú',
+    openMenu: 'Abrir menú',
+    mainMenu: 'Menú principal',
+    close: 'Cerrar',
+    closeMenu: 'Cerrar menú',
+  },
+};
+const T = LABELS[getLocale()] || LABELS.en;
+
 function buildBrand(section) {
   const link = section?.querySelector('a');
   const label = link?.textContent.trim() || 'Everything Energy';
@@ -28,7 +51,7 @@ function buildTools(section) {
     const phone = document.createElement('a');
     phone.className = 'header-phone';
     phone.href = tel.getAttribute('href');
-    phone.setAttribute('aria-label', `Call ${tel.textContent.trim()}`);
+    phone.setAttribute('aria-label', T.call(tel.textContent.trim()));
     phone.innerHTML = `<i class="ico-tel" aria-hidden="true"></i><span>${tel.textContent.trim()}</span>`;
     tools.append(phone);
   }
@@ -55,7 +78,7 @@ function buildThemeToggle() {
   toggle.type = 'button';
   toggle.className = 'header-theme-toggle';
   toggle.setAttribute('role', 'switch');
-  toggle.innerHTML = `<span>${getLocale() === 'es' ? 'Modo oscuro' : 'Dark mode'}</span>
+  toggle.innerHTML = `<span>${T.darkMode}</span>
     <span class="header-theme-toggle-track" aria-hidden="true"></span>`;
   const sync = () => toggle.setAttribute('aria-checked', document.documentElement.dataset.pageTheme === 'dark');
   toggle.addEventListener('click', () => {
@@ -81,9 +104,9 @@ function buildMenu(section, header, planLink) {
   toggle.className = 'header-menu-toggle';
   toggle.setAttribute('aria-expanded', 'false');
   toggle.setAttribute('aria-controls', 'header-menu');
-  toggle.setAttribute('aria-label', 'Open menu');
+  toggle.setAttribute('aria-label', T.openMenu);
   toggle.innerHTML = `<img class="logo-small" src="${window.hlx.codeBasePath}/icons/nrg-logo-small.svg" alt="" width="32" height="32">
-    <i class="ico-hamburger" aria-hidden="true"></i><span>Menu</span>`;
+    <i class="ico-hamburger" aria-hidden="true"></i><span>${T.menu}</span>`;
 
   const overlay = document.createElement('div');
   overlay.className = 'header-overlay-mask';
@@ -92,14 +115,14 @@ function buildMenu(section, header, planLink) {
   const menu = document.createElement('nav');
   menu.id = 'header-menu';
   menu.className = 'header-menu';
-  menu.setAttribute('aria-label', 'Main menu');
+  menu.setAttribute('aria-label', T.mainMenu);
   menu.hidden = true;
 
   const close = document.createElement('button');
   close.type = 'button';
   close.className = 'header-menu-close';
-  close.innerHTML = '<span>Close</span><i class="ico-close" aria-hidden="true"></i>';
-  close.setAttribute('aria-label', 'Close menu');
+  close.innerHTML = `<span>${T.close}</span><i class="ico-close" aria-hidden="true"></i>`;
+  close.setAttribute('aria-label', T.closeMenu);
   menu.append(close);
 
   const list = section?.querySelector('ul');
@@ -139,7 +162,7 @@ function buildMenu(section, header, planLink) {
 
   function setOpen(open) {
     toggle.setAttribute('aria-expanded', open);
-    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    toggle.setAttribute('aria-label', open ? T.closeMenu : T.openMenu);
     menu.hidden = !open;
     overlay.hidden = !open;
     header.classList.toggle('menu-open', open);
