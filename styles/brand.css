@@ -7,11 +7,39 @@
  * Use semantic tokens in blocks; keep block layout in the block stylesheet.
  */
 
-/* Size-adjusted local fallback keeps layout stable while Source Sans 3 loads. */
+/* Local fallback for Source Sans 3, which loads after the first section renders.
+   Width (size-adjust) and line box (ascent/descent/line-gap overrides) are matched per
+   weight, so the swap does not re-wrap text and cause layout shift (CLS).
+   Source Sans 3: ascender 1.024em, descender 0.4em, no line gap; widths measured
+   against Arial on site copy. Liberation Sans has Arial's metrics (Linux, e.g. Lighthouse). */
 @font-face {
   font-family: "Source Sans 3 Fallback";
-  size-adjust: 93%;
-  src: local('Arial');
+  font-weight: 400;
+  src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans');
+  size-adjust: 91.63%;
+  ascent-override: 111.75%;
+  descent-override: 43.65%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Source Sans 3 Fallback";
+  font-weight: 600;
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold');
+  size-adjust: 88.53%;
+  ascent-override: 115.67%;
+  descent-override: 45.18%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Source Sans 3 Fallback";
+  font-weight: 700 900;
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold');
+  size-adjust: 90.86%;
+  ascent-override: 112.7%;
+  descent-override: 44.02%;
+  line-gap-override: 0%;
 }
 
 :root {
