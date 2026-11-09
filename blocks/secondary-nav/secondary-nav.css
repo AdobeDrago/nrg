@@ -16,6 +16,8 @@
     padding: 0 56px;
   }
 
+  /* the original's links are 22px tall; set the size on the list too so the items
+     don't keep the body's 18px/27px line box, which made the row 5px taller */
   .secondary-nav ul {
     display: flex;
     flex-wrap: wrap;
@@ -23,6 +25,8 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    font-size: 17px;
+    line-height: 22px;
   }
 
   .secondary-nav a:any-link {
@@ -30,7 +34,7 @@
     font-family: var(--body-font-family);
     font-size: 17px;
     font-weight: 400;
-    line-height: normal;
+    line-height: inherit;
     text-decoration: none;
   }
 

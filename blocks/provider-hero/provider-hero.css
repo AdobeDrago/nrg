@@ -4,7 +4,7 @@
   grid-template-areas: "back" "title" "image" "intro";
   max-width: 1020px;
   margin: 0 auto;
-  padding: 48px 40px 64px;
+  padding: 77px 40px 64px; /* the original's 155px, less its 78px header */
 }
 
 .provider-hero.landing {
@@ -25,7 +25,7 @@
   color: var(--color-action-primary-text);
   font-size: 14px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 18px; /* 38px tall, as on the original */
   text-decoration: none;
 }
 
@@ -108,7 +108,7 @@
 .provider-hero .provider-hero-intro p {
   margin: 0;
   color: var(--color-text-secondary);
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 1.5;
 }
@@ -118,55 +118,61 @@
   font-weight: 400;
 }
 
+/* top paddings are the original's, less its header (94px below 1440, 126px from 1440),
+   which overlays the hero there but sits above it here */
 @media (width >= 1024px) {
+  /* the original sizes this hero to a 1440px box */
   .provider-hero {
+    box-sizing: border-box;
+    max-width: 1440px;
     grid-template-columns: minmax(0, 470px) 1fr minmax(0, 260px);
     grid-template-areas: "back back back" "title . image" "intro . image";
     align-items: start;
-    padding: 130px 260px 110px 160px;
+    padding: 141px 110px 88px 105px;
   }
 
-  /* the original sizes this hero to a 1440px box; the image spans both rows,
-     so the title row stays auto and the intro row takes the leftover height */
+  /* the image spans both rows, so the title row stays auto and the intro row
+     takes the leftover height */
   .provider-hero.landing {
-    box-sizing: border-box;
-    max-width: 1440px;
     grid-template:
       "title . image" auto
       "intro . image" 1fr
       / minmax(0, 580px) 1fr auto;
-    padding: 130px 30px 0 105px;
+    padding: 135px 30px 0 105px;
   }
 
-  .provider-hero .provider-hero-back { margin: 0 0 68px -105px; }
+  .provider-hero .provider-hero-back { margin: 0 0 64px -75px; }
   .provider-hero .provider-hero-title { max-width: 470px; }
 
   .provider-hero .provider-hero-title h1,
-  .provider-hero .provider-hero-title h2 { font-size: 72px; }
+  .provider-hero .provider-hero-title h2 { font-size: 64px; }
   .provider-hero .provider-hero-title::after { bottom: -20px; }
   .provider-hero.landing .provider-hero-title::after { bottom: -40px; }
 
+  /* the original floats the logo right, 50px below the top of the title */
   .provider-hero .provider-hero-image {
-    place-self: center end;
+    place-self: start end;
     max-width: 260px;
-    margin: 0;
+    margin: 50px 0 0;
   }
 
   .provider-hero.landing .provider-hero-image {
+    align-self: center;
     max-width: 340px;
     margin: 0 64px 32px 0;
   }
   .provider-hero .provider-hero-intro { margin-top: 43px; }
   .provider-hero.landing .provider-hero-intro { margin: 58px 0 80px; }
-  .provider-hero .provider-hero-intro p { font-size: 18px; }
-}
-
-@media (width >= 1024px) and (width <= 1439px) {
-  .provider-hero.landing .provider-hero-title h1 { font-size: 64px; }
 }
 
 @media (width >= 1440px) {
-  .provider-hero.landing { padding: 130px 100px 0 160px; }
+  .provider-hero { padding: 119px 260px 110px 160px; }
+  .provider-hero .provider-hero-back { margin: 0 0 68px -105px; }
+
+  .provider-hero .provider-hero-title h1,
+  .provider-hero .provider-hero-title h2 { font-size: 72px; }
+
+  .provider-hero.landing { padding: 135px 100px 0 160px; }
   .provider-hero.landing .provider-hero-image { margin-right: 96px; }
 }
 
@@ -232,7 +238,7 @@
     padding-left: 160px;
     max-width: none;
     margin-left: calc((100% - 1440px) / 2); /* % excludes the scrollbar, unlike vw */
-    padding-top: 182px;
+    padding-top: 187px;
   }
 
   .provider-hero.landing.areas .provider-hero-image {
@@ -266,7 +272,7 @@
 @media (width <= 1439px) {
   .provider-hero.landing.areas {
     padding-left: 105px;
-    padding-top: 150px;
+    padding-top: 155px;
     max-width: 1440px;
     margin-left: 0;
   }
