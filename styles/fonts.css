@@ -26,6 +26,7 @@
 
 .ico-back-top::before { content: "\e905"; }
 .ico-close::before { content: "\e90b"; }
+.ico-exclamation::before { content: "\e908"; }
 .ico-hamburger::before { content: "\e90c"; }
 .ico-search::before { content: "\e909"; }
 .ico-truck::before { content: "\e913"; }

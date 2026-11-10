@@ -138,13 +138,16 @@ export async function buildZipSearch({
   form.className = 'zip-search';
   form.noValidate = true;
   form.action = `${localePrefix()}/plans`;
+  // the error message and alert icon sit in the field, positioned against it (zip-form.css);
+  // the stacked variant below moves the message out, above its button
   form.innerHTML = `<label for="${id}"></label>
     <div class="zip-search-field">
       <input id="${id}" name="zip" type="text" inputmode="numeric" autocomplete="postal-code"
         maxlength="5" pattern="[0-9]{5}" aria-describedby="${id}-error">
+      <i class="zip-search-alert ico-exclamation" aria-hidden="true"></i>
       <button type="submit" aria-label="${t.search}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3a7 7 0 0 1 5.6 11.2l5.1 5.1-1.4 1.4-5.1-5.1A7 7 0 1 1 10 3zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg></button>
-    </div>
-    <p class="zip-error" id="${id}-error" role="alert" hidden>${t.searchError}</p>`;
+      <p class="zip-error" id="${id}-error" role="alert" hidden>${t.searchError}</p>
+    </div>`;
 
   const input = form.querySelector('input');
   const error = form.querySelector('.zip-error');
@@ -155,7 +158,7 @@ export async function buildZipSearch({
     const button = form.querySelector('button');
     button.removeAttribute('aria-label');
     button.prepend(document.createTextNode(submitLabel));
-    form.append(button);
+    form.append(error, button);
   }
 
   input.addEventListener('input', () => {

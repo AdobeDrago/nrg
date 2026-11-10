@@ -152,6 +152,7 @@
 }
 
 .zip-search .zip-search-field {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -163,8 +164,6 @@
 }
 
 .zip-search .zip-search-field:focus-within { border-color: var(--color-border-accent); }
-/* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */
-.zip-search input[aria-invalid="true"] { color: var(--color-accent); }
 
 /* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */
 .zip-search input {
@@ -204,13 +203,35 @@
   fill: var(--color-action-primary-text);
 }
 
+/* invalid ZIP, as on the original: a red message 4px under the field and an alert icon
+   against the search button. Both sit out of flow, so the card doesn't grow. */
 .zip-search .zip-error {
-  margin: 8px 0 0 20px;
-  color: var(--color-accent);
-  font-size: 14px;
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 20px;
+  margin: 0;
+  color: var(--color-status-error);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
 }
 
-/* stacked variant: full-width "Fetch plans" button below the input (area sidebar) */
+.zip-search .zip-search-alert {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  color: var(--color-status-error);
+  font-size: 18px;
+  transform: translateY(-50%);
+}
+
+/* the stacked variant has no button in the field */
+.zip-search.zip-search-stacked .zip-search-alert { right: 24px; }
+.zip-search input[aria-invalid="true"] ~ .zip-search-alert { display: block; }
+
+/* stacked variant: full-width "Fetch plans" button below the input (area sidebar).
+   The original keeps the button 32px under the field, room for the error message. */
 .zip-search.zip-search-stacked .zip-search-field { padding: 13px 24px; }
 /* stylelint-disable-next-line no-descending-specificity -- different element/state than the earlier selector; specificity, not order, decides */
 .zip-search.zip-search-stacked input { padding: 0; }
@@ -221,13 +242,23 @@
   justify-content: center;
   width: 100%;
   height: 53px;
-  margin-top: 24px;
+  margin-top: 32px;
   border-radius: 40px;
   color: var(--color-action-primary-text);
   font: inherit;
   font-size: 20px;
   font-weight: 600;
 }
+
+/* here the message sits in flow between the field and the button: one line keeps the
+   original's 32px gap, and a longer (Spanish) one pushes the button down instead of
+   covering it */
+.zip-search.zip-search-stacked .zip-error {
+  position: static;
+  margin: 4px 0 0 21px;
+}
+
+.zip-search.zip-search-stacked .zip-error:not([hidden]) + button { margin-top: 8px; }
 
 .zip-search.zip-search-stacked button svg {
   width: 24px;
