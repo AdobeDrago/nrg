@@ -177,12 +177,12 @@
   }
 }
 
-/* with the secondary nav above (as on the original), keep the title at the same height */
+/* with the secondary nav above (as on the original), the title sits where the original's
+   does: 166px below the 94px header, and 154px below the 126px one at 1440px+ */
 @media (width >= 1024px) {
-  main:has(.secondary-nav) .faq-hero { padding-top: 161px; }
+  main:has(.secondary-nav) .faq-hero { padding-top: 166px; }
 }
 
-/* 1440px+: the title 165px below the secondary nav links, as on the original */
 @media (width >= 1440px) {
-  main:has(.secondary-nav) .faq-hero { padding-top: 152px; }
+  main:has(.secondary-nav) .faq-hero { padding-top: 154px; }
 }
