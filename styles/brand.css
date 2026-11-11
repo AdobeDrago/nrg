@@ -82,6 +82,7 @@
   --palette-pink-500: #d8479a;
   --palette-pink-600: #c8368a;
   --palette-red-300: #ff8095;
+  --palette-red-500: #e22;
   --palette-red-600: #d0021b;
   --palette-blue-300: #79b3dc;
   --palette-blue-400: #57a1d3;
@@ -179,7 +180,7 @@
 
   /* Focus and status */
   --color-focus: var(--palette-purple-500);
-  --color-status-error: var(--palette-red-600);
+  --color-status-error: var(--palette-red-500); /* the original's error-message red */
 
   /* Shadow inks. Geometry stays with the consumer; themes change only the ink. */
   --color-shadow-neutral: var(--palette-black);

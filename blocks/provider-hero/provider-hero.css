@@ -105,7 +105,8 @@
   margin: 32px 0 48px;
 }
 
-.provider-hero .provider-hero-intro p {
+/* direct paragraphs only: the areas ZIP search sits in the intro, and its error is a <p> */
+.provider-hero .provider-hero-intro > p {
   margin: 0;
   color: var(--color-text-secondary);
   font-size: 18px;
@@ -113,7 +114,7 @@
   line-height: 1.5;
 }
 
-.provider-hero.landing .provider-hero-intro p {
+.provider-hero.landing .provider-hero-intro > p {
   font-size: 18px;
   font-weight: 400;
 }
@@ -202,7 +203,7 @@
   margin: 32px 40px 64px;
 }
 
-.provider-hero.landing.areas .provider-hero-intro p {
+.provider-hero.landing.areas .provider-hero-intro > p {
   color: var(--color-text-secondary);
   font-size: 18px;
   font-weight: 600;
